@@ -11,8 +11,8 @@ user_guide_src/cilexer/dist/*
 user_guide_src/cilexer/pycilexer.egg-info/*
 
 #codeigniter 3
-app/Config/App.php
-app/Config/Email.php
+#app/Config/App.php
+#app/Config/Email.php
 public/uploads/
 
 writable/
