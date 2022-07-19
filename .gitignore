@@ -84,7 +84,7 @@ phpunit
 # Composer
 #-------------------------
 vendor/
-
+public/Minible_v2.0.0
 #-------------------------
 # IDE / Development Files
 #-------------------------
