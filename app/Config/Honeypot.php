@@ -18,14 +18,15 @@ class Honeypot extends BaseConfig
      *
      * @var string
      */
-    public $label = 'Fill This Field';
+    */
+	public $label = 'ikteb linna';
 
-    /**
-     * Honeypot Field Name
-     *
-     * @var string
-     */
-    public $name = 'honeypot';
+	/**
+	 * Honeypot Field Name
+	 *
+	 * @var string
+	 */
+	public $name = 'chaditik';
 
     /**
      * Honeypot HTML Template
