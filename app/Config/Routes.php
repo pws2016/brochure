@@ -36,7 +36,17 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+$routes->add('/logout', 'Authentification::logout');
+$routes->add('/login', 'Authentification::login');
+$routes->add('/loginAsGuest', 'Authentification::loginAsGuest');
 
+$routes->add('/register', 'Authentification::register');
+$routes->add('/forgotPassword', 'Authentification::forgotPassword');
+$routes->add('/resetPassword/(:any)/(:any)', 'Authentification::resetPassword/$1/$2');
+$routes->add('/activation/(:any)/(:any)', 'Authentification::activateAccount/$1/$2');
+
+ $routes->add('/loginas_back/(:any)', 'UserPanel::loginas_back/$1');
+$routes->get('/loginas_back/(:any)', 'UserPanel::loginas_back/$1');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
