@@ -4,18 +4,40 @@ use CodeIgniter\Model;
 
 class UserModel extends Model
 {
-	
-    protected $table = 'users';
-	protected $primaryKey = 'id';
-	protected $allowedFields = [
-	'role', 
-	'email',
-	'password',
-	'display_name',
-	'active',
-	'token',
-	'mobile',
-	'pass'];
+	public function getUser()
+    {
+        $builder = $this->db->table('users');
+        return $builder->get();
+    }
+
+	public function saveUser($data){
+        $query = $this->db->table('users')->insert($data);
+        return $query;
+    }
+	public function updateUser($data, $id)
+    {
+        $query = $this->db->table('users')->update($data, array('id' => $id));
+        return $query;
+    }
+
+	public function deleteUser($id)
+    {
+        $query = $this->db->table('users')->delete(array('id' => $id));
+        return $query;
+    } 
+
+
+    // protected $table = 'users';
+	// protected $primaryKey = 'id';
+	// protected $allowedFields = [
+	// 'role', 
+	// 'email',
+	// 'password',
+	// 'display_name',
+	// 'active',
+	// 'token',
+	// 'mobile',
+	// 'pass'];
 	/*protected $useSoftDeletes = true;
 	protected $returnType = 'array';
 	protected $useTimestamps = true;

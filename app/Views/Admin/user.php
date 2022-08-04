@@ -1,6 +1,11 @@
 <!doctype html>
 <html lang="it">
     <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Product Lists</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
         <meta charset="utf-8" />
         <title><?php echo lang('app.title_page_dashboard')?> | <?/*php echo $settings['meta_title']*/?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,140 +63,181 @@
                                         <!--h4 class="card-title"><a data-bs-target="#add-modal-dialog"  data-bs-toggle="modal"  name="add" class="btn btn-success float-right"><?php echo  lang('app.btn_add')?></a></h4-->
                                        
                                 
-<div class="col-md-12 text-end py-2">
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-Add New Client
-</button>
+                                        <div class="container">
+    <h3>Product Lists</h3>
+    <button type="button" class="btn btn-success mb-2" data-toggle="modal" data-target="#addModal">Add New</button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add New Client</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-   
-<form class="" action="" method="">
-          <div class="row">
-            <div class="col-12 col-sm-6">
-              <div class="form-group">
-               <label for="firstname">First Name</label>
-               <input type="text" class="form-control" name="firstname" id="name" value="<?= set_value('name') ?>">
-              </div>
-            </div>
-            <div class="col-12 col-sm-6">
-              <div class="form-group">
-               <label for="firstname">Phone</label>
-               <input type="text" class="form-control" name="phone" id="phone" value="<?= set_value('phone') ?>">
-              </div>
-            </div>
-            <div class="col-12">
-              <div class="form-group">
-               <label for="email">Email address</label>
-               <input type="text" class="form-control" name="email" id="email" value="<?= set_value('email') ?>">
-              </div>
-            </div>
-            <div class="col-12 col-sm-6">
-              <div class="form-group">
-               <label for="password">Password</label>
-               <input type="password" class="form-control" name="password" id="pass" value="">
-             </div>
-           </div>
-           <div class="col-12 col-sm-6">
-             <div class="form-group">
-              <label for="confirmpass">Confirm Password</label>
-              <input type="password" class="form-control" name="pass" id="confirmpass" value="">
-            </div>
-          </div>
-          <?php if (isset($validation)): ?>
-            <div class="col-12">
-              <div class="alert alert-danger" role="alert">
-                <?= $validation->listErrors() ?>
-              </div>
-            </div>
-          <?php endif; ?>
-          </div>
-
-          <div class="row">
-            <div class="col-12 col-sm-4"><br>
-              <button type="submit" class="btn btn-primary">Register</button>
-            </div>
-            <div class="col-12 col-sm-8 text-right"><br>
-              <a href="/login">Already have an account</a>
-            </div>
-          </div>
-        </form>
-      </div>
-    
-    </div>
-  </div>
-</div>
- 
-</div>
-<div class="card">
-    <div class="card-body">
-        <table class="table table-hover table-striped table-bordered">
-         
+        <table class="table table-striped">
             <thead>
-                <tr class="bg-dark bg-gradient text-light">
-                  
-                   
-                    <th>Client ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Sattus</th>
-         
+                <tr>
+                    <th>id</th>
+                    <th>display_name</th>
+                    <th>mobile</th>
+                    <th>email</th>
                 </tr>
-          
-            <?php
-             use App\Models\UserModel;
-
-             $users = new UserModel();
-             $listclient ['users']= $users->findAll();
-        
-
-
-
-  foreach($users as $row): ?>
-  
-     
-        <tr> 
-      <td class="py-1 px-2"> <?=isset ($row['id'] )?></td>
-      <td class="py-1 px-2"><?= isset ($row['display_name'])  ?></td>
-      <td class="py-1 px-2"><?= isset ($row['email'])  ?></td>
-      <td class="py-1 px-2"><?= isset ($row['mobile'] )?></td>
-      <td class="py-1 px-2"><?= isset ($row['active'] ) ?></td> 
-
-      <td class="py-1 px-2 text-center">
-         <!-- <button type="button" class='bi bi-trash' style='color: red'></span></button> -->
-              
-              <span class='bi bi-trash' style='color: red'></span>
-              <!-- <button type="button" class='bi bi-pencil' style='color:#f35f39'></span></button> -->
-           <span class='bi bi-pencil' style='color:#f35f39'></span>
-      </td>
-
-      </tr>     
-<?php endforeach; ?>
-           
-              
-           
+            </thead>
+            <tbody>
+            <?php foreach($user as $row):?>
+                <tr>
+                   <td><?= $row->id;?></td>
+                    <td><?= $row->display_name;?></td>
+                    <td><?= $row->mobile;?></td>
+                    <td><?= $row->email;?></td>
+                    <td>
+                        <a href="#" class="btn btn-info btn-sm btn-edit" data-id="<?= $row->id;?>" data-name="<?= $row->display_name;?>" data-mobile="<?= $row->mobile;?>" data-email="<?= $row->email;?>">Edit</a>
+                        <a href="#" class="btn btn-danger btn-sm btn-delete" data-id="<?= $row->id;?>">Delete</a>
+                    </td>
+                </tr>
+            <?php endforeach;?>
+            </tbody>
         </table>
-    </div>
-</div>
 
-                                        
-        
-                                    </div>
-                                </div>
-                            </div> <!-- end col -->
-                        </div> <!-- end row -->
-                    </div> <!-- container-fluid -->
+    </div>
+    
+    <!-- Modal Add Product-->
+    <form action="/product/save" method="post">
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add New User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            
+                <div class="form-group">
+                    <label></label>
+                    <input type="text" class="form-control" name="display_name" placeholder=" Name">
                 </div>
-                <!-- End Page-content -->
+                
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" class="form-control" name="mobile" placeholder="EMAIL">
+                </div>
+
+                <div class="form-group">
+                    <label>Mobile</label>
+                    <select name="product_category" class="form-control">
+                    <input type="text" class="form-control" name="mobile" placeholder="mobile">
+                    </select>
+                </div>
+            
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+            </div>
+        </div>
+        </div>
+    </form>
+    <!-- End Modal Add Product-->
+
+    <!-- Modal Edit Product-->
+    <form action="/product/update" method="post">
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit user</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control display_name" name="display_name" placeholder=" Name">
+                </div>
+                
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" class="form-control" name="mobile" placeholder="EMAIL">
+                </div>
+
+                <div class="form-group">
+                    <label>Mobile</label>
+                    <select name="product_category" class="form-control">
+                    <input type="text" class="form-control" name="mobile" placeholder="mobile">
+                    </select>
+                </div>
+            
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="id" class="id">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+            </div>
+        </div>
+        </div>
+    </form>
+    <!-- End Modal Edit Product-->
+
+    <!-- Modal Delete Product-->
+    <form action="/product/delete" method="post">
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            
+               <h4>Are you sure want to delete this product?</h4>
+            
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="id" class="userID">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="submit" class="btn btn-primary">Yes</button>
+            </div>
+            </div>
+        </div>
+        </div>
+    </form>
+    <!-- End Modal Delete Product-->
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function(){
+
+        // get Edit Product
+        $('.btn-edit').on('click',function(){
+            // get data from button edit
+            const id = $(this).data('id');
+            const name = $(this).data('name');
+            const price = $(this).data('email');
+            const category = $(this).data('mobile');
+            // Set data to Form Edit
+            $('.id').val(id);
+            $('.display_name').val(name);
+            $('.mobile').val(email);
+            $('.mobile').val(mobile);
+            // Call Modal Edit
+            $('#editModal').modal('show');
+        });
+
+        // get Delete Product
+        $('.btn-delete').on('click',function(){
+            // get data from button edit
+            const id = $(this).data('id');
+            // Set data to Form Edit
+            $('.userID').val(id);
+            // Call Modal Edit
+            $('#deleteModal').modal('show');
+        });
+        
+    });
+</script>
        
                 <footer class="footer">
                     <div class="container-fluid">

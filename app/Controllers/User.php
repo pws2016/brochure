@@ -11,64 +11,51 @@ class User extends BaseController
 	{
 		$data = $this->common_data();
 		
-     $users = new UserModel();
-	 $listclient ['users']= $users->orderBy('id', 'DESC')->findAll();
-     // 	 var_dump($listclient);
-	 return view('admin/user',$data);
+		$model = new UserModel();
+        $datas['users']  = $model->getUser()->getResult();
+
+        echo view('user', $data);
 	
-
-	
-		$data = [];
-		helper(['form']);
-
-
-		if ($this->request->getMethod() == 'post') {
-			//let's do the validation here
-			$rules = [
-				'email' => 'required|min_length[6]|max_length[50]|valid_email',
-				'password' => 'required|min_length[8]|max_length[255]|validateUser[email,password]',
-			];
-
-			$errors = [
-				'password' => [
-					'validateUser' => 'Email or Password don\'t match'
-				]
-			];
-
-			if (! $this->validate($rules, $errors)) {
-				$data['validation'] = $this->validator;
-			}else{
-				$model = new UserModel();
-
-				$user = $model->where('email', $this->request->getVar('email'))
-											->first();
-
-				$this->setUserSession($user);
-				//$session->setFlashdata('success', 'Successful Registration');
-				return redirect()->to('dashboard');
-
 			}
+			public function save()
+			{
+				$model = new UserModel();
+				$datas = array(
+					'display_name'        => $this->request->getPost('display_name'),
+					'email'       => $this->request->getPost('product_price'),
+					'mobile' => $this->request->getPost('email'),
+					'password' => $this->request->getPost('password'),
+
+				);
+				$model->saveUser($datas);
+				return redirect()->to('/user');
+			}
+
+			public function update()
+			{
+				$model = new UserModel();
+				$id = $this->request->getPost('id');
+				$datas = array(
+					'display_name'        => $this->request->getPost('display_name'),
+					'email'       => $this->request->getPost('product_price'),
+					'mobile' => $this->request->getPost('email'),
+					'password' => $this->request->getPost('password'),
+				);
+				$model->updateUser($datas, $id);
+				return redirect()->to('/user');
+			}
+			public function delete()
+    {
+        $model = new UserModel();
+        $id = $this->request->getPost('id');
+        $model->deleteProduct($id);
+        return redirect()->to('/user');
+    }
+
 		}
 
 		
-	echo  view('admin/user',$data);
-	}
-
-	private function setUserSession($user){
-		$data = [
-			'id' => $user['id'],
-			'firstname' => $user['firstname'],
-			'lastname' => $user['lastname'],
-			'email' => $user['email'],
-			'isLoggedIn' => true,
-		];
-
-		session()->set($data);
-		return true;
-	}
-
 	
-}
 
 
 
