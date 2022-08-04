@@ -40,6 +40,7 @@ $routes->add('/logout', 'Authentification::logout');
 $routes->add('/login', 'Authentification::login');
 $routes->add('/loginAsGuest', 'Authentification::loginAsGuest');
 
+
 $routes->add('/register', 'Authentification::register');
 $routes->add('/forgotPassword', 'Authentification::forgotPassword');
 $routes->add('/resetPassword/(:any)/(:any)', 'Authentification::resetPassword/$1/$2');
@@ -47,6 +48,17 @@ $routes->add('/activation/(:any)/(:any)', 'Authentification::activateAccount/$1/
 
  $routes->add('/loginas_back/(:any)', 'UserPanel::loginas_back/$1');
 $routes->get('/loginas_back/(:any)', 'UserPanel::loginas_back/$1');
+
+
+# admin routes #######
+$routes->add('admin/dashboard', 'AdminPanel::Dashboard');
+$routes->add('admin/package', 'Package::package');
+ $routes->add('admin/user', 'User::user');
+
+// $routes->match(['get','post'],'register', 'Users::user', ['filter' => 'noauth']);
+
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

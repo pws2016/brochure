@@ -73,23 +73,13 @@ abstract class BaseController extends Controller
 		$common_data['settings']=$settings;
 		$user_loginas=$this->session->get('user_loginas');	
 		if(!empty($user_loginas)) $common_data['user_loginas']=$user_loginas;
-		if($user_data['role']=='A') $common_data['profile_url']=base_url('admin/profile');
+		if(isset($user_data) && $user_data['role']=='A') $common_data['profile_url']=base_url('admin/profile');
 		else $common_data['profile_url']=base_url('myAccount/profile');
 		
-		if($user_data['role']=='A') $common_data['prefix_route']='admin/';
+		if(isset($user_data) &&$user_data['role']=='A') $common_data['prefix_route']='admin/';
 		else $common_data['prefix_route']='myAccount/';
 		
-		$common_data['list_projects']=$this->ProjectsModel->where('enable','yes')->find();
-		
-		if(!is_null($this->session->get('selected_project'))) $common_data['selected_project']=$this->session->get('selected_project');
-		
-		$common_data['ItalianMonth']=$this->ItalianMonth;
-		$common_data['CallCanal']=$this->CallCanal;
-		$common_data['CallClassification']=$this->CallClassification;
-		$common_data['CallStatus']=$this->CallStatus;
-		$common_data['CallPriority']=$this->CallPriority;
-		$common_data['piano_inv_tipologia']=$this->piano_inv_tipologia;
-		$common_data['scadenza_rata']=$this->scadenza_rata;
+	
 		return $common_data;
 	}
 	
