@@ -74,7 +74,7 @@ Add New Client
       </div>
       <div class="modal-body">
    
-<form class="" action="" method="post">
+<form class="" action="" method="">
           <div class="row">
             <div class="col-12 col-sm-6">
               <div class="form-group">
@@ -103,7 +103,7 @@ Add New Client
            <div class="col-12 col-sm-6">
              <div class="form-group">
               <label for="confirmpass">Confirm Password</label>
-              <input type="password" class="form-control" name="password_confirm" id="confirmpass" value="">
+              <input type="password" class="form-control" name="pass" id="confirmpass" value="">
             </div>
           </div>
           <?php if (isset($validation)): ?>
@@ -129,22 +129,15 @@ Add New Client
     </div>
   </div>
 </div>
-<!-- <a href="#ajout_user.php"  class="btn btn-primary rounded-0" data-toggle="modal" data-target="#modalRegisterForm">Add New Client</button></a> -->
-    <!-- <button class="btn btn-primary rounded-0" type="button" id="new_employee"><i class="fa fa-plus"></i> Add New Client</button> -->
+ 
 </div>
 <div class="card">
     <div class="card-body">
         <table class="table table-hover table-striped table-bordered">
-            <colgroup>
-                <col width="5%">
-                <col width="20%">
-                <col width="20%">
-                <col width="20%">
-                <col width="20%">
-                <col width="15%">
-            </colgroup>
+         
             <thead>
                 <tr class="bg-dark bg-gradient text-light">
+                  
                    
                     <th>Client ID</th>
                     <th>Name</th>
@@ -153,40 +146,39 @@ Add New Client
                     <th>Sattus</th>
          
                 </tr>
-            </thead>
-            <tbody>
-                
-                <?php 
-                use App\Models\UserModel;
+          
+            <?php
+             use App\Models\UserModel;
 
-        $users = new UserModel();
-		 $listclient ['users']= $users->findAll();
-   
+             $users = new UserModel();
+             $listclient ['users']= $users->findAll();
+        
+
+
+
+  foreach($users as $row): ?>
+  
+     
+        <tr> 
+      <td class="py-1 px-2"> <?=isset ($row['id'] )?></td>
+      <td class="py-1 px-2"><?= isset ($row['display_name'])  ?></td>
+      <td class="py-1 px-2"><?= isset ($row['email'])  ?></td>
+      <td class="py-1 px-2"><?= isset ($row['mobile'] )?></td>
+      <td class="py-1 px-2"><?= isset ($row['active'] ) ?></td> 
+
+      <td class="py-1 px-2 text-center">
+         <!-- <button type="button" class='bi bi-trash' style='color: red'></span></button> -->
+              
+              <span class='bi bi-trash' style='color: red'></span>
+              <!-- <button type="button" class='bi bi-pencil' style='color:#f35f39'></span></button> -->
+           <span class='bi bi-pencil' style='color:#f35f39'></span>
+      </td>
+
+      </tr>     
+<?php endforeach; ?>
            
-             foreach( $users as $row):
-                //  var_dump($listclient);
-                ?>
-                <tr>
               
-               
-                    <td class="py-1 px-2"> <?=isset ($row['id'] ) ?></td>
-                    <td class="py-1 px-2"><?= isset ($row['display_name'])  ?></td>
-                    <td class="py-1 px-2"><?= isset ($row['email'])  ?></td>
-                    <td class="py-1 px-2"><?= isset ($row['mobile'] )?></td>
-                    <td class="py-1 px-2"><?= isset ($row['active'] ) ?></td> 
-
-                    <td class="py-1 px-2 text-center">
-                       <!-- <button type="button" class='bi bi-trash' style='color: red'></span></button> -->
-                            
-                            <span class='bi bi-trash' style='color: red'></span>
-                            <!-- <button type="button" class='bi bi-pencil' style='color:#f35f39'></span></button> -->
-                         <span class='bi bi-pencil' style='color:#f35f39'></span>
-                    </td>
-                </tr>
-              
-                <?php endforeach; ?>
-              
-            </tbody>
+           
         </table>
     </div>
 </div>
@@ -234,7 +226,7 @@ Add New Client
 
       
 
-          <!-- <script src="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/js/pages/dashboard.init.js"></script> -->
+        
 
       <script src="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/js/app.js"></script>
      

@@ -7,7 +7,7 @@ class UserModel extends Model
 	
     protected $table = 'users';
 	protected $primaryKey = 'id';
-    public $allowedFields = [
+	protected $allowedFields = [
 	'role', 
 	'email',
 	'password',
@@ -27,16 +27,16 @@ class UserModel extends Model
   
   
 
-	// public function login($email,$password,$role='customer'){
-	// 	$db = \Config\Database::connect();
-	// 	$req="SELECT * FROM ".$this->table." where deleted_at IS NULL ";
-	// 	if(!is_null($role)) $req.=" and role='".$role."'";
-	// 	if(!is_null($email)) $req.=" and email='".$email."'";
-	// 	if(!is_null($password)) $req.=" and password='".md5($password)."'";
-	// 	$query = $db->query($req);
-	// 	$results = $query->getResultArray();
-	// 	return $results;
-	// }
+	public function login($email,$password,$role='customer'){
+		$db = \Config\Database::connect();
+		$req="SELECT * FROM ".$this->table." where deleted_at IS NULL ";
+		if(!is_null($role)) $req.=" and role='".$role."'";
+		if(!is_null($email)) $req.=" and email='".$email."'";
+		if(!is_null($password)) $req.=" and password='".md5($password)."'";
+		$query = $db->query($req);
+		$results = $query->getResultArray();
+		return $results;
+	}
 	
 	
 	
