@@ -26,57 +26,28 @@ class Authentification extends BaseController
 		$data['error']=lang('app.error_not_exist_account');
 		return view('login.php', $data);
 	}
+
+	
 	public function login(){
 		$common_data=$this->common_data();
+		$settings=$common_data['settings'];
 		$data=$common_data;
 		
 		if($common_data['is_logged']==true){
-				if($common_data['user_data']['role']=='A') return redirect()->to( base_url('/admin/dashboard') );
+				if($common_data['user_data']['role']=='A') return redirect()->to( base_url('admin/dashboard') );
 				else return redirect()->to( base_url('/myAccount') );
 		}
-		 $email=$this->request->getVar('login_email');
-		 $password=$this->request->getVar('login_password');
-		
-	if(!is_null($this->request->getVar('login_email'))){
-		$throttler = \Config\Services::throttler();
 
-		// Checking login attempt 4 times in a minute
-        $allowed = $throttler->check('login', 4, MINUTE);
-		if ($allowed) {
-		$val = $this->validate([
-           
-            'login_email' =>['label' => 'email', 'rules' => 'required|valid_email'],
-			'login_password' => ['label' => lang('app.field_password'), 'rules' =>'required']
-        ]);
-		
-		if (!$val)
-        {
-			
-            return view('login.php', [
-                   'validation' => $this->validator,'settings'=>$settings
-            ]);
-		
-        }
-		elseif(!isset($_POST['g-recaptcha-response'])){
-			$data['error']=lang('app.error_captcha');
-		}
-		else{
-		$recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
-			
-			$recaptcha_response = $this->request->getVar('g-recaptcha-response');
+      else{
+		if(!is_null($this->request->getVar('login_email'))){
+			 $email=$this->request->getVar('login_email');
+			 $password=$this->request->getVar('login_password'); 
 
-			// Make and decode POST request:
-			$recaptcha = file_get_contents($recaptcha_url . '?secret=' . CAPTCHA_SECRET . '&response=' . $recaptcha_response);
-			$recaptcha = json_decode($recaptcha);
-
-			// Take action based on the score returned:
-			if ($recaptcha->score >= 0.9) {
-				$users = $this->UserModel
+		$users = $this->UserModel
 							->where('email', $email)
 							->where('password', md5($password))
 							->findAll();
 				
-							
 				 $url=uri_string();
 				if(empty($users)){
 					$error=lang('app.error_not_exist_account');
@@ -98,20 +69,128 @@ class Authentification extends BaseController
 						
 						default:$redirect_url='MyAccount';
 					}
-						$this->addUserLog($users[0]['id'],'login');
+						// $this->addUserLog($users[0]['id'],'login');
 					return redirect()->to( base_url($redirect_url) );
 				}
-			}else{
-				$data['error']=lang('app.error_captcha');
 			}
-		}
-		}else{
-			return redirect()->to( base_url('login') );
-		}
-	}
 		return view('login.php', $data);
 	
+	  }
 	}
+	// 	$common_data=$this->common_data();
+	// 	$data=$common_data;
+		
+	// 	if($common_data['is_logged']==true){
+	// 			if($common_data['user_data']['role']=='A') return redirect()->to( base_url('/admin/dashboard') );
+	// 			else return redirect()->to( base_url('/myAccount') );
+	// 	}
+
+    //   else{
+	// 	return view('login.php', $data);
+	
+	// }
+
+
+	// 	 $email=$this->request->getVar('login_email');
+	// 	 $password=$this->request->getVar('login_password');
+	// 	 if(!is_null($this->request->getVar('login_email'))){
+	// 		$throttler = \Config\Services::throttler();
+	// 		// Checking login attempt 4 times in a minute
+    //   $allowed = $throttler->check('login', 4, MINUTE);
+	// 	if ($allowed) {
+	// 		$val = $this->validate([
+           
+	// 			        'login_email' =>['label' => 'email', 'rules' => 'required|valid_email'],
+	// 					'login_password' => ['label' => lang('app.field_password'), 'rules' =>'required']
+	// 			    ]);
+	// 				if (!$val)
+    //     {
+			
+    //         return view('login.php', [
+    //                'validation' => $this->validator,'settings'=>$settings
+    //         ]);
+		
+    //     }
+
+
+	// 	 }
+
+		
+		
+	// if(!is_null($this->request->getVar('login_email'))){
+	// 	$throttler = \Config\Services::throttler();
+
+	// 	// Checking login attempt 4 times in a minute
+    //     $allowed = $throttler->check('login', 4, MINUTE);
+	// 	if ($allowed) {
+	// 	$val = $this->validate([
+           
+    //         'login_email' =>['label' => 'email', 'rules' => 'required|valid_email'],
+	// 		'login_password' => ['label' => lang('app.field_password'), 'rules' =>'required']
+    //     ]);
+		
+	// 	if (!$val)
+    //     {
+			
+    //         return view('login.php', [
+    //                'validation' => $this->validator,'settings'=>$settings
+    //         ]);
+		
+    //     }
+	
+	// 	elseif(!isset($_POST['g-recaptcha-response'])){
+	// 		$data['error']=lang('app.error_captcha');
+	// 	}
+	// 	else{
+	// 	$recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+			
+	// 		$recaptcha_response = $this->request->getVar('g-recaptcha-response');
+
+	// 		// Make and decode POST request:
+	// 		$recaptcha = file_get_contents($recaptcha_url . '?secret=' . CAPTCHA_SECRET . '&response=' . $recaptcha_response);
+	// 		$recaptcha = json_decode($recaptcha);
+
+	// 		// Take action based on the score returned:
+	// 		if ($recaptcha->score >= 0.9) {
+	// 			$users = $this->UserModel
+	// 						->where('email', $email)
+	// 						->where('password', md5($password))
+	// 						->findAll();
+				
+							
+	// 			 $url=uri_string();
+	// 			if(empty($users)){
+	// 				$error=lang('app.error_not_exist_account');
+	// 				 return view($url, [
+	// 				   'error' => $error,'settings'=>$settings
+	// 				]);
+	// 			}
+	// 			elseif($users[0]['active']!='yes'){
+	// 				 $error=lang('app.error_not_active_account');
+					
+	// 				return view($url, ['error' => $error,'settings'=>$settings]);
+				
+	// 			}
+	// 			else{
+					
+	// 				$this->session->set(array('user_data'=>$users[0]));
+	// 				switch($users[0]['role']){
+	// 					case 'A':$redirect_url='admin/dashboard'; break;
+						
+	// 					default:$redirect_url='MyAccount';
+	// 				}
+	// 					$this->addUserLog($users[0]['id'],'login');
+	// 				return redirect()->to( base_url($redirect_url) );
+	// 			}
+	// 		}else{
+	// 			$data['error']=lang('app.error_captcha');
+	// 		}
+	// 	}
+	// 	}else{
+	// 		return redirect()->to( base_url('login') );
+	// 	}
+	// }
+	// }
 	
 	public function register(){
 		$common_data=$this->common_data();
