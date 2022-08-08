@@ -77,18 +77,18 @@
                 </tr>
             </thead>
             <tbody>
-            <?php foreach($user as $row):?>
+            <?/*php foreach($user as $row):?>
                 <tr>
                    <td><?= $row->id;?></td>
                     <td><?= $row->display_name;?></td>
                     <td><?= $row->mobile;?></td>
-                    <td><?= $row->email;?></td>
+                    <td><?= $row->email;></td>
                     <td>
                         <a href="#" class="btn btn-info btn-sm btn-edit" data-id="<?= $row->id;?>" data-name="<?= $row->display_name;?>" data-mobile="<?= $row->mobile;?>" data-email="<?= $row->email;?>">Edit</a>
                         <a href="#" class="btn btn-danger btn-sm btn-delete" data-id="<?= $row->id;?>">Delete</a>
                     </td>
                 </tr>
-            <?php endforeach;?>
+            <?php endforeach;**/?>
             </tbody>
         </table>
 
