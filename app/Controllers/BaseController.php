@@ -13,6 +13,7 @@ use App\Models\UserModel;
 use App\Models\UserProfileModel;
 use App\Models\UsersLogModel;
 use App\Models\TemplatesModel;
+use App\Models\PackageModel;
 
 /**
  * Class BaseController
@@ -58,6 +59,7 @@ abstract class BaseController extends Controller
 		$this->UserModel =  new UserModel();
 		$this->UserProfileModel =  new UserProfileModel();
 		$this->TemplatesModel =  new TemplatesModel();
+        $this->PackageModel =  new PackageModel();
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();

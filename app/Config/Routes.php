@@ -53,6 +53,12 @@ $routes->get('/loginas_back/(:any)', 'UserPanel::loginas_back/$1');
 # admin routes #######
 $routes->add('admin/dashboard', 'AdminPanel::Dashboard');
 $routes->add('admin/package', 'Package::package');
+$routes->add('admin/package/insert', 'Package::insert');
+$routes->add('admin/package/update', 'Package::update');
+$routes->add('admin/package/get_data', 'Package::get_data');
+$routes->add('admin/package/delete', 'Package::delete');
+
+
  $routes->add('admin/user', 'User::user');
 
 // $routes->match(['get','post'],'register', 'Users::user', ['filter' => 'noauth']);
