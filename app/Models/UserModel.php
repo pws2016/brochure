@@ -4,7 +4,27 @@ use CodeIgniter\Model;
 
 class UserModel extends Model
 {
-	 
+	// public function getUser()
+    // {
+    //     $builder = $this->db->table('users');
+    //     return $builder->get();
+    // }
+
+	// public function saveUser($data){
+    //     $query = $this->db->table('users')->insert($data);
+    //     return $query;
+    // }
+	// public function updateUser($data, $id)
+    // {
+    //     $query = $this->db->table('users')->update($data, array('id' => $id));
+    //     return $query;
+    // }
+
+	// public function deleteUser($id)
+    // {
+    //     $query = $this->db->table('users')->delete(array('id' => $id));
+    //     return $query;
+    // } 
 
 
     protected $table = 'users';
@@ -18,13 +38,14 @@ class UserModel extends Model
 	'token',
 	'mobile',
 	'pass'];
-// protected $useSoftDeletes = true;
-	// protected $returnType = 'array';
-	// protected $useTimestamps = true;
-    // protected $createdField  = 'created_at';
-	// protected $deletedField  = 'deleted_at';
-	// protected $updatedField  = 'updated_at';
-	
+	/*protected $useSoftDeletes = true;
+	protected $returnType = 'array';
+	protected $useTimestamps = true;
+    protected $createdField  = 'created_at';
+	protected $deletedField  = 'deleted_at';
+	protected $updatedField  = 'updated_at';
+	*/
+  
   
   
 
@@ -41,14 +62,14 @@ class UserModel extends Model
 	
 	
 	
-	// public function activate($id,$active,$token=null){
-	// 	$db = \Config\Database::connect();
-	// 	$req="update ".$this->table." set active='".$active."'";
-	// 	if(!is_null($token)) $req.=",token='".$token."'";
-	// 	$req.=" where id='".$id."'";
-	// 	$query = $db->query($req);
-	// 	return true;
-	// }
+	public function activate($id,$active,$token=null){
+		$db = \Config\Database::connect();
+		$req="update ".$this->table." set active='".$active."'";
+		if(!is_null($token)) $req.=",token='".$token."'";
+		$req.=" where id='".$id."'";
+		$query = $db->query($req);
+		return true;
+	}
 
 	
 }
