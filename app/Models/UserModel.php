@@ -4,27 +4,6 @@ use CodeIgniter\Model;
 
 class UserModel extends Model
 {
-	// public function getUser()
-    // {
-    //     $builder = $this->db->table('users');
-    //     return $builder->get();
-    // }
-
-	// public function saveUser($data){
-    //     $query = $this->db->table('users')->insert($data);
-    //     return $query;
-    // }
-	// public function updateUser($data, $id)
-    // {
-    //     $query = $this->db->table('users')->update($data, array('id' => $id));
-    //     return $query;
-    // }
-
-	// public function deleteUser($id)
-    // {
-    //     $query = $this->db->table('users')->delete(array('id' => $id));
-    //     return $query;
-    // } 
 
 
     protected $table = 'users';

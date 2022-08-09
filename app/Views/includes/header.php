@@ -352,7 +352,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="<?php echo base_url($prefix_route.'')?>">
+					<a href="<?php echo base_url($prefix_route.'user')?>">
 						<i class="uil-bars me-2"></i><span>add user</span>
 					</a>
 				</li>

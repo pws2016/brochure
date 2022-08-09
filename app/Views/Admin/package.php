@@ -112,7 +112,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="">validity_months</label>
-                                                        <input type="text" id="validity" name="validity" class="form-control" required>
+                                                        <input type="text" id="validity" name="validity_months" class="form-control" required>
                                                     </div>
 
                                                 </div>

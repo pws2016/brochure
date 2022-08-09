@@ -61,7 +61,7 @@ class Package extends BaseController
 				'price' => $this->request->getVar("price"),
 				'description' => $this->request->getVar("description"),
 				'sorting'  => $this->request->getVar("sorting"),
-				'validity_months' => $this->request->getVar("validity"),
+				'validity_months' => $this->request->getVar("validity_months"),
 				'nb_brochure' => $this->request->getVar("nb_brochure"),
 
 
@@ -111,7 +111,7 @@ class Package extends BaseController
   </div>
   <div class="form-group">
 	<label for="">validity_months</label>
-	<input type="text" id="validity" name="validity" value="<?= $person['validity_months'] ?>" class="form-control" required>
+	<input type="text" id="validity" name="validity_months" value="<?= $person['validity_months'] ?>" class="form-control" required>
   </div>
 <?php
 	}
