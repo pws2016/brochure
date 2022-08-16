@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title><?php echo lang('app.title_page_dashboard') ?> | <?php echo $settings['meta_title'] ?></title>
+    <title><?php echo lang('/user/dashboarduser') ?> | <?php echo $settings[''] ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="" name="description" />
     <meta content="Creazioneimpresa" name="author" />
@@ -38,7 +38,7 @@
 
 <body data-sidebar="dark">
     <div id="layout-wrapper">
-        <?php echo view('includes/header.php') ?>
+        <?php echo view('includes/headeruser.php') ?>
         <div class="main-content">
             <div class="page-content">
                 <div class="container-fluid">
@@ -54,7 +54,7 @@
 
                                         <div class="page-title-right">
                                             <ol class="breadcrumb m-0">
-                                                <li class="breadcrumb-item"><a href="javascript: void(0);">Contacts</a></li>
+                                                <li class="breadcrumb-item"></li>
                                                 <li class="breadcrumb-item active">User List</li>
                                             </ol>
                                         </div>
@@ -75,7 +75,7 @@
                                                         <button type="button" class="btn btn-success waves-effect waves-light" data-toggle="modal" data-target="#exampleModal">
                                                             <i class="mdi mdi-plus me-2"></i> Add New </button>
                                                     </div>
-                                                    <form action="<?= base_url('user/partners/insert') ?>" method="post" id="form">
+                                                    <form action="<?= base_url('user/partners/insert') ?>" method="post" id="form" enctype="multipart/form-data">
                                                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
@@ -100,6 +100,7 @@
                                                                         <div class="mb-3">
                                                                             <label for="image" class="form-label">Choose image</label>
                                                                             <input class="form-control" type="file" name="image" id="image">
+                                                                            
                                                                         </div>
 
                                                                     </div>
@@ -161,7 +162,10 @@
                                                                 <td> <?php echo $row['name']; ?></td>
 
                                                                 <td><?php echo $row['email']; ?></td>
-                                                                <td><?php echo $row['image']; ?></td>
+                                                                
+                                                                <td>
+                                                                
+                                                                <img src="<?php echo base_url('uploads/'.$row['image'])?>"  height="50" width="50px"/> </td>
 
                                                                 <td>
                                                                     <ul class="list-inline mb-0">
@@ -208,7 +212,7 @@
                                                     <tr>
                                             </table>
 
-                                            <form action="<?= base_url('user/partners/get_data') ?>" method="post" id="form">
+                                            <form action="<?= base_url('user/partners/update') ?>" method="post" id="form" enctype="multipart/form-data" >
                                                 <div class="modal fade" id="edit_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">

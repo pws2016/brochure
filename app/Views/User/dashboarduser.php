@@ -2,7 +2,7 @@
 <html lang="it">
     <head>
         <meta charset="utf-8" />
-        <title><?php echo lang('app.title_page_dashboard')?> | <?php echo $settings['meta_title']?></title>
+        <title><?php echo lang('/user/dashboarduser')?> | <?php echo $settings['']?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="" name="description" />
         <meta content="Creazioneimpresa" name="author" />
@@ -26,14 +26,14 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0"><?php echo lang('app.title_page_dashboard')?></h4>
+                                    <h4 class="mb-0"><?php echo lang('/user/dashboarduser')?></h4>
 
-                                    <div class="page-title-right">
+                                    <!-- <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);"><?php echo lang('app.menu_crm')?></a></li>
-                                            <li class="breadcrumb-item active"><?php echo lang('app.menu_dashboard')?></li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);"><?php echo lang('')?></a></li>
+                                            <li class="breadcrumb-item active"><?php echo lang('/user/dashboarduser')?></li>
                                         </ol>
-                                    </div>
+                                    </div> -->
 
                                 </div>
                             </div>
@@ -48,7 +48,7 @@
                                 <div class="card">
 								
                                     <div class="card-body">
-        <h4><?php echo lang('app.title_section_last_invoices')?></h4>
+       
                                         <!--h4 class="card-title"><a data-bs-target="#add-modal-dialog"  data-bs-toggle="modal"  name="add" class="btn btn-success float-right"><?php echo  lang('app.btn_add')?></a></h4-->
                                        <?php 
 										 if(isset($validation)){?>
@@ -71,52 +71,13 @@
         
                                         <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
-												<tr class="bg-transparent">
-													<th style="width: 120px;">&nbsp;</th>
-													<th><?php echo lang('app.field_invoice')?></th>
-													<th><?php echo lang('app.field_date')?></th>
-													<th><?php echo lang('app.field_billed_to')?></th>
-													<th><?php echo lang('app.field_total')?></th>
-													<th><?php echo lang('app.field_status')?></th>
-													<th><?php echo lang('app.field_payment_method')?></th>
-												</tr>
+												
                                             </thead>
         
         
                                             <tbody>
 											
-                                           <?php 
-										   if(!empty($list_invoices)){
-										   foreach($list_invoices as $k=>$one_customer){?>
-												<tr class="odd gradeX">
-													<td>
-														<div class="dropdown mt-4 mt-sm-0">
-															<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-																Azione <i class="mdi mdi-chevron-down"></i>
-															</button>
-															<div class="dropdown-menu">
-																<a class="dropdown-item" href="<?php echo base_url($prefix_route.'invoices/details/'.$one_customer['id'])?>">Dettaglio pagamento </a>
-																<a class="dropdown-item" target="_blank" href="<?php echo $one_customer['pdf']?>">Dettaglio fattura (FIC)</a>
-																<hr>
-																<?php if($one_customer['pdf_type']!=""){
-											   if($one_customer['pdf_type']=="simple") $url= base_url($prefix_route.'/requests/download_bp_pdf/'.$one_customer['request_id']);
-											   if($one_customer['pdf_type']=="full") $url= base_url('/requests/certificazione/zip/'.$one_customer['request_id']);
-																?>
-																<a class="dropdown-item" target="_blank" href="<?php echo $url?>">Scarica PDF</a>
-																<?php } ?>
-																
-															</div>
-														</div>
-													</td>
-													<td><?php echo $one_customer['num']?></td>
-													<td><?php echo date('d/m/Y',strtotime($one_customer['date']))?></td>
-													<td><a class="text-primary" data-bs-target="#client-profile-modal-dialog" data-bs-toggle="modal" onclick="get_client_profile('<?php echo $one_customer['user_id']?>')"><?php echo $one_customer['billing_name']?></a></td>
-													<td><?php echo $one_customer['amount']?> €</td>
-													<td><div class="badge bg-soft-success font-size-12"><?php echo lang('app.field_status_paid')?></div></td>
-													<td><?php echo $one_customer['payment_method']?></td>
-													
-												</tr>
-										   <?php } }?>
+                                           
                                             </tbody>
                                         </table>
         
@@ -182,7 +143,6 @@
 
       
 
-          <script src="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/js/pages/dashboard.init.js"></script>
 
       <script src="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/js/app.js"></script>
 <script>
