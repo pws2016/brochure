@@ -352,8 +352,8 @@
 					</a>
 				</li>
 				<li>
-					<a href="<?php echo base_url('')?>">
-						<i class="uil-bars me-2"></i><span>add user</span>
+					<a href="<?php echo base_url('user/contact')?>">
+						<i class="uil-bars me-2"></i><span>Contacts</span>
 					</a>
 				</li>
 				<!--li><a href="<?php //echo base_url('settings')?>"><i class="uil uil-cog"></i> <span class="align-middle"><?php echo lang('app.menu_setting')?></span></a>

@@ -71,6 +71,7 @@ $routes->add('user/partners/insert',      'Partners::insert');
 $routes->add('user/partners/delete',    'Partners::delete');
 $routes->add('user/partners/get_data',     'Partners::get_data');
 $routes->add('user/partners/update',    'Partners::update');
+$routes->add('user/contact',    'Contacts::contacts');
 ///// testing
 $routes->add('admin/test',      'Test::test');
 

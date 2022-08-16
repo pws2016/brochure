@@ -16,7 +16,7 @@ use App\Models\TemplatesModel;
 use App\Models\PackageModel;
 use App\Models\UserPackModel;
 use App\Models\PartnersModel;
-
+use App\Models\ContactsModel;
 /**
  * Class BaseController
  * test
@@ -64,6 +64,7 @@ abstract class BaseController extends Controller
         $this->PackageModel =  new PackageModel();
         $this->UserPackModel =  new UserPackModel();
         $this->PartnersModel =  new PartnersModel();
+        $this->ContactsModel =  new ContactsModel();
 
         // Preload any models, libraries, etc, here.
 
