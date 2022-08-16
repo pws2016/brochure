@@ -51,20 +51,32 @@ $routes->get('/loginas_back/(:any)', 'UserPanel::loginas_back/$1');
 
 
 # admin routes #######
-$routes->add('admin/dashboard', 'AdminPanel::Dashboard');
+$routes->add('admin/dashboard',        'AdminPanel::Dashboard');
+$routes->add('admin/package',           'Package::package');
+$routes->add('admin/package/insert',    'Package::insert');
+$routes->add('admin/package/update',    'Package::update');
+$routes->add('admin/package/get_data',  'Package::get_data');
+$routes->add('admin/package/delete',    'Package::delete');
+$routes->add('admin/user',              'User::user');
+$routes->add('admin/user/addUser',      'User::addUser');
+$routes->add('admin/user/updateUser',   'User::updateUser');
+$routes->add('admin/user/get_data',     'User::get_data');
+$routes->add('admin/user/delete',       'User::delete');
 
-$routes->add('admin/package', 'Package::package');
-$routes->add('admin/package/insert', 'Package::insert');
-$routes->add('admin/package/update', 'Package::update');
-$routes->add('admin/package/get_data', 'Package::get_data');
-$routes->add('admin/package/delete', 'Package::delete');
+# ######user routes ########################
+$routes->add('user/dashboarduser',      'UserPanel::Dash');
+$routes->add('user/packageuser',      'Packageuser::package_list');
+$routes->add('user/partners',      'Partners::partners');
+$routes->add('user/partners/insert',      'Partners::insert');
+$routes->add('user/partners/delete',    'Partners::delete');
+$routes->add('user/partners/get_data',     'Partners::get_data');
+$routes->add('user/partners/update',    'Partners::update');
+///// testing
+$routes->add('admin/test',      'Test::test');
 
 
-$routes->add('admin/user', 'User::user');
-$routes->add('admin/user/addUser', 'User::addUser');
-$routes->add('admin/user/updateUser', 'User::updateUser');
-$routes->add('admin/user/get_data', 'User::get_data');
-$routes->add('admin/user/delete', 'User::delete');
+
+
 
 
 // $routes->match(['get','post'],'register', 'Users::user', ['filter' => 'noauth']);

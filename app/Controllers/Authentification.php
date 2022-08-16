@@ -1,13 +1,17 @@
 <?php namespace App\Controllers;
 //use App\Models\UserModel;
-//use App\Models\UserProfileModel;
+use App\Models\UserModel;
 
 
 
 class Authentification extends BaseController
 {
 	
-	
+	// public $dmodel;
+	// public function __construct()
+	// {
+	// 	$this->dmodel =new UserModel();
+	// }
 	public function index()
 	{  
 		
@@ -20,7 +24,7 @@ class Authentification extends BaseController
 		$exist=$this->UserModel->where('role', 'guest')->where('active', 'yes')->first();
 		if(!empty($exist)){
 			$this->session->set(array('user_data'=>$exist));
-			$redirect_url='MyAccount';
+			$redirect_url='admin/dashboard';
 			return redirect()->to( base_url($redirect_url) );
 		}
 		$data['error']=lang('app.error_not_exist_account');
@@ -35,7 +39,8 @@ class Authentification extends BaseController
 		
 		if($common_data['is_logged']==true){
 				if($common_data['user_data']['role']=='A') return redirect()->to( base_url('admin/dashboard') );
-				else return redirect()->to( base_url('/myAccount') );
+				else return redirect()->to( base_url('user/dashboarduser') );
+				
 		}
 
       else{
@@ -47,7 +52,7 @@ class Authentification extends BaseController
 							->where('email', $email)
 							->where('password', md5($password))
 							->findAll();
-				
+			//	var_dump($users);exit;
 				 $url=uri_string();
 				if(empty($users)){
 					$error=lang('app.error_not_exist_account');
@@ -67,7 +72,7 @@ class Authentification extends BaseController
 					switch($users[0]['role']){
 						case 'A':$redirect_url='admin/dashboard'; break;
 						
-						default:$redirect_url='MyAccount';
+						default:$redirect_url='user/dashboarduser';
 					}
 						// $this->addUserLog($users[0]['id'],'login');
 					return redirect()->to( base_url($redirect_url) );

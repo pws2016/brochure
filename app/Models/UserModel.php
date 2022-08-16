@@ -50,6 +50,25 @@ class UserModel extends Model
 		return true;
 	}
 
-	
-}
+	public function getlogeduserdata($id){
+		$data = $this->UserModel->find();
+         $data->where('$uniid',$id);
+		 $res= $data->get();
+		 if (count($res->getResultArray()) == 1 ){
+			return $res->getRow();
+		}
+			else
+			{
+				return false;
+			}
+var_dump('$data');
+		 }
+
+
+
+	}
+
+
+
+
 
