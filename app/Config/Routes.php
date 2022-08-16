@@ -57,6 +57,7 @@ $routes->add('admin/package/insert',    'Package::insert');
 $routes->add('admin/package/update',    'Package::update');
 $routes->add('admin/package/get_data',  'Package::get_data');
 $routes->add('admin/package/delete',    'Package::delete');
+////
 $routes->add('admin/user',              'User::user');
 $routes->add('admin/user/addUser',      'User::addUser');
 $routes->add('admin/user/updateUser',   'User::updateUser');
@@ -66,12 +67,22 @@ $routes->add('admin/user/delete',       'User::delete');
 # ######user routes ########################
 $routes->add('user/dashboarduser',      'UserPanel::Dash');
 $routes->add('user/packageuser',      'Packageuser::package_list');
+/////
 $routes->add('user/partners',      'Partners::partners');
 $routes->add('user/partners/insert',      'Partners::insert');
 $routes->add('user/partners/delete',    'Partners::delete');
 $routes->add('user/partners/get_data',     'Partners::get_data');
 $routes->add('user/partners/update',    'Partners::update');
-$routes->add('user/contact',    'Contacts::contacts');
+/////
+$routes->add('user/contacts',    'Contacts::contacts');
+$routes->add('user/contacts/insert',    'Contacts::insert');
+$routes->add('user/contacts/delete',    'Contacts::delete');
+$routes->add('user/contacts/get_data',    'Contacts::get_data');
+$routes->add('user/contacts/update',    'Contacts::update');
+
+
+
+
 ///// testing
 $routes->add('admin/test',      'Test::test');
 

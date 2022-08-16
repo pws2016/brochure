@@ -352,7 +352,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="<?php echo base_url('user/contact')?>">
+					<a href="<?php echo base_url('user/contacts')?>">
 						<i class="uil-bars me-2"></i><span>Contacts</span>
 					</a>
 				</li>
