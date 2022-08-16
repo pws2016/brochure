@@ -335,24 +335,24 @@
 		case 1:*/?>
 				<li class="menu-title">Offerte</li>
 				<li>
-					<a href="<?php echo base_url($prefix_route.'test')?>">
+					<a href="<?php echo base_url('admin/test')?>">
 						<i class="uil-bars me-2"></i><span>Lista offerte</span>
 					</a>
 				</li>
 				<li class="menu-title">Setting</li>
 				<li>
-					<a href="<?php echo base_url($prefix_route.'package')?>">
+					<a href="<?php echo base_url('admin/package')?>">
 						<i class="uil-bars me-2"></i><span>Lista pacchetti</span>
 					</a>
 				</li>
 				<li>
-					<a href="<?php echo base_url($prefix_route.'user')?>">
+					<a href="<?php echo base_url('admin/user')?>">
 						<i class=" uil-bars me-2"></i><span>Lista client</span>
 						<!-- uil-bookmark-full -->
 					</a>
 				</li>
 				<li>
-					<a href="<?php echo base_url($prefix_route.'user')?>">
+					<a href="<?php echo base_url('admin/user')?>">
 						<i class="uil-bars me-2"></i><span>add user</span>
 					</a>
 				</li>

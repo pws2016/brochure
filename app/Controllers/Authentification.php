@@ -203,7 +203,7 @@ class Authentification extends BaseController
 		
 		if($common_data['is_logged']==true && $common_data['user_data']['role']!='guest'){
 				if($common_data['user_data']['role']=='A') return redirect()->to( base_url('/admin/dashboard') );
-				else return redirect()->to( base_url('/myAccount') );
+				else return redirect()->to( base_url('/user/dashboarduser') );
 		}
 		$throttler = \Config\Services::throttler();
 
@@ -289,7 +289,7 @@ class Authentification extends BaseController
 		$data=$common_data;
 		if($common_data['is_logged']==true){
 				if($common_data['user_data']['role']=='A') return redirect()->to( base_url('/admin/dashboard') );
-				else return redirect()->to( base_url('/myAccount') );
+				else return redirect()->to( base_url('/user/dashboarduser') );
 		}
 		$redirect=$this->request->getVar('redirect');
 		
@@ -318,7 +318,7 @@ class Authentification extends BaseController
 		$data=$common_data;
 		if($common_data['is_logged']==true){
 				if($common_data['user_data']['role']=='A') return redirect()->to( base_url('/admin/dashboard') );
-				else return redirect()->to( base_url('/myAccount') );
+				else return redirect()->to( base_url('/user/dashboarduser') );
 		}
 		 $uri = previous_url(false);
 		
@@ -404,7 +404,7 @@ class Authentification extends BaseController
 		$data=$common_data;
 	if($common_data['is_logged']==true){
 				if($common_data['user_data']['role']=='A') return redirect()->to( base_url('/admin/dashboard') );
-				else return redirect()->to( base_url('/myAccount') );
+				else return redirect()->to( base_url('/user/dashboarduser') );
 		}
 			$settings=$this->SettingModel->getByMetaKey();
 		$data['redirect_url']=$this->session->get('forgot_redirect');
