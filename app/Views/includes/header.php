@@ -335,7 +335,7 @@
 		case 1:*/?>
 				<li class="menu-title">Offerte</li>
 				<li>
-					<a href="<?php echo base_url($prefix_route.'calls')?>">
+					<a href="<?php echo base_url($prefix_route.'test')?>">
 						<i class="uil-bars me-2"></i><span>Lista offerte</span>
 					</a>
 				</li>

@@ -2,9 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\UserModel;
-
-
-
+use CodeIgniter\CLI\Console;
 
 class User extends BaseController
 {
@@ -13,7 +11,12 @@ class User extends BaseController
 	{
 
 		$data = $this->common_data();
+
 		$data['list_user'] = $this->UserModel->find();
+		$data['pack_title'] = $this->PackageModel->find();
+		$data['pack'] = $this->UserPackModel->find();
+
+	
 
 
 		echo view('admin/user', $data);
@@ -37,8 +40,27 @@ class User extends BaseController
 
 			];
 
-			var_dump($data_add);
+
+			
+			// var_dump($data_add);
 			$xx = $this->UserModel->insert($data_add);
+           $p = $this->PackageModel->find($this->request->getVar("pack"));
+
+		   $C_date=strtotime($p['created_at']);
+		   $exp=strtotime($p['validity_months']);
+     
+		   $exp_date = $C_date+ $exp;
+
+			$data_pack = array(
+			'user_id'=> $xx, 
+			'pack_id'=>$this->request->getVar("pack"),
+			'nb_brochure'=>$p['nb_brochure'],
+			'expired_at'=> date('Y-m-d',strtotime("+".$p['validity_months']." months -1 day")),
+
+
+		);
+			$this->UserPackModel->insert($data_pack);
+			
 			$session = session();
 			$session->setFlashdata("successMsg", "New Package created successfully");
 			return redirect()->to(base_url('admin/user'));
@@ -48,6 +70,11 @@ class User extends BaseController
 
 		return view('admin/user');
 	}
+
+
+
+
+
 
 	public function updateUser()
 	{
@@ -65,9 +92,12 @@ class User extends BaseController
 				'role'  => $this->request->getVar("role"),
 				'pass' => $this->request->getVar("pass"),
 				'password' => $this->request->getVar("password"),
+				'pack_id'=>$this->request->getVar("pack"),
 
 			];
-			var_dump($data_update);
+
+			// var_dump($data_update);
+
 			$this->UserModel->update($id, $data_update);
 		
 
@@ -108,6 +138,23 @@ class User extends BaseController
 										  </div>
 
 										
+										  <div class="form-outline mb-4">
+                                         <select class="form-select form-select-lg mb-3" name="pack" class="form-control form-control-lg">
+
+                                              <option value="">-Select-</option>
+                                                 <?php 
+												 
+												 $pack_title =$this->PackageModel->find();
+												 foreach ($pack_title as $pack) : ?>
+                                                     <option value="<?= $pack['id']; ?>"><?= $pack['title']; ?></option>
+                                                 <?php endforeach; ?>
+
+
+
+                                                                    </select>
+
+
+                                                                </div>
 
 										
 											 

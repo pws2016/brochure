@@ -11,7 +11,6 @@ class AdminPanel extends BaseController
 	{
 		$data = $this->common_data();
 
-		//echo view('includes/header', $data);
 		echo view('admin/dashboard',$data);
 	
 	}
