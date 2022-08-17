@@ -33,8 +33,9 @@ $data['list_pack'] = $this->PackageModel->find();
 				'email' => $this->request->getVar("email"),
 				'mobile' => $this->request->getVar("mobile"),
 				'role'  => 'C',
-				'pass' => md5($this->request->getVar("pass")),
-				'password' => $this->request->getVar("password"),
+				'active'  => 'yes',
+				'pass' => $this->request->getVar("pass"),
+				'password' =>md5( $this->request->getVar("password")),
 
 
 
@@ -90,8 +91,8 @@ $data['list_pack'] = $this->PackageModel->find();
 				'email' => $this->request->getVar("email"),
 				'mobile' => $this->request->getVar("mobile"),
 				//'role'  => $this->request->getVar("role"),
-				'pass' => md5($this->request->getVar("pass")),
-				'password' => $this->request->getVar("password"),
+				'pass' =>$this->request->getVar("pass"),
+				'password' =>  md5($this->request->getVar("password")),
 				//'pack_id'=>$this->request->getVar("pack"),
 
 			];
