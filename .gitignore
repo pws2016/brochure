@@ -85,6 +85,7 @@ phpunit
 #-------------------------
 vendor/
 public/Minible_v2.0.0
+app/Config/App.php
 #-------------------------
 # IDE / Development Files
 #-------------------------
