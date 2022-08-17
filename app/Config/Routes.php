@@ -66,22 +66,31 @@ $routes->add('admin/user/delete',       'User::delete');
 
 # ######user routes ########################
 $routes->add('user/dashboarduser',      'UserPanel::Dash');
-$routes->add('user/packageuser',      'Packageuser::package_list');
+$routes->add('user/packageuser',        'Packageuser::package_list');
 /////
-$routes->add('user/partners',      'Partners::partners');
-$routes->add('user/partners/insert',      'Partners::insert');
+$routes->add('user/partners',           'Partners::partners');
+$routes->add('user/partners/insert',    'Partners::insert');
 $routes->add('user/partners/delete',    'Partners::delete');
-$routes->add('user/partners/get_data',     'Partners::get_data');
+$routes->add('user/partners/get_data',  'Partners::get_data');
 $routes->add('user/partners/update',    'Partners::update');
 /////
-$routes->add('user/contacts',    'Contacts::contacts');
+$routes->add('user/contacts',           'Contacts::contacts');
 $routes->add('user/contacts/insert',    'Contacts::insert');
 $routes->add('user/contacts/delete',    'Contacts::delete');
-$routes->add('user/contacts/get_data',    'Contacts::get_data');
+$routes->add('user/contacts/get_data',  'Contacts::get_data');
 $routes->add('user/contacts/update',    'Contacts::update');
-
-
-
+//////
+$routes->add('user/products',           'Products::products');
+$routes->add('user/products/insert',    'Products::insert');
+$routes->add('user/products/delete',    'Products::delete');
+$routes->add('user/products/get_data',  'Products::get_data');
+$routes->add('user/products/update',    'Products::update');
+/////
+$routes->add('user/premi',           'Premi::premi');
+$routes->add('user/premi/insert',    'Premi::insert');
+$routes->add('user/premi/delete',    'Premi::delete');
+$routes->add('user/premi/get_data',  'Premi::get_data');
+$routes->add('user/premi/update',    'Premi::update');
 
 ///// testing
 $routes->add('admin/test',      'Test::test');

@@ -17,6 +17,8 @@ use App\Models\PackageModel;
 use App\Models\UserPackModel;
 use App\Models\PartnersModel;
 use App\Models\ContactsModel;
+use App\Models\ProductsModel;
+use App\Models\PremiModel;
 /**
  * Class BaseController
  * test
@@ -59,13 +61,14 @@ abstract class BaseController extends Controller
 		
 		$this->UsersLogModel=new UsersLogModel();
 		$this->UserModel =  new UserModel();
-		$this->UserProfileModel =  new UserProfileModel();
-		$this->TemplatesModel =  new TemplatesModel();
-        $this->PackageModel =  new PackageModel();
+		$this->UserProfileModel = new UserProfileModel();
+		$this->TemplatesModel = new TemplatesModel();
+        $this->PackageModel  =  new PackageModel();
         $this->UserPackModel =  new UserPackModel();
         $this->PartnersModel =  new PartnersModel();
         $this->ContactsModel =  new ContactsModel();
-
+        $this->ProductsModel =  new ProductsModel();
+        $this->PremiModel    =  new PremiModel();
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();

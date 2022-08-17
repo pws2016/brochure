@@ -335,17 +335,6 @@
 		case 1:*/?>
 				<li class="menu-title">Offerte</li>
 				<li>
-					<a href="<?php echo base_url('')?>">
-						<i class="uil-bars me-2"></i><span>1</span>
-					</a>
-				</li>
-				<li class="menu-title">Setting</li>
-				<li>
-					<a href="<?php echo base_url('')?>">
-						<i class="uil-bars me-2"></i><span>2</span>
-					</a>
-				</li>
-				<li>
 					<a href="<?php echo base_url('user/partners')?>">
 						<i class=" uil-bars me-2"></i><span>partners</span>
 						<!-- uil-bookmark-full -->
@@ -356,6 +345,23 @@
 						<i class="uil-bars me-2"></i><span>Contacts</span>
 					</a>
 				</li>
+				<li>
+					<a href="<?php echo base_url('user/products')?>">
+						<i class="uil-bars me-2"></i><span>Products</span>
+					</a>
+				</li>
+				<li>
+					<a href="<?php echo base_url('user/premi')?>">
+						<i class="uil-bars me-2"></i><span>Premi</span>
+					</a>
+				</li>
+				<li class="menu-title">Setting</li>
+				<li>
+					<a href="<?php echo base_url('')?>">
+						<i class="uil-bars me-2"></i><span>2</span>
+					</a>
+				</li>
+				
 				<!--li><a href="<?php //echo base_url('settings')?>"><i class="uil uil-cog"></i> <span class="align-middle"><?php echo lang('app.menu_setting')?></span></a>
 				</li-->
 					<?php
