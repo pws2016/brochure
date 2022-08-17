@@ -47,41 +47,7 @@
                             <div class="col-12">
                                 <div class="card">
 								
-                                    <div class="card-body">
-       
-                                        <!--h4 class="card-title"><a data-bs-target="#add-modal-dialog"  data-bs-toggle="modal"  name="add" class="btn btn-success float-right"><?php echo  lang('app.btn_add')?></a></h4-->
-                                       <?php 
-										 if(isset($validation)){?>
-										 <div class="alert alert-danger" role="alert">
-											 <?php echo $validation->listErrors()?>
-											</div>
-										 <?php }?>
-							 <?php 
-										 if(isset($error)){?>
-										 <div class="alert alert-danger" role="alert">
-											 <?php echo $error?>
-											</div>
-										 <?php }?>
-										  <?php 
-										 if(isset($success)){?>
-										 <div class="alert alert-success" role="alert">
-											 <?php echo $success?>
-											</div>
-										 <?php }?>
-        
-                                        <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                            <thead>
-												
-                                            </thead>
-        
-        
-                                            <tbody>
-											
-                                           
-                                            </tbody>
-                                        </table>
-        
-                                    </div>
+                                
                                 </div>
                             </div> <!-- end col -->
                         </div> <!-- end row -->

@@ -16,7 +16,7 @@ class Partners extends BaseController
         $data = $this->common_data();
        
        
-        $data['part'] = $this->PartnersModel->find();
+        $data['part'] = $this->PartnersModel->where('user_id',$data['user_data']['id'])->find();
 
         //  var_dump($data);
         // var_dump( $data['part']);

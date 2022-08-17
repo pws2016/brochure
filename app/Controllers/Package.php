@@ -12,7 +12,7 @@ class Package extends BaseController
 	{
 
 		$data = $this->common_data();
-		$data['list_pack'] = $this->PackageModel->find();
+		$data['list_pack'] = $this->PackageModel->where('user_id',$data['user_data']['id'])->find();
 		// var_dump($data['list_pack']);
 
 
