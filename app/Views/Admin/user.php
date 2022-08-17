@@ -128,7 +128,7 @@
                                                                 </div>
 
 
-
+<?php /*
                                                                 <div class="mb-3">
                                                                     <label class="">Choose package</label>
                                                                     <select class="form-select form-select-lg mb-3" name="pack" class="form-control form-control-lg">
@@ -139,7 +139,7 @@
                                                                      
 
                                                                         <?php foreach ($list_pack as $pa) : 
-																		var_dump($pa);?>
+																		?>
                                                                             <option value="<?= $pa['id']; ?>"><?= $pa['title']; ?></option>
                                                                         <?php endforeach; ?>
 
@@ -149,7 +149,7 @@
 
 
                                                                 </div>
-
+*/?>
                                                                 <div class="mt-3 text-end">
                                                                     <button class="btn btn-primary w-sm waves-effect waves-light" type="submit">Register</button>
                                                                 </div>
