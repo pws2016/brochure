@@ -15,7 +15,7 @@ class User extends BaseController
 		$data['list_user'] = $this->UserModel->find();
 		$data['pack_title'] = $this->PackageModel->find();
 		$data['pack'] = $this->UserPackModel->find();
-
+$data['list_pack'] = $this->PackageModel->find();
 	
 
 
@@ -32,7 +32,7 @@ class User extends BaseController
 				'display_name' => $this->request->getVar("display_name"),
 				'email' => $this->request->getVar("email"),
 				'mobile' => $this->request->getVar("mobile"),
-				'role'  => $this->request->getVar("role"),
+				'role'  => 'C',
 				'pass' => $this->request->getVar("pass"),
 				'password' => $this->request->getVar("password"),
 

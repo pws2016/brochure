@@ -136,10 +136,11 @@
                                                                         <option value="">-Select-</option>
 
 
-                                                                        $data['pack'] = $this->UserPackModel->find();
+                                                                     
 
-                                                                        <?php foreach ($pack as $pa) : ?>
-                                                                            <option value="<?= $pack['id']; ?>"><?= $pack['title']; ?></option>
+                                                                        <?php foreach ($list_pack as $pa) : 
+																		var_dump($pa);?>
+                                                                            <option value="<?= $pa['id']; ?>"><?= $pa['title']; ?></option>
                                                                         <?php endforeach; ?>
 
 
