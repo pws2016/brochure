@@ -50,6 +50,9 @@ class Ajax extends BaseController
 			else  $logo_name=""; // without logo
 				$tab=array("step"=>$current_step);
 				if(!is_null($logo_name)) $tab['logo']=$logo_name;
+				$tab['title_couverture']=$this->request->getVar('title_couverture');
+				$tab['subtitle_couverture']=$this->request->getVar('subtitle_couverture');
+				$this->BrochuresModel->update($this->session->get('current_brochure'),$tab);
 			break;
 		}
 		$res=array("error"=>false,'POST'=>$tab,'FILES'=>$_FILES);
