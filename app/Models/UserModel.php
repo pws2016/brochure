@@ -16,7 +16,7 @@ class UserModel extends Model
 	'active',
 	'token',
 	'mobile',
-	'pass'];
+	'pass','remain_broch'];
 	/*protected $useSoftDeletes = true;
 	protected $returnType = 'array';
 	protected $useTimestamps = true;
