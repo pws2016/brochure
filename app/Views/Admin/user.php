@@ -128,7 +128,7 @@
                                                                 </div>
 
 
-
+<?php /*
                                                                 <div class="mb-3">
                                                                     <label class="">Choose package</label>
                                                                     <select class="form-select form-select-lg mb-3" name="pack" class="form-control form-control-lg">
@@ -136,10 +136,11 @@
                                                                         <option value="">-Select-</option>
 
 
-                                                                        $data['pack'] = $this->UserPackModel->find();
+                                                                     
 
-                                                                        <?php foreach ($pack as $pa) : ?>
-                                                                            <option value="<?= $pack['id']; ?>"><?= $pack['title']; ?></option>
+                                                                        <?php foreach ($list_pack as $pa) : 
+																		?>
+                                                                            <option value="<?= $pa['id']; ?>"><?= $pa['title']; ?></option>
                                                                         <?php endforeach; ?>
 
 
@@ -148,7 +149,7 @@
 
 
                                                                 </div>
-
+*/?>
                                                                 <div class="mt-3 text-end">
                                                                     <button class="btn btn-primary w-sm waves-effect waves-light" type="submit">Register</button>
                                                                 </div>

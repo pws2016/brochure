@@ -259,80 +259,21 @@
 						<i class="uil-home-alt"></i><span>Dashboard</span>
 					</a>
 				</li>
-				<?php /* if($user_data['role']=='A'){?>
+				
+			
 				<li>
-					<a href="<?php echo base_url($prefix_route.'customers')?>">
-						<i class="uil-users-alt me-2"></i><span>Lista clienti</span>
-					</a>
-				</li>
-				<?php }*/ ?>
-				<?php /*<li>
-					<a href="<?php echo base_url($prefix_route.'invoices?project='.$selected_project['id'])?>">
-						<i class="uil-invoice me-2"></i><span>Fatture</span>
-					</a>
-				</li>*/?>
-				<li>
-					<a href="<?php echo base_url($prefix_route.'payments')?>">
-						<i class="uil-invoice me-2"></i><span>Pagamenti</span>
-					</a>
-				</li>
-				<?php /*if($user_data['role']=='customer'){?>
-				<li>
-					<a href="<?php echo base_url($prefix_route.'overview')?>">
-						<i class="uil-layers me-2"></i><span>Prezzi</span>
-					</a>
-				</li>
-				<?php }?>
-				<li class="menu-title">Nostri Servizi</li>
-				<?php //if(!empty($selected_project)){*/
-				?>
-				<!--li>
-	  <a href="<?php //echo base_url($prefix_route.'overview')?>">
-	   <i class="uil-layers me-2"></i><span>Prezzi/Acquista pacchetti</span>
-	  </a>
-	 </li-->
-				<?php /*switch($selected_project['id']){
-						case 1:*/?>
-				<li>
-					<a href="<? /*php echo base_url($prefix_route.'requests?plan_type=simple')*/?>">
-						<i class="uil-analysis me-2"></i><span><? /*php echo lang('app.menu_requests') */ ?></span>
-					</a>
-				</li>
-
-				<!-- <li>
-					<a href="<?php  /*echo base_url($prefix_route.'requests?plan_type=full') */?>">
-						<i class="uil-file-alt me-2"></i><span><? /*php echo lang('app.menu_requests_bp_full') */?></span>
+					<a href="<?php echo base_url('user/brochures/new')?>">
+						<i class="uil-analysis me-2"></i><span>New Brochure</span>
 					</a>
 				</li>
 
 				<li>
-					<a href="<?php echo base_url($prefix_route.'requests?plan_type=business')?>">
-						<i class="uil-analytics me-2"></i><span><?php echo lang('app.menu_requests_bp_business')?></span>
-					</a>
-				</li> -->
-					<?php /*break;
-						case 2:*/  //break;
-					//}
-//} ?>
-
-				<?php /* if($user_data['role']=='customer'){?>
-				<li class="menu-title">Offerte</li>
-				<li>
-					<a href="<?php echo base_url($prefix_route.'offers')?>">
-						<i class="uil-file-alt me-2"></i><span>Le mie offerte</span>
+					<a href="<?php echo base_url('user/brochures')?>">
+						<i class="uil-analysis me-2"></i><span>My Brochure</span>
 					</a>
 				</li>
-				<?php if($user_data['dropbox']!=""){?>
-				<li>
-					<a href="<?php echo base_url('myAccount/dropbox')?>">
-						<i class="uil-dropbox me-2"></i><span>Documenti (Dropbox)</span>
-					</a>
-				</li>
-				<?php } ?>
-				<?php }
-					   if($user_data['role']=='A'){
-						   /*switch($selected_project['id']){
-		case 1:*/?>
+				
+			
 				<li class="menu-title">Offerte</li>
 				<li>
 					<a href="<?php echo base_url('user/partners')?>">

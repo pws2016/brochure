@@ -2,12 +2,12 @@
 use CodeIgniter\Database\ConnectionInterface;
 use CodeIgniter\Model;
 
-class BrochureTemplatesModel extends Model
+class BrochuresModel extends Model
 {
 	
     protected $table = 'brochures';
 	protected $primaryKey = 'id';
-    protected $allowedFields = ['user_id','template_id', 'title','html','background'];
+    protected $allowedFields = ['user_id','template_id', 'title','html','background','status','step'];
 	protected $useSoftDeletes = true;
 	protected $returnType = 'array';
 	protected $useTimestamps = true;

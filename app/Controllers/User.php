@@ -15,7 +15,7 @@ class User extends BaseController
 		$data['list_user'] = $this->UserModel->find();
 		$data['pack_title'] = $this->PackageModel->find();
 		$data['pack'] = $this->UserPackModel->find();
-
+$data['list_pack'] = $this->PackageModel->find();
 	
 
 
@@ -32,9 +32,10 @@ class User extends BaseController
 				'display_name' => $this->request->getVar("display_name"),
 				'email' => $this->request->getVar("email"),
 				'mobile' => $this->request->getVar("mobile"),
-				'role'  => $this->request->getVar("role"),
+				'role'  => 'C',
+				'active'  => 'yes',
 				'pass' => $this->request->getVar("pass"),
-				'password' => $this->request->getVar("password"),
+				'password' =>md5( $this->request->getVar("password")),
 
 
 
@@ -89,10 +90,10 @@ class User extends BaseController
 				'display_name' => $this->request->getVar("display_name"),
 				'email' => $this->request->getVar("email"),
 				'mobile' => $this->request->getVar("mobile"),
-				'role'  => $this->request->getVar("role"),
-				'pass' => $this->request->getVar("pass"),
-				'password' => $this->request->getVar("password"),
-				'pack_id'=>$this->request->getVar("pack"),
+				//'role'  => $this->request->getVar("role"),
+				'pass' =>$this->request->getVar("pass"),
+				'password' =>  md5($this->request->getVar("password")),
+				//'pack_id'=>$this->request->getVar("pack"),
 
 			];
 
@@ -119,26 +120,31 @@ class User extends BaseController
 ?>
  <div class="form-outline mb-4">
  <input type="hidden" id="edit_id" name="id" value="<?= $user_data['id'] ?>"  class="form-control" >
+  <label class="form-label" for="display_name"> Name</label>
 											  <input type="text" id="display_name" name="display_name" value="<?= $user_data['display_name'] ?>" class="form-control form-control-lg" />
-											  <label class="form-label" for="display_name"> Name</label>
+											 
 										  </div>
 
 										  <div class="form-outline mb-4">
+										    <label class="form-label" for="email">Email</label>
 											  <input type="email" id="email" name="email" value="<?= $user_data['email'] ?>" class="form-control form-control-lg" />
-											  <label class="form-label" for="email">Email</label>
+											
 										  </div>
 										  <div class="form-outline mb-4">
+										   <label class="form-label" for="mobile">Phone</label>
 											  <input type="text" id="mobile" name="mobile"  value="<?= $user_data['mobile'] ?>" class="form-control form-control-lg" />
-											  <label class="form-label" for="mobile">Phone</label>
+											 
 										  </div>
 
 										  <div class="form-outline mb-4">
+										    <label class="form-label" for="password">Password</label>
 											  <input type="password" id="password" name="password" value="<?= $user_data['password'] ?>" class="form-control form-control-lg" />
-											  <label class="form-label" for="password">Password</label>
+											
 										  </div>
 
 										
 										  <div class="form-outline mb-4">
+										    <label class="form-label" for="password">Package</label>
                                          <select class="form-select form-select-lg mb-3" name="pack" class="form-control form-control-lg">
 
                                               <option value="">-Select-</option>
