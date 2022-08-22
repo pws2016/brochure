@@ -21,6 +21,7 @@ use App\Models\ProductsModel;
 use App\Models\PremiModel;
 use App\Models\CompanyModel;
 use App\Models\BrochuresModel;
+use App\Models\BitemModel;
 /**
  * Class BaseController
  * test
@@ -72,7 +73,10 @@ abstract class BaseController extends Controller
         $this->ProductsModel =  new ProductsModel();
         $this->PremiModel    =  new PremiModel();
         $this-> CompanyModel =  new CompanyModel();
-       $this->BrochuresModel=new BrochuresModel();
+       $this->BrochuresModel =  new BrochuresModel();
+	   $this->BitemModel     =  new BitemModel();
+
+
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();

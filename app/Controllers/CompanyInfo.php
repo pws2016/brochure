@@ -33,6 +33,11 @@ class CompanyInfo extends BaseController
             'title_contacts' => $this->request->getVar("title_contacts"),
             'title_partners' => $this->request->getVar("title_partners"),
             'title_intro' => $this->request->getVar("title_intro"),
+            'title_product' => $this->request->getVar("title_product"),
+            'title_premi' => $this->request->getVar("title_premi"),
+            'description_product' => $this->request->getVar("description_product"),
+            'description_premi' => $this->request->getVar("description_premi"),
+
             'description_operation' => $this->request->getVar("description_operation"),
             'description_contacts' => $this->request->getVar("description_contacts"),
             'description_partners' => $this->request->getVar("description_partners"),
