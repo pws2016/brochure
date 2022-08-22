@@ -59,9 +59,6 @@ class Premi extends BaseController
                 ];
 
                 $ad = $this->PremiModel->insert($add_data);
-
-
-                //$this->session->setFlashdata("successMsg", "New P created successfully");
                 return redirect()->to(base_url('user/premi'));
             }
         }
@@ -71,6 +68,7 @@ class Premi extends BaseController
     public function update()
     {
 
+        $data = $this->common_data();
 
         $id = $this->request->getVar("id");
 
@@ -84,8 +82,7 @@ class Premi extends BaseController
 
             'name' => $this->request->getVar("name"),
             'description' => $this->request->getVar("description"),
-            // 'image' => $this->request->getFile("image"),
-            'user_id' => $this->request->getVar("user_id"),
+            // 'user_id' => $this->request->getVar("user_id"),
 
 
 

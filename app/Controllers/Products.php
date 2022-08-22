@@ -60,8 +60,6 @@ class Products extends BaseController
 
                 $ad = $this->ProductsModel->insert($add_data);
 
-
-                //$this->session->setFlashdata("successMsg", "New P created successfully");
                 return redirect()->to(base_url('user/products'));
             }
         }
@@ -70,7 +68,7 @@ class Products extends BaseController
     }
     public function update()
     {
-
+        $data = $this->common_data();
 
         $id = $this->request->getVar("id");
 
@@ -84,7 +82,6 @@ class Products extends BaseController
 
             'name' => $this->request->getVar("name"),
             'description' => $this->request->getVar("description"),
-            // 'image' => $this->request->getFile("image"),
             'user_id' => $this->request->getVar("user_id"),
 
 

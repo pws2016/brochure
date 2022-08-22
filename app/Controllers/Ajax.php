@@ -52,11 +52,118 @@ class Ajax extends BaseController
 				if(!is_null($logo_name)) $tab['logo']=$logo_name;
 				$tab['title_couverture']=$this->request->getVar('title_couverture');
 				$tab['subtitle_couverture']=$this->request->getVar('subtitle_couverture');
+				$bg_name=null;
+				if($this->request->getVar('selectbg')=='new'){ // uplaod new logo 
+						$validated = $this->validate([
+								'background' => [
+									'uploaded[background]',
+									'mime_in[background,image/jpg,image/jpeg,image/gif,image/png]',
+									'max_size[background,4096]',
+								],
+							]);
+							
+							if ($validated) { 
+								$avatar_bg = $this->request->getFile('background');
+								 $bg_name = $avatar_bg->getRandomName();
+								
+								$avatar_bg->move(ROOTPATH.'public/uploads/',$bg_name);
+							
+							
+							}
+							else{$validation=$this->validator;
+								$error_msg=$validation->listErrors();
+								$bg_name=null;
+							}
+				}
+				elseif($this->request->getVar('selectbg')=='default'){ // recuperate logo from company data
+					$inf_company=$this->CompanyModel->where('user_id',$data['user_data']['id'])->first();
+					if(!empty($inf_company)) $bg_name=$inf_company['background'];
+				}
+				elseif($this->request->getVar('selectbg')=='current'){ // remain old selected logo
+					$bg_name=null;
+				}
+				else  $bg_name=""; // without logo
+					
+					if(!is_null($bg_name)) $tab['background']=$bg_name;
 				$this->BrochuresModel->update($this->session->get('current_brochure'),$tab);
+
 			break;
+			
+			case 2:
+	
+			$tab['title_operation']=$this->request->getVar('title_operation');
+			$tab['description_operation']=$this->request->getVar('description_operation');
+			$tab["step"]=$current_step;
+			$x=$this->BrochuresModel->update($this->session->get('current_brochure'),$tab);
+				
+		    break;
+
+			case 3:
+
+				$tab['title_premi']=$this->request->getVar('title_premi');
+				$tab['description_premi']=$this->request->getVar('description_premi');
+				
+				$tab["step"]=$current_step;
+				$this->BrochuresModel->update($this->session->get('current_brochure'),$tab);
+				if(!empty($this->request->getVar('select_premi') )){
+				foreach($this->request->getVar('select_premi') as $select){
+					$this->BitemModel->insert(array('id_brochure'=>$this->session->get('current_brochure'),'id_item'=>$select,'type_item'=>"premi"));
+				}
+			}
+
+		break;
+
+		case 4:
+			$tab['title_partners']=$this->request->getVar('title_partners');
+			$tab['description_partners']=$this->request->getVar('description_partners');
+			
+			$tab["step"]=$current_step;
+			$this->BrochuresModel->update($this->session->get('current_brochure'),$tab);
+			if(!empty($this->request->getVar('select_partner') )){
+			foreach($this->request->getVar('select_partner') as $select){
+				$this->BitemModel->insert(array('id_brochure'=>$this->session->get('current_brochure'),'id_item'=>$select,'type_item'=>"partners"));
+			}    }
+		break;
+
+		case 5:
+			$tab['title_contacts']=$this->request->getVar('title_contacts');
+			$tab['description_contacts']=$this->request->getVar('description_contacts');
+			
+			$tab["step"]=$current_step;
+			$this->BrochuresModel->update($this->session->get('current_brochure'),$tab);
+			if(!empty($this->request->getVar('select_contact') )){
+			foreach($this->request->getVar('select_contact') as $select){
+			$this->BitemModel->insert(array('id_brochure'=>$this->session->get('current_brochure'),'id_item'=>$select,'type_item'=>"contacts"));
+			}}
+		break;
+
+case 6:
+	$tab['title_product']=$this->request->getVar('title_product');
+			$tab['description_product']=$this->request->getVar('description_product');
+			
+			$tab["step"]=$current_step;
+			$this->BrochuresModel->update($this->session->get('current_brochure'),$tab);
+			if(!empty($this->request->getVar('select_product') )){
+			foreach($this->request->getVar('select_product') as $select){
+				$this->BitemModel->insert(array('id_brochure'=>$this->session->get('current_brochure'),'id_item'=>$select,'type_item'=>"products"));
+			}}
+break;
+
+case 7:
+	        $tab['title_intro']=$this->request->getVar('title_intro');
+			$tab['description_intro']=$this->request->getVar('description_intro');
+			$tab["step"]=$current_step;
+			$this->BrochuresModel->update($this->session->get('current_brochure'),$tab);
+break;
+case 8:
+	
+	
+
+
+break;
+			
 		}
-		$res=array("error"=>false,'POST'=>$tab,'FILES'=>$_FILES);
+		$res=array("error"=>false,'error_msg'=>$x,'POST'=>$tab,'FILES'=>$_FILES);
 		echo json_encode($res);
 	}
 }
-?>

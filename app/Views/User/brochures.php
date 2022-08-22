@@ -125,7 +125,7 @@
 
                                                                         <li class="list-inline-item">
 
-                                                                            <a onclick="get_data('<?php echo $row['id']; ?>')" class="px-2 text-primary" data-toggle="modal" data-target="#edit_modal"><i class="uil uil-pen font-size-18"></i></a>
+                                                                            <a href="<?php echo base_url('user/brochures/edit/'.$row['id'] )?>" class="px-2 text-primary" ><i class="uil uil-pen font-size-18"></i></a>
                                                                         </li>
                                                                         <li class="list-inline-item">
                                                                             <a onclick="del_pack('<?php echo $row['id']; ?>')" class="px-2 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>

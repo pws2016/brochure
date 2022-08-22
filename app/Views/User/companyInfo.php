@@ -87,7 +87,8 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <?php
-                                                if ($company['background'] != "") { ?> <img src="<?php echo base_url('uploads/' . $company['background']) ?>" height="50" width="50px"><?php }
+                                                if ($company['background'] != "") { ?> <img src="<?php echo base_url
+                                                    ('uploads/' . $company['background']) ?>" height="50" width="50px"><?php }
 
 
                                                                                                                                     ?>
@@ -104,7 +105,7 @@
                                             <label for="description_operation" class="col-md-2 col-form-label">description_operation</label>
                                             <div class="col-md-10">
 
-                                                <textarea id="title_op" name="description_operation" ><?php echo $company['description_operation'] ?? '' ?></textarea>
+                                                <textarea id="operation" name="description_operation" ><?php echo $company['description_operation'] ?? '' ?></textarea>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
@@ -118,7 +119,7 @@
                                             <label for="description_operation" class="col-md-2 col-form-label">description_contacts</label>
                                             <div class="col-md-10">
 
-                                                <textarea id="title_cont" name="description_contacts"><?php echo $company['description_operation'] ?? '' ?></textarea>
+                                                <textarea id="contacts" name="description_contacts"><?php echo $company['description_operation'] ?? '' ?></textarea>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
@@ -132,7 +133,35 @@
                                             <label for="description_partners" class="col-md-2 col-form-label">description_partners</label>
                                             <div class="col-md-10">
 
-                                                <textarea id="title_part" name="description_partners"><?php echo $company['description_partners'] ?? '' ?></textarea>
+                                                <textarea id="partners" name="description_partners"><?php echo $company['description_partners'] ?? '' ?></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="title_premi" class="col-md-2 col-form-label">title_permi</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" name="title_premi" id="p-title" value="<?php echo $company['title_premi'] ?? '' ?>">
+
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="description_intro" class="col-md-2 col-form-label">description_premi</label>
+                                            <div class="col-md-10">
+
+                                                <textarea id="premi" name="description_premi"><?php echo $company['description_premi'] ?? '' ?></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="title_intro" class="col-md-2 col-form-label">title_products</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" name="title_product" id="p-title" value="<?php echo $company['title_product'] ?? '' ?>">
+
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="description_intro" class="col-md-2 col-form-label">description_products</label>
+                                            <div class="col-md-10">
+
+                                                <textarea id="product" name="description_product"><?php echo $company['description_product'] ?? '' ?></textarea>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
@@ -217,13 +246,43 @@
             <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/tinymce/tinymce.min.js"></script>
 
             <!-- init js -->
-
-
-
-            <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/js/app.js"></script>
+ <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/js/app.js"></script>
             <script>
                 tinymce.init({
-                    selector: 'textarea#title_op',
+                    selector: 'textarea#product',
+                    height: 150,
+                    menubar: false,
+                    plugins: [
+                        'advlist autolink lists link image charmap print preview anchor',
+                        'searchreplace visualblocks code fullscreen',
+                        'insertdatetime media table paste code help wordcount'
+                    ],
+                    toolbar: 'undo redo | formatselect | ' +
+                        'bold italic backcolor | alignleft aligncenter ' +
+                        'alignright alignjustify | bullist numlist outdent indent | ' +
+                        'removeformat | help',
+                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                });
+
+              tinymce.init({
+                    selector: 'textarea#premi',
+                    height: 150,
+                    menubar: false,
+                    plugins: [
+                        'advlist autolink lists link image charmap print preview anchor',
+                        'searchreplace visualblocks code fullscreen',
+                        'insertdatetime media table paste code help wordcount'
+                    ],
+                    toolbar: 'undo redo | formatselect | ' +
+                        'bold italic backcolor | alignleft aligncenter ' +
+                        'alignright alignjustify | bullist numlist outdent indent | ' +
+                        'removeformat | help',
+                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                });
+
+
+                tinymce.init({
+                    selector: 'textarea#operation',
                     height: 150,
                     menubar: false,
                     plugins: [
@@ -239,7 +298,7 @@
                 });
 
                 tinymce.init({
-                    selector: 'textarea#title_cont',
+                    selector: 'textarea#contacts',
                     height: 150,
                     menubar: false,
                     plugins: [
@@ -255,7 +314,7 @@
                 });
 
                 tinymce.init({
-                    selector: 'textarea#title_part',
+                    selector: 'textarea#partners',
                     height: 150,
                     menubar: false,
                     plugins: [
