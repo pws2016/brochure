@@ -352,8 +352,36 @@
 												</section>
 												<h3>prevus Page</h3>
 												<section>
-
-
+													<form method="post" id="form-step-8" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
+													<div class="row">
+															<div class="mb-3">
+																<label for="verticalnav-firstname-input"> Template </label>
+																<select class="form-control" id="template_id" name="template_id" onchange="sel_template(this.value)">
+																	<option value=""><?php echo lang('app.field_select')?></option>
+																	<?php foreach($list_template as $k=>$v){?>
+																	<option value="<?php echo $v['id']?>" <?php if($v['id']==$inf_brochure['template_id']) echo 'selected'?>><?php echo $v['title']?></option>
+																	<?php } ?>
+																</select>
+															</div>
+														</div>
+														<div class="row" id="template_pages">
+													<?php	for($i=1;$i<=7;$i++){?>
+														<div class="mb-3 col-12">
+															<label for="verticalnav-firstname-input"> Template Page <?php echo $i?></label>
+															<select class="form-control" id="id_page" name="id_page[]">
+																<option value=""><?php echo lang('app.field_select')?></option>
+																<?php foreach($list_pages as $k=>$v){?>
+																	<option value="<?php echo $v['id']?>" <?php if($v['id']==$res_page_template[$i])echo 'selected'?>><?php echo $v['title']?></option>
+																<?php }?>
+															</select>
+														</div>
+														<?php }?>
+														
+														</div>
+														<div class="row">
+															<input onclick="save_template()" type="button" class="btn btn-info" name="preview" value="save & preview">
+														</div>
+													</form>
 												</section>
 											</div>
 										</div>
@@ -571,7 +599,25 @@
 				} else return true;
 			},
 			onFinished: function(event, currentIndex) {
+				var formData = new FormData();
 
+				var ff = $('#form-step-' + currentIndex).serializeArray();
+
+				$.each(ff, function(k, v) {
+					formData.append(v.name, v.value);
+
+				});
+				$.ajax({
+							url: "<?php echo base_url() ?>/ajax/save_template",
+							type: 'POST',
+							processData: false,
+							contentType: false,
+							data: formData
+						}).done(function(data) {
+							console.log(data);
+
+
+						});
 			}
 		});
 		$("input,textarea").on("keyup", function() {
@@ -582,9 +628,41 @@
 		});
 
 
+function save_template(){
+	var currentIndex=8;
+	var formData = new FormData();
 
+			var ff = $('#form-step-' + currentIndex).serializeArray();
 
+			$.each(ff, function(k, v) {
+				formData.append(v.name, v.value);
 
+			});
+	$.ajax({
+				url: "<?php echo base_url() ?>/ajax/save_template",
+				type: 'POST',
+				processData: false,
+				contentType: false,
+				data: formData
+			}).done(function(data) {
+				console.log(data);
+				window.open("<?php echo base_url('user/brochures/preview/'.$inf_brochure['id'])?>", '_blank'); 
+
+			});
+}
+
+function sel_template(v){
+	$.ajax({
+				url: "<?php echo base_url() ?>/ajax/get_template_pages",
+				type: 'POST',
+				
+				data: {template_id:v}
+			}).done(function(data) {
+				console.log(data);
+				$("#template_pages").html(data);
+
+			});
+}
 
 
 
