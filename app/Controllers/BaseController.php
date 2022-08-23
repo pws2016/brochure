@@ -21,7 +21,10 @@ use App\Models\ProductsModel;
 use App\Models\PremiModel;
 use App\Models\CompanyModel;
 use App\Models\BrochuresModel;
+use App\Models\BrochureTemplatesModel;
+use App\Models\BrochureTemplatePagesModel;
 use App\Models\BitemModel;
+use App\Models\BtemplateModel;
 /**
  * Class BaseController
  * test
@@ -74,8 +77,10 @@ abstract class BaseController extends Controller
         $this->PremiModel    =  new PremiModel();
         $this-> CompanyModel =  new CompanyModel();
        $this->BrochuresModel =  new BrochuresModel();
+	   $this->BrochureTemplatesModel=new BrochureTemplatesModel();
+	   $this->BrochureTemplatePagesModel=new BrochureTemplatePagesModel();
 	   $this->BitemModel     =  new BitemModel();
-
+		$this->BtemplateModel     =  new BtemplateModel();
 
         // Preload any models, libraries, etc, here.
 

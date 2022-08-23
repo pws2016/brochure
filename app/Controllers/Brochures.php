@@ -57,7 +57,7 @@ class Brochures extends BaseController
             $data['par'] = $this->PartnersModel->where('user_id',$data['user_data']['id'])->find();
 			$data['cont'] = $this->ContactsModel->where('user_id',$data['user_data']['id'])->find();
 			$data['prod'] = $this->ProductsModel->where('user_id',$data['user_data']['id'])->find();
-			
+		
 			//insert
 
 		
@@ -108,8 +108,48 @@ class Brochures extends BaseController
 				}
 			}
 			
-		
+			$data['list_template']=$this->BrochureTemplatesModel->where('user_id is null')->orWhere('user_id',$data['user_data']['id'])->find();
+			$data['list_pages']=$this->BrochureTemplatePagesModel->where('template_id',$inf_brochure['template_id'])->orderBy('type','ASC')->find();
+			$ll=$this->BtemplateModel->where('id_brochure',$inf_brochure['id'])->find();
+			if(!empty($ll)){
+				foreach($ll as $k=>$v){
+				$res_page_template[$v['ord']]=$v['page_id'];
+			} }
+			$data['res_page_template']=$res_page_template ?? array();
+			
 		return view('User/brochures_edit.php',$data);
 	}
-	
+	public function preview_broch($id){
+		$data=$this->common_data();
+		$inf_brochure=$this->BrochuresModel->find($this->session->get('current_brochure'));	
+		$inf_template=$this->BrochureTemplatesModel->find($inf_brochure['template_id']);
+		$list_pages=$this->BrochureTemplatePagesModel->where('template_id',$inf_brochure['template_id'])->orderBy('type','ASC')->find();
+		$ll=$this->BtemplateModel->where('id_brochure',$inf_brochure['id'])->find();
+		if(!empty($ll)){
+				foreach($ll as $k=>$v){
+				$res_page_template[$v['ord']]=$v['page_id'];
+			} 
+		}
+		
+		####### start compiling html ##############
+		$html=$inf_template['html'];
+		#### page $i #####
+		for($i=1;$i<8;$i++){
+		
+			$temp_page=$this->BrochureTemplatePagesModel->find($res_page_template[$i]);
+			$page[$i]=$temp_page['html'];
+			switch($temp_page['type']){
+				case 'couverture':
+					$page[$i]=str_replace(array("{page_title}","{page_description}","{logo}","{background}"),
+					array($inf_brochure['title_couverture'],$inf_brochure['subtitle_couverture'],$logo,$background),
+					$page[$i]);
+				break;
+			}// end switch type page
+		}// end for $i
+		$html=str_replace(array("{page1}","{page2}","{page3}","{page4}","{page5}","{page6}","{page7}"),
+		array($page[1] ?? "",$page[2] ?? "",$page[3] ?? "",$page[4] ?? "",$page[5] ?? "",$page[6] ?? "",$page[7] ?? ""),
+		$html);
+		echo $data['html']=$html ?? "";
+		//return view('User/brochures_preview.php',$data);
+	}
 }

@@ -166,4 +166,38 @@ break;
 		$res=array("error"=>false,'error_msg'=>$x,'POST'=>$tab,'FILES'=>$_FILES);
 		echo json_encode($res);
 	}
+	
+	
+	public function get_template_pages(){
+		$template_id=$this->request->getVar('template_id');
+		$list_pages=$this->BrochureTemplatePagesModel->where('template_id',$template_id)->orderBy('type','ASC')->find();
+		for($i=1;$i<=7;$i++){?>
+		<div class="mb-3 col-12">
+			<label for="verticalnav-firstname-input"> Template Page <?php echo $i?></label>
+			<select class="form-control" id="id_page" name="id_page[]">
+				<option value=""><?php echo lang('app.field_select')?></option>
+				<?php foreach($list_pages as $k=>$v){?>
+					<option value="<?php echo $v['id']?>"><?php echo $v['title']?></option>
+				<?php }?>
+			</select>
+		</div>
+		<?php }
+	}
+	
+	public function save_template(){
+		$data=$this->common_data();
+		$step=$this->request->getVar('step');
+		$tab['step']=$step;
+		$tab['template_id']=$this->request->getVar('template_id');
+		$this->BrochuresModel->update($this->session->get('current_brochure'),$tab);
+		
+		$exist=$this->BtemplateModel->where('id_brochure',$this->session->get('current_brochure'))->delete();
+		foreach($this->request->getVar('id_page') as $k=>$v){
+			$this->BtemplateModel->insert(array(
+			'id_brochure'=>$this->session->get('current_brochure'),
+			'page_id'=>$v,
+			'ord'=>($k+1)
+			));
+		}
+	}
 }

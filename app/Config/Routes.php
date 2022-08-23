@@ -102,6 +102,7 @@ $routes->add('admin/test',      'Test::test');
 $routes->add('/ajax/(:any)', 'Ajax::index/$1');
 $routes->add('user/brochures/new',    'Brochures::new_broch');
 $routes->add('user/brochures/edit/(:any)',    'Brochures::edit_broch/$1');
+$routes->add('user/brochures/preview/(:any)',    'Brochures::preview_broch/$1');
 $routes->add('user/brochures',    'Brochures::index');
 
 
