@@ -24,7 +24,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'http://localhost/brochureCRM/brochure/public/';
+    public $baseURL = 'http://localhost/brochure/broch/public/';
 
     /**
      * --------------------------------------------------------------------------
