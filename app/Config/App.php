@@ -24,7 +24,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'http://localhost/brochure/broch/public/';
+    public $baseURL = 'http://localhost/broch/brochure/public/';
 
     /**
      * --------------------------------------------------------------------------
