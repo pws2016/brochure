@@ -119,6 +119,7 @@ class Brochures extends BaseController
 			
 		return view('User/brochures_edit.php',$data);
 	}
+
 	public function preview_broch($id){
 		$data=$this->common_data();
 		$inf_brochure=$this->BrochuresModel->find($this->session->get('current_brochure'));	
@@ -152,4 +153,15 @@ class Brochures extends BaseController
 		echo $data['html']=$html ?? "";
 		//return view('User/brochures_preview.php',$data);
 	}
+
+	
+    public function delete()
+    {
+
+
+        $id = $this->request->getVar("id");
+        $this->BrochuresModel->delete($id);
+    }
+	
+
 }

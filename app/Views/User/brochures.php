@@ -121,7 +121,8 @@
                                                                     <ul class="list-inline mb-0">
 
 
-
+<?php
+                                                                    if($row['status']=="draft"){  ?>
 
                                                                         <li class="list-inline-item">
 
@@ -130,7 +131,7 @@
                                                                         <li class="list-inline-item">
                                                                             <a onclick="del_pack('<?php echo $row['id']; ?>')" class="px-2 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
                                                                         </li>
-                                                                        
+                                                                        <?php }?>
 																		 </ul>
                                                                 </td>
                                                                 <td> <?php echo $row['id']; ?></td>
@@ -249,7 +250,7 @@
                                     function del_pack(id) {
                                         if (confirm("are you sure !")) {
                                             $.ajax({
-                                                url: "<?php echo base_url("user/contacts/delete"); ?>",
+                                                url: "<?php echo base_url("user/brochures/delete"); ?>",
                                                 type: "GET",
                                                 cache: false,
                                                 data: {

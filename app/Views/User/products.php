@@ -90,18 +90,18 @@
                                                                         <!-- Add package Form -->
 
                                                                         <div class="form-group">
-                                                                            <label for="">Name</label>
+                                                                            <label for="">Name</label><span class="text-primary">*</span>
                                                                             <input type="text" id="name" name="name" class="form-control" required>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                        <label for="description">Description</label>
+                                                                        <label for="description">Description</label><span class="text-primary">*</span>
                                                                         <textarea id="description" name="description" class="md-textarea form-control" rows="3" required></textarea>
                                                                           
                                                                     
                                                                     </div>
                                                                     <div class="mb-3">
-                                                                        <label for="image" class="form-label">Choose image</label>
-                                                                        <input class="form-control" type="file" name="image" id="image">
+                                                                        <label for="image" class="form-label">Choose image</label><span class="text-primary">*</span>
+                                                                        <input class="form-control" type="file" name="image" id="image" required>
 
                                                                     </div>
 
