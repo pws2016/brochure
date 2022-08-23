@@ -66,10 +66,10 @@
 
 
                                         <div class="mb-3 row">
-                                            <label for="logo" class="col-md-2 col-form-label">Choose Logo</label>
+                                            <label for="logo" class="col-md-2 col-form-label">Choose Logo </label>
 
                                             <div class="col-md-8">
-                                                <input class="form-control" type="file" name="logo" id="logo">
+                                                <input class="form-control" type="file" name="logo" id="logo" required>
                                             </div>
                                             <div class="col-md-2">
                                                 <?php

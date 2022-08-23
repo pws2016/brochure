@@ -55,13 +55,13 @@
                                                         <button type="button" class="btn btn-success waves-effect waves-light" data-toggle="modal" data-target="#exampleModal">
                                                             <i class="mdi mdi-plus me-2"></i> Add New </button>
                                                     </div>
-                                                    <form action="<?= base_url('user/contacts/insert') ?>" method="post" id="form" enctype="multipart/form-data">
+                                                    <form action="<?= base_url('user/contacts/insert') ?>" method="post" id="form" enctype="multipart/form-data" data-parsley-validate="">
                                                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
 
-                                                                        <h5 class="modal-title" id="exampleModalLabel"> Add Partners</h5>
+                                                                        <h5 class="modal-title" id="exampleModalLabel"> Add Contacts</h5>
                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
@@ -70,16 +70,16 @@
                                                                         <!-- Add package Form -->
 
                                                                         <div class="form-group">
-                                                                            <label for="">Name</label>
+                                                                            <label for="">Name</label><span class="text-primary">*</span>
                                                                             <input type="text" id="name" name="name" class="form-control" required>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label for="">Email</label>
+                                                                            <label for="">Email</label><span class="text-primary">*</span>
                                                                             <input type="email" id="email" name="email" class="form-control" required>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label for="">Phone</label>
-                                                                            <input type="text" id="phone" name="phone" class="form-control" required>
+                                                                            <label for="">Phone</label><span class="text-primary">*</span>
+                                                                            <input type="number" id="phone" name="phone" class="form-control" size="20"required>
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label for="">Fax</label>
@@ -90,8 +90,8 @@
                                                                             <input type="text" id="address" name="address" class="form-control" required>
                                                                         </div>
                                                                         <div class="mb-3">
-                                                                            <label for="image" class="form-label">Choose image</label>
-                                                                            <input class="form-control" type="file" name="image" id="image">
+                                                                            <label for="image" class="form-label">Choose image</label><span class="text-primary">*</span>
+                                                                            <input class="form-control" type="file" name="image" id="image" required>
                                                                             
                                                                         </div>
 
@@ -178,17 +178,7 @@
                                                                         <li class="list-inline-item">
                                                                             <a onclick="del_pack('<?php echo $row['id']; ?>')" class="px-2 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
                                                                         </li>
-                                                                        <li class="list-inline-item dropdown">
-                                                                            <a class="text-muted dropdown-toggle font-size-18 px-2" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
-                                                                                <i class="uil uil-ellipsis-v"></i>
-                                                                            </a>
-
-                                                                            <div class="dropdown-menu dropdown-menu-end">
-                                                                                <a class="dropdown-item" href="#">Action</a>
-                                                                                <a class="dropdown-item" href="#">Another action</a>
-                                                                                <a class="dropdown-item" href="#">Something else here</a>
-                                                                            </div>
-                                                                        </li>
+                                                                       
                                                                 </td>
                                                                 </ul>
                                                             </tr>
@@ -215,13 +205,13 @@
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Edit Partners</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Edit Contact</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
 
-                                                            <div class="modal-body" id="edit_partners">
+                                                            <div class="modal-body" id="edit_contact">
                                                                 <!-- Add package Form -->
 
                                                             </div>
@@ -290,6 +280,47 @@ function get_client_profile(id){
 				$("#div_client_profile").html(data);
 			});
 }
+
+
+function get_data(id) {
+                                        $.ajax({
+                                            url: "<?php echo base_url("user/contacts/get_data"); ?>",
+                                            type: "POST",
+                                            cache: false,
+                                            data: {
+
+                                                id: id
+
+
+                                            },
+                                            success: function(dataResult) {
+                                                $("#edit_contact").html(dataResult);
+
+                                            }
+
+                                        });
+                                    }
+                                    function del_pack(id) {
+                                        if (confirm("are you sure !")) {
+                                            $.ajax({
+                                                url: "<?php echo base_url("user/contacts/delete"); ?>",
+                                                type: "GET",
+                                                cache: false,
+                                                data: {
+
+                                                    id: id
+
+
+                                                },
+                                                success: function(datadelete) {
+
+                                                    $("#tr_" + id).remove();
+
+                                                }
+
+                                            });
+                                        }
+                                    }
 	</script>
     </body>
 </html>

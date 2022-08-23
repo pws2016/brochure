@@ -90,17 +90,17 @@
                                                                         <!-- Add package Form -->
 
                                                                         <div class="form-group">
-                                                                            <label for="">Name</label>
+                                                                            <label for="">Name</label><span class="text-primary">*</span>
                                                                             <input type="text" id="name" name="name" class="form-control" required>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label for="">Email</label>
-                                                                            <input type="text" id="email" name="email" class="form-control" required>
+                                                                            <label for="">Email</label><span class="text-primary">*</span>
+                                                                            <input type="email" id="email" name="email" class="form-control" required>
                                                                         </div>
                                                                         <div class="mb-3">
-                                                                            <label for="image" class="form-label">Choose image</label>
-                                                                            <input class="form-control" type="file" name="image" id="image">
-                                                                            
+                                                                            <label for="image" class="form-label">Choose image</label><span class="text-primary">*</span>
+                                                                            <input class="form-control" type="file" name="image" id="image" required>
+
                                                                         </div>
 
                                                                     </div>
@@ -162,10 +162,11 @@
                                                                 <td> <?php echo $row['name']; ?></td>
 
                                                                 <td><?php echo $row['email']; ?></td>
-                                                                
+
                                                                 <td>
-                                                                
-                                                                <img src="<?php echo base_url('uploads/'.$row['image'])?>"  height="50" width="50px"/> </td>
+
+                                                                    <img src="<?php echo base_url('uploads/' . $row['image']) ?>" height="50" width="50px" />
+                                                                </td>
 
                                                                 <td>
                                                                     <ul class="list-inline mb-0">
@@ -180,17 +181,7 @@
                                                                         <li class="list-inline-item">
                                                                             <a onclick="del_pack('<?php echo $row['id']; ?>')" class="px-2 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
                                                                         </li>
-                                                                        <li class="list-inline-item dropdown">
-                                                                            <a class="text-muted dropdown-toggle font-size-18 px-2" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
-                                                                                <i class="uil uil-ellipsis-v"></i>
-                                                                            </a>
 
-                                                                            <div class="dropdown-menu dropdown-menu-end">
-                                                                                <a class="dropdown-item" href="#">Action</a>
-                                                                                <a class="dropdown-item" href="#">Another action</a>
-                                                                                <a class="dropdown-item" href="#">Something else here</a>
-                                                                            </div>
-                                                                        </li>
                                                                 </td>
                                                                 </ul>
                                                             </tr>
@@ -212,7 +203,7 @@
                                                     <tr>
                                             </table>
 
-                                            <form action="<?= base_url('user/partners/update') ?>" method="post" id="form" enctype="multipart/form-data" >
+                                            <form action="<?= base_url('user/partners/update') ?>" method="post" id="form" enctype="multipart/form-data">
                                                 <div class="modal fade" id="edit_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
@@ -273,7 +264,9 @@
                                 <!-- Sweet Alert2 -->
                                 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
-                                <!-- Add package -->
+          <!-- parsleyjs -->
+        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/parsleyjs/parsley.min.js"></script>
+
                                 <script>
                                     function get_data(id) {
                                         $.ajax({
@@ -319,6 +312,17 @@
                                             });
                                         }
                                     }
+
+                                    $(function () {
+  $('#form').parsley().on('field:validated', function() {
+    var ok = $('.parsley-error').length === 0;
+    $('.bs-callout-info').toggleClass('hidden', !ok);
+    $('.bs-callout-warning').toggleClass('hidden', ok);
+  })
+  .on('form:submit', function() {
+    return false; // Don't submit form for this demo
+  });
+});
                                 </script>
 </body>
 

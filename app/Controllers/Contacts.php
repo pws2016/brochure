@@ -19,8 +19,6 @@ class Contacts extends BaseController
 
         $data['cont'] = $this->ContactsModel->where('user_id',$data['user_data']['id'])->find();
 
-        //  var_dump($data);
-        // var_dump( $data['part']);
         echo view('user/contacts', $data);
     }
 
@@ -77,7 +75,7 @@ class Contacts extends BaseController
     public function update()
     {
 
-
+        $data = $this->common_data();
         $id = $this->request->getVar("id");
 
 
@@ -143,34 +141,31 @@ class Contacts extends BaseController
     {
 
         $id = $this->request->getVar("id");
-        $par = $this->ContactsModel->find($id);
+        $cont = $this->ContactsModel->find($id);
 
-        //    var_dump($par);
+        //    var_dump($cont);
 ?>
-        <input type="hidden" id="edit_partners" name="id" class="form-control" value="<?= $par['id'] ?>">
+        <input type="hidden" id="edit_partners" name="id" class="form-control" value="<?= $cont['id'] ?>">
         <div class="form-group">
-            <label for="">Name</label>
-            <input type="text" id="name" name="name" value="<?= $par['name'] ?>" class="form-control" required>
+            <label for="">Name</label><span class="text-primary">*</span>
+            <input type="text" id="name" name="name" value="<?= $cont['name'] ?>" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="">Email</label><span class="text-primary">*</span>
+            <input type="text" id="email" name="email" value="<?= $cont['email'] ?>" class="form-control" required>
         </div>
         <div class="form-group">
-            <label for="">Email</label>
-            <input type="text" id="email" name="email" value="<?= $par['email'] ?>" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="">Email</label>
-            <input type="text" id="email" name="email" value="<?= $par['email'] ?>" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="">Phone</label>
-            <input type="text" id="phone" name="phone" value="<?= $par['phone'] ?>" class="form-control" required>
+            <label for="">Phone</label><span class="text-primary">*</span>
+            <input type="text" id="phone" name="phone" value="<?= $cont['phone'] ?>" class="form-control" required>
         </div>
         <div class="form-group">
             <label for="">Fax</label>
-            <input type="text" id="fax" name="fax" value="<?= $par['fax'] ?>" class="form-control" required>
+            <input type="text" id="fax" name="fax" value="<?= $cont['fax'] ?>" class="form-control" required>
         </div>
         <div class="form-group">
             <label for="">Address</label>
-            <input type="text" id="address" name="address"  value="<?= $par['address'] ?>" class="form-control" required>
+            <input type="text" id="address" name="address"  value="<?= $cont['address'] ?>" class="form-control" required>
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Choose image</label>
