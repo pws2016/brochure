@@ -105,6 +105,7 @@ class Ajax extends BaseController
 				
 				$tab["step"]=$current_step;
 				$this->BrochuresModel->update($this->session->get('current_brochure'),$tab);
+				$this->BitemModel->where('id_brochure',$this->session->get('current_brochure'))->where('type_item',"premi")->delete();
 				if(!empty($this->request->getVar('select_premi') )){
 				foreach($this->request->getVar('select_premi') as $select){
 					$this->BitemModel->insert(array('id_brochure'=>$this->session->get('current_brochure'),'id_item'=>$select,'type_item'=>"premi"));
@@ -119,6 +120,7 @@ class Ajax extends BaseController
 			
 			$tab["step"]=$current_step;
 			$this->BrochuresModel->update($this->session->get('current_brochure'),$tab);
+			$this->BitemModel->where('id_brochure',$this->session->get('current_brochure'))->where('type_item',"partners")->delete();
 			if(!empty($this->request->getVar('select_partner') )){
 			foreach($this->request->getVar('select_partner') as $select){
 				$this->BitemModel->insert(array('id_brochure'=>$this->session->get('current_brochure'),'id_item'=>$select,'type_item'=>"partners"));
@@ -131,6 +133,7 @@ class Ajax extends BaseController
 			
 			$tab["step"]=$current_step;
 			$this->BrochuresModel->update($this->session->get('current_brochure'),$tab);
+			$this->BitemModel->where('id_brochure',$this->session->get('current_brochure'))->where('type_item',"contacts")->delete();
 			if(!empty($this->request->getVar('select_contact') )){
 			foreach($this->request->getVar('select_contact') as $select){
 			$this->BitemModel->insert(array('id_brochure'=>$this->session->get('current_brochure'),'id_item'=>$select,'type_item'=>"contacts"));
