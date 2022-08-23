@@ -81,7 +81,7 @@
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
 
-                                                                        <h5 class="modal-title" id="exampleModalLabel"> Add Products</h5>
+                                                                        <h5 class="modal-title" id="exampleModalLabel"> Add Premi</h5>
                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
@@ -90,18 +90,18 @@
                                                                         <!-- Add package Form -->
 
                                                                         <div class="form-group">
-                                                                            <label for="">Name</label>
+                                                                            <label for="">Name</label><span class="text-primary">*</span>
                                                                             <input type="text" id="name" name="name" class="form-control" required>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                        <label for="description">Description</label>
+                                                                        <label for="description">Description</label><span class="text-primary">*</span>
                                                                         <textarea id="description" name="description" class="md-textarea form-control" rows="3" required></textarea>
                                                                           
                                                                     
                                                                     </div>
                                                                     <div class="mb-3">
-                                                                        <label for="image" class="form-label">Choose image</label>
-                                                                        <input class="form-control" type="file" name="image" id="image">
+                                                                        <label for="image" class="form-label">Choose image</label><span class="text-primary">*</span>
+                                                                        <input class="form-control" type="file" name="image" id="image" required>
 
                                                                     </div>
 
@@ -210,13 +210,13 @@
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Edit Partners</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel">Edit Premi</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
 
-                                                        <div class="modal-body" id="edit_partners">
+                                                        <div class="modal-body" id="edit_premi">
                                                             <!-- Add package Form -->
 
                                                         </div>
@@ -286,7 +286,7 @@
 
                                         },
                                         success: function(dataResult) {
-                                            $("#edit_partners").html(dataResult);
+                                            $("#edit_premi").html(dataResult);
 
                                         }
 

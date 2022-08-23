@@ -112,4 +112,12 @@ class Brochures extends BaseController
 		return view('User/brochures_edit.php',$data);
 	}
 	
+    public function delete()
+    {
+
+
+        $id = $this->request->getVar("id");
+        $this->BrochuresModel->delete($id);
+    }
+	
 }

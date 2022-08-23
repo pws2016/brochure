@@ -134,11 +134,11 @@ class Products extends BaseController
 ?>
         <input type="hidden" id="edit_partners" name="id" class="form-control" value="<?= $prod['id'] ?>">
         <div class="form-group">
-            <label for="">Name</label>
+            <label for="">Name</label><span class="text-primary">*</span>
             <input type="text" id="name" name="name" value="<?= $prod['name'] ?>" class="form-control" required>
         </div>
         <div class="form-group">
-            <label for="description">Description</label>
+            <label for="description">Description</label><span class="text-primary">*</span>
             <textarea id="description" name="description" class="md-textarea form-control" rows="3" required><?= $prod['description'] ?></textarea>  
         </div>
         <div class="mb-3">

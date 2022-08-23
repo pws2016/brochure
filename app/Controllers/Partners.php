@@ -62,17 +62,17 @@ class Partners extends BaseController
 
             $ad = $this->PartnersModel->insert($add_data);
 
-           
+        } 
            //$this->session->setFlashdata("successMsg", "New P created successfully");
             return redirect()->to(base_url('user/partners'));
-            }  }
+             }
 
         return view('user/partners');
     }
     public function update()
 	{
 
-
+        $data = $this->common_data();
 	$id=$this->request->getVar("id");
     
   
@@ -86,7 +86,7 @@ class Partners extends BaseController
                 'name' => $this->request->getVar("name"),
                 'email' => $this->request->getVar("email"),
                // 'image' => $this->request->getFile("image"),
-                'user_id' => $this->request->getVar("user_id"),
+                'user_id' => $data['user_data']['id'],
 
 
 
@@ -114,7 +114,7 @@ class Partners extends BaseController
                     'name' => $this->request->getVar("name"),
                     'email' => $this->request->getVar("email"),
                     'image' => $name,
-                     'user_id' => $data['user_data']['id']
+                     'user_id' => $data['user_data']['id'],
     
     
     
@@ -150,12 +150,12 @@ class Partners extends BaseController
 ?>
 <input type="hidden" id="edit_partners" name="id"  class="form-control" value="<?= $par['id'] ?>" > 
         <div class="form-group">
-            <label for="">Name</label>
+            <label for="">Name</label><span class="text-primary">*</span>
             <input type="text" id="name" name="name"  value="<?= $par['name'] ?>" class="form-control" required>
         </div>
         <div class="form-group">
-            <label for="">Email</label>
-            <input type="text" id="email" name="email" value="<?= $par['email'] ?>" class="form-control" required>
+            <label for="">Email</label><span class="text-primary">*</span>
+            <input type="email" id="email" name="email" value="<?= $par['email'] ?>" class="form-control" required>
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Choose image</label>
