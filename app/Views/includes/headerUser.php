@@ -304,7 +304,7 @@
 				<li class="menu-title">Setting</li>
 				<li>
 					<a href="<?php echo base_url('')?>">
-						<i class="uil-bars me-2"></i><span>2</span>
+						<i class="uil-bars me-2"></i><span></span>
 					</a>
 				</li>
 				

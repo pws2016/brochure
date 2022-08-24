@@ -18,15 +18,14 @@ class Partners extends BaseController
        
         $data['part'] = $this->PartnersModel->where('user_id',$data['user_data']['id'])->find();
 
-        //  var_dump($data);
-        // var_dump( $data['part']);
+      
         echo view('user/partners', $data);
     }
 
 
     public function insert()
     { 
-
+     
 
         $data = $this->common_data();
           
@@ -42,7 +41,7 @@ class Partners extends BaseController
   
         if ($validated) {
             $avatar = $this->request->getFile('image');
-           $name = $avatar->getName();
+            $name = $avatar->getName();
             $avatar->move(ROOTPATH . 'public/uploads');
       
 
@@ -63,7 +62,7 @@ class Partners extends BaseController
             $ad = $this->PartnersModel->insert($add_data);
 
         } 
-           //$this->session->setFlashdata("successMsg", "New P created successfully");
+         
             return redirect()->to(base_url('user/partners'));
              }
 
@@ -85,7 +84,7 @@ class Partners extends BaseController
 			
                 'name' => $this->request->getVar("name"),
                 'email' => $this->request->getVar("email"),
-               // 'image' => $this->request->getFile("image"),
+          
                 'user_id' => $data['user_data']['id'],
 
 
@@ -122,11 +121,6 @@ class Partners extends BaseController
                 ];
     
               
-    
-               
-               //$this->session->setFlashdata("successMsg", "New P created successfully");
-               
-               //return redirect()->to(base_url('user/partners'));
                 }  
             $this->PartnersModel->update($id, $data_update);
 			
@@ -175,12 +169,6 @@ class Partners extends BaseController
         $this->PartnersModel->delete($id);
     }
 
-public function get_userid($id){
 
-    $id = $this->request->getVar("id");
-    $pratners= $this->userModel->find($id);
-
-
-}
 
 }

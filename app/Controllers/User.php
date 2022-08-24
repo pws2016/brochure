@@ -12,20 +12,26 @@ class User extends BaseController
 
 		$data = $this->common_data();
 
-		$data['list_user'] = $this->UserModel->find();
+		$data['list_user'] = $this->UserModel->where('role','C')->find();
 		$data['pack_title'] = $this->PackageModel->find();
 		$data['pack'] = $this->UserPackModel->find();
-$data['list_pack'] = $this->PackageModel->find();
+        $data['list_pack'] = $this->PackageModel->find();
 	
+    
 
-
-		echo view('admin/user', $data);
+	  $data['expired_date']= $this->UserModel->getexpired('$id');
+	
+	      echo view('admin/user', $data);
+	
 	}
 
 
 	public function addUser()
-	{ {
+	{
+		 {
 
+			
+		    $p = $this->PackageModel->find($this->request->getVar("pack"));
 			$data_add = [
 
 
@@ -36,6 +42,8 @@ $data['list_pack'] = $this->PackageModel->find();
 				'active'  => 'yes',
 				'pass' => $this->request->getVar("pass"),
 				'password' =>md5( $this->request->getVar("password")),
+				'remain_broch' => $p['nb_brochure'],
+
 
 
 
@@ -45,7 +53,7 @@ $data['list_pack'] = $this->PackageModel->find();
 			
 			// var_dump($data_add);
 			$xx = $this->UserModel->insert($data_add);
-           $p = $this->PackageModel->find($this->request->getVar("pack"));
+           
 
 		   $C_date=strtotime($p['created_at']);
 		   $exp=strtotime($p['validity_months']);
@@ -143,17 +151,7 @@ $data['list_pack'] = $this->PackageModel->find();
 										  </div>
 
 										
-										  <div class="form-outline mb-4">
-										    <label class="form-label" for="password">Package</label>
-                                         <select class="form-select form-select-lg mb-3" name="pack" class="form-control form-control-lg">
-
-                                              <option value="">-Select-</option>
-                                                 <?php 
-												 
-												 $pack_title =$this->PackageModel->find();
-												 foreach ($pack_title as $pack) : ?>
-                                                     <option value="<?= $pack['id']; ?>"><?= $pack['title']; ?></option>
-                                                 <?php endforeach; ?>
+										
 
 
 

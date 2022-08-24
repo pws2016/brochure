@@ -3,35 +3,14 @@
 
 <head>
     <meta charset="utf-8" />
-    <title><?php echo lang('app.title_page_dashboard') ?> | <?php echo $settings['meta_title'] ?></title>
+    <title><?php echo lang('Package') ?> | <?php echo $settings['meta_title'] ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="" name="description" />
     <meta content="Creazioneimpresa" name="author" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="shortcut icon" href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/images/favicon.ico">
     <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.bootstrap4.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css" />
-
-
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-    <meta content="Themesbrand" name="author" />
-    <!-- App favicon -->
-
-
-    <!-- Bootstrap Css -->
-    <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
-    <!-- Icons Css -->
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <!-- App Css-->
-    <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
     <style>
         h3.post__title.expand:before {
             width: 100px;
@@ -60,12 +39,12 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0"><?php echo lang('app.package') ?></h4>
+                                <h4 class="mb-0"><?php echo lang('Clients ') ?></h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <!-- <li class="breadcrumb-item"><a href="javascript: void(0);"><?php echo lang('app.menu_crm') ?></a></li>
-                                            <li class="breadcrumb-item active"><?php echo lang('app.menu_dashboard') ?></li> -->
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);"><?php echo lang('List Clients') ?></a></li>
+                                        <li class="breadcrumb-item active"><?php echo lang('Add clients') ?></li>
                                     </ol>
                                 </div>
 
@@ -74,209 +53,247 @@
                     </div>
                     <!-- end page title -->
 
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row mb-2">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <button type="button" class="btn btn-success waves-effect waves-light" data-toggle="modal" data-target="#exampleModal">
+                                                    <i class="mdi mdi-plus me-2"></i> Add users </button>
+                                            </div>
+                                            <form action="<?= base_url('admin/user/addUser') ?>" method="post" id="form">
+                                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
 
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12 mt-5">
-
-                                <hr style="background-color: black; color: black; height: 1px;">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 mt-2">
-                                <!-- Add Records Modal -->
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#exampleModal">
-                                    Add User
-                                </button>
-
-                                <!-- Modal -->
-                                <form action="<?= base_url('admin/user/addUser') ?>" method="post" id="form">
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-
-                                                <div class="modal-body">
-                                                    <!-- Add user Form -->
-
-
-
-                                                    <div class="card" style="border-radius: 15px;">
-                                                        <div class="card-body p-5">
-                                                            <h2 class="text-uppercase text-center mb-5">Create an account</h2>
-
-                                                            <form action="<?= base_url('admin/user/addUser') ?>" method="post" id="form">
+                                                                <h5 class="modal-title" id="exampleModalLabel"> Add user</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <!-- Add package Form -->
 
                                                                 <div class="mb-3">
-                                                                    <label class="form-label" for="email">Email</label>
+                                                                    <label class="form-label" for="email">Email<span class="text-primary">*</span></label>
                                                                     <input type="email" class="form-control" id="email" name="email" class="form-control form-control-lg" placeholder="Enter email" require>
                                                                 </div>
 
                                                                 <div class="mb-3">
-                                                                    <label class="form-label" for="display_name">Username</label>
+                                                                    <label class="form-label" for="display_name">Username<span class="text-primary">*</span></label>
                                                                     <input type="text" class="form-control" id="display_name" name="display_name" class="form-control form-control-lg" placeholder="Enter username" require>
                                                                 </div>
 
                                                                 <div class="mb-3">
-                                                                    <label class="form-label" for="mobile">Phone</label>
+                                                                    <label class="form-label" for="mobile">Phone<span class="text-primary">*</span></label>
                                                                     <input type="text" class="form-control" id="mobile" name="mobile" class="form-control form-control-lg" placeholder="Enter username" require>
                                                                 </div>
 
                                                                 <div class="mb-3">
-                                                                    <label class="form-label" for="password">Password</label>
+                                                                    <label class="form-label" for="password">Password<span class="text-primary">*</span></label>
                                                                     <input type="password" class="form-control" id="password" name="password" class="form-control form-control-lg" placeholder="Enter password" require>
                                                                 </div>
 
-
-<?php /*
                                                                 <div class="mb-3">
-                                                                    <label class="">Choose package</label>
-                                                                    <select class="form-select form-select-lg mb-3" name="pack" class="form-control form-control-lg">
+                                                                <label class="">Choose package<span class="text-primary">*</span></label>
+                                         <select class="form-select form-select-lg mb-3" name="pack" class="form-control form-control-lg">
 
-                                                                        <option value="">-Select-</option>
-
-
-                                                                     
+                                                                <?php 
+                                                             	?>
+                                                                     <option value="">-Select-</option>
 
                                                                         <?php foreach ($list_pack as $pa) : 
 																		?>
                                                                             <option value="<?= $pa['id']; ?>"><?= $pa['title']; ?></option>
                                                                         <?php endforeach; ?>
-
-
-
                                                                     </select>
 
 
                                                                 </div>
-*/?>
-                                                                <div class="mt-3 text-end">
-                                                                    <button class="btn btn-primary w-sm waves-effect waves-light" type="submit">Register</button>
-                                                                </div>
 
-
-                                                            </form>
-
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary" id="add">Add User</button>
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </form>
+                                        </div>
 
 
-
-
+                                        <div class="col-md-6">
+                                            <div class="form-inline float-md-end mb-3">
+                                                <div class="search-box ms-2">
+                                                    <div class="position-relative">
+                                                        <input type="text" class="form-control rounded bg-light border-0" placeholder="Search...">
+                                                        <i class="mdi mdi-magnify search-icon"></i>
+                                                    </div>
                                                 </div>
 
                                             </div>
                                         </div>
+
+
                                     </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 mt-4">
-
-                                <table class="table table-striped mb-0 ">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">ID</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Phone</th>
-                                            <th scope="col">Package</th>
 
 
-                                        </tr>
-                                        <?php
-                                        if (!empty($list_user)) {
-                                            foreach ($list_user as $row) {
-                                        ?>
-                                                <tr id="tr_<?php echo $row['id']; ?>">
+                                    <!-- end row -->
 
-                                                    <td><?php echo $row['id']; ?></td>
-                                                    <td scope="row"><?php echo $row['display_name']; ?></td>
-                                                    <td><?php echo $row['email']; ?></td>
-                                                    <td><?php echo $row['mobile']; ?></td>
-                                                    
-                                                    <td>
+                                    <table class="table table-centered table-nowrap mb-0">
+                                        <thead>
+                                            <tr>
 
-                                                    </td>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Phone</th>
+                                                <th scope="col">remain broch</th>
+                                                <th scope="col">experation date</th>
+                                            </tr>
+                                            </tr>
+                                            <?php
+		
+        
+                                    
+                                            if (!empty($list_user)) {
+                                                foreach ($list_user as $row) {
+                                            ?>
+                                                    <tr id="tr_<?php echo $row['id']; ?>">
+
+                                                        <td><?php echo $row['id']; ?></td>
+                                                        <td ><?php echo $row['display_name']; ?></td>
+                                                        <td><?php echo $row['email']; ?></td>
+                                                        <td><?php echo $row['mobile']; ?></td>
+                                                        <td><?php echo $row['remain_broch']; ?></td>
+                                                        <td> <?php foreach ($expired_date as $exp)
+																	    
+
+                                                                            echo $exp['expired_at'];
+                                                            
+                                                                        ?> </td>
+
+
+                                                        <td>
+                                                            <ul class="list-inline mb-0">
+                                                                <li class="list-inline-item">
+
+
+                                                                    <a onclick="get_data('<?php echo $row['id']; ?>')" class="px-2 text-primary" data-toggle="modal" data-target="#edit_modal"><i class="uil uil-pen font-size-18"></i></a>
+                                                                </li>
+                                                                <li class="list-inline-item">
+                                                                    <a onclick="del_pack('<?php echo $row['id']; ?>')" class="px-2 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
+                                                                </li>
+
+
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                            <?php }
+                                            }
+                                            ?>
+                                        </thead>
+                                        <tbody>
+                                    </table>
+
+                                    <form action="<?= base_url('admin/user/updateUser') ?>" method="post" id="formupdate">
+                                        <div class="modal fade" id="edit_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Update User</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+
+                                                    <div class="modal-body" id="updateUser">
+                                                        <!-- Add package Form -->
+
+                                                    </div>
+
+                                                    <!-- body -->
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary" id="update">Update</button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <form action="<?= base_url('admin/user/delete') ?>" method="get" id="formdelete">
+                                        <div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Delete Package</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+
+                                                    <div class="modal-body" id="delete_pack">
+                                                        <!-- Add package Form -->
+
+                                                    </div>
+
+                                                    <!-- body -->
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </form>
 
 
 
-                                                    <td><a onclick="get_data('<?php echo $row['id']; ?>')" class="btn bi bi-pencil" data-toggle="modal" data-target="#edit_modal"></a></td>
 
 
-                                                    <td><a onclick="del_pack('<?php echo $row['id']; ?>')" class="btn bi bi-trash"></a></td>
-
-                                                </tr>
-                                        <?php }
-                                        }
-                                        ?>
-                                    </thead>
-                                </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <form action="<?= base_url('admin/user/updateUser') ?>" method="post" id="formupdate">
-                    <div class="modal fade" id="edit_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Update User</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
 
-                                <div class="modal-body" id="updateUser">
-                                    <!-- Add package Form -->
 
-                                </div>
 
-                                <!-- body -->
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary" id="update">Update</button>
-                                </div>
 
+                <!-- footer -->
+
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <?php echo view('includes/copyright'); ?>
                             </div>
-                </form>
-                <form action="<?= base_url('admin/user/delete') ?>" method="get" id="formdelete">
-                    <div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Delete Package</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
 
-                                <div class="modal-body" id="delete_pack">
-                                    <!-- Add package Form -->
-
-                                </div>
-
-                                <!-- body -->
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                                </div>
-
-                            </div>
                         </div>
-
                     </div>
-                </form>
-
-
-
-
-
+                </footer>
             </div>
+            <!-- end main content-->
+
         </div>
+        <!-- END layout-wrapper -->
 
         <!-- Optional JavaScript -->
+        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/jquery/jquery.min.js"></script>
+        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/metismenu/metisMenu.min.js"></script>
+        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/simplebar/simplebar.min.js"></script>
+        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/node-waves/waves.min.js"></script>
+        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
+        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -298,12 +315,26 @@
         <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
-
         <!-- Sweet Alert2 -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 
+
         <script>
+            function get_client_profile(id) {
+                $.ajax({
+                    url: "<?php echo base_url() ?>/ajax/get_client_profile",
+                    method: "POST",
+                    data: {
+                        id: id
+                    }
+
+                }).done(function(data) {
+
+                    $("#div_client_profile").html(data);
+                });
+            }
+
             function get_data(id) {
                 $.ajax({
                     url: "<?php echo base_url("admin/user/get_data"); ?>",
@@ -322,10 +353,6 @@
 
                 });
             }
-
-
-
-
 
             function del_pack(id) {
                 if (confirm("are you sure !")) {

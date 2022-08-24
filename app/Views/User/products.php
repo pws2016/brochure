@@ -138,12 +138,7 @@
                                         <table class="table table-centered table-nowrap mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col" style="width: 50px;">
-                                                        <div class="form-check font-size-16">
-                                                            <input type="checkbox" class="form-check-input" id="contacusercheck">
-                                                            <label class="form-check-label" for="contacusercheck"></label>
-                                                        </div>
-                                                    </th>
+                                                    
                                                     <th>ID</th>
                                                     <th>Name</th>
                                                     <th>Description</th>
@@ -153,12 +148,7 @@
                                                 if (!empty($prod)) {
                                                     foreach ($prod as $row) {
                                                 ?><tr id="tr_<?php echo $row['id']; ?>">
-                                                            <td>
-                                                                <div class="form-check font-size-16">
-                                                                    <input type="checkbox" class="form-check-input" id="contacusercheck1">
-                                                                    <label class="form-check-label" for="contacusercheck1"></label>
-                                                                </div>
-                                                            </td>
+                                                            
                                                             <td> <?php echo $row['user_id']; ?></td>
 
                                                             <td> <?php echo $row['name']; ?></td>
@@ -220,7 +210,7 @@
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Edit Partners</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel">Edit Products</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>

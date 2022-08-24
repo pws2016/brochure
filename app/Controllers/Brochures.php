@@ -60,7 +60,14 @@ class Brochures extends BaseController
 		
 			//insert
 
-		
+			$data['list_template']=$this->BrochureTemplatesModel->where('user_id is null')->orWhere('user_id',$data['user_data']['id'])->find();
+			$data['list_pages']=$this->BrochureTemplatePagesModel->where('template_id',$inf_brochure['template_id'])->orderBy('type','ASC')->find();
+			$ll=$this->BtemplateModel->where('id_brochure',$inf_brochure['id'])->find();
+			if(!empty($ll)){
+				foreach($ll as $k=>$v){
+				$res_page_template[$v['ord']]=$v['page_id'];
+			} }
+			$data['res_page_template']=$res_page_template ?? array();
 		echo view('User/brochures_new.php',$data);
 	}
 	public function edit_broch($id){

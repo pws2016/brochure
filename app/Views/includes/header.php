@@ -272,9 +272,7 @@
 					</a>
 				</li>*/?>
 				<li>
-					<a href="<?php echo base_url($prefix_route.'payments')?>">
-						<i class="uil-invoice me-2"></i><span>Pagamenti</span>
-					</a>
+					
 				</li>
 				<?php /*if($user_data['role']=='customer'){?>
 				<li>
@@ -294,9 +292,7 @@
 				<?php /*switch($selected_project['id']){
 						case 1:*/?>
 				<li>
-					<a href="<? /*php echo base_url($prefix_route.'requests?plan_type=simple')*/?>">
-						<i class="uil-analysis me-2"></i><span><? /*php echo lang('app.menu_requests') */ ?></span>
-					</a>
+					
 				</li>
 
 				<!-- <li>
@@ -306,9 +302,7 @@
 				</li>
 
 				<li>
-					<a href="<?php echo base_url($prefix_route.'requests?plan_type=business')?>">
-						<i class="uil-analytics me-2"></i><span><?php echo lang('app.menu_requests_bp_business')?></span>
-					</a>
+					
 				</li> -->
 					<?php /*break;
 						case 2:*/  //break;
@@ -333,23 +327,15 @@
 					   if($user_data['role']=='A'){
 						   /*switch($selected_project['id']){
 		case 1:*/?>
-				<li class="menu-title">Offerte</li>
-				<li>
-					<a href="<?php echo base_url('admin/test')?>">
-						<i class="uil-bars me-2"></i><span>Lista offerte</span>
-					</a>
-				</li>
-				<li class="menu-title">Setting</li>
+				
+				<li class="menu-title">menu</li>
 				<li>
 					<a href="<?php echo base_url('admin/package')?>">
-						<i class="uil-bars me-2"></i><span>Lista pacchetti</span>
+						<i class="uil-bars me-2"></i><span>Liste package</span>
 					</a>
 				</li>
 				<li>
-					<a href="<?php echo base_url('admin/user')?>">
-						<i class=" uil-bars me-2"></i><span>Lista client</span>
-						<!-- uil-bookmark-full -->
-					</a>
+				
 				</li>
 				<li>
 					<a href="<?php echo base_url('admin/user')?>">
