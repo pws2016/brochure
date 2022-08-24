@@ -60,7 +60,14 @@ class Brochures extends BaseController
 		
 			//insert
 
-		
+			$data['list_template']=$this->BrochureTemplatesModel->where('user_id is null')->orWhere('user_id',$data['user_data']['id'])->find();
+			$data['list_pages']=$this->BrochureTemplatePagesModel->where('template_id',$inf_brochure['template_id'])->orderBy('type','ASC')->find();
+			$ll=$this->BtemplateModel->where('id_brochure',$inf_brochure['id'])->find();
+			if(!empty($ll)){
+				foreach($ll as $k=>$v){
+				$res_page_template[$v['ord']]=$v['page_id'];
+			} }
+			$data['res_page_template']=$res_page_template ?? array();
 		echo view('User/brochures_new.php',$data);
 	}
 	public function edit_broch($id){
@@ -141,8 +148,147 @@ class Brochures extends BaseController
 			$page[$i]=$temp_page['html'];
 			switch($temp_page['type']){
 				case 'couverture':
+					if($inf_brochure['logo']!="") $logo="<img src='".base_url('uploads/'.$inf_brochure['logo'])."'>";
 					$page[$i]=str_replace(array("{page_title}","{page_description}","{logo}","{background}"),
 					array($inf_brochure['title_couverture'],$inf_brochure['subtitle_couverture'],$logo,$background),
+					$page[$i]);
+				break;
+				case 'operation':
+					$page[$i]=str_replace(array("{page_title}","{page_description}"),
+					array($inf_brochure['title_operation'],$inf_brochure['description_operation']),
+					$page[$i]);
+				break;
+				case 'premi':
+				
+					preg_match_all('/{item}/', $page[$i], $output_array);
+					 $x_items=count($output_array[0]);
+					 $bitems=$this->BitemModel->where('id_brochure',$id)->where('type_item','premi')->find();
+					foreach($bitems as $kk=>$vv){
+						$ids_item[$kk+1]=$vv['id_item'];
+					}
+					
+					for($j=1;$j<=$x_items;$j++){
+						$item_html="";
+						if(isset($ids_item[$j])){
+							$inf_item=$this->PremiModel->find($ids_item[$j]);
+							$item_html=$temp_page['item_html'];
+							if(!empty($inf_item)){
+								$item_img="";
+								if($inf_item['image']!="") $item_img="<img src='".base_url('uploads/'.$inf_item['image'])."'>";
+								$item_html=str_replace(array("{item_title}","{item_description}","{item_img}"),
+							array($inf_item['name'],$inf_item['description'],$item_img),
+							$item_html);
+							}
+							else $item_html="";
+						}
+						else $item_html="";
+						$count=1;
+					
+					$pos = strpos($page[$i], "{item}");
+					$page[$i]= substr_replace($page[$i],$item_html, $pos, 6);
+					}
+					$page[$i]=str_replace(array("{page_title}","{page_description}"),
+					array($inf_brochure['title_premi'],$inf_brochure['description_premi']),
+					$page[$i]);
+				break;
+				case 'product':
+				
+					preg_match_all('/{item}/', $page[$i], $output_array);
+					 $x_items=count($output_array[0]);
+					 $bitems=$this->BitemModel->where('id_brochure',$id)->where('type_item','products')->find();
+					foreach($bitems as $kk=>$vv){
+						$ids_item[$kk+1]=$vv['id_item'];
+					}
+					
+					for($j=1;$j<=$x_items;$j++){
+						$item_html="";
+						if(isset($ids_item[$j])){
+							$inf_item=$this->ProductsModel->find($ids_item[$j]);
+							$item_html=$temp_page['item_html'];
+							if(!empty($inf_item)){
+								$item_img="";
+								if($inf_item['image']!="") $item_img="<img src='".base_url('uploads/'.$inf_item['image'])."'>";
+								$item_html=str_replace(array("{item_title}","{item_description}","{item_img}"),
+							array($inf_item['name'],$inf_item['description'],$item_img),
+							$item_html);
+							}
+							else $item_html="";
+						}
+						else $item_html="";
+						$count=1;
+					
+					$pos = strpos($page[$i], "{item}");
+					$page[$i]= substr_replace($page[$i],$item_html, $pos, 6);
+					}
+					$page[$i]=str_replace(array("{page_title}","{page_description}"),
+					array($inf_brochure['title_product'],$inf_brochure['description_product']),
+					$page[$i]);
+				break;
+
+				case 'partners':
+				
+					preg_match_all('/{item}/', $page[$i], $output_array);
+					 $x_items=count($output_array[0]);
+					 $bitems=$this->BitemModel->where('id_brochure',$id)->where('type_item','partners')->find();
+					foreach($bitems as $kk=>$vv){
+						$ids_item[$kk+1]=$vv['id_item'];
+					}
+					
+					for($j=1;$j<=$x_items;$j++){
+						$item_html="";
+						if(isset($ids_item[$j])){
+							$inf_item=$this->PartnersModel->find($ids_item[$j]);
+							$item_html=$temp_page['item_html'];
+							if(!empty($inf_item)){
+								$item_img="";
+								if($inf_item['image']!="") $item_img="<img src='".base_url('uploads/'.$inf_item['image'])."'>";
+								$item_html=str_replace(array("{item_title}","{item_email}","{item_img}"),
+							array($inf_item['name'],$inf_item['email'],$item_img),
+							$item_html);
+							}
+							else $item_html="";
+						}
+						else $item_html="";
+						$count=1;
+					
+					$pos = strpos($page[$i], "{item}");
+					$page[$i]= substr_replace($page[$i],$item_html, $pos, 6);
+					}
+					$page[$i]=str_replace(array("{page_title}","{page_description}"),
+					array($inf_brochure['title_partners'],$inf_brochure['description_partners']),
+					$page[$i]);
+				break;
+				case 'contact':
+				
+					preg_match_all('/{item}/', $page[$i], $output_array);
+					 $x_items=count($output_array[0]);
+					 $bitems=$this->BitemModel->where('id_brochure',$id)->where('type_item','contacts')->find();
+					foreach($bitems as $kk=>$vv){
+						$ids_item[$kk+1]=$vv['id_item'];
+					}
+					
+					for($j=1;$j<=$x_items;$j++){
+						$item_html="";
+						if(isset($ids_item[$j])){
+							$inf_item=$this->ContactsModel->find($ids_item[$j]);
+							$item_html=$temp_page['item_html'];
+							if(!empty($inf_item)){
+								$item_img="";
+								if($inf_item['image']!="") $item_img="<img src='".base_url('uploads/'.$inf_item['image'])."'>";
+								$item_html=str_replace(array("{item_title}","{item_email}","{item_phone}","{item_fax}","{item_adres}","{item_img}"),
+							array($inf_item['name'],$inf_item['email'],$inf_item['phone'],$inf_item['fax'],$inf_item['address'],$item_img),
+							$item_html);
+							}
+							else $item_html="";
+						}
+						else $item_html="";
+						$count=1;
+					
+					$pos = strpos($page[$i], "{item}");
+					$page[$i]= substr_replace($page[$i],$item_html, $pos, 6);
+					}
+					$page[$i]=str_replace(array("{page_title}","{page_description}"),
+					array($inf_brochure['title_contacts'],$inf_brochure['description_contacts']),
 					$page[$i]);
 				break;
 			}// end switch type page

@@ -98,7 +98,7 @@
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                        <button type="submit" class="btn btn-primary" id="add">Add Partners</button>
+                                                                        <button type="submit" class="btn btn-primary" id="add">Add Contacts</button>
 
                                                                     </div>
                                                                 </div>
@@ -128,12 +128,7 @@
                                             <table class="table table-centered table-nowrap mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col" style="width: 50px;">
-                                                            <div class="form-check font-size-16">
-                                                                <input type="checkbox" class="form-check-input" id="contacusercheck">
-                                                                <label class="form-check-label" for="contacusercheck"></label>
-                                                            </div>
-                                                        </th>
+                                                     
                                                         <th>ID</th>
                                                         <th>Name</th>
                                                         <th>Email</th>
@@ -146,12 +141,7 @@
                                                     if (!empty($cont)) {
                                                         foreach ($cont as $row) {
                                                     ?><tr id="tr_<?php echo $row['id']; ?>">
-                                                                <td>
-                                                                    <div class="form-check font-size-16">
-                                                                        <input type="checkbox" class="form-check-input" id="contacusercheck1">
-                                                                        <label class="form-check-label" for="contacusercheck1"></label>
-                                                                    </div>
-                                                                </td>
+                                                             
                                                                 <td> <?php echo $row['user_id']; ?></td>
 
                                                                 <td> <?php echo $row['name']; ?></td>

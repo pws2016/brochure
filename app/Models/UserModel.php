@@ -61,9 +61,20 @@ class UserModel extends Model
 			{
 				return false;
 			}
-var_dump('$data');
+
 		 }
 
+public function getexpired($id) {
+
+	$db = \Config\Database::connect();
+
+	$builder = $db->table('users');
+	$builder->select('*');
+	$builder->join('user_pack', 'user_pack.id = users.id');
+	$query = $builder->get()->getResultArray();
+	return ($query);
+
+}
 
 
 	}

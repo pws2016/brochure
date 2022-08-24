@@ -82,7 +82,7 @@ class Products extends BaseController
 
             'name' => $this->request->getVar("name"),
             'description' => $this->request->getVar("description"),
-            'user_id' => $this->request->getVar("user_id"),
+            // 'user_id' => $this->request->getVar("user_id"),
 
 
 

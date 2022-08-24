@@ -87,7 +87,7 @@
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <!-- Add package Form -->
+                                                                        <!-- Add partners Form -->
 
                                                                         <div class="form-group">
                                                                             <label for="">Name</label><span class="text-primary">*</span>
@@ -107,7 +107,7 @@
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                                         <button type="submit" class="btn btn-primary" id="add">Add Partners</button>
-
+                                                                        
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -137,10 +137,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th scope="col" style="width: 50px;">
-                                                            <div class="form-check font-size-16">
-                                                                <input type="checkbox" class="form-check-input" id="contacusercheck">
-                                                                <label class="form-check-label" for="contacusercheck"></label>
-                                                            </div>
+                                                          
                                                         </th>
                                                         <th>ID</th>
                                                         <th>Name</th>
@@ -152,10 +149,7 @@
                                                         foreach ($part as $row) {
                                                     ?><tr id="tr_<?php echo $row['id']; ?>">
                                                                 <td>
-                                                                    <div class="form-check font-size-16">
-                                                                        <input type="checkbox" class="form-check-input" id="contacusercheck1">
-                                                                        <label class="form-check-label" for="contacusercheck1"></label>
-                                                                    </div>
+                                                                    
                                                                 </td>
                                                                 <td> <?php echo $row['user_id']; ?></td>
 
@@ -264,8 +258,8 @@
                                 <!-- Sweet Alert2 -->
                                 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
-          <!-- parsleyjs -->
-        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/parsleyjs/parsley.min.js"></script>
+                                <!-- parsleyjs -->
+                                <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/parsleyjs/parsley.min.js"></script>
 
                                 <script>
                                     function get_data(id) {
@@ -313,16 +307,16 @@
                                         }
                                     }
 
-                                    $(function () {
-  $('#form').parsley().on('field:validated', function() {
-    var ok = $('.parsley-error').length === 0;
-    $('.bs-callout-info').toggleClass('hidden', !ok);
-    $('.bs-callout-warning').toggleClass('hidden', ok);
-  })
-  .on('form:submit', function() {
-    return false; // Don't submit form for this demo
-  });
-});
+                                    $(function() {
+                                        $('#form').parsley().on('field:validated', function() {
+                                                var ok = $('.parsley-error').length === 0;
+                                                $('.bs-callout-info').toggleClass('hidden', !ok);
+                                                $('.bs-callout-warning').toggleClass('hidden', ok);
+                                            })
+                                            .on('form:submit', function() {
+                                                return true; // Don't submit form for this demo
+                                            });
+                                    });
                                 </script>
 </body>
 
