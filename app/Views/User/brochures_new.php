@@ -386,6 +386,7 @@
 														</div>
 													</form>
 												</section>
+												
 											</div>
 										</div>
 									</div>
@@ -603,7 +604,15 @@
 
 				} else return true;
 			},
+
 			onFinished: function(event, currentIndex) {
+if (confirm("Are u sure !")){
+
+	save_step(currentIndex);
+	document.location.href="<?php echo base_url('user/brochures')?>";
+}
+
+	
 
 			}
 		});

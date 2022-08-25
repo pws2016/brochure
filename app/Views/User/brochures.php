@@ -72,8 +72,8 @@
 										<?php if(session()->has('error')){?>
 										<div class="alert alert-danger"><?php echo session()->getFlashdata('error')?></div>
 										<?php } ?>
-										<?php if(isset($error)){?>
-										<div class="alert alert-danger"><?php echo $error?></div>
+										<?php if(isset($errorPack)){?>
+										<div class="alert alert-danger"><?php echo $errorPack?></div>
 										<?php } ?>
                                             <div class="row mb-2">
                                                 <div class="col-md-6">
@@ -122,7 +122,7 @@
 
 
 <?php
-                                                                    if($row['status']=="draft"){  ?>
+                                                                    if($row['status']=="draft" && !isset($errorPack)){  ?>
 
                                                                         <li class="list-inline-item">
 

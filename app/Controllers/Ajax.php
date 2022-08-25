@@ -159,9 +159,28 @@ case 7:
 			$this->BrochuresModel->update($this->session->get('current_brochure'),$tab);
 break;
 case 8:
-	
-	
 
+	$tab["step"]=$current_step;
+	$step=$this->request->getVar('step');
+		$tab['step']=$step;
+		$tab['template_id']=$this->request->getVar('template_id');
+        $tab['status']="done";
+ 
+		$x=$this->BrochuresModel->update($this->session->get('current_brochure'),$tab);
+		var_dump($this->session->get('current_brochure'));
+		$exist=$this->BtemplateModel->where('id_brochure',$this->session->get('current_brochure'))->delete();
+		foreach($this->request->getVar('id_page') as $k=>$v){
+			$this->BtemplateModel->insert(array(
+			'id_brochure'=>$this->session->get('current_brochure'),
+			'page_id'=>$v,
+			'ord'=>($k+1)
+			));
+		}
+
+   $inf_user =$this->UserModel->find($data['user_data']['id']);
+   $nb =$inf_user['remain_broch']-1;
+
+   $this->UserModel->update($data['user_data']['id'], array("remain_broch"=>$nb));
 
 break;
 			

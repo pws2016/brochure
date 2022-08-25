@@ -599,7 +599,8 @@
 				} else return true;
 			},
 			onFinished: function(event, currentIndex) {
-				var formData = new FormData();
+				if (confirm("Are u sure !")){
+				/*var formData = new FormData();
 
 				var ff = $('#form-step-' + currentIndex).serializeArray();
 
@@ -618,6 +619,11 @@
 
 
 						});
+					*/	
+
+					save_step(currentIndex);
+					document.location.href="<?php echo base_url('user/brochures')?>";
+					}
 			}
 		});
 		$("input,textarea").on("keyup", function() {
