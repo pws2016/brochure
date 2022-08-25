@@ -64,13 +64,13 @@ class UserModel extends Model
 
 		 }
 
-public function getexpired($id) {
+public function getexpired() {
 
 	$db = \Config\Database::connect();
 
 	$builder = $db->table('users');
 	$builder->select('*');
-	$builder->join('user_pack', 'user_pack.id = users.id');
+	$builder->join('user_pack', 'user_pack.user_id = users.id');
 	$query = $builder->get()->getResultArray();
 	return ($query);
 

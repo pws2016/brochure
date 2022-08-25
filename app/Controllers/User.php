@@ -12,14 +12,14 @@ class User extends BaseController
 
 		$data = $this->common_data();
 
-		$data['list_user'] = $this->UserModel->where('role','C')->find();
+		$data['list_user'] = $this->UserModel->getexpired();
 		$data['pack_title'] = $this->PackageModel->find();
 		$data['pack'] = $this->UserPackModel->find();
         $data['list_pack'] = $this->PackageModel->find();
 	
     
 
-	  $data['expired_date']= $this->UserModel->getexpired('$id');
+	  //$data['expired_date']= $this->UserModel->getexpired('$id');
 	
 	      echo view('admin/user', $data);
 	

@@ -171,12 +171,7 @@
                                                         <td><?php echo $row['email']; ?></td>
                                                         <td><?php echo $row['mobile']; ?></td>
                                                         <td><?php echo $row['remain_broch']; ?></td>
-                                                        <td> <?php foreach ($expired_date as $exp)
-																	    
-
-                                                                            echo $exp['expired_at'];
-                                                            
-                                                                        ?> </td>
+                                                        <td><?php echo $row['expired_at'];?></td>
 
 
                                                         <td>
