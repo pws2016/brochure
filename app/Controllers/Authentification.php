@@ -284,34 +284,7 @@ class Authentification extends BaseController
 		}
 		return view('register.php', $data);
 	}
-	public function activateAccount($email,$token){
-		$common_data=$this->common_data();
-		$data=$common_data;
-		if($common_data['is_logged']==true){
-				if($common_data['user_data']['role']=='A') return redirect()->to( base_url('/admin/dashboard') );
-				else return redirect()->to( base_url('/user/dashboarduser') );
-		}
-		$redirect=$this->request->getVar('redirect');
-		
-		
-		$exist=$this->UserModel->where('token', $token)
-						->where('email', $email)
-						->find();
-					
-		if(empty($exist)){
-			$data['error']=lang('app.error_activation_account');
-			return redirect()->to( base_url());
-		}
-		else{
-			$new_token=random_string('alnum', 6);
-			$this->UserModel->activate($exist[0]['id'],"yes",$new_token);
-			$ex=$this->UserModel->find($exist[0]['id']);
-			$this->session->set(array('user_data'=>$ex));
-			$data['success']=lang('app.success_activation_account');
-			if($redirect!='') return redirect()->to( $redirect);
-		}
-		
-	}
+	
 	
 	public function forgotPassword(){
 		$common_data=$this->common_data();

@@ -14,7 +14,7 @@ class Brochures extends BaseController
 		$data=$this->common_data();
 		
 		$verify=$this->verifyUserPack($data['user_data']['id']);
-		if($verify['status']==false) $data['error']=$verify['msg'];
+		if($verify['status']==false) $data['errorPack']=$verify['msg'];
 		
 		$list=$this->BrochuresModel->where('user_id',$data['user_data']['id'])->find();
 		$data['list']=$list;
@@ -79,8 +79,10 @@ class Brochures extends BaseController
 		
 	
 			$this->session->set(array('current_brochure'=>$id));
+			//var_dump($this->session->get('current_brochure'));exit;
 		//}
 		    $inf_brochure=$this->BrochuresModel->find($this->session->get('current_brochure'));
+			if($inf_brochure['status']=='done') return redirect()->to(base_url('user/brochures'))->with('error',"brochue is done");
 			$data['inf_brochure']=$inf_brochure;
 			$data['startIndex']=$inf_brochure['step'];
             $data['company'] = $this->CompanyModel->where('user_id',$data['user_data']['id'])->first();
