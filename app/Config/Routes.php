@@ -38,6 +38,7 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 $routes->add('/logout', 'Authentification::logout');
 $routes->add('/login', 'Authentification::login');
+$routes->add('/smsAuth', 'Authentification::smsAuth');
 $routes->add('/loginAsGuest', 'Authentification::loginAsGuest');
 
 
