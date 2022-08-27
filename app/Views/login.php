@@ -103,7 +103,7 @@
 											
 											
                                             <button class="btn btn-primary w-sm waves-effect waves-light" type="submit">
-                                                <?php echo lang('onclik')?> btn_login </button>
+                                                <?php echo lang('app.btn_login')?>  </button>
                                         </div>
             
                                         <!-- <?php /*

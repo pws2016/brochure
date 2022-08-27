@@ -9,10 +9,7 @@
 	<meta name="robots" CONTENT="noindex, nofollow">
 	<meta name="googlebot" content="noindex, nofollow">
 	<link rel="shortcut icon" href="https://creazioneimpresa.net/wp-content/uploads/2020/06/favicon-black.png">
-	<link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
-	<link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/spectrum-colorpicker2/spectrum.min.css" rel="stylesheet" type="text/css">
-	<link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/@chenfengyuan/datepicker/datepicker.min.css">
+
 	<link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 	<link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 	<link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -59,7 +56,7 @@
 
 <body data-sidebar="dark">
 	<div id="layout-wrapper">
-		<?php echo view('includes/headeruser.php') ?>
+		<?php echo view('includes/headerUser.php') ?>
 
 		<div class="main-content">
 
@@ -462,8 +459,7 @@
 <!--tinymce js-->
 <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/tinymce/tinymce.min.js"></script>
 
-<!-- init js -->
-<script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/js/app.js"></script>
+
 	<script>
 		
 		 tinymce.init({
@@ -714,7 +710,8 @@ function sel_template(v){
 
 
 
-
+<!-- init js -->
+<script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/js/app.js"></script>
 
 </body>
 

@@ -131,7 +131,7 @@ public function smsAuth()
 				}
 				else{
 				$this->session->set(array('user_data' => $s));
-				switch ($data[0]['role']) {
+				switch ($s['role']) {
 					case 'A':
 						$redirect_url = 'admin/dashboard';
 						break;

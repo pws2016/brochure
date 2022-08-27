@@ -17,8 +17,10 @@ class Package extends BaseController
 		echo view('admin/package', $data);
 	}
 	public function insert()
-	{ {
-
+	{
+		
+		
+		if($this->request->getVar("title")!==null){
 			$data_ins = [
 
 
@@ -28,19 +30,17 @@ class Package extends BaseController
 				'sorting'  => $this->request->getVar("sorting"),
 				'validity' => $this->request->getVar("validity"),
 				'nb_brochure' => $this->request->getVar("nb_brochure"),
-
+				'validity_months' => $this->request->getVar("validity_months"),
 
 
 			];
 
-			// var_dump($data_ins);
+		
 			$xx = $this->PackageModel->insert($data_ins);
 			$session = session();
 			$session->setFlashdata("successMsg", "New Package created successfully");
 			return redirect()->to(base_url('admin/package'));
 		}
-
-
 
 		return view('admin/package');
 	}
@@ -64,7 +64,7 @@ class Package extends BaseController
 
 
 			];
-			var_dump($data_edit);
+			//var_dump($data_edit);
 			$this->PackageModel->update($id, $data_edit);
 			// var_dump($data_ins);
 

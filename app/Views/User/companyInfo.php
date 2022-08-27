@@ -69,7 +69,7 @@
                                             <label for="logo" class="col-md-2 col-form-label">Choose Logo </label>
 
                                             <div class="col-md-8">
-                                                <input class="form-control" type="file" name="logo" id="logo" required>
+                                                <input class="form-control" type="file" name="logo" id="logo" >
                                             </div>
                                             <div class="col-md-2">
                                                 <?php
