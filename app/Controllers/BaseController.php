@@ -25,6 +25,7 @@ use App\Models\BrochureTemplatesModel;
 use App\Models\BrochureTemplatePagesModel;
 use App\Models\BitemModel;
 use App\Models\BtemplateModel;
+use App\Models\UsersAuthSmsModel;
 /**
  * Class BaseController
  * test
@@ -81,6 +82,7 @@ abstract class BaseController extends Controller
 	   $this->BrochureTemplatePagesModel=new BrochureTemplatePagesModel();
 	   $this->BitemModel     =  new BitemModel();
 		$this->BtemplateModel     =  new BtemplateModel();
+		$this->UsersAuthSmsModel     =  new UsersAuthSmsModel();
 
         // Preload any models, libraries, etc, here.
 
