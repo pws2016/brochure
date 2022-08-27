@@ -24,7 +24,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'http://localhost/broch/brochure/public/';
+    public $baseURL = 'http://localhost/brochureCRM/brochure/public/';
 
     /**
      * --------------------------------------------------------------------------
@@ -70,7 +70,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $defaultLocale = 'en';
+    public $defaultLocale = 'it';
 
     /**
      * --------------------------------------------------------------------------
@@ -97,7 +97,7 @@ class App extends BaseConfig
      *
      * @var string[]
      */
-    public $supportedLocales = ['en'];
+    public $supportedLocales = ['it'];
 
     /**
      * --------------------------------------------------------------------------
@@ -109,7 +109,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $appTimezone = 'Europe/';
+    public $appTimezone = 'Europe/Rome';
 
     /**
      * --------------------------------------------------------------------------

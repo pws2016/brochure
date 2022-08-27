@@ -49,35 +49,7 @@
 				</div>
 			</div>
 
-			<?php /*    <div class="dropdown d-inline-block language-switch">
-                            <button type="button" class="btn header-item waves-effect"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="" src="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/images/flags/us.jpg" alt="Header Language" height="16">
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-end">
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/images/flags/spain.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Spanish</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/images/flags/germany.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">German</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/images/flags/italy.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Italian</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/images/flags/russia.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Russian</span>
-                                </a>
-                            </div>
-                        </div>
-*/?>
+		
 			<?php if(!empty($list_projects)){?>
 			<div class="dropdown d-none d-lg-inline-block ms-1">
 				<button type="button" class="btn header-item noti-icon waves-effect"
@@ -109,92 +81,7 @@
 				</button>
 			</div>
 
-			<!--div class="dropdown d-inline-block">
-	   <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
-		data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		<i class="uil-bell"></i>
-		<span class="badge bg-danger rounded-pill">3</span>
-	   </button>
-	   <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
-		aria-labelledby="page-header-notifications-dropdown">
-		<div class="p-3">
-		 <div class="row align-items-center">
-		  <div class="col">
-		   <h5 class="m-0 font-size-16"> Notifications </h5>
-		  </div>
-		  <div class="col-auto">
-		   <a href="#!" class="small"> Mark all as read</a>
-		  </div>
-		 </div>
-		</div>
-		<div data-simplebar style="max-height: 230px;">
-		 <a href="" class="text-reset notification-item">
-		  <div class="d-flex align-items-start">
-		   <div class="avatar-xs me-3">
-			<span class="avatar-title bg-primary rounded-circle font-size-16">
-			 <i class="uil-shopping-basket"></i>
-			</span>
-		   </div>
-		   <div class="flex-1">
-			<h6 class="mt-0 mb-1">Your order is placed</h6>
-			<div class="font-size-12 text-muted">
-			 <p class="mb-1">If several languages coalesce the grammar</p>
-			 <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
-			</div>
-		   </div>
-		  </div>
-		 </a>
-		 <a href="" class="text-reset notification-item">
-		  <div class="d-flex align-items-start">
-		   <img src="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/images/users/avatar-3.jpg"
-			class="me-3 rounded-circle avatar-xs" alt="user-pic">
-		   <div class="flex-1">
-			<h6 class="mt-0 mb-1">James Lemire</h6>
-			<div class="font-size-12 text-muted">
-			 <p class="mb-1">It will seem like simplified English.</p>
-			 <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 1 hours ago</p>
-			</div>
-		   </div>
-		  </div>
-		 </a>
-		 <a href="" class="text-reset notification-item">
-		  <div class="d-flex align-items-start">
-		   <div class="avatar-xs me-3">
-			<span class="avatar-title bg-success rounded-circle font-size-16">
-			 <i class="uil-truck"></i>
-			</span>
-		   </div>
-		   <div class="flex-1">
-			<h6 class="mt-0 mb-1">Your item is shipped</h6>
-			<div class="font-size-12 text-muted">
-			 <p class="mb-1">If several languages coalesce the grammar</p>
-			 <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
-			</div>
-		   </div>
-		  </div>
-		 </a>
-
-		 <a href="" class="text-reset notification-item">
-		  <div class="d-flex align-items-start">
-		   <img src="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/images/users/avatar-4.jpg"
-			class="me-3 rounded-circle avatar-xs" alt="user-pic">
-		   <div class="flex-1">
-			<h6 class="mt-0 mb-1">Salena Layfield</h6>
-			<div class="font-size-12 text-muted">
-			 <p class="mb-1">As a skeptical Cambridge friend of mine occidental.</p>
-			 <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 1 hours ago</p>
-			</div>
-		   </div>
-		  </div>
-		 </a>
-		</div>
-		<div class="p-2 border-top d-grid">
-		 <a class="btn btn-sm btn-link font-size-14 text-center" href="javascript:void(0)">
-		  <i class="uil-arrow-circle-right me-1"></i> View More..
-		 </a>
-		</div>
-	   </div>
-	  </div-->
+		
 
 			<div class="dropdown d-inline-block">
 				<button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
@@ -206,17 +93,7 @@
 				</button>
 				<div class="dropdown-menu dropdown-menu-end">
 					<!-- item-->
-					<?php /* if($user_data['role']!='A'){?>
-					<a class="dropdown-item" href="<?php echo base_url($prefix_route.'admin/dashboard');//$profile_url?>"><i class="uil uil-user-circle font-size-18 align-middle text-muted me-1"></i> <span class="align-middle"><?php echo lang('app.menu_profile')?></span></a>
-					<?php } if($user_data['role']=='A'){?>
-					<a class="dropdown-item d-block" href="<?php echo base_url('settings')?>"><i class="uil uil-cog font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle"><?php echo lang('app.menu_setting')?></span></a>
-					<?php }*/?>
-					<?php /*if($user_loginas!==null && $user_loginas['role']=='A'){?>
-					<a href="<?php echo base_url('loginas_back/admin')?>" class="dropdown-item notify-item">
-						<i class="uil uil-previous font-size-18 align-middle me-1 text-muted"></i>
-						<span><?php echo  lang('app.menu_return_admin')?></span>
-					</a>
-					<?php } */?>
+				
 					<a class="dropdown-item" href="<?php echo base_url('logout')?>"><i class="uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle"><?php echo lang('app.menu_logout')?></span></a>
 				</div>
 			</div>
@@ -301,24 +178,8 @@
 						<i class="uil-bars me-2"></i><span>Company info</span>
 					</a>
 				</li>
-				<li class="menu-title">Setting</li>
-				<li>
-					<a href="<?php echo base_url('')?>">
-						<i class="uil-bars me-2"></i><span></span>
-					</a>
-				</li>
 				
-				<!--li><a href="<?php //echo base_url('settings')?>"><i class="uil uil-cog"></i> <span class="align-middle"><?php echo lang('app.menu_setting')?></span></a>
-				</li-->
-					<?php
-			/*break;
-		case 2:*/?>
-				
-				
-				<?php
-			/*break;
-	}*/
-				?>
+			
 					
 				<hr>
 				<li class="menu-title">Profilo</li>
@@ -327,39 +188,12 @@
 					<a href="<?php echo base_url($prefix_route.'profile');//$profile_url?>"><i class="uil uil-user-circle"></i> <span class="align-middle">Mio profilo</span></a>
 				</li>
 				<?php }*/?>
-				<li class="menu-title">APP</li>
-				<li>
-					<a href="https://academy.creazioneimpresa.it" target="_blank">
-						<i class="uil-desktop-cloud-alt me-2"></i><span>Academy</span>
-					</a>
-				</li>
-				<li>
-					<a href="https://www.creazioneimpresa.net" target="_blank">
-						<i class="uil-blogger-alt me-2"></i><span>Blog</span>
-					</a>
-				</li>
 				
-				<li class="menu-title">Assistenza</li>
-				<li>
-					<a class="text-primary" href="mailto:s.benia@creazioneimpresa.it">
-						<i class="uil-fast-mail me-2"></i><span>Assistenza Tecnica</span>
-					</a>
-				</li>
-				<hr>
 				<li>
 					<a href="<?php echo base_url('logout')?>">
 					<i class="uil uil-sign-out-alt"></i><span><?php echo lang('app.menu_logout')?></span></a>
 				</li>
-				<?php 
-				/*if($user_loginas!==null && $user_loginas['role']=='A'){?>
-				<li>
-					<a class="text-primary" href="<?php echo base_url('loginas_back/admin')?>">
-						<i class="uil uil-previous"></i>
-						<span><?php echo  lang('app.menu_return_admin')?></span>
-					</a>
-				</li>
-				<?php }*/ 
-				?>
+				
 				</ul>
 			</div>
 	</div>

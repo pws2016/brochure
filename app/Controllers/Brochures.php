@@ -19,7 +19,7 @@ class Brochures extends BaseController
 		$list=$this->BrochuresModel->where('user_id',$data['user_data']['id'])->find();
 		$data['list']=$list;
 		
-		echo view('User/brochures.php',$data);
+		echo view('user/brochures.php',$data);
 	}
 	
 	public function new_broch(){
@@ -68,7 +68,7 @@ class Brochures extends BaseController
 				$res_page_template[$v['ord']]=$v['page_id'];
 			} }
 			$data['res_page_template']=$res_page_template ?? array();
-		echo view('User/brochures_new.php',$data);
+		echo view('user/brochures_new.php',$data);
 	}
 	public function edit_broch($id){
 		$data=$this->common_data();
@@ -126,7 +126,7 @@ class Brochures extends BaseController
 			} }
 			$data['res_page_template']=$res_page_template ?? array();
 			
-		return view('User/brochures_edit.php',$data);
+		return view('user/brochures_edit.php',$data);
 	}
 
 	public function preview_broch($id){
@@ -299,7 +299,7 @@ class Brochures extends BaseController
 		array($page[1] ?? "",$page[2] ?? "",$page[3] ?? "",$page[4] ?? "",$page[5] ?? "",$page[6] ?? "",$page[7] ?? ""),
 		$html);
 		echo $data['html']=$html ?? "";
-		//return view('User/brochures_preview.php',$data);
+		//return view('user/brochures_preview.php',$data);
 	}
 
 	

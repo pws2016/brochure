@@ -121,46 +121,35 @@ class User extends BaseController
 
 	public function get_data(){
 
-		$id = $this->request->getVar("id");
+		 $id = $this->request->getVar("id");
 		$user_data=$this->UserModel->find($id);
 	
-	// var_dump($res);
+	
 ?>
- <div class="form-outline mb-4">
+
  <input type="hidden" id="edit_id" name="id" value="<?= $user_data['id'] ?>"  class="form-control" >
-  <label class="form-label" for="display_name"> Name</label>
-											  <input type="text" id="display_name" name="display_name" value="<?= $user_data['display_name'] ?>" class="form-control form-control-lg" />
-											 
-										  </div>
+ 
+ 
+   <div class="mb-3">
+	<label class="form-label" for="email">Email<span class="text-primary">*</span></label>
+	<input type="email" class="form-control" id="email" name="email" class="form-control form-control-lg" placeholder="Enter email" required value="<?= $user_data['email'] ?>">
+</div>
 
-										  <div class="form-outline mb-4">
-										    <label class="form-label" for="email">Email</label>
-											  <input type="email" id="email" name="email" value="<?= $user_data['email'] ?>" class="form-control form-control-lg" />
-											
-										  </div>
-										  <div class="form-outline mb-4">
-										   <label class="form-label" for="mobile">Phone</label>
-											  <input type="text" id="mobile" name="mobile"  value="<?= $user_data['mobile'] ?>" class="form-control form-control-lg" />
-											 
-										  </div>
+<div class="mb-3">
+	<label class="form-label" for="display_name">Username<span class="text-primary">*</span></label>
+	<input type="text" class="form-control" id="display_name" name="display_name" class="form-control form-control-lg" placeholder="Enter username" required value="<?= $user_data['display_name'] ?>">
+</div>
 
-										  <div class="form-outline mb-4">
-										    <label class="form-label" for="password">Password</label>
-											  <input type="password" id="password" name="password" value="<?= $user_data['password'] ?>" class="form-control form-control-lg" />
-											
-										  </div>
+<div class="mb-3">
+	<label class="form-label" for="mobile">Phone<span class="text-primary">*</span></label>
+	<input type="text" class="form-control" id="mobile" name="mobile" class="form-control form-control-lg" placeholder="Enter username" required  value="<?= $user_data['mobile'] ?>">
+</div>
 
-										
-										
-
-
-
-                                                                    </select>
-
-
-                                                                </div>
-
-										
+<div class="mb-3">
+	<label class="form-label" for="password">Password<span class="text-primary">*</span></label>
+	<input type="password" class="form-control" id="password" name="password" class="form-control form-control-lg" placeholder="Enter password" required>
+</div>
+									
 											 
 											  <?php
 	}
