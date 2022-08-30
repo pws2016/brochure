@@ -69,10 +69,8 @@ public function getexpired() {
 	$db = \Config\Database::connect();
 
 	$builder = $db->table('users');
-	//	$builder->select('users.*','user_pack.expired_at');
-			$builder->select('*');
-	$builder->where("users.deleted_at is NULL and role='C'");
-	
+	$builder->select('users.*','user_pack.expired_at');
+	$builder->where('users.deleted_at is NULL');
 	$builder->join('user_pack', 'user_pack.user_id = users.id');
 	$query = $builder->get()->getResultArray();
 	return ($query);
