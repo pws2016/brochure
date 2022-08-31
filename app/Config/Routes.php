@@ -92,6 +92,7 @@ $routes->add('user/premi/insert',    'Premi::insert');
 $routes->add('user/premi/delete',    'Premi::delete');
 $routes->add('user/premi/get_data',  'Premi::get_data');
 $routes->add('user/premi/update',    'Premi::update');
+$routes->add('user/premi/get_block_data',  'Premi::get_block_data');
 ////
 $routes->add('user/companyInfo',   'CompanyInfo::companyInfo');
 $routes->add('user/companyInfo/update',   'CompanyInfo::update');
