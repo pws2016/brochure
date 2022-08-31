@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="" name="description" />
     <meta content="Creazioneimpresa" name="author" />
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="shortcut icon" href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/images/favicon.ico">
+	<link href="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
 	 <link href="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -42,16 +43,18 @@
             <div class="page-content">
                 <div class="container-fluid">
 
+                
+
                             <!-- start page title -->
                             <div class="row">
                                 <div class="col-12">
                                     <div class="page-title-box d-flex align-items-center justify-content-between">
-                                        <h4 class="mb-0">Products</h4>
+                                        <h4 class="mb-0">products</h4>
 
                                         <div class="page-title-right">
                                             <ol class="breadcrumb m-0">
                                                 <li class="breadcrumb-item"></li>
-                                                <li class="breadcrumb-item active">Products</li>
+                                                <li class="breadcrumb-item active">products</li>
                                             </ol>
                                         </div>
 
@@ -66,6 +69,9 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="row mb-2">
+                                            <div class="row">
+                                                <?php if( session()->get('msg')!==null) echo  session()->get('msg')?>
+                                                </div>
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -77,7 +83,7 @@
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
 
-                                                                        <h5 class="modal-title" id="exampleModalLabel"> Add Products</h5>
+                                                                        <h5 class="modal-title" id="exampleModalLabel"> Add products</h5>
                                                                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
@@ -88,6 +94,15 @@
                                                                         <div class="form-group">
                                                                             <label for="">Name</label><span class="text-primary">*</span>
                                                                             <input type="text" id="name" name="name" class="form-control" required>
+                                                                        </div>
+																		 <div class="form-group">
+                                                                            <label for="">Category</label><span class="text-primary">*</span>
+                                                                            <select id="ids_category" name="ids_category[]" class="select2 form-control select2-multiple" multiple="multiple" data-placeholder="Choose ..." required style="width:100%">
+																			<?php if(!empty($list_category)){
+																				foreach($list_category as $k=>$v){?>
+																				<option value="<?php echo $v['id']?>" <?php if($v['user_id']==null) echo 'selected'?>><?php echo $v['title']?></option>
+																			<?php } }?>
+																			</select>
                                                                         </div>
                                                                         <div class="form-group">
                                                                         <label for="description">Description</label><span class="text-primary">*</span>
@@ -100,7 +115,7 @@
                                                                         <input class="form-control" type="file" name="image" id="image" required>
 
                                                                     </div>
-
+                                                                    <div class="alert alert-warning"><label><input type='checkbox' name='insert_item' checked>I accept to associate the  item </label></div>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -113,62 +128,75 @@
                                                 </form>
                                             </div>
 
-                                         
+                                      
 
                                         </div>
 
 
                                         <!-- end row -->
 
-                                          <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                     <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                                 <tr>
-                                                    
-                                                    <th>ID</th>
+                                                  
+                                                   
                                                     <th>Name</th>
                                                     <th>Description</th>
+													 <th>Categories</th>
                                                     <th>Image</th>
-													 <th></th>
+													 <th>Enable</th>
+													  <th></th>
                                                 </tr>
-												</thead>
-												<tbody>
+											</thead>
+											<tbody>
                                                 <?php
                                                 if (!empty($prod)) {
                                                     foreach ($prod as $row) {
                                                 ?><tr id="tr_<?php echo $row['id']; ?>">
-                                                            
-                                                            <td> <?php echo $row['user_id']; ?></td>
+                                                           
+                                                         
 
                                                             <td> <?php echo $row['name']; ?></td>
 
                                                             <td><?php echo $row['description']; ?></td>
-
+															<td><?php echo $row['categories']; ?></td>
                                                             <td>
 
                                                                 <img src="<?php echo base_url('uploads/' . $row['image']) ?>" height="50" width="50px" />
                                                             </td>
-
+															<td><?php if($row['enable']==1){?><span class="bg-success badge me-2"><?php echo lang('app.yes')?></span> <?php } else{?><span class="bg-danger badge me-2"><?php echo lang('app.no')?></span> <?php } ?></td>
                                                             <td>
                                                                 <ul class="list-inline mb-0">
-
-
-
 
                                                                     <li class="list-inline-item">
 
                                                                         <a onclick="get_data('<?php echo $row['id']; ?>')" class="px-2 text-primary" data-bs-toggle="modal" data-bs-target="#edit_modal"><i class="uil uil-pen font-size-18"></i></a>
                                                                     </li>
+																	<li class="list-inline-item">
+                                                                      <a class="px-2 text-info" data-bs-target="#duplicate-modal-dialog" data-bs-toggle="modal" onclick="duplicate_item('<?php echo $row['id']?>')" href=""><i class="uil uil-file-copy-alt font-size-18"></i></a>
+                                                                    </li>
+																	<?php if($row['enable']==1){?>
+																	<li class="list-inline-item">
+                                                                      <a class="px-2 text-danger" data-bs-target="#block-modal-dialog" data-bs-toggle="modal" onclick="block_item('<?php echo $row['id']?>','<?php echo $row['enable']?>')" href=""><i class="uil uil-file-block-alt font-size-18"></i></a>
+                                                                    </li>
+																	<?php } else{?>
+																	<li class="list-inline-item">
+                                                                      <a class="px-2 text-success" data-bs-target="#block-modal-dialog" data-bs-toggle="modal" onclick="block_item('<?php echo $row['id']?>','<?php echo $row['enable']?>')" href=""><i class="uil uil-file-check-alt font-size-18"></i></a>
+                                                                    </li>
+																	<?php } ?>
+																	<?php /*
                                                                     <li class="list-inline-item">
                                                                         <a onclick="del_pack('<?php echo $row['id']; ?>')" class="px-2 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
                                                                     </li>
-                                                                  
+																	*/?>
+                                                                   
                                                             </td>
                                                             </ul>
                                                         </tr>
                                                 <?php }
                                                 }
                                                 ?>
-                                           
+                                            
                                             </tbody>
 
                                         </table>
@@ -178,13 +206,13 @@
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Edit Products</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel">Edit products</h5>
                                                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
 
-                                                        <div class="modal-body" id="edit_partners">
+                                                        <div class="modal-body" id="edit_products">
                                                             <!-- Add package Form -->
 
                                                         </div>
@@ -202,15 +230,66 @@
 
                                         </form>
 
-
-
+ <?php $attributes = ['class' => 'form-input-flat', 'id' => 'myform','method'=>'post'];
+		echo form_open( base_url('user/products'), $attributes);?>
+		<input type="hidden" name="action" id="block_action" value="">
+		<input type="hidden" name="id" id="block_id">
+		<div class="modal fade" id="block-modal-dialog"  tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-header">
+						
+						 <h5 class="modal-title mt-0" id="exampleModalScrollableTitle"><?php echo lang('app.modal_block_item')?></h5>
+						  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                                        </button>
+					</div>
+					
+		
+					<div class="modal-body" id="div_block_item">
+						
+					</div>
+					<div class="modal-footer">
+						 <button type="button" class="btn btn-light" data-bs-dismiss="modal"><?php echo lang('app.btn_cancel')?></button>
+						<input type="submit" name="delete" class="btn btn-danger" value="<?php echo lang('app.btn_save')?>">
+					</div>
+				</div>
+			</div>
+		</div>
+         </form>
+<?php $attributes = ['class' => 'form-input-flat', 'id' => 'myform','method'=>'post'];
+		echo form_open( base_url('user/products'), $attributes);?>
+		<input type="hidden" name="action" value="duplicate">
+		<input type="hidden" name="id" id="duplicate_id">
+		<div class="modal fade" id="duplicate-modal-dialog"  tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-header">
+						
+						 <h5 class="modal-title mt-0" id="exampleModalScrollableTitle"><?php echo lang('app.modal_duplicate_item')?></h5>
+						  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                                        </button>
+					</div>
+					
+		
+					<div class="modal-body" id="">
+						<?php echo lang('app.alert_duplicate_item')?><br/>
+						<div class="alert alert-warning"><label><input type='checkbox' name='insert_item' checked>I accept to associate the copied item to brochures as original</label></div>
+					</div>
+					<div class="modal-footer">
+						 <button type="button" class="btn btn-light" data-bs-dismiss="modal"><?php echo lang('app.btn_cancel')?></button>
+						<input type="submit" name="delete" class="btn btn-danger" value="<?php echo lang('app.btn_save')?>">
+					</div>
+				</div>
+			</div>
+		</div>
+         </form>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Optional JavaScript -->
-                            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-                            <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/jquery/jquery.min.js"></script>
+                         <!-- JAVASCRIPT -->
+        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/jquery/jquery.min.js"></script>
 		
 
         <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -219,6 +298,7 @@
         <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/node-waves/waves.min.js"></script>
         <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
         <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
+		  <script src="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/libs/select2/js/select2.min.js"></script>
                                 <!-- Toastr -->
                                 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
                                 <!-- Font Awesome -->
@@ -237,56 +317,82 @@ $("#datatable").DataTable({
 			searching: true
 			
 			});
-
+$(".select2").select2();
 </script>
    <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/parsleyjs/parsley.min.js"></script>
-                            <script>
-                                function get_data(id) {
-                                    $.ajax({
-                                        url: "<?php echo base_url("user/products/get_data"); ?>",
-                                        type: "POST",
-                                        cache: false,
-                                        data: {
-
-                                            id: id
 
 
-                                        },
-                                        success: function(dataResult) {
-                                            $("#edit_partners").html(dataResult);
+<script>
+	function get_data(id) {
+		$.ajax({
+			url: "<?php echo base_url("user/products/get_data"); ?>",
+			type: "POST",
+			cache: false,
+			data: {
 
-                                        }
-
-                                    });
-                                }
-
-
-
+				id: id
 
 
-                                function del_pack(id) {
-                                    if (confirm("are you sure !")) {
-                                        $.ajax({
-                                            url: "<?php echo base_url("user/products/delete"); ?>",
-                                            type: "GET",
-                                            cache: false,
-                                            data: {
+			},
+			success: function(dataResult) {
+				$("#edit_products").html(dataResult);
+				$(".select2").select2();
+			}
 
-                                                id: id
+		});
+	}
 
 
-                                            },
-                                            success: function(datadelete) {
+	function del_pack(id) {
+		if (confirm("are you sure !")) {
+			$.ajax({
+				url: "<?php echo base_url("user/products/delete"); ?>",
+				type: "GET",
+				cache: false,
+				data: {
 
-                                                $("#tr_" + id).remove();
+					id: id
 
-                                            }
 
-                                        });
-                                    }
-                                }
-                            </script>
-		   <script src="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/js/app.js"></script>
+				},
+				success: function(datadelete) {
+
+					$("#tr_" + id).remove();
+
+				}
+
+			});
+		}
+	}
+	function block_item(id,enable){
+		$("#div_msg_desactivate").hide(0);
+		$("#div_msg_activate").hide(0);
+		$("#block_id").val(id);
+		if(enable==1) $("#block_action").val('desactivate');
+		else $("#block_action").val('activate');
+		$.ajax({
+			url: "<?php echo base_url("user/products/get_block_data"); ?>",
+			type: "POST",
+			cache: false,
+			data: {
+
+				id: id,
+				enable:enable
+
+			},
+			success: function(dataResult) {
+				$("#div_block_item").html(dataResult);
+			}
+
+		});
+		
+	}
+	
+	function duplicate_item(id){
+		$("#duplicate_id").val(id);
+	}
+</script>
+	 <script src="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/js/app.js"></script>
 </body>
 
 </html>

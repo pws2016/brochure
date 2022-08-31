@@ -7,7 +7,7 @@ class PartnersModel extends Model
 	
     protected $table = 'partners';
 	protected $primaryKey = 'id';
-    protected $allowedFields = ['user_id', 'name','email','image'];
+    protected $allowedFields = ['user_id', 'name','email','image','enable','ids_category'];
 	// protected $useSoftDeletes = true;
 	// protected $returnType = 'array';
 	// protected $useTimestamps = true;

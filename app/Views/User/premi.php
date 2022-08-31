@@ -69,6 +69,9 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="row mb-2">
+                                                <div class="row">
+                                                <?php if( session()->get('msg')!==null) echo  session()->get('msg')?>
+                                                </div>
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -92,7 +95,14 @@
                                                                             <label for="">Name</label><span class="text-primary">*</span>
                                                                             <input type="text" id="name" name="name" class="form-control" required>
                                                                         </div>
-																		 <div class="form-group">
+																		
+                                                                        <div class="form-group">
+                                                                        <label for="description">Description</label><span class="text-primary">*</span>
+                                                                        <textarea id="description" name="description" class="md-textarea form-control" rows="3" required></textarea>
+                                                                          
+                                                                    
+                                                                    </div>
+                                                                    <div class="form-group">
                                                                             <label for="">Category</label><span class="text-primary">*</span>
                                                                             <select id="ids_category" name="ids_category[]" class="select2 form-control select2-multiple" multiple="multiple" data-placeholder="Choose ..." required style="width:100%">
 																			<?php if(!empty($list_category)){
@@ -101,18 +111,12 @@
 																			<?php } }?>
 																			</select>
                                                                         </div>
-                                                                        <div class="form-group">
-                                                                        <label for="description">Description</label><span class="text-primary">*</span>
-                                                                        <textarea id="description" name="description" class="md-textarea form-control" rows="3" required></textarea>
-                                                                          
-                                                                    
-                                                                    </div>
                                                                     <div class="mb-3">
                                                                         <label for="image" class="form-label">Choose image</label><span class="text-primary">*</span>
                                                                         <input class="form-control" type="file" name="image" id="image" required>
 
                                                                     </div>
-
+                                                                    <div class="alert alert-warning"><label><input type='checkbox' name='insert_item' checked>I accept to associate the  item </label></div>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -318,7 +322,7 @@ $(".select2").select2();
 </script>
    <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/parsleyjs/parsley.min.js"></script>
 
-<!-- Add package -->
+
 <script>
 	function get_data(id) {
 		$.ajax({
