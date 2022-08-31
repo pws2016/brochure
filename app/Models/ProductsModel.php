@@ -7,7 +7,7 @@ class ProductsModel extends Model
 	
     protected $table = 'products';
 	protected $primaryKey = 'id';
-    protected $allowedFields = ['user_id', 'name','description','image'];
+    protected $allowedFields = ['user_id', 'name','description','image','enable','ids_category'];
 	// protected $useSoftDeletes = true;
 	// protected $returnType = 'array';
 	// protected $useTimestamps = true;

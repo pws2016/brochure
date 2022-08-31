@@ -74,18 +74,21 @@ $routes->add('user/partners/insert',    'Partners::insert');
 $routes->add('user/partners/delete',    'Partners::delete');
 $routes->add('user/partners/get_data',  'Partners::get_data');
 $routes->add('user/partners/update',    'Partners::update');
+$routes->add('user/partners/get_block_data',  'Partners::get_block_data');
 /////
 $routes->add('user/contacts',           'Contacts::contacts');
 $routes->add('user/contacts/insert',    'Contacts::insert');
 $routes->add('user/contacts/delete',    'Contacts::delete');
 $routes->add('user/contacts/get_data',  'Contacts::get_data');
 $routes->add('user/contacts/update',    'Contacts::update');
+$routes->add('user/contacts/get_block_data',  'Contacts::get_block_data');
 //////
 $routes->add('user/products',           'Products::products');
 $routes->add('user/products/insert',    'Products::insert');
 $routes->add('user/products/delete',    'Products::delete');
 $routes->add('user/products/get_data',  'Products::get_data');
 $routes->add('user/products/update',    'Products::update');
+$routes->add('user/products/get_block_data',  'Products::get_block_data');
 /////
 $routes->add('user/premi',           'Premi::premi');
 $routes->add('user/premi/insert',    'Premi::insert');
