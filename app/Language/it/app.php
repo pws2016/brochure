@@ -358,13 +358,11 @@ $lang['title_section_user_doc']="Documenti";
 $lang['title_section_user_media']="Media";
 $lang['modal_new_address']="Aggiungi Nuova indirrizzo";
 
-$lang['title_page_staff_list']="Staff Medical";
-$lang['title_page_staff_edit']="Modifica staff Medical";
-$lang['title_section_current_files']="file correnti";
-$lang['title_section_new_team_memeber']="Nuovo Membro";
-$lang['title_page_patient_new']="Nuovo paziente";
-$lang['title_page_patient_list']="Lista pazient";
-$lang['title_page_patient_edit']="Modifica paziente";
+
+$lang['modal_block_item']="attivare/disattivare l'elemento";
+$lang['alert_desactivate_item']="Have <b>{x}</b> brochure with this item. Are you sure to desactivate it?";
+$lang['alert_activate_item']="Have <b>{x}</b> brochure with same categories.check the bottom checkbox to accept associate the item to brochures.<br/><label><input type='checkbox' name='insert_item' checked>I accept</label> <br/>Are you sure to activate it?";
+$lang['alert_duplicate_item']="Are you sure to duplicate this item?";
 ################### statistics ###############"
 
 ############### errors ####################

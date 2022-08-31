@@ -178,7 +178,11 @@
 						<i class="uil-bars me-2"></i><span>Company info</span>
 					</a>
 				</li>
-				
+				<li>
+					<a href="<?php echo base_url('user/category')?>">
+						<i class="uil-bars me-2"></i><span>Category</span>
+					</a>
+				</li>
 			
 					
 				<hr>

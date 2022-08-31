@@ -17,7 +17,7 @@ class BrochuresModel extends Model
 	'title_partners','description_partners',
 	'title_intro','description_intro',
 	'title_premi','description_premi',
-	'title_product','description_product',
+	'title_product','description_product','id_category'
 	
 	];
 	protected $useSoftDeletes = true;

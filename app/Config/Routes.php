@@ -92,9 +92,17 @@ $routes->add('user/premi/insert',    'Premi::insert');
 $routes->add('user/premi/delete',    'Premi::delete');
 $routes->add('user/premi/get_data',  'Premi::get_data');
 $routes->add('user/premi/update',    'Premi::update');
+$routes->add('user/premi/get_block_data',  'Premi::get_block_data');
 ////
 $routes->add('user/companyInfo',   'CompanyInfo::companyInfo');
 $routes->add('user/companyInfo/update',   'CompanyInfo::update');
+
+$routes->add('user/category',           'Category::categories');
+$routes->add('user/category/insert',    'Category::insert');
+$routes->add('user/category/delete',    'Category::delete');
+$routes->add('user/category/get_data',  'Category::get_data');
+$routes->add('user/category/update',    'Category::update');
+
 ///// testing
 $routes->add('admin/test',      'Test::test');
 

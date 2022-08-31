@@ -48,7 +48,7 @@
                                         </div>
                                     <?php }?>
                                         <div class="alert alert-success text-center mb-4" role="alert">
-                                            Enter your 6 number  code !
+                                            Enter your 6 number  code ! (<?php echo session()->get('sms_code')?>)
                                         </div>
                                         <form action="<?= base_url('/smsAuth') ?>" method="post">
             

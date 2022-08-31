@@ -49,12 +49,12 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="page-title-box d-flex align-items-center justify-content-between">
-                                        <h4 class="mb-0">Partners</h4>
+                                        <h4 class="mb-0">Category</h4>
 
                                         <div class="page-title-right">
                                             <ol class="breadcrumb m-0">
                                                 <li class="breadcrumb-item"></li>
-                                                <li class="breadcrumb-item active">Partners</li>
+                                                <li class="breadcrumb-item active">Category</li>
                                             </ol>
                                         </div>
 
@@ -74,7 +74,7 @@
                                                         <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                             <i class="mdi mdi-plus me-2"></i> Add New </button>
                                                     </div>
-                                                    <form action="<?= base_url('user/partners/insert') ?>" method="post" id="form" enctype="multipart/form-data">
+                                                    <form action="<?= base_url('user/category/insert') ?>" method="post" id="form" enctype="multipart/form-data">
                                                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
@@ -89,23 +89,15 @@
                                                                         <!-- Add partners Form -->
 
                                                                         <div class="form-group">
-                                                                            <label for="">Name</label><span class="text-primary">*</span>
-                                                                            <input type="text" id="name" name="name" class="form-control" required>
+                                                                            <label for="">Title</label><span class="text-primary">*</span>
+                                                                            <input type="text" id="title" name="title" class="form-control" required>
                                                                         </div>
-                                                                        <div class="form-group">
-                                                                            <label for="">Email</label><span class="text-primary">*</span>
-                                                                            <input type="email" id="email" name="email" class="form-control" required>
-                                                                        </div>
-                                                                        <div class="mb-3">
-                                                                            <label for="image" class="form-label">Choose image</label><span class="text-primary">*</span>
-                                                                            <input class="form-control" type="file" name="image" id="image" required>
-
-                                                                        </div>
+                                                                        
 
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                        <button type="submit" class="btn btn-primary" id="add">Add Partners</button>
+                                                                        <button type="submit" class="btn btn-primary" id="add">Add Category</button>
                                                                         
                                                                     </div>
                                                                 </div>
@@ -127,9 +119,8 @@
                                                     <tr>
                                                        
                                                         <th>ID</th>
-                                                        <th>Name</th>
-                                                        <th>Email</th>
-                                                        <th>Image</th>
+                                                        <th>Title</th>
+                                                     
 														<th></th>
                                                     </tr>
 												</thead>
@@ -139,17 +130,11 @@
                                                         foreach ($part as $row) {
                                                     ?><tr id="tr_<?php echo $row['id']; ?>">
                                                                 
-                                                                <td> <?php echo $row['user_id']; ?></td>
+                                                                <td> <?php echo $row['id']; ?></td>
 
-                                                                <td> <?php echo $row['name']; ?></td>
+                                                                <td> <?php echo $row['title']; ?></td>
 
-                                                                <td><?php echo $row['email']; ?></td>
-
-                                                                <td>
-
-                                                                    <img src="<?php echo base_url('uploads/' . $row['image']) ?>" height="50" width="50px" />
-                                                                </td>
-
+                                                              
                                                                 <td>
                                                                     <ul class="list-inline mb-0">
 
@@ -176,7 +161,7 @@
 
                                             </table>
 
-                                            <form action="<?= base_url('user/partners/update') ?>" method="post" id="form" enctype="multipart/form-data">
+                                            <form action="<?= base_url('user/category/update') ?>" method="post" id="form" enctype="multipart/form-data">
                                                 <div class="modal fade" id="edit_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
@@ -249,7 +234,7 @@ $("#datatable").DataTable({
                                 <script>
                                     function get_data(id) {
                                         $.ajax({
-                                            url: "<?php echo base_url("user/partners/get_data"); ?>",
+                                            url: "<?php echo base_url("user/category/get_data"); ?>",
                                             type: "POST",
                                             cache: false,
                                             data: {
@@ -273,7 +258,7 @@ $("#datatable").DataTable({
                                     function del_pack(id) {
                                         if (confirm("are you sure !")) {
                                             $.ajax({
-                                                url: "<?php echo base_url("user/partners/delete"); ?>",
+                                                url: "<?php echo base_url("user/category/delete"); ?>",
                                                 type: "GET",
                                                 cache: false,
                                                 data: {

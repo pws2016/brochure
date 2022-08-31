@@ -71,6 +71,7 @@ class Authentification extends BaseController
 					$this->session->set(array('verifier_sms' => $users[0]));
 					// creation code + save dans table smsauth
 					$sms_code = random_string("numeric", 6);
+					$this->session->set(array('sms_code'=>$sms_code));
 					$iat = time(); // current timestamp value
 					$exp = $iat + 600;
 
