@@ -69,9 +69,14 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="row mb-2">
-                                                <div class="row">
-                                                <?php if( session()->get('msg')!==null) echo  session()->get('msg')?>
-                                                </div>
+                                            <?php if (session()->get('msg') !== null) { ?> 
+                                        <div class="alert alert-success text-center mb-4" role="alert">
+                                         <?php echo  session()->get('msg');
+                                            session()->remove('msg');
+                                            ?> 
+                                             </div>
+                                             <?php   
+                                            }?> 
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#exampleModal">

@@ -101,11 +101,52 @@
 																	<input type="text" class="form-control" id="title" name="title" value="<?php echo $inf_brochure['title'] ?>" required>
 																</div>
 															</div>
+															<div class="form-group">
+																		<label for="">Category</label><span class="text-primary">*</span>
+
+																		<select id="id_category" name="id_category" class=" form-control" required style="width:100%">
+																			<option value=""><?php echo lang('app.field_select') ?></option>
+																			<?php if (!empty($list_category)) {
+
+																				foreach ($list_category as $k => $v) { ?>
+																					<option value="<?php echo $v['id'] ?>" <?php if ($v['id'] == $inf_brochure['id_category'] ) echo 'selected' ?>><?php echo $v['title'] ?></option>
+																			<?php }
+																			} ?>
+																		</select>
+
+
+																	</div>
+															<div class="row">
+															<div class="mb-3">
+																<label for="verticalnav-firstname-input"> Template </label>
+																<select class="form-control" id="template_id" name="template_id" onchange="sel_template(this.value)">
+																	<option value=""><?php echo lang('app.field_select')?></option>
+																	<?php foreach($list_template as $k=>$v){?>
+																	<option value="<?php echo $v['id']?>" <?php if($v['id']==$inf_brochure['template_id']) echo 'selected'?>><?php echo $v['title']?></option>
+																	<?php } ?>
+																</select>
+															</div>
+														</div>
+														<div class="row" id="template_pages">
+													<?php	for($i=1;$i<=7;$i++){?>
+														<div class="mb-3 col-12">
+															<label for="verticalnav-firstname-input"> Template Page <?php echo $i?></label>
+															<select class="form-control" id="id_page" name="id_page[]">
+																<option value=""><?php echo lang('app.field_select')?></option>
+																<?php foreach($list_pages as $k=>$v){?>
+																	<option value="<?php echo $v['id']?>" <?php if($v['id']==$res_page_template[$i])echo 'selected'?>><?php echo $v['title']?></option>
+																<?php }?>
+															</select>
+														</div>
+														<?php }?>
+														
+														</div>
 														</div>
 														<!--/div-->
 													</form>
 												</section>
-												<h3>Couverture page</h3>
+												<!-- couverture -->
+												<h3>Copertina</h3>
 												<section>
 													<form method="post" id="form-step-1" enctype="multipart/form-data">
 														<div class="row">
@@ -124,6 +165,7 @@
 
 																	</label>
 																	<input type="text" class="form-control" id="subtitle_couverture" name="subtitle_couverture" value="<?php echo $inf_brochure['subtitle_couverture'] ?>">
+									
 																</div>
 															</div>
 														</div>
@@ -187,9 +229,67 @@
 														</div>
 													</form>
 												</section>
-												<h3>Operation Page</h3>
+
+												<!-- intro page -->
+												<h3>Introduction Page</h3>
 												<section>
 													<form method="post" id="form-step-2" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
+														<div class="row">
+															<div class="mb-3">
+																<label for="verticalnav-firstname-input"> Intro Title </label>
+																<input type="text" class="form-control" id="title_intro" name="title_intro" value="<?php echo $inf_brochure['title_intro'] ?? '' ?>">
+															</div>
+														</div>
+														<div class="mb-3 row">
+															<label for="description_intro" class="col-md-2 col-form-label">description</label>
+															<div class="mb-3 row">
+
+																<textarea id="intro" name="description_intro"><?php echo $inf_brochure['description_intro'] ?? '' ?></textarea>
+															</div>
+														</div>
+
+													</form>
+												</section>
+												<!-- product page -->
+
+												<h3>Area di attività</h3>
+												<section>
+													<form method="post" id="form-step-3" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
+														<div class="row">
+															<div class="mb-3">
+																<label for="verticalnav-firstname-input"> Products Title </label>
+																<input type="text" class="form-control" id="title_product" name="title_product" value="<?php echo $inf_brochure['title_product'] ?? '' ?>">
+															</div>
+														</div>
+														<div class="mb-3 row">
+
+															<label for="description_product" class="col-md-2 col-form-label">description</label>
+															<div class="mb-3 row">
+
+																<textarea id="product" name="description_product"><?php echo $inf_brochure['description_product'] ?? '' ?></textarea>
+															</div>
+														</div>
+														<div id=check_list_products>
+														<?php
+
+
+														foreach ($prod as $row) {
+														?>
+
+															<input type="checkbox"  name="select_product[]" value="<?= $row['id']; ?>" <?php if(in_array($row['id'],$items_product ?? array())) echo 'checked'?>/> <?= $row['name']; ?> <br />
+														<?php
+														}
+
+
+														?>
+														</div>
+													</form>
+												</section>
+
+												
+												<h3>Operazioni</h3>
+												<section>
+													<form method="post" id="form-step-4" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
 														<div class="row">
 															<div class="mb-3">
 																<label for="title_operation"> Operation Title </label>
@@ -206,9 +306,10 @@
 
 													</form>
 												</section>
-												<h3>Premi Page</h3>
+												<!-- Premi -->
+												<h3>Premi</h3>
 												<section>
-													<form method="post" id="form-step-3" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
+													<form method="post" id="form-step-5" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
 														<div class="row">
 															<div class="mb-3">
 																<label for="verticalnav-firstname-input"> Premi Title </label>
@@ -221,7 +322,7 @@
 
 																<textarea id="premi" name="description_premi"><?php echo $inf_brochure['description_premi'] ?? '' ?></textarea>
 															</div>
-															<div>
+															<div id=check_list_premi>
 
 																<?php
 
@@ -239,9 +340,9 @@
 
 													</form>
 												</section>
-												<h3>Partner Page</h3>
+												<h3>Partner</h3>
 												<section>
-													<form method="post" id="form-step-4" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
+													<form method="post" id="form-step-6" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
 														<div class="row">
 															<div class="mb-3">
 																<label for="title_partners"> Partners Title </label>
@@ -255,6 +356,7 @@
 																<textarea id="partners" name="description_partners"><?php echo $inf_brochure['description_partners'] ?? '' ?></textarea>
 															</div>
 														</div>
+														<div id=check_list_partners>
 														<?php
 
 
@@ -266,11 +368,12 @@
 
 
 														?>
+														</div>
 													</form>
 												</section>
-												<h3>Contacts Page</h3>
+												<h3>Contatti</h3>
 												<section>
-													<form method="post" id="form-step-5" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
+													<form method="post" id="form-step-7" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
 														<div class="row">
 															<div class="mb-3">
 																<label for="title_contacts"> Contacts Title </label>
@@ -284,6 +387,7 @@
 																<textarea id="contacts" name="description_contacts"><?php echo $inf_brochure['description_contacts'] ?? '' ?></textarea>
 															</div>
 														</div>
+														<div id=check_list_contacts>
 														<?php
 
 
@@ -295,86 +399,15 @@
 
 
 														?>
+														</div>
 													</form>
 												</section>
-												<h3>Products Page</h3>
-												<section>
-													<form method="post" id="form-step-6" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
-														<div class="row">
-															<div class="mb-3">
-																<label for="verticalnav-firstname-input"> Products Title </label>
-																<input type="text" class="form-control" id="title_product" name="title_product" value="<?php echo $inf_brochure['title_product'] ?? '' ?>">
-															</div>
-														</div>
-														<div class="mb-3 row">
-
-															<label for="description_product" class="col-md-2 col-form-label">description</label>
-															<div class="mb-3 row">
-
-																<textarea id="product" name="description_product"><?php echo $inf_brochure['description_product'] ?? '' ?></textarea>
-															</div>
-														</div>
-														<?php
-
-
-														foreach ($prod as $row) {
-														?>
-
-															<input type="checkbox"  name="select_product[]" value="<?= $row['id']; ?>" <?php if(in_array($row['id'],$items_product ?? array())) echo 'checked'?>/> <?= $row['name']; ?> <br />
-														<?php
-														}
-
-
-														?>
-													</form>
-												</section>
-												<h3>Introduction Page</h3>
-												<section>
-													<form method="post" id="form-step-7" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
-														<div class="row">
-															<div class="mb-3">
-																<label for="verticalnav-firstname-input"> Intro Title </label>
-																<input type="text" class="form-control" id="title_intro" name="title_intro" value="<?php echo $inf_brochure['title_intro'] ?? '' ?>">
-															</div>
-														</div>
-														<div class="mb-3 row">
-															<label for="description_intro" class="col-md-2 col-form-label">description</label>
-															<div class="mb-3 row">
-
-																<textarea id="intro" name="description_intro"><?php echo $inf_brochure['description_intro'] ?? '' ?></textarea>
-															</div>
-														</div>
-
-													</form>
-												</section>
+												
+												
 												<h3>prevus Page</h3>
 												<section>
 													<form method="post" id="form-step-8" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
-													<div class="row">
-															<div class="mb-3">
-																<label for="verticalnav-firstname-input"> Template </label>
-																<select class="form-control" id="template_id" name="template_id" onchange="sel_template(this.value)">
-																	<option value=""><?php echo lang('app.field_select')?></option>
-																	<?php foreach($list_template as $k=>$v){?>
-																	<option value="<?php echo $v['id']?>" <?php if($v['id']==$inf_brochure['template_id']) echo 'selected'?>><?php echo $v['title']?></option>
-																	<?php } ?>
-																</select>
-															</div>
-														</div>
-														<div class="row" id="template_pages">
-													<?php	for($i=1;$i<=7;$i++){?>
-														<div class="mb-3 col-12">
-															<label for="verticalnav-firstname-input"> Template Page <?php echo $i?></label>
-															<select class="form-control" id="id_page" name="id_page[]">
-																<option value=""><?php echo lang('app.field_select')?></option>
-																<?php foreach($list_pages as $k=>$v){?>
-																	<option value="<?php echo $v['id']?>" <?php if($v['id']==$res_page_template[$i])echo 'selected'?>><?php echo $v['title']?></option>
-																<?php }?>
-															</select>
-														</div>
-														<?php }?>
-														
-														</div>
+													
 														<div class="row">
 															<input onclick="save_template()" type="button" class="btn btn-info" name="preview" value="save & preview">
 														</div>
@@ -618,6 +651,59 @@
 					*/	
 
 					save_step(currentIndex);
+					switch(newIndex){
+							case 3: var id_cat=$("#id_category").val(); 
+								$.ajax({
+										url: "<?php echo base_url() ?>/ajax/get_items_cat",
+										type: 'POST',
+										
+										data: {id_cat:id_cat,type_item:'products'}
+									}).done(function(data) {
+									//	alert(data);
+											$("#check_list_products").html(data);
+
+									});
+							break;
+							case 4: var id_cat=$("#id_category").val(); 
+								$.ajax({
+										url: "<?php echo base_url() ?>/ajax/get_items_cat",
+										type: 'POST',
+										
+										data: {id_cat:id_cat,type_item:'premi'}
+									}).done(function(data) {
+									//	alert(data);
+											$("#check_list_premi").html(data);
+
+									});
+							break;
+							case 6: var id_cat=$("#id_category").val(); 
+								$.ajax({
+										url: "<?php echo base_url() ?>/ajax/get_items_cat",
+										type: 'POST',
+										
+										data: {id_cat:id_cat,type_item:'partners'}
+									}).done(function(data) {
+									//	alert(data);
+											$("#check_list_partners").html(data);
+
+									});
+							break;
+							case 7: 
+								var id_cat=$("#id_category").val(); 
+								$.ajax({
+										url: "<?php echo base_url() ?>/ajax/get_items_cat",
+										type: 'POST',
+										
+										data: {id_cat:id_cat,type_item:'contacts'}
+									}).done(function(data) {
+									//	alert(data);
+											$("#check_list_contacts").html(data);
+
+									});
+							break;
+						}
+
+
 					document.location.href="<?php echo base_url('user/brochures')?>";
 					}
 			}

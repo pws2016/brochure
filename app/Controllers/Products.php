@@ -24,8 +24,9 @@ class Products extends BaseController
                     $id = $this->request->getVar('id');
                     $this->ProductsModel->update($id, array("enable" => 0));
                     $this->BitemModel->where('type_item', 'products')->where('id_item', $id)->where("id_brochure IN(select id from brochures where user_id='" . $data['user_data']['id'] . "')")->delete();
-                    break;
                     $msg=" products desactivate";
+                    break;
+                
                 case 'activate':
                     $id = $this->request->getVar('id');
                     $this->ProductsModel->update($id, array("enable" => 1));
