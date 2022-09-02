@@ -21,8 +21,9 @@ class Premi extends BaseController
                     $id = $this->request->getVar('id');
                     $this->PremiModel->update($id, array("enable" => 0));
                     $this->BitemModel->where('type_item', 'premi')->where('id_item', $id)->where("id_brochure IN(select id from brochures where user_id='" . $data['user_data']['id'] . "')")->delete();
-                    break;
                     $msg=" premi desactivate";
+                    break;
+              
                 case 'activate':
                     $id = $this->request->getVar('id');
                     $this->PremiModel->update($id, array("enable" => 1));
@@ -34,8 +35,9 @@ class Premi extends BaseController
                             if (empty($exist)) $this->BitemModel->insert(array("id_brochure" => $v['id'], 'id_item' => $id, 'type_item' => 'premi'));
                         }
                     }
-                    break;
                     $msg=" premi activate";
+                    break;
+                   
 
                 case 'duplicate':
                     $id = $this->request->getVar('id');

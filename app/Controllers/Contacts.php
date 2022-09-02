@@ -24,8 +24,9 @@ class Contacts extends BaseController
                     $id = $this->request->getVar('id');
                     $this->ContactsModel->update($id, array("enable" => 0));
                     $this->BitemModel->where('type_item', 'contacts')->where('id_item', $id)->where("id_brochure IN(select id from brochures where user_id='" . $data['user_data']['id'] . "')")->delete();
-                    break;
                     $msg = " contact desactivate";
+                    break;
+                 
                 case 'activate':
                     $id = $this->request->getVar('id');
                     $this->ContactsModel->update($id, array("enable" => 1));
@@ -37,8 +38,9 @@ class Contacts extends BaseController
                             if (empty($exist)) $this->BitemModel->insert(array("id_brochure" => $v['id'], 'id_item' => $id, 'type_item' => 'contacts'));
                         }
                     }
-                    break;
                     $msg = " conatct activate";
+                    break;
+                   
 
                 case 'duplicate':
                     $id = $this->request->getVar('id');

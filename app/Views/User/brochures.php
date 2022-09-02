@@ -98,6 +98,9 @@
                                                         </th>
                                                         <th>ID</th>
                                                         <th>Title</th>
+                                                        <th>Category</th>
+                                                        <th>Created_at</th>
+                                                        <th>updated_at</th>
                                                         <th>Status</th>
                                                        
                                                     </tr>
@@ -127,6 +130,10 @@
                                                                 <td> <?php echo $row['id']; ?></td>
 
                                                                 <td> <?php echo $row['title']; ?></td>
+                                                                <td> <?php echo $row['catname']; ?></td>
+                                                                <td> <?php echo $row['created_at']; ?></td>
+                                                                <td> <?php echo $row['updated_at']; ?></td>
+
 
                                                                 <td><?php echo $row['status']; ?></td>
                                                               
@@ -207,7 +214,7 @@ $("#datatable").DataTable({
 			});
 
 </script>
-                                <!-- Add package -->
+                             
                                 <script>
                                     function get_data(id) {
                                         $.ajax({

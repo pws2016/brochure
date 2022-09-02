@@ -4,20 +4,20 @@
 <head>
 
 	<meta charset="utf-8" />
-	<title><?php echo lang('app.title_page_create_requests') ?> | <?php echo $settings['meta_title'] ?></title>
+	<title><?php echo lang('/user/dashboarduser') ?> | <?php echo $settings[''] ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="robots" CONTENT="noindex, nofollow">
-	<meta name="googlebot" content="noindex, nofollow">
-	<link rel="shortcut icon" href="https://creazioneimpresa.net/wp-content/uploads/2020/06/favicon-black.png">
-
+	<meta content="" name="description" />
+	<meta content="Creazioneimpresa" name="author" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+	<link rel="shortcut icon" href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/images/favicon.ico">
+	<link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
 	<link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 	<link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 	<link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 	<link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
 	<link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 	<link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<style>
 		.h5title {
 			border-bottom: 1px solid;
@@ -99,13 +99,65 @@
 
 																	</label>
 																	<input type="text" class="form-control" id="title" name="title" value="<?php echo $inf_brochure['title'] ?>" required>
+
+																	<div class="form-group">
+																		<label for="">Category</label><span class="text-primary">*</span>
+
+																		<select id="id_category" name="id_category" class=" form-control" required style="width:100%">
+																			<option value=""><?php echo lang('app.field_select') ?></option>
+																			<?php if (!empty($list_category)) {
+
+																				foreach ($list_category as $k => $v) { ?>
+																					<option value="<?php echo $v['id'] ?>" <?php if ($v['user_id'] == null) echo 'selected' ?>><?php echo $v['title'] ?></option>
+																			<?php }
+																			} ?>
+																		</select>
+
+
+																	</div>
+																</div>
+																<div class="mb-3">
+																	<div class="row">
+																		<div class="mb-3">
+																			<label for="verticalnav-firstname-input"> Template </label>
+																			<select class="form-control" id="template_id" name="template_id" onchange="sel_template(this.value)">
+																				<option value=""><?php echo lang('app.field_select') ?></option>
+																				<?php
+
+																				if (!empty($list_template)) {
+																					foreach ($list_template as $k => $v) { ?>
+																						<option value="<?php echo $v['id'] ?>" <?php if ($v['id'] == $inf_brochure['template_id']) echo 'selected' ?>><?php echo $v['title'] ?></option>
+																				<?php }
+																				} ?>
+																			</select>
+																		</div>
+																	</div>
+																	<div class="row" id="template_pages">
+																		<?php for ($i = 1; $i <= 7; $i++) { ?>
+																			<div class="mb-3 col-12">
+																				<label for="verticalnav-firstname-input"> Template Page <?php echo $i ?></label>
+																				<select class="form-control" id="id_page" name="id_page[]">
+																					<option value=""><?php echo lang('app.field_select') ?></option>
+
+																					<?php
+																					if (!empty($list_pages)) {
+																						foreach ($list_pages as $k => $v) { ?>
+																							<option value="<?php echo $v['id'] ?>" <?php if ($v['id'] == $res_page_template[$i]) echo 'selected' ?>><?php echo $v['title'] ?></option>
+																					<?php }
+																					} ?>
+																				</select>
+																			</div>
+																		<?php } ?>
+
+																	</div>
+
 																</div>
 															</div>
 														</div>
 														<!--/div-->
 													</form>
 												</section>
-												<h3>Couverture page</h3>
+												<h3>Copertina </h3>
 												<section>
 													<form method="post" id="form-step-1" enctype="multipart/form-data">
 														<div class="row">
@@ -158,178 +210,38 @@
 														<div class="mb-3">
 
 															<div class="form-check form-check-inline ">
-															<input class="form-check-input" name="selectbg" type="radio" id="bg1" value="no">
-															<label class="form-check-label" for="bg1">without background</label>
-														</div>
-														<div class="form-check form-check-inline">
-															<input class="form-check-input" name="selectbg" type="radio" id="bg2" value="default" checked>
-															<label class="form-check-label" for="bg2">Default background</label>
-														</div>
-														<div class="form-check form-check-inline">
-															<input class="form-check-input" name="selectbg" type="radio" id="bg3" value="current">
-															<label class="form-check-label" for="bg3">Current background</label>
-														</div>
-														<div class="form-check form-check-inline">
-															<input class="form-check-input" name="selectbg" type="radio" id="bg4" value="new">
-															<label class="form-check-label" for="bg4">New background</label>
-														</div>
+																<input class="form-check-input" name="selectbg" type="radio" id="bg1" value="no">
+																<label class="form-check-label" for="bg1">without background</label>
+															</div>
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" name="selectbg" type="radio" id="bg2" value="default" checked>
+																<label class="form-check-label" for="bg2">Default background</label>
+															</div>
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" name="selectbg" type="radio" id="bg3" value="current">
+																<label class="form-check-label" for="bg3">Current background</label>
+															</div>
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" name="selectbg" type="radio" id="bg4" value="new">
+																<label class="form-check-label" for="bg4">New background</label>
+															</div>
 
-														<div class="row">
-															<div class="col-lg-12">
-																<div class="mb-3">
-																	<label for="verticalnav-firstname-input">Uplaod New background<span class="text-primary">*</span>
+															<div class="row">
+																<div class="col-lg-12">
+																	<div class="mb-3">
+																		<label for="verticalnav-firstname-input">Uplaod New background<span class="text-primary">*</span>
 
-																	</label>
-																	<input type="file" class="form-control" id="background" name="background">
+																		</label>
+																		<input type="file" class="form-control" id="background" name="background">
+																	</div>
 																</div>
 															</div>
 														</div>
-														</div>
-													</form>
-												</section>
-												<h3>Operation Page</h3>
-												<section>
-													<form method="post" id="form-step-2" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
-														<div class="row">
-															<div class="mb-3">
-																<label for="title_operation"> Operation Title </label>
-																<input type="text" class="form-control" id="title_operation" name="title_operation" value="<?php echo $company['title_operation']?>">
-															</div>
-														</div>
-														<div class="mb-3 row">
-															<label for="description_operation" class="col-md-2 col-form-label">description</label>
-															<div class="mb-3 row">
-
-																<textarea id="opertion" name="description_operation" ><?php echo $company['description_operation']?></textarea>
-															</div>
-														</div>
-
-													</form>
-												</section>
-												<h3>Premi Page</h3>
-												<section>
-													<form method="post" id="form-step-3" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
-														<div class="row">
-															<div class="mb-3">
-																<label for="verticalnav-firstname-input"> Premi Title </label>
-																<input type="text" class="form-control" id="title_premi" name="title_premi" value="<?php echo $company['title_premi']?>">
-															</div>
-														</div>
-														<div class="mb-3 row">
-															<label for="description_premi" class="col-md-2 col-form-label">description</label>
-															<div class="mb-3 row">
-
-																<textarea id="premi" name="description_premi"><?php echo $company['description_premi']?></textarea>
-															</div>
-															<div>
-
-																<?php
-
-
-																foreach ($premi as $row) {
-																?>
-																	<input type="checkbox" name="select_premi[]" value="<?= $row['id']; ?>"/> <?= $row['name']; ?> <br />
-																<?php
-																}
-
-
-																?>
-
-															</div>
-
-													</form>
-												</section>
-												<h3>Partner Page</h3>
-												<section>
-													<form method="post" id="form-step-4" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
-														<div class="row">
-															<div class="mb-3">
-																<label for="title_partners"> Partners Title </label>
-																<input type="text" class="form-control" id="title_partners" name="title_partners" value="<?php echo $company['title_partners'] ?? '' ?>">
-															</div>
-														</div>
-														<div class="mb-3 row">
-															<label for="description_partners" class="col-md-2 col-form-label">description</label>
-															<div class="mb-3 row">
-
-																<textarea id="partners" name="description_partners"><?php echo $company['description_partners'];?></textarea>
-															</div>
-														</div>
-														<?php
-
-
-														foreach ($par as $row) {
-														?>
-															<input type="checkbox" name="select_partner[]" value="<?= $row['id']; ?>"/> <?= $row['name']; ?> <br />
-														<?php
-														}
-
-
-														?>
-													</form>
-												</section>
-												<h3>Contacts Page</h3>
-												<section>
-													<form method="post" id="form-step-5" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
-														<div class="row">
-															<div class="mb-3">
-																<label for="title_contacts"> Contacts Title </label>
-																<input type="text" class="form-control" id="title_contacts" name="title_contacts" value="<?php echo $company['title_contacts'] ?? '' ?>">
-															</div>
-														</div>
-														<div class="mb-3 row">
-															<label for="description_contacts" class="col-md-2 col-form-label">description</label>
-															<div class="mb-3 row">
-
-																<textarea id="contacts" name="description_contacts"><?php echo $company['description_contacts'] ?? '' ?></textarea>
-															</div>
-														</div>
-														<?php
-
-
-														foreach ($cont as $row) {
-														?>
-															<input type="checkbox" name="select_contact[]" value="<?= $row['id']; ?>" /> <?= $row['name']; ?> <br />
-														<?php
-														}
-
-
-														?>
-													</form>
-												</section>
-												<h3>Products Page</h3>
-												<section>
-													<form method="post" id="form-step-6" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
-														<div class="row">
-															<div class="mb-3">
-																<label for="verticalnav-firstname-input"> Products Title </label>
-																<input type="text" class="form-control" id="title_product" name="title_product" value="<?php echo $company['title_product'] ?? '' ?>">
-															</div>
-														</div>
-														<div class="mb-3 row">
-
-															<label for="description_product" class="col-md-2 col-form-label">description</label>
-															<div class="mb-3 row">
-
-																<textarea id="product" name="description_product"><?php echo $company['description_product'] ?? '' ?></textarea>
-															</div>
-														</div>
-														<?php
-
-
-														foreach ($prod as $row) {
-														?>
-															<input type="checkbox"  name="select_product[]" value="<?= $row['id']; ?>" /> <?= $row['name']; ?> <br />
-														<?php
-														}
-
-
-														?>
 													</form>
 												</section>
 												<h3>Introduction Page</h3>
 												<section>
-													<form method="post" id="form-step-7" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
+													<form method="post" id="form-step-2" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
 														<div class="row">
 															<div class="mb-3">
 																<label for="verticalnav-firstname-input"> Intro Title </label>
@@ -346,44 +258,171 @@
 
 													</form>
 												</section>
-												<h3>prevus Page</h3>
+												<h3>Area di attività</h3>
 												<section>
-													<form method="post" id="form-step-8" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
-													<div class="row">
+													<form method="post" id="form-step-3" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
+														<div class="row">
 															<div class="mb-3">
-																<label for="verticalnav-firstname-input"> Template </label>
-																<select class="form-control" id="template_id" name="template_id" onchange="sel_template(this.value)">
-																	<option value=""><?php echo lang('app.field_select')?></option>
-																	<?php if(!empty($list_template)){
-																		foreach($list_template as $k=>$v){?>
-																	<option value="<?php echo $v['id']?>" <?php if($v['id']==$inf_brochure['template_id']) echo 'selected'?>><?php echo $v['title']?></option>
-																	<?php }} ?>
-																</select>
+																<label for="verticalnav-firstname-input"> Products Title </label>
+																<input type="text" class="form-control" id="title_product" name="title_product" value="<?php echo $company['title_product'] ?? '' ?>">
 															</div>
 														</div>
-														<div class="row" id="template_pages">
-													<?php	for($i=1;$i<=7;$i++){?>
-														<div class="mb-3 col-12">
-															<label for="verticalnav-firstname-input"> Template Page <?php echo $i?></label>
-															<select class="form-control" id="id_page" name="id_page[]">
-																<option value=""><?php echo lang('app.field_select')?></option>
+														<div class="mb-3 row">
 
-																<?php 
-																if(!empty($list_pages)){
-																	 foreach($list_pages as $k=>$v){?>
-																	<option value="<?php echo $v['id']?>" <?php if($v['id']==$res_page_template[$i])echo 'selected'?>><?php echo $v['title']?></option>
-																<?php }}?>
-															</select>
+															<label for="description_product" class="col-md-2 col-form-label">description</label>
+															<div class="mb-3 row">
+
+																<textarea id="product" name="description_product"><?php echo $company['description_product'] ?? '' ?></textarea>
+															</div>
 														</div>
-														<?php }?>
-														
-														</div>
-														<div class="row">
-															<input onclick="save_template()" type="button" class="btn btn-info" name="preview" value="save & preview">
+														<div id="div_list_products">
+														<?php
+
+
+														foreach ($prod as $row) {
+														?>
+															<input type="checkbox" name="select_product[]" value="<?= $row['id']; ?>" /> <?= $row['name']; ?> <br />
+														<?php
+														}
+
+
+														?>
 														</div>
 													</form>
 												</section>
-												
+
+												<h3>Operazioni</h3>
+												<section>
+													<form method="post" id="form-step-4" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
+														<div class="row">
+															<div class="mb-3">
+																<label for="title_operation"> Operation Title </label>
+																<input type="text" class="form-control" id="title_operation" name="title_operation" value="<?php echo $company['title_operation'] ?>">
+															</div>
+														</div>
+														<div class="mb-3 row">
+															<label for="description_operation" class="col-md-2 col-form-label">description</label>
+															<div class="mb-3 row">
+
+																<textarea id="opertion" name="description_operation"><?php echo $company['description_operation'] ?></textarea>
+															</div>
+														</div>
+
+													</form>
+												</section>
+												<h3>Premi</h3>
+												<section>
+													<form method="post" id="form-step-5" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
+														<div class="row">
+															<div class="mb-3">
+																<label for="verticalnav-firstname-input"> Premi Title </label>
+																<input type="text" class="form-control" id="title_premi" name="title_premi" value="<?php echo $company['title_premi'] ?>">
+															</div>
+														</div>
+														<div >
+														<div class="mb-3 row">
+															<label for="description_premi" class="col-md-2 col-form-label">description</label>
+															<div class="mb-3 row">
+
+																<textarea id="premi" name="description_premi"><?php echo $company['description_premi'] ?></textarea>
+															</div>
+															<div id=div_list_premi>
+
+																<?php
+
+
+																foreach ($premi as $row) {
+																?>
+																	<input type="checkbox" name="select_premi[]" value="<?= $row['id']; ?>" /> <?= $row['name']; ?> <br />
+																<?php
+																}
+
+
+																?>
+
+															</div>
+															</div>
+
+													</form>
+												</section>
+												<h3>Partner</h3>
+												<section>
+													<form method="post" id="form-step-6" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
+														<div class="row">
+															<div class="mb-3">
+																<label for="title_partners"> Partners Title </label>
+																<input type="text" class="form-control" id="title_partners" name="title_partners" value="<?php echo $company['title_partners'] ?? '' ?>">
+															</div>
+														</div>
+														<div class="mb-3 row">
+															<label for="description_partners" class="col-md-2 col-form-label">description</label>
+															<div class="mb-3 row">
+
+																<textarea id="partners" name="description_partners"><?php echo $company['description_partners']; ?></textarea>
+															</div>
+														</div>
+														<div>
+															<div id=div_list_partners>
+
+														
+														<?php
+
+
+														foreach ($par as $row) {
+														?>
+															<input type="checkbox" name="select_partner[]" value="<?= $row['id']; ?>" /> <?= $row['name']; ?> <br />
+														<?php
+														}
+
+
+														?>
+															</div>
+															</div>
+													</form>
+												</section>
+												<h3>Contatti</h3>
+												<section>
+													<form method="post" id="form-step-7" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
+														<div class="row">
+															<div class="mb-3">
+																<label for="title_contacts"> Contacts Title </label>
+																<input type="text" class="form-control" id="title_contacts" name="title_contacts" value="<?php echo $company['title_contacts'] ?? '' ?>">
+															</div>
+														</div>
+														<div class="mb-3 row">
+															<label for="description_contacts" class="col-md-2 col-form-label">description</label>
+															<div class="mb-3 row">
+
+																<textarea id="contacts" name="description_contacts"><?php echo $company['description_contacts'] ?? '' ?></textarea>
+															</div>
+														</div>
+														<div id=div_list_contacts>
+														
+														<?php
+
+
+														foreach ($cont as $row) {
+														?>
+															<input type="checkbox" name="select_contact[]" value="<?= $row['id']; ?>" /> <?= $row['name']; ?> <br />
+														<?php
+														}
+
+
+														?>
+														</div>
+													</form>
+												</section>
+
+												<h3>prevus Page</h3>
+												<section>
+													<form method="post" id="form-step-8" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
+
+														<div class="row">
+															<input onclick="save_template()" type="button" class="btn btn-info" name="preview" value=" preview">
+														</div>
+													</form>
+												</section>
+
 											</div>
 										</div>
 									</div>
@@ -463,100 +502,121 @@
 	<!--tinymce js-->
 	<script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/tinymce/tinymce.min.js"></script>
 
+	<!-- init js -->
+	<script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/js/app.js"></script>
+	<!-- Responsive examples -->
+	<!-- Font Awesome -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/js/all.min.js"></script>
+	<script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+	<script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
 
+	<!-- Responsive examples -->
+	<script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+	<script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
+	<script>
+		$("#datatable").DataTable({
+			language: {
+				url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Italian.json'
+			},
+			searching: true
+
+		});
+		$(".select2").select2();
+	</script>
 
 	<script>
 		$(document).ready(function() {
-		 tinymce.init({
-                    selector: 'textarea#opertion',
-                    height: 150,
-                    menubar: false,
-                    plugins: [
-                        'advlist autolink lists link image charmap print preview anchor',
-                        'searchreplace visualblocks code fullscreen',
-                        'insertdatetime media table paste code help wordcount'
-                    ],
-                    toolbar: 'undo redo | formatselect | ' +
-                        'bold italic backcolor | alignleft aligncenter ' +
-                        'alignright alignjustify | bullist numlist outdent indent | ' +
-                        'removeformat | help',
-                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                });
-				tinymce.init({
-                    selector: 'textarea#premi',
-                    height: 150,
-                    menubar: false,
-                    plugins: [
-                        'advlist autolink lists link image charmap print preview anchor',
-                        'searchreplace visualblocks code fullscreen',
-                        'insertdatetime media table paste code help wordcount'
-                    ],
-                    toolbar: 'undo redo | formatselect | ' +
-                        'bold italic backcolor | alignleft aligncenter ' +
-                        'alignright alignjustify | bullist numlist outdent indent | ' +
-                        'removeformat | help',
-                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                });
-				tinymce.init({
-                    selector: 'textarea#partners',
-                    height: 150,
-                    menubar: false,
-                    plugins: [
-                        'advlist autolink lists link image charmap print preview anchor',
-                        'searchreplace visualblocks code fullscreen',
-                        'insertdatetime media table paste code help wordcount'
-                    ],
-                    toolbar: 'undo redo | formatselect | ' +
-                        'bold italic backcolor | alignleft aligncenter ' +
-                        'alignright alignjustify | bullist numlist outdent indent | ' +
-                        'removeformat | help',
-                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                });
-				tinymce.init({
-                    selector: 'textarea#contacts',
-                    height: 150,
-                    menubar: false,
-                    plugins: [
-                        'advlist autolink lists link image charmap print preview anchor',
-                        'searchreplace visualblocks code fullscreen',
-                        'insertdatetime media table paste code help wordcount'
-                    ],
-                    toolbar: 'undo redo | formatselect | ' +
-                        'bold italic backcolor | alignleft aligncenter ' +
-                        'alignright alignjustify | bullist numlist outdent indent | ' +
-                        'removeformat | help',
-                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                });
-				tinymce.init({
-                    selector: 'textarea#product',
-                    height: 150,
-                    menubar: false,
-                    plugins: [
-                        'advlist autolink lists link image charmap print preview anchor',
-                        'searchreplace visualblocks code fullscreen',
-                        'insertdatetime media table paste code help wordcount'
-                    ],
-                    toolbar: 'undo redo | formatselect | ' +
-                        'bold italic backcolor | alignleft aligncenter ' +
-                        'alignright alignjustify | bullist numlist outdent indent | ' +
-                        'removeformat | help',
-                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                });
-				tinymce.init({
-                    selector: 'textarea#intro',
-                    height: 150,
-                    menubar: false,
-                    plugins: [
-                        'advlist autolink lists link image charmap print preview anchor',
-                        'searchreplace visualblocks code fullscreen',
-                        'insertdatetime media table paste code help wordcount'
-                    ],
-                    toolbar: 'undo redo | formatselect | ' +
-                        'bold italic backcolor | alignleft aligncenter ' +
-                        'alignright alignjustify | bullist numlist outdent indent | ' +
-                        'removeformat | help',
-                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                });
+			tinymce.init({
+				selector: 'textarea#opertion',
+				height: 150,
+				menubar: false,
+				plugins: [
+					'advlist autolink lists link image charmap print preview anchor',
+					'searchreplace visualblocks code fullscreen',
+					'insertdatetime media table paste code help wordcount'
+				],
+				toolbar: 'undo redo | formatselect | ' +
+					'bold italic backcolor | alignleft aligncenter ' +
+					'alignright alignjustify | bullist numlist outdent indent | ' +
+					'removeformat | help',
+				content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+			});
+			tinymce.init({
+				selector: 'textarea#premi',
+				height: 150,
+				menubar: false,
+				plugins: [
+					'advlist autolink lists link image charmap print preview anchor',
+					'searchreplace visualblocks code fullscreen',
+					'insertdatetime media table paste code help wordcount'
+				],
+				toolbar: 'undo redo | formatselect | ' +
+					'bold italic backcolor | alignleft aligncenter ' +
+					'alignright alignjustify | bullist numlist outdent indent | ' +
+					'removeformat | help',
+				content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+			});
+			tinymce.init({
+				selector: 'textarea#partners',
+				height: 150,
+				menubar: false,
+				plugins: [
+					'advlist autolink lists link image charmap print preview anchor',
+					'searchreplace visualblocks code fullscreen',
+					'insertdatetime media table paste code help wordcount'
+				],
+				toolbar: 'undo redo | formatselect | ' +
+					'bold italic backcolor | alignleft aligncenter ' +
+					'alignright alignjustify | bullist numlist outdent indent | ' +
+					'removeformat | help',
+				content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+			});
+			tinymce.init({
+				selector: 'textarea#contacts',
+				height: 150,
+				menubar: false,
+				plugins: [
+					'advlist autolink lists link image charmap print preview anchor',
+					'searchreplace visualblocks code fullscreen',
+					'insertdatetime media table paste code help wordcount'
+				],
+				toolbar: 'undo redo | formatselect | ' +
+					'bold italic backcolor | alignleft aligncenter ' +
+					'alignright alignjustify | bullist numlist outdent indent | ' +
+					'removeformat | help',
+				content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+			});
+			tinymce.init({
+				selector: 'textarea#product',
+				height: 150,
+				menubar: false,
+				plugins: [
+					'advlist autolink lists link image charmap print preview anchor',
+					'searchreplace visualblocks code fullscreen',
+					'insertdatetime media table paste code help wordcount'
+				],
+				toolbar: 'undo redo | formatselect | ' +
+					'bold italic backcolor | alignleft aligncenter ' +
+					'alignright alignjustify | bullist numlist outdent indent | ' +
+					'removeformat | help',
+				content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+			});
+			tinymce.init({
+				selector: 'textarea#intro',
+				height: 150,
+				menubar: false,
+				plugins: [
+					'advlist autolink lists link image charmap print preview anchor',
+					'searchreplace visualblocks code fullscreen',
+					'insertdatetime media table paste code help wordcount'
+				],
+				toolbar: 'undo redo | formatselect | ' +
+					'bold italic backcolor | alignleft aligncenter ' +
+					'alignright alignjustify | bullist numlist outdent indent | ' +
+					'removeformat | help',
+				content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+			});
 		});
 
 		$("#vertical-example").steps({
@@ -591,6 +651,63 @@
 						tinyMCE.triggerSave();
 
 						save_step(currentIndex);
+
+						switch(newIndex){
+							case 3:
+								
+								var id_cat=$("#id_category").val(); 
+								$.ajax({
+										url: "<?php echo base_url() ?>/ajax/get_items_by_cat",
+										type: 'POST',
+										
+										data: {id_cat:id_cat,type_item:'products'}
+									}).done(function(data) {
+										
+											$("#div_list_products").html(data);
+
+									});
+							break;
+							case 5:
+								 var id_cat=$("#id_category").val(); 
+								$.ajax({
+										url: "<?php echo base_url() ?>/ajax/get_items_by_cat",
+										type: 'POST',
+										
+										data: {id_cat:id_cat,type_item:'premi'}
+									}).done(function(data) {
+									
+											$("#div_list_premi").html(data);
+
+									});
+							break;
+							case 6: 
+								var id_cat=$("#id_category").val(); 
+								$.ajax({
+										url: "<?php echo base_url() ?>/ajax/get_items_by_cat",
+										type: 'POST',
+										
+										data: {id_cat:id_cat,type_item:'partners'}
+									}).done(function(data) {
+									
+											$("#div_list_partners").html(data);
+
+									});
+							break;
+							case 7:
+								 var id_cat=$("#id_category").val(); 
+								$.ajax({
+										url: "<?php echo base_url() ?>/ajax/get_items_by_cat",
+										type: 'POST',
+										
+										data: {id_cat:id_cat,type_item:'contacts'}
+									}).done(function(data) {
+									
+											$("#div_list_contacts").html(data);
+
+									});
+							break;
+						}
+						
 						return true;
 					}
 					if ($form.on('form:error')) {
@@ -602,13 +719,13 @@
 			},
 
 			onFinished: function(event, currentIndex) {
-if (confirm("Are u sure !")){
+				if (confirm("Are u sure !")) {
 
-	save_step(currentIndex);
-	document.location.href="<?php echo base_url('user/brochures')?>";
-}
+					save_step(currentIndex);
+					document.location.href = "<?php echo base_url('user/brochures') ?>";
+				}
 
-	
+
 
 			}
 		});
@@ -664,10 +781,10 @@ if (confirm("Are u sure !")){
 			});
 
 		}
-		
-function save_template(){
-	var currentIndex=8;
-	var formData = new FormData();
+
+		function save_template() {
+			var currentIndex = 8;
+			var formData = new FormData();
 
 			var ff = $('#form-step-' + currentIndex).serializeArray();
 
@@ -675,7 +792,7 @@ function save_template(){
 				formData.append(v.name, v.value);
 
 			});
-	$.ajax({
+			$.ajax({
 				url: "<?php echo base_url() ?>/ajax/save_template",
 				type: 'POST',
 				processData: false,
@@ -683,29 +800,28 @@ function save_template(){
 				data: formData
 			}).done(function(data) {
 				console.log(data);
-				window.open("<?php echo base_url('user/brochures/preview/'.$inf_brochure['id'])?>", '_blank'); 
+				window.open("<?php echo base_url('user/brochures/preview/' . $inf_brochure['id']) ?>", '_blank');
 
 			});
-}
+		}
 
-function sel_template(v){
-	$.ajax({
+		function sel_template(v) {
+			$.ajax({
 				url: "<?php echo base_url() ?>/ajax/get_template_pages",
 				type: 'POST',
-				
-				data: {template_id:v}
+
+				data: {
+					template_id: v
+				}
 			}).done(function(data) {
 				console.log(data);
 				$("#template_pages").html(data);
 
 			});
-}
-
-
+		}
 	</script>
 
-<!-- init js -->
-<script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/js/app.js"></script>
+
 
 
 

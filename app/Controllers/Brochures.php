@@ -12,19 +12,27 @@ class Brochures extends BaseController
 {
 	public function index(){
 		$data=$this->common_data();
-		
+	
 		$verify=$this->verifyUserPack($data['user_data']['id']);
 		if($verify['status']==false) $data['errorPack']=$verify['msg'];
 		
-		$list=$this->BrochuresModel->where('user_id',$data['user_data']['id'])->find();
-		$data['list']=$list;
-		
+		$ll=$this->BrochuresModel->where('user_id',$data['user_data']['id'])->find();
+		if(!empty($ll)){
+			foreach($ll as $k=>$v){
+			$inf_cat=$this->CategoryModel->find($v['id_category']);
+			$v['catname']=$inf_cat['title'] ?? "";
+			$res[]=$v;
+			}
+		}
+		$data['list']=$res ?? array();
+
 		echo view('user/brochures.php',$data);
 	}
 	
 	public function new_broch(){
 		$data=$this->common_data();
-
+		 $data['list_category'] = $this->CategoryModel->where('user_id IS NULL')->orWhere('user_id', $data['user_data']['id'])->find();
+	    
 		$verify=$this->verifyUserPack($data['user_data']['id']);
 		if($verify['status']==false) return redirect()->to(base_url('user/brochures'))->with('error',$verify['msg']);
 		//if(null ===($this->session->get('current_brochure')) ){
@@ -53,10 +61,10 @@ class Brochures extends BaseController
 			$data['inf_brochure']=$inf_brochure;
 			$data['startIndex']=$inf_brochure['step'];
             $data['company'] = $this->CompanyModel->where('user_id',$data['user_data']['id'])->first();
-			$data['premi'] = $this->PremiModel->where('user_id',$data['user_data']['id'])->find();
-            $data['par'] = $this->PartnersModel->where('user_id',$data['user_data']['id'])->find();
-			$data['cont'] = $this->ContactsModel->where('user_id',$data['user_data']['id'])->find();
-			$data['prod'] = $this->ProductsModel->where('user_id',$data['user_data']['id'])->find();
+			$data['premi'] = $this->PremiModel->where('user_id',$data['user_data']['id'])->where('FIND_IN_SET(1,ids_category)>0')->where('enable','1')->find();
+            $data['par'] = $this->PartnersModel->where('user_id',$data['user_data']['id'])->where('FIND_IN_SET(1,ids_category)>0')->where('enable','1')->find();
+			$data['cont'] = $this->ContactsModel->where('user_id',$data['user_data']['id'])->where('FIND_IN_SET(1,ids_category)>0')->where('enable','1')->find();
+			$data['prod'] = $this->ProductsModel->where('user_id',$data['user_data']['id'])->where('FIND_IN_SET(1,ids_category)>0')->where('enable','1')->find();
 		
 			//insert
 
@@ -69,9 +77,14 @@ class Brochures extends BaseController
 			} }
 			$data['res_page_template']=$res_page_template ?? array();
 		echo view('user/brochures_new.php',$data);
+
 	}
 	public function edit_broch($id){
 		$data=$this->common_data();
+
+		$data['list_category'] = $this->CategoryModel->where('user_id IS NULL')->orWhere('user_id', $data['user_data']['id'])->find();
+	
+	
 
 		$verify=$this->verifyUserPack($data['user_data']['id']);
 		if($verify['status']==false) return redirect()->to(base_url('user/brochures'))->with('error',$verify['msg']);
@@ -79,17 +92,23 @@ class Brochures extends BaseController
 		
 	
 			$this->session->set(array('current_brochure'=>$id));
-			//var_dump($this->session->get('current_brochure'));exit;
+			// var_dump($this->session->get('current_brochure'));exit;
 		//}
 		    $inf_brochure=$this->BrochuresModel->find($this->session->get('current_brochure'));
+			// var_dump($inf_brochure);
 			if($inf_brochure['status']=='done') return redirect()->to(base_url('user/brochures'))->with('error',"brochue is done");
 			$data['inf_brochure']=$inf_brochure;
 			$data['startIndex']=$inf_brochure['step'];
             $data['company'] = $this->CompanyModel->where('user_id',$data['user_data']['id'])->first();
-			$data['premi'] = $this->PremiModel->where('user_id',$data['user_data']['id'])->find();
-            $data['par'] = $this->PartnersModel->where('user_id',$data['user_data']['id'])->find();
-			$data['cont'] = $this->ContactsModel->where('user_id',$data['user_data']['id'])->find();
-			$data['prod'] = $this->ProductsModel->where('user_id',$data['user_data']['id'])->find();
+			$data['premi'] = $this->PremiModel->where('user_id',$data['user_data']['id'])->where('FIND_IN_SET(1,ids_category)>0')->where('enable','1')->find();
+            $data['par'] = $this->PartnersModel->where('user_id',$data['user_data']['id'])->where('FIND_IN_SET(1,ids_category)>0')->where('enable','1')->find();
+			$data['cont'] = $this->ContactsModel->where('user_id',$data['user_data']['id'])->where('FIND_IN_SET(1,ids_category)>0')->where('enable','1')->find();
+			$data['prod'] = $this->ProductsModel->where('user_id',$data['user_data']['id'])->where('FIND_IN_SET(1,ids_category)>0')->where('enable','1')->find();
+			// $data['cat'] = $this->CategoryModel->where('user_id',$data['user_data']['id'])->find();
+
+			// $data['list_category'] = $this->CategoryModel->where('user_id IS NULL')->orWhere('user_id', $data['user_data']['id'])->find();
+			
+
 			$ll=$this->BitemModel->select('id_item')->where('type_item','products')->where('id_brochure',$id)->find();
 			if(!empty($ll)){
 				foreach($ll as $prod){
@@ -149,12 +168,16 @@ class Brochures extends BaseController
 			$temp_page=$this->BrochureTemplatePagesModel->find($res_page_template[$i]);
 			$page[$i]=$temp_page['html'];
 			switch($temp_page['type']){
+
 				case 'couverture':
 					if($inf_brochure['logo']!="") $logo="<img src='".base_url('uploads/'.$inf_brochure['logo'])."'>";
 					$page[$i]=str_replace(array("{page_title}","{page_description}","{logo}","{background}"),
 					array($inf_brochure['title_couverture'],$inf_brochure['subtitle_couverture'],$logo,$background),
 					$page[$i]);
+
 				break;
+
+	   			
 				case 'operation':
 					$page[$i]=str_replace(array("{page_title}","{page_description}"),
 					array($inf_brochure['title_operation'],$inf_brochure['description_operation']),
@@ -298,8 +321,9 @@ class Brochures extends BaseController
 		$html=str_replace(array("{page1}","{page2}","{page3}","{page4}","{page5}","{page6}","{page7}"),
 		array($page[1] ?? "",$page[2] ?? "",$page[3] ?? "",$page[4] ?? "",$page[5] ?? "",$page[6] ?? "",$page[7] ?? ""),
 		$html);
-		echo $data['html']=$html ?? "";
 		//return view('user/brochures_preview.php',$data);
+		echo $data['html']=$html ?? "";
+		
 	}
 
 	

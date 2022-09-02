@@ -21,8 +21,9 @@ class Partners extends BaseController
                     $id = $this->request->getVar('id');
                     $this->PartnersModel->update($id, array("enable" => 0));
                     $this->BitemModel->where('type_item', 'partners')->where('id_item', $id)->where("id_brochure IN(select id from brochures where user_id='" . $data['user_data']['id'] . "')")->delete();
-                    break;
                     $msg=" partners desactivate";
+                    break;
+                  
                 case 'activate':
                     $id = $this->request->getVar('id');
                     $this->PartnersModel->update($id, array("enable" => 1));
@@ -34,8 +35,9 @@ class Partners extends BaseController
                             if (empty($exist)) $this->BitemModel->insert(array("id_brochure" => $v['id'], 'id_item' => $id, 'type_item' => 'partners'));
                         }
                     }
-                    break;
                     $msg=" partners activate";
+                    break;
+                
 
                 case 'duplicate':
                     $id = $this->request->getVar('id');
