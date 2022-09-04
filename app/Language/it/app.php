@@ -363,6 +363,9 @@ $lang['modal_block_item']="attivare/disattivare l'elemento";
 $lang['alert_desactivate_item']="Have <b>{x}</b> brochure with this item. Are you sure to desactivate it?";
 $lang['alert_activate_item']="Have <b>{x}</b> brochure with same categories.check the bottom checkbox to accept associate the item to brochures.<br/><label><input type='checkbox' name='insert_item' checked>I accept</label> <br/>Are you sure to activate it?";
 $lang['alert_duplicate_item']="Are you sure to duplicate this item?";
+
+$lang['modal_associate_broch_item']="Associate Item to brochure";
+$lang['help_associate_item']="Select brochure to associate the selected it to its";
 ################### statistics ###############"
 
 ############### errors ####################

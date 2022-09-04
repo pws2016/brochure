@@ -53,7 +53,18 @@ class Premi extends BaseController
                         }
                     }
                     $msg="duplicate done";
-                    break;
+                break;
+				case 'associate':
+					 $id = $this->request->getVar('id');
+					 if($id!=""){
+						 $this->BitemModel->where('type_item','premi')->where('id_item',$id)->where("id_brochure IN (select id from brochures where user_id='".$data['user_data']['id']."')")->delete();
+						if(!empty( $this->request->getVar('list_assoc'))){
+							foreach($this->request->getVar('list_assoc') as $kk=>$vv){
+								 $this->BitemModel->insert(array("id_brochure" => $vv, 'id_item' => $id, 'type_item' => 'premi'));
+							}
+						}
+					 }
+				break;
             }
             
             return redirect()->back()->with('msg',$msg);

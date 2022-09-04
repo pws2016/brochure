@@ -349,4 +349,37 @@ class Ajax extends BaseController
 		
 	
 	}
+	
+	public function get_list_broch(){
+			$data = $this->common_data();
+	
+			$id = $this->request->getVar('id');
+			$type_item = $this->request->getVar('type_item');
+			$res=array();
+			$ll=$this->BrochuresModel->where('user_id',$data['user_data']['id'])->find();
+			if(!empty($ll)){
+				foreach($ll as $k=>$v){
+					$inf_cat=$this->CategoryModel->find($v['id_category']);
+					$v['catname']=$inf_cat['title'] ?? "";
+					$has_item=$this->BitemModel->where('type_item',$type_item)->where('id_item',$id)->where('id_brochure',$v['id'])->find();
+					if(!empty($has_item)) $v['checked']=true; else $v['checked']=false;
+					$res[]=$v;
+				}
+			}
+			
+			if(!empty($res)){
+				foreach($res as $k=>$v){?>
+				<tr>
+					<td><input type="checkbox" name="list_assoc[]" value="<?php echo $v['id']?>" <?php if($v['checked']==true) echo 'checked'?>></td>
+					<td> <?php echo $v['title']; ?></td>
+					<td> <?php echo $v['catname']; ?></td>
+					<td> <?php echo $v['created_at']; ?></td>
+					<td> <?php echo $v['updated_at']; ?></td>
+					<td><?php echo $v['status']; ?></td>
+				</tr>
+				<?php }
+			}
+		
+			
+	}
 }
