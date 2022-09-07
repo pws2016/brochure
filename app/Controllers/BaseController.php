@@ -27,6 +27,10 @@ use App\Models\BitemModel;
 use App\Models\BtemplateModel;
 use App\Models\UsersAuthSmsModel;
 use App\Models\CategoryModel;
+use App\Models\OperationsModel;
+
+use App\Models\SubOperationsModel;
+
 /**
  * Class BaseController
  * test
@@ -85,6 +89,9 @@ abstract class BaseController extends Controller
 		$this->BtemplateModel     =  new BtemplateModel();
 		$this->UsersAuthSmsModel     =  new UsersAuthSmsModel();
 		$this->CategoryModel=new CategoryModel();
+		$this->OperationsModel =  new OperationsModel();
+		$this->SubOperationsModel =  new SubOperationsModel();
+
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();

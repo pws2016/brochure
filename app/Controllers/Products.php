@@ -55,7 +55,21 @@ class Products extends BaseController
                     }
                     $msg="duplicate done";
                     break;
-            }
+                    case 'associate':
+                        $id = $this->request->getVar('id');
+                        if($id!=""){
+                            $this->BitemModel->where('type_item','premi')->where('id_item',$id)->where("id_brochure IN (select id from brochures where user_id='".$data['user_data']['id']."')")->delete();
+                           if(!empty( $this->request->getVar('list_assoc'))){
+                               foreach($this->request->getVar('list_assoc') as $kk=>$vv){
+                                    $this->BitemModel->insert(array("id_brochure" => $vv, 'id_item' => $id, 'type_item' => 'products'));
+                               }
+                           }
+                        }
+                   break;
+               }
+               
+            
+
             return redirect()->back()->with('msg',$msg);
         }
         $ll = $this->ProductsModel->where('user_id', $data['user_data']['id'])->find();
@@ -263,6 +277,7 @@ class Products extends BaseController
                 break;
         }
     }
+
     public function delete()
     {
 

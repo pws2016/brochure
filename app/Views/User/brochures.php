@@ -122,8 +122,15 @@
                                                                             <a href="<?php echo base_url('user/brochures/edit/'.$row['id'] )?>" class="px-2 text-primary" ><i class="uil uil-pen font-size-18"></i></a>
                                                                         </li>
                                                                         <li class="list-inline-item">
-                                                                            <a onclick="del_pack('<?php echo $row['id']; ?>')" class="px-2 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
+                                                                        <a onclick="del_pack('<?php echo $row['id']; ?>')" class="px-2 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
                                                                         </li>
+
+                                                                        <li class="list-inline-item">
+                                                                    <a class="px-2 text-info" data-bs-target="#duplicate-modal-dialog" data-bs-toggle="modal" onclick="duplicate_broch('<?php echo $row['id'] ?>')" href=""><i class="uil uil-file-copy-alt font-size-18"></i></a>
+                                                                        
+                                                                                                                                                                                                                        
+                                                                </li>
+
                                                                         <?php }?>
 																		 </ul>
                                                                 </td>
@@ -176,7 +183,33 @@
 
 
                                             </form>
+                                            <?php $attributes = ['class' => 'form-input-flat', 'id' => 'myform', 'method' => 'post'];
+                                    echo form_open(base_url('user/brochures/duplication'), $attributes); ?>
+                                    <input type="hidden" name="action" value="duplicate">
+                                    <input type="hidden" name="id" id="id_duplicate">
+                                    <div class="modal fade" id="duplicate-modal-dialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-scrollable">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
 
+                                                    <h5 class="modal-title mt-0" id="exampleModalScrollableTitle"><?php echo lang('app.modal_duplicate_item') ?></h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                    </button>
+                                                </div>
+
+
+                                                <div class="modal-body" id="">
+                                                    <?php echo lang('app.alert_duplicate_item') ?><br />
+                                                    <div class="alert alert-warning"><label>I accept to copie brochures as original</label></div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal"><?php echo lang('app.btn_cancel') ?></button>
+                                                    <input type="submit" name="delete" class="btn btn-danger" value="<?php echo lang('app.btn_save') ?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </form>
 
 
                                         </div>
@@ -259,6 +292,9 @@ $("#datatable").DataTable({
 
                                             });
                                         }
+                                    }
+                                    function duplicate_broch(v){
+                                        $("#id_duplicate").val(v);
                                     }
                                 </script>
 								  <script src="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/js/app.js"></script>

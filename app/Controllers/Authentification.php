@@ -16,7 +16,7 @@ class Authentification extends BaseController
 	// }
 	public function index()
 	{
-
+		$data = $this->common_data();
 		return view('dashboard', $data);
 	}
 

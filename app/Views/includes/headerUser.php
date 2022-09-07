@@ -183,7 +183,12 @@
 						<i class="uil-bars me-2"></i><span>Category</span>
 					</a>
 				</li>
-			
+				<li>
+					<a href="<?php echo base_url('user/operations')?>">
+						<i class=" uil-bars me-2"></i><span>Operations</span>
+						<!-- uil-bookmark-full -->
+					</a>
+				</li>
 					
 				<hr>
 				<li class="menu-title">Profilo</li>

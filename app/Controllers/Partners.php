@@ -21,9 +21,9 @@ class Partners extends BaseController
                     $id = $this->request->getVar('id');
                     $this->PartnersModel->update($id, array("enable" => 0));
                     $this->BitemModel->where('type_item', 'partners')->where('id_item', $id)->where("id_brochure IN(select id from brochures where user_id='" . $data['user_data']['id'] . "')")->delete();
-                    $msg=" partners desactivate";
+                    $msg = " partners desactivate";
                     break;
-                  
+
                 case 'activate':
                     $id = $this->request->getVar('id');
                     $this->PartnersModel->update($id, array("enable" => 1));
@@ -35,14 +35,14 @@ class Partners extends BaseController
                             if (empty($exist)) $this->BitemModel->insert(array("id_brochure" => $v['id'], 'id_item' => $id, 'type_item' => 'partners'));
                         }
                     }
-                    $msg=" partners activate";
+                    $msg = " partners activate";
                     break;
-                
+
 
                 case 'duplicate':
                     $id = $this->request->getVar('id');
                     $inf_part = $this->PartnersModel->find($id);
-                    $newid = $this->PartnersModel->insert(array("user_id" => $data['user_data']['id'], "name" => $inf_part['name'] . " copy", "email" => $inf_part['email'], "image" => $inf_part['image'], "enable" => $inf_part['enable'], "ids_category" => $inf_part['ids_category']));
+                    $newid = $this->PartnersModel->insert(array("user_id" => $data['user_data']['id'], "name" => $inf_part['name'] . " copy", "email" => $inf_part['email'], "image" => $inf_part['image'], "enable" => $inf_part['enable'], "ids_category" => $inf_part['ids_category'],"ord" => $inf_part['ord'],));
                     if ($this->request->getVar('insert_item') !== null) {
                         $ll = $this->BrochuresModel->where('user_id', $data['user_data']['id'])->where("id_category IN (" . $inf_part['ids_category'] . ")")->find();
                         if (!empty($ll)) {
@@ -52,12 +52,24 @@ class Partners extends BaseController
                             }
                         }
                     }
-                    $msg="duplicate done";
+                    $msg = "duplicate done";
+                    break;
+                case 'associate':
+                    $id = $this->request->getVar('id');
+                    if ($id != "") {
+                        $this->BitemModel->where('type_item', 'premi')->where('id_item', $id)->where("id_brochure IN (select id from brochures where user_id='" . $data['user_data']['id'] . "')")->delete();
+                        if (!empty($this->request->getVar('list_assoc'))) {
+                            foreach ($this->request->getVar('list_assoc') as $kk => $vv) {
+                                $this->BitemModel->insert(array("id_brochure" => $vv, 'id_item' => $id, 'type_item' => 'partners'));
+                            }
+                        }
+                    }
                     break;
             }
-            
-            return redirect()->back()->with('msg',$msg);
 
+
+
+            return redirect()->back()->with('msg', $msg);
         }
         $ll = $this->PartnersModel->where('user_id', $data['user_data']['id'])->find();
         $res = array();
@@ -75,6 +87,7 @@ class Partners extends BaseController
             $res[] = $vv;
         }
         $data['part'] = $res;
+      
         $data['list_category'] = $this->CategoryModel->where('user_id IS NULL')->orWhere('user_id', $data['user_data']['id'])->find();
 
         echo view('user/partners', $data);
@@ -112,7 +125,8 @@ class Partners extends BaseController
                     'image' => $name,
                     'user_id' => $data['user_data']['id'],
                     'enable' => 1,
-                    'ids_category' => implode(",", $this->request->getVar("ids_category") ?? "")
+                    'ids_category' => implode(",", $this->request->getVar("ids_category") ?? ""),
+                    'ord' => $this->request->getVar("ord"),
 
 
 
@@ -143,8 +157,9 @@ class Partners extends BaseController
 
             'name' => $this->request->getVar("name"),
             'email' => $this->request->getVar("email"),
-
             'user_id' => $data['user_data']['id'],
+             'ord' => $this->request->getVar("ord"),
+
 
 
 
@@ -173,7 +188,7 @@ class Partners extends BaseController
                 'email' => $this->request->getVar("email"),
                 'image' => $name,
                 'user_id' => $data['user_data']['id'],
-
+                'ord' => $this->request->getVar("ord"),
 
 
 
@@ -217,10 +232,15 @@ class Partners extends BaseController
             <label for="image" class="form-label">Choose image</label>
             <input class="form-control" type="file" name="image" id="image">
         </div>
+        <div class="mb-3">
+            <label for="order" class="form-label"> order</label><span class="text-primary">*</span>
+            <input class="form-control" type="number" name="ord" id="ord" value="<?= $par['ord'] ?>" required>
+
+        </div>
 
 
 
-<?php
+        <?php
     }
     public function get_block_data()
     {
