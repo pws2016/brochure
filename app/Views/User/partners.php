@@ -69,15 +69,15 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row mb-2">
-                                    <?php if (session()->get('msg') !== null) { ?> 
-                                        <div class="alert alert-success text-center mb-4" role="alert">
-                                         <?php echo  session()->get('msg');
-                                            session()->remove('msg');
-                                            ?> 
-                                             </div>
-                                             <?php   
-                                            }?> 
-                                       
+                                        <?php if (session()->get('msg') !== null) { ?>
+                                            <div class="alert alert-success text-center mb-4" role="alert">
+                                                <?php echo  session()->get('msg');
+                                                session()->remove('msg');
+                                                ?>
+                                            </div>
+                                        <?php
+                                        } ?>
+
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -120,6 +120,11 @@
                                                                     <input class="form-control" type="file" name="image" id="image" required>
 
                                                                 </div>
+                                                                <div class="mb-3">
+                                                                    <label for="ord" class="form-label"> order</label><span class="text-primary">*</span>
+                                                                    <input class="form-control" type="number" name="ord" id="ord" required>
+
+                                                                </div>
 
                                                             </div>
                                                             <div class="modal-footer">
@@ -146,6 +151,7 @@
                                             <tr>
 
                                                 <th>ID</th>
+                                                <th>ord</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
                                                 <th>Categories</th>
@@ -161,9 +167,8 @@
                                             ?><tr id="tr_<?php echo $row['id']; ?>">
 
                                                         <td> <?php echo $row['user_id']; ?></td>
-
+                                                        <td> <?php echo $row['ord']; ?></td>
                                                         <td> <?php echo $row['name']; ?></td>
-
                                                         <td><?php echo $row['email']; ?></td>
                                                         <td><?php echo $row['categories']; ?></td>
 
@@ -181,6 +186,9 @@
                                                                 </li>
                                                                 <li class="list-inline-item">
                                                                     <a class="px-2 text-info" data-bs-target="#duplicate-modal-dialog" data-bs-toggle="modal" onclick="duplicate_item('<?php echo $row['id'] ?>')" href=""><i class="uil uil-file-copy-alt font-size-18"></i></a>
+                                                                </li>
+                                                                <li class="list-inline-item">
+                                                                    <a class="px-2 text-warning" data-bs-target="#associateBroch-modal-dialog" data-bs-toggle="modal" onclick="associate_item('<?php echo $row['id'] ?>')" href=""><i class="uil uil-apps font-size-18"></i></a>
                                                                 </li>
                                                                 <?php if ($row['enable'] == 1) { ?>
                                                                     <li class="list-inline-item">
@@ -292,6 +300,45 @@
                                     </div>
                                     </form>
 
+                                    <?php $attributes = ['class' => 'form-input-flat', 'id' => 'myform', 'method' => 'post'];
+                                    echo form_open(base_url('user/premi'), $attributes); ?>
+                                    <input type="hidden" name="action" value="associate">
+                                    <input type="hidden" name="id" id="associate_id">
+                                    <div class="modal fade" id="associateBroch-modal-dialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-scrollable modal-fullscreen">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+
+                                                    <h5 class="modal-title mt-0" id="exampleModalScrollableTitle"><?php echo lang('app.modal_associate_broch_item') ?></h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                    </button>
+                                                </div>
+
+
+                                                <div class="modal-body" id="">
+                                                    <div class="alert alert-info"><?php echo lang('app.help_associate_item') ?></div>
+                                                    <table class="table table-bordered" id="">
+                                                        <thead>
+                                                            <th></th>
+                                                            <th>Title</th>
+                                                            <th>Category</th>
+                                                            <th>Created_at</th>
+                                                            <th>updated_at</th>
+                                                            <th>Status</th>
+                                                        </thead>
+                                                        <tbody id="div_list_brochures">
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal"><?php echo lang('app.btn_cancel') ?></button>
+                                                    <input type="submit" name="delete" class="btn btn-danger" value="<?php echo lang('app.btn_save') ?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  
                                 </div>
                             </div>
                         </div>
@@ -388,33 +435,54 @@
                                         return true; // Don't submit form for this demo
                                     });
                             });
-                            function block_item(id,enable){
-		$("#div_msg_desactivate").hide(0);
-		$("#div_msg_activate").hide(0);
-		$("#block_id").val(id);
-		if(enable==1) $("#block_action").val('desactivate');
-		else $("#block_action").val('activate');
-		$.ajax({
-			url: "<?php echo base_url("user/partners/get_block_data"); ?>",
-			type: "POST",
-			cache: false,
-			data: {
 
-				id: id,
-				enable:enable
+                            function block_item(id, enable) {
+                                $("#div_msg_desactivate").hide(0);
+                                $("#div_msg_activate").hide(0);
+                                $("#block_id").val(id);
+                                if (enable == 1) $("#block_action").val('desactivate');
+                                else $("#block_action").val('activate');
+                                $.ajax({
+                                    url: "<?php echo base_url("user/partners/get_block_data"); ?>",
+                                    type: "POST",
+                                    cache: false,
+                                    data: {
 
-			},
-			success: function(dataResult) {
-				$("#div_block_item").html(dataResult);
-			}
+                                        id: id,
+                                        enable: enable
 
-		});
-		
-	}
-	
-	function duplicate_item(id){
-		$("#duplicate_id").val(id);
-	}
+                                    },
+                                    success: function(dataResult) {
+                                        $("#div_block_item").html(dataResult);
+                                    }
+
+                                });
+
+                            }
+
+                            function duplicate_item(id) {
+                                $("#duplicate_id").val(id);
+                            }
+
+                            function associate_item(id) {
+                                $("#associate_id").val(id);
+                                $.ajax({
+                                    url: "<?php echo base_url("ajax/get_list_broch"); ?>",
+                                    type: "POST",
+                                    cache: false,
+                                    data: {
+
+                                        id: id,
+                                        type_item: 'premi'
+
+                                    },
+                                    success: function(dataResult) {
+                                        $("#div_list_brochures").html(dataResult);
+                                    }
+
+                                });
+
+                            }
                         </script>
                         <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/js/app.js"></script>
 </body>

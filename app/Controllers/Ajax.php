@@ -133,7 +133,12 @@ class Ajax extends BaseController
 				$tab["step"] = $current_step;
 				$x = $this->BrochuresModel->update($this->session->get('current_brochure'), $tab);
 
-
+			$x=$this->BitemModel->where('id_brochure', $this->session->get('current_brochure'))->where('type_item', "operations")->delete();
+				if (!empty($this->request->getVar('select_operations'))) {
+					foreach ($this->request->getVar('select_operations') as $select) {
+						$this->BitemModel->insert(array('id_brochure' => $this->session->get('current_brochure'), 'id_item' => $select, 'type_item' => "operations"));
+					}
+				}
 				break;
 				//Premi
 			case 5:
@@ -257,6 +262,17 @@ class Ajax extends BaseController
 				}
 
 		break;
+		case "operations":
+			$operat = $this->OperationsModel->where('user_id', $data['user_data']['id'])->where('FIND_IN_SET(' . $id_categ . ',ids_category)>0')->where('enable', '1')->find();
+				foreach ($operat as $row) {
+			?>
+					<input type="checkbox" name="select_operations[]" value="<?= $row['id']; ?>" checked /> <?= $row['name']; ?> <br />
+				<?php
+				}
+
+		break;
+
+
 		case "premi":
 				$premi = $this->PremiModel->where('user_id', $data['user_data']['id'])->where('FIND_IN_SET(' . $id_categ . ',ids_category)>0')->where('enable', '1')->find();
 
@@ -267,7 +283,7 @@ class Ajax extends BaseController
 				}
 		break;
 		case "partners":
-              $part = $this->PartnersModel->where('user_id', $data['user_data']['id'])->where('FIND_IN_SET(' . $id_categ . ',ids_category)>0')->where('enable', '1')->find();
+              $part = $this->PartnersModel->where('user_id', $data['user_data']['id'])->where('FIND_IN_SET(' . $id_categ . ',ids_category)>0')->where('enable', '1')->orderBy('ord','ASC')->find();
 
 				foreach ($part as $row) {
 				?>
@@ -309,6 +325,15 @@ class Ajax extends BaseController
 					<?php
 					}
 			break;
+			case "operations":
+				$operat = $this->OperationsModel->where('user_id', $data['user_data']['id'])->where('FIND_IN_SET(' . $id_categ . ',ids_category)>0')->where('enable', '1')->find();
+					foreach ($operat as $row) {
+				?>
+						<input type="checkbox" name="select_operations[]" value="<?= $row['id']; ?>" checked /> <?= $row['name']; ?> <br />
+					<?php
+					}
+	
+			break;
 			case "premi":
 					$premi = $this->PremiModel->where('user_id', $data['user_data']['id'])->where('FIND_IN_SET(' . $id_categ . ',ids_category)>0')->where('enable', '1')->find();
 					
@@ -323,7 +348,7 @@ class Ajax extends BaseController
 			case "partners":
 	
 	
-					$part = $this->PartnersModel->where('user_id', $data['user_data']['id'])->where('FIND_IN_SET(' . $id_categ . ',ids_category)>0')->where('enable', '1')->find();
+					$part = $this->PartnersModel->where('user_id', $data['user_data']['id'])->where('FIND_IN_SET(' . $id_categ . ',ids_category)>0')->where('enable', '1')->orderBy('ord','ASC')->find();
 	
 					$items_partner=$this->BitemModel->select('id_item')->where('type_item','partners')->where('id_brochure',$this->session->get('current_brochure'))->find();
 					foreach ($part as $row) {

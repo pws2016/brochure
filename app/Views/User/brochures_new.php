@@ -306,6 +306,20 @@
 
 																<textarea id="opertion" name="description_operation"><?php echo $company['description_operation'] ?></textarea>
 															</div>
+															<div id=div_list_operations>
+
+																<?php
+
+																foreach ($ope as $row) {
+																?>
+	             		<input type="checkbox" name="select_operations[]" value="<?= $row['id']; ?>" /> <?= $row['name']; ?> <br />
+																<?php
+																}
+
+
+																?>
+
+															</div>
 														</div>
 
 													</form>
@@ -411,8 +425,7 @@
 														?>
 														</div>
 													</form>
-												</section>
-
+											
 												<h3>prevus Page</h3>
 												<section>
 													<form method="post" id="form-step-8" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
@@ -664,6 +677,20 @@
 									}).done(function(data) {
 										
 											$("#div_list_products").html(data);
+
+									});
+							break;
+							case 4  :
+								
+								var id_cat=$("#id_category").val(); 
+								$.ajax({
+										url: "<?php echo base_url() ?>/ajax/get_items_by_cat",
+										type: 'POST',
+										
+										data: {id_cat:id_cat,type_item:'operations'}
+									}).done(function(data) {
+										
+											$("#div_list_operations").html(data);
 
 									});
 							break;

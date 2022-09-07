@@ -105,6 +105,23 @@ $routes->add('user/category/insert',    'Category::insert');
 $routes->add('user/category/delete',    'Category::delete');
 $routes->add('user/category/get_data',  'Category::get_data');
 $routes->add('user/category/update',    'Category::update');
+////////
+$routes->add('user/operations',           'Operations::operations');
+$routes->add('user/operations/insert',    'Operations::insert');
+$routes->add('user/operations/update',    'Operations::update');
+$routes->add('user/operations/delete',    'Operations::delete');
+$routes->add('user/operations/get_data',    'Operations::get_data');
+$routes->add('user/operations/get_block_data',    'Operations::get_block_data');
+
+//////
+
+$routes->add('user/subOperations/insert',           'SubOperations::insert');
+$routes->add('user/subOperations/update',           'SubOperations::update');
+$routes->add('user/subOperations/get_data',           'SubOperations::get_data');
+
+
+$routes->add('user/subOperations/(:any)',           'SubOperations::subOperations/$1');
+
 
 ///// testing
 $routes->add('admin/test',      'Test::test');
@@ -114,6 +131,7 @@ $routes->add('admin/test',      'Test::test');
 $routes->add('/ajax/(:any)', 'Ajax::index/$1');
 $routes->add('user/brochures/new',    'Brochures::new_broch');
 $routes->add('user/brochures/delete',    'Brochures::delete');
+$routes->add('user/brochures/duplication',    'Brochures::duplication');
 $routes->add('user/brochures/edit/(:any)',    'Brochures::edit_broch/$1');
 
 $routes->add('user/brochures/preview/(:any)',    'Brochures::preview_broch/$1');
