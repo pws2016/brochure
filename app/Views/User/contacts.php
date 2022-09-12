@@ -47,22 +47,23 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0">Contacts</h4>
+                                <h4 class="mb-0">Elenco Contatti</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"></li>
-                                        <li class="breadcrumb-item active">Contacts</li>
+                                        <li class="breadcrumb-item active">Contatti</li>
                                     </ol>
                                 </div>
 
                             </div>
                         </div>
+						<div class="col-12">
+							<p>Clicca su <b>+ Agg. Nuovo</b> per creare un nuovo contatto.</p>
+						</div>
                     </div>
 
-
-
-                    <div class="row">
+					<div class="row">
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
@@ -78,7 +79,7 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                    <i class="mdi mdi-plus me-2"></i> Add New </button>
+                                                    <i class="mdi mdi-plus me-2"></i> Agg. Nuovo </button>
                                             </div>
                                             <form action="<?= base_url('user/contacts/insert') ?>" method="post" id="form" enctype="multipart/form-data" data-parsley-validate="">
                                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -86,7 +87,7 @@
                                                         <div class="modal-content">
                                                             <div class="modal-header">
 
-                                                                <h5 class="modal-title" id="exampleModalLabel"> Add Contacts</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel"> Aggiungi nuovo contatto</h5>
                                                                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -95,7 +96,7 @@
                                                                 <!-- Add package Form -->
 
                                                                 <div class="form-group">
-                                                                    <label for="">Name</label><span class="text-primary">*</span>
+                                                                    <label for="">Nome</label><span class="text-primary">*</span>
                                                                     <input type="text" id="name" name="name" class="form-control" required>
                                                                 </div>
                                                                 <div class="form-group">
@@ -103,7 +104,7 @@
                                                                     <input type="email" id="email" name="email" class="form-control" required>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="">Phone</label><span class="text-primary">*</span>
+                                                                    <label for="">Telefono</label><span class="text-primary">*</span>
                                                                     <input type="number" id="phone" name="phone" class="form-control" size="20" required>
                                                                 </div>
                                                                 <div class="form-group">
@@ -111,16 +112,16 @@
                                                                     <input type="text" id="fax" name="fax" class="form-control" required>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="">Address</label>
+                                                                    <label for="">Indirizzo</label>
                                                                     <input type="text" id="address" name="address" class="form-control" required>
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <label for="image" class="form-label">Choose image</label><span class="text-primary">*</span>
+                                                                    <label for="image" class="form-label">Scegli un immagine</label><span class="text-primary">*</span>
                                                                     <input class="form-control" type="file" name="image" id="image" required>
 
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="">Category</label><span class="text-primary">*</span>
+                                                                    <label for="">Categoria/e di appartenenza</label><span class="text-primary">*</span>
                                                                     <select id="ids_category" name="ids_category[]" class="select2 form-control select2-multiple" multiple="multiple" data-placeholder="Choose ..." required style="width:100%">
                                                                         <?php if (!empty($list_category)) {
                                                                             foreach ($list_category as $k => $v) { ?>
@@ -132,8 +133,8 @@
 
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary" id="add">Add Contacts</button>
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiusi</button>
+                                                                <button type="submit" class="btn btn-primary" id="add">Salva</button>
 
                                                             </div>
                                                         </div>
@@ -150,16 +151,14 @@
                                     <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                         <thead>
                                             <tr>
-
-
-                                                <th>Name</th>
+                                                <th>Nome</th>
                                                 <th>Email</th>
-                                                <th>Phone</th>
+                                                <th>Telefono</th>
                                                 <th>Fax</th>
-                                                <th>Address</th>
-                                                <th>Image</th>
-                                                <th>Categories</th>
-                                                <th>Enable</th>
+                                                <th>Ind.</th>
+                                                <th>Img.</th>
+                                                <th>Categorie</th>
+                                                <th>Status</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -213,7 +212,7 @@
                                                                         <a onclick="del_pack('<?php echo $row['id']; ?>')" class="px-2 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
                                                                     </li>
 																	*/ ?>
-
+															</ul>
                                                         </td>
 
                                                     </tr>
@@ -230,7 +229,7 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Edit Contact</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">Modifica contatto</h5>
                                                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
@@ -243,15 +242,13 @@
 
                                                     <!-- body -->
                                                     <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary" id="update">Update</button>
+                                                        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                                                        <button type="submit" class="btn btn-primary" id="update">Modifica</button>
                                                     </div>
 
                                                 </div>
                                             </div>
                                         </div>
-
-
                                     </form>
 
 
@@ -290,18 +287,18 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
 
-                                                    <h5 class="modal-title mt-0" id="exampleModalScrollableTitle"><?php echo lang('app.modal_duplicate_item') ?></h5>
+                                                    <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Duplica Contatto</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                                     </button>
                                                 </div>
 
 
                                                 <div class="modal-body" id="">
-                                                    <?php echo lang('app.alert_duplicate_item') ?><br />
-                                                    <div class="alert alert-warning"><label><input type='checkbox' name='insert_item' checked>I accept to associate the copied item to brochures as original</label></div>
+                                                    Sei sicuro di duplicare questo contatto?<br />
+                                                    <div class="alert alert-warning"><label><input type='checkbox' name='insert_item' checked> Accetto di duplicare il contatto come da originale</label></div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal"><?php echo lang('app.btn_cancel') ?></button>
+                                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Chiudi</button>
                                                     <input type="submit" name="delete" class="btn btn-danger" value="<?php echo lang('app.btn_save') ?>">
                                                 </div>
                                             </div>
@@ -317,21 +314,22 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
 
-                                                    <h5 class="modal-title mt-0" id="exampleModalScrollableTitle"><?php echo lang('app.modal_associate_broch_item') ?></h5>
+                                                    <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Associa il contatto alla brochure</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                                     </button>
                                                 </div>
 
 
                                                 <div class="modal-body" id="">
-                                                    <div class="alert alert-info"><?php echo lang('app.help_associate_item') ?></div>
+                                                    <div class="alert alert-info">
+Seleziona una o più brochure per associarla/e al contatto</div>
                                                     <table class="table table-bordered" id="">
                                                         <thead>
                                                             <th></th>
-                                                            <th>Title</th>
-                                                            <th>Category</th>
-                                                            <th>Created_at</th>
-                                                            <th>updated_at</th>
+                                                            <th>Titolo</th>
+                                                            <th>Categorie</th>
+                                                            <th>Creato il</th>
+                                                            <th>Ultima modifica</th>
                                                             <th>Status</th>
                                                         </thead>
                                                         <tbody id="div_list_brochures">
@@ -340,7 +338,7 @@
                                                     </table>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal"><?php echo lang('app.btn_cancel') ?></button>
+                                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Chiudi</button>
                                                     <input type="submit" name="delete" class="btn btn-danger" value="<?php echo lang('app.btn_save') ?>">
                                                 </div>
                                             </div>
@@ -349,6 +347,13 @@
                                 </div>
                             </div>
                         </div>
+				<div class="col-12">
+				<h5>Info</h5>
+				<p><i class="uil uil-pen font-size-18 text-primary"></i> Strumento di modifica<br>
+					<i class="uil uil-apps font-size-18 text-warning"></i> Associazione<br>
+					<i class="uil uil-file-copy-alt font-size-18 text-info"></i> Permette di duplicare la righa<br>
+					<i class="uil uil-file-block-alt font-size-18 text-danger"></i> Attivare o disattivare la righa</p>
+			</div>
 
 
                         <!-- Optional JavaScript -->

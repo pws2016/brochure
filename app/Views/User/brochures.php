@@ -49,17 +49,19 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="page-title-box d-flex align-items-center justify-content-between">
-                                        <h4 class="mb-0">Brochures</h4>
-
+                                        <h4 class="mb-0">Elenco Brochures</h4>
                                         <div class="page-title-right">
                                             <ol class="breadcrumb m-0">
                                                 <li class="breadcrumb-item"></li>
-                                                <li class="breadcrumb-item active">Brochures</li>
+                                                <li class="breadcrumb-item active">Elenco Brochures</li>
                                             </ol>
                                         </div>
 
                                     </div>
                                 </div>
+								<div class="col-12">
+									<p>Elenco di tutte le brochure.  Clicca su <b>+ Agg. Nuovo</b> per creare una nuova Brochure.</p>
+								</div>
                             </div>
                             <!-- end page title -->
 
@@ -78,7 +80,7 @@
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <a  class="btn btn-success waves-effect waves-light" href="<?php echo base_url('user/brochures/new')?>">
-                                                            <i class="mdi mdi-plus me-2"></i> Add New </a>
+                                                            <i class="mdi mdi-plus me-2"></i> <?php echo lang('app.btn_add') ?> </a>
                                                     </div>
                                                    
                                                 </div>
@@ -97,10 +99,10 @@
                                                            
                                                         </th>
                                                         <th>ID</th>
-                                                        <th>Title</th>
-                                                        <th>Category</th>
-                                                        <th>Created_at</th>
-                                                        <th>updated_at</th>
+                                                        <th>Titole</th>
+                                                        <th>Categoria</th>
+                                                        <th>Creato il</th>
+                                                        <th>Modicato il</th>
                                                         <th>Status</th>
                                                        
                                                     </tr>
@@ -160,7 +162,7 @@
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Edit Partners</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Modifica partner</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -173,8 +175,8 @@
 
                                                             <!-- body -->
                                                             <div class="modal-footer">
-                                                                <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary" id="update">Update</button>
+                                                                <button type="submit" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                                                                <button type="submit" class="btn btn-primary" id="update">Aggiorna</button>
                                                             </div>
 
                                                         </div>
@@ -200,7 +202,7 @@
 
                                                 <div class="modal-body" id="">
                                                     <?php echo lang('app.alert_duplicate_item') ?><br />
-                                                    <div class="alert alert-warning"><label>I accept to copie brochures as original</label></div>
+                                                    <div class="alert alert-warning"><label><?php echo lang('app.alert_duplicate_item2') ?></label></div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-light" data-bs-dismiss="modal"><?php echo lang('app.btn_cancel') ?></button>
@@ -215,6 +217,13 @@
                                         </div>
                                     </div>
                                 </div>
+					<div class="col-12">
+						<h5>Info</h5>
+						<p><i class="uil uil-pen font-size-18 text-primary"></i> Strumento di modifica<br>
+							<i class="uil uil-trash-alt font-size-18 text-danger"></i> Strumento di cancellazione<br>
+							<i class="uil uil-file-copy-alt font-size-18 text-info"></i> Permette di duplicare la righa</p>
+					</div>
+				</div>
 
                                 <!-- Optional JavaScript -->
                                 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

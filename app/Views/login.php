@@ -11,14 +11,7 @@
         <link href="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
 		<!-- script src="https://www.google.com/recaptcha/api.js?render="></script -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-MES0LPRMPP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-MES0LPRMPP');
-</script>
     </head>
     <body class="authentication-bg">
         <div class="account-pages my-5 pt-sm-5">
@@ -33,14 +26,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col-md-12 col-lg6-12 col-xl-12">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-5">
                         <div class="card">
                            
                             <div class="card-body p-4">
 								<div class="row">
-									<div class="col-lg-6"><img src="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/images/login-bp.png" class="img-fluid"></div>
-									<div class="col-lg-6">
+									<div class="col-lg-12">
                                 <div class="text-center mt-2">
                                     <h5 class="text-primary"><?php echo lang('app.title_page_login')?></h5>
                                    
@@ -112,7 +104,6 @@
 */?> -->
                                         <div class="mt-4 text-center">
                                             <p class="mb-3"><?php echo lang('app.looking_to')?> <a href="<?php echo base_url('register')?>" class="fw-medium text-primary"> <?php echo lang('app.create_account')?> </a> </p>
-											<p>Non vuoi registrati?  <span class="text-primary"><a href="https://guest.creazioneimpresa.it" rel="nofollow">Accedi come OSPITE!</a></span></p>
                                         </div>
                                   <?php echo form_close();?>
                                 </div>

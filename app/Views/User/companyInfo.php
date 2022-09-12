@@ -12,19 +12,8 @@
     <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
     <style>
-        h3.post__title.expand:before {
-            width: 100px;
-        }
-
-        h3.post__title:before {
-            content: "";
-            width: 0;
-            height: 10px;
-            background-color: #FF7700;
-            position: absolute;
-            top: 0;
-            transition: width 0.5s;
-        }
+        h3.post__title.expand:before {width: 100px;}
+        h3.post__title:before {content: "";width: 0;height: 10px;background-color: #FF7700;position: absolute;top: 0;transition: width 0.5s;}
     </style>
 </head>
 
@@ -39,7 +28,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0"><?php echo lang('Company Info') ?></h4>
+                                <h4 class="mb-0">Profilo Società</h4>
 
                                 <!-- <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
@@ -58,121 +47,131 @@
                             <div class="card">
                                 <div class="card-body">
 
-                                    <h4 class="card-title">Company Info inputs</h4>
-                                    <p class="card-title-desc">Updates </p>
+                                    <!--h4 class="card-title">Company Info inputs</h4-->
+                                    <p class="card-title-desc">Aggiornamento il profilo aggiungendo informazioni di DEFAULT. Questo ti permetterà di velocizzare l'output della brochure.</p>
 
                                     <form action="<?= base_url('user/companyInfo/update') ?>" method="post" id="form" enctype="multipart/form-data">
 
 
 
                                         <div class="mb-3 row">
-                                            <label for="logo" class="col-md-2 col-form-label">Choose Logo </label>
+                                            <label for="logo" class="col-md-2 col-form-label">Scegli un lodo</label>
 
                                             <div class="col-md-8">
                                                 <input class="form-control" type="file" name="logo" id="logo" >
+												<small class="text-muted">Scegli un logo di default.  Questo logo sarà poi utilizzato automaticamente su tutte le brochure.  Qual ora volesse è possibile modificare il logo direttamente sulla brochure. </small>
                                             </div>
                                             <div class="col-md-2">
                                                 <?php
-                                                if ($company['logo'] != "") { ?> <img src="<?php echo base_url('uploads/' . $company['logo']) ?>" height="50" width="50px"><?php }
-
-
-                                                                                                                                    ?>
+                                                if ($company['logo'] != "") { ?> <img src="<?php echo base_url('uploads/' . $company['logo']) ?>" height="50" width="50px"><?php } ?>
                                             </div>
+											
                                         </div>
 
                                         <div class="mb-3 row">
-                                            <label for="background" class="col-md-2 col-form-label">Choose Background</label>
+                                            <label for="background" class="col-md-2 col-form-label">Scegli un immagine copertina</label>
                                             <div class="col-md-8">
                                                 <input class="form-control" type="file" name="background" id="background">
+												<small class="text-muted">Scegli un’immagine di sfondo che verrà poi utilizzato automaticamente su tutte le brochure.  Qual ora volesse, è possibile modificarlo direttamente sulla brochure.</small>
                                             </div>
                                             <div class="col-md-2">
                                                 <?php
                                                 if ($company['background'] != "") { ?> <img src="<?php echo base_url
                                                     ('uploads/' . $company['background']) ?>" height="50" width="50px"><?php }
-
-
-                                                                                                                                    ?>
+                                                                             ?>
                                             </div>
                                         </div>
+										<hr>
                                         <div class="mb-3 row">
-                                            <label for="title_operation" class="col-md-2 col-form-label">title_operation</label>
+                                            <label for="title_operation" class="col-md-2 col-form-label">Titolo Operazioni</label>
                                             <div class="col-md-10">
                                                 <input class="form-control" type="text" name="title_operation" id="title_operation" value="<?php echo $company['title_operation'] ?? '' ?>">
+												<small class="text-muted">Verrà impostato in automatico sulla brochure.  E' possibile modificare o cambiare il titolo direttamente nella brochure qual ora servisse.</small>
 
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="description_operation" class="col-md-2 col-form-label">description_operation</label>
+                                            <label for="description_operation" class="col-md-2 col-form-label">Testo</label>
                                             <div class="col-md-10">
 
                                                 <textarea id="operation" name="description_operation" ><?php echo $company['description_operation'] ?? '' ?></textarea>
                                             </div>
                                         </div>
+										<hr>
                                         <div class="mb-3 row">
-                                            <label for="title_contacts" class="col-md-2 col-form-label">title_contacts</label>
+                                            <label for="title_contacts" class="col-md-2 col-form-label">Titolo contatti</label>
                                             <div class="col-md-10">
                                                 <input class="form-control" type="text" name="title_contacts" id="title_contacts" value="<?php echo $company['title_contacts'] ?? '' ?>">
+												<small class="text-muted">Verrà impostato in automatico sulla brochure.  E' possibile modificare o cambiare il titolo direttamente nella brochure qual ora servisse.</small>
 
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="description_operation" class="col-md-2 col-form-label">description_contacts</label>
+                                            <label for="description_operation" class="col-md-2 col-form-label">Testo</label>
                                             <div class="col-md-10">
 
                                                 <textarea id="contacts" name="description_contacts"><?php echo $company['description_operation'] ?? '' ?></textarea>
                                             </div>
                                         </div>
+										<hr>
                                         <div class="mb-3 row">
-                                            <label for="title_partners" class="col-md-2 col-form-label">title_partners</label>
+                                            <label for="title_partners" class="col-md-2 col-form-label">Titolo partners</label>
                                             <div class="col-md-10">
                                                 <input class="form-control" type="text" name="title_partners" id="title_partners" value="<?php echo $company['title_partners'] ?? '' ?>">
+												<small class="text-muted">Verrà impostato in automatico sulla brochure.  E' possibile modificare o cambiare il titolo direttamente nella brochure qual ora servisse.</small>
 
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="description_partners" class="col-md-2 col-form-label">description_partners</label>
+                                            <label for="description_partners" class="col-md-2 col-form-label">Testo</label>
                                             <div class="col-md-10">
 
                                                 <textarea id="partners" name="description_partners"><?php echo $company['description_partners'] ?? '' ?></textarea>
                                             </div>
                                         </div>
+										<hr>
                                         <div class="mb-3 row">
-                                            <label for="title_premi" class="col-md-2 col-form-label">title_permi</label>
+                                            <label for="title_premi" class="col-md-2 col-form-label">Titolo premi</label>
                                             <div class="col-md-10">
                                                 <input class="form-control" type="text" name="title_premi" id="p-title" value="<?php echo $company['title_premi'] ?? '' ?>">
+												<small class="text-muted">Verrà impostato in automatico sulla brochure.  E' possibile modificare o cambiare il titolo direttamente nella brochure qual ora servisse.</small>
 
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="description_intro" class="col-md-2 col-form-label">description_premi</label>
+                                            <label for="description_intro" class="col-md-2 col-form-label">Testo premi</label>
                                             <div class="col-md-10">
 
                                                 <textarea id="premi" name="description_premi"><?php echo $company['description_premi'] ?? '' ?></textarea>
                                             </div>
                                         </div>
+										<hr>
                                         <div class="mb-3 row">
-                                            <label for="title_intro" class="col-md-2 col-form-label">title_products</label>
+                                            <label for="title_intro" class="col-md-2 col-form-label">Titolo produzioni</label>
                                             <div class="col-md-10">
                                                 <input class="form-control" type="text" name="title_product" id="p-title" value="<?php echo $company['title_product'] ?? '' ?>">
+												<small class="text-muted">Verrà impostato in automatico sulla brochure.  E' possibile modificare o cambiare il titolo direttamente nella brochure qual ora servisse.</small>
 
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="description_intro" class="col-md-2 col-form-label">description_products</label>
+                                            <label for="description_intro" class="col-md-2 col-form-label">Testo</label>
                                             <div class="col-md-10">
 
                                                 <textarea id="product" name="description_product"><?php echo $company['description_product'] ?? '' ?></textarea>
                                             </div>
                                         </div>
+										<hr>
                                         <div class="mb-3 row">
-                                            <label for="title_intro" class="col-md-2 col-form-label">title_intro</label>
+                                            <label for="title_intro" class="col-md-2 col-form-label">Titolo introduzione</label>
                                             <div class="col-md-10">
                                                 <input class="form-control" type="text" name="title_intro" id="title_intro" value="<?php echo $company['title_intro'] ?? '' ?>">
+												<small class="text-muted">Verrà impostato in automatico sulla brochure.  E' possibile modificare o cambiare il titolo direttamente nella brochure qual ora servisse.</small>
 
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="description_intro" class="col-md-2 col-form-label">description_intro</label>
+                                            <label for="description_intro" class="col-md-2 col-form-label">Testo</label>
                                             <div class="col-md-10">
 
                                                 <textarea id="intro" name="description_intro"><?php echo $company['description_intro'] ?? '' ?></textarea>
@@ -181,7 +180,7 @@
 
 
 
-                                        <button type="submit" class="btn btn-primary " id="update">Update</button>
+                                        <button type="submit" class="btn btn-primary " id="update">Salva Modifica</button>
 
                                     </form>
                                 </div>

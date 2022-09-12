@@ -49,17 +49,20 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0">Operations</h4>
+                                <h4 class="mb-0">Elenco Operazioni</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"></li>
-                                        <li class="breadcrumb-item active">Operations</li>
+                                        <li class="breadcrumb-item active">Operazioni</li>
                                     </ol>
                                 </div>
 
                             </div>
                         </div>
+						<div class="col-12">
+							<p>Clicca su <b>+ Agg. Nuovo</b> per creare una nuova operazione.</p>
+						</div>
                     </div>
                     <!-- end page title -->
 
@@ -72,7 +75,7 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                    <i class="mdi mdi-plus me-2"></i> Add New </button>
+                                                    <i class="mdi mdi-plus me-2"></i> Agg. Nuovo </button>
                                             </div>
                                             <form action="<?= base_url('user/operations/insert') ?>" method="post" id="form" enctype="multiope/form-data">
                                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -80,7 +83,7 @@
                                                         <div class="modal-content">
                                                             <div class="modal-header">
 
-                                                                <h5 class="modal-title" id="exampleModalLabel"> Add Operations</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel"> Aggiungere nuova operazione</h5>
                                                                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -89,17 +92,17 @@
                                                                 <!-- Add openers Form -->
 
                                                                 <div class="form-group">
-                                                                    <label for="">name</label><span class="text-primary">*</span>
+                                                                    <label for="">Nome</label><span class="text-primary">*</span>
                                                                     <input type="text" id="name" name="name" class="form-control" required>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="description">Description</label><span class="text-primary">*</span>
+                                                                    <label for="description">Descrizione</label><span class="text-primary">*</span>
                                                                     <textarea id="description" name="description" class="md-textarea form-control" rows="3" required></textarea>
 
 
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="">Category</label><span class="text-primary">*</span>
+                                                                    <label for="">Categorie/a di appartenenza</label><span class="text-primary">*</span>
                                                                     <select id="ids_category" name="ids_category[]" class="select2 form-control select2-multiple" multiple="multiple" data-placeholder="Choose ..." required style="width:100%">
                                                                         <?php if (!empty($list_category)) {
                                                                             foreach ($list_category as $k => $v) { ?>
@@ -111,8 +114,8 @@
 
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary" id="add">Add Operations</button>
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                                                                <button type="submit" class="btn btn-primary" id="add">Salva</button>
 
                                                             </div>
                                                         </div>
@@ -310,6 +313,13 @@
                                 </div>
                             </div>
                         </div>
+			<div class="col-12">
+				<h5>Info</h5>
+				<p><i class="uil uil-pen font-size-18 text-primary"></i> Strumento di modifica<br>
+					<i class="uil uil-apps font-size-18 text-warning"></i> Associazione<br>
+					<i class="uil uil-file-copy-alt font-size-18 text-info"></i> Permette di duplicare la righa<br>
+					<i class="uil uil-file-block-alt font-size-18 text-danger"></i> Attivare o disattivare la righa</p>
+			</div>
 
                         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
                         <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/jquery/jquery.min.js"></script>

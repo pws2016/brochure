@@ -49,7 +49,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0">Partners</h4>
+                                <h4 class="mb-0">Elenco Partners</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
@@ -60,10 +60,10 @@
 
                             </div>
                         </div>
+						<div class="col-12">
+							<p>Clicca su <b>+ Agg. Nuovo</b> per creare un nuovo partner.</p>
+						</div>
                     </div>
-                    <!-- end page title -->
-
-
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card">
@@ -81,7 +81,7 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                    <i class="mdi mdi-plus me-2"></i> Add New </button>
+                                                    <i class="mdi mdi-plus me-2"></i> Agg. Nuovo </button>
                                             </div>
                                             <form action="<?= base_url('user/partners/insert') ?>" method="post" id="form" enctype="multipart/form-data">
                                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -89,7 +89,7 @@
                                                         <div class="modal-content">
                                                             <div class="modal-header">
 
-                                                                <h5 class="modal-title" id="exampleModalLabel"> Add Partners</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Aggiungi un nuovo partner</h5>
                                                                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -98,7 +98,7 @@
                                                                 <!-- Add partners Form -->
 
                                                                 <div class="form-group">
-                                                                    <label for="">Name</label><span class="text-primary">*</span>
+                                                                    <label for="">Nome</label><span class="text-primary">*</span>
                                                                     <input type="text" id="name" name="name" class="form-control" required>
                                                                 </div>
                                                                 <div class="form-group">
@@ -106,7 +106,7 @@
                                                                     <input type="email" id="email" name="email" class="form-control" required>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="">Category</label><span class="text-primary">*</span>
+                                                                    <label for="">Categoria/e di appartenenza</label><span class="text-primary">*</span>
                                                                     <select id="ids_category" name="ids_category[]" class="select2 form-control select2-multiple" multiple="multiple" data-placeholder="Choose ..." required style="width:100%">
                                                                         <?php if (!empty($list_category)) {
                                                                             foreach ($list_category as $k => $v) { ?>
@@ -116,20 +116,20 @@
                                                                     </select>
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <label for="image" class="form-label">Choose image</label><span class="text-primary">*</span>
+                                                                    <label for="image" class="form-label">Scegli un immagine</label><span class="text-primary">*</span>
                                                                     <input class="form-control" type="file" name="image" id="image" required>
 
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <label for="ord" class="form-label"> order</label><span class="text-primary">*</span>
+                                                                    <label for="ord" class="form-label">Ordinamento</label><span class="text-primary">*</span>
                                                                     <input class="form-control" type="number" name="ord" id="ord" required>
 
                                                                 </div>
 
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary" id="add">Add Partners</button>
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                                                                <button type="submit" class="btn btn-primary" id="add">Salva</button>
 
                                                             </div>
                                                         </div>
@@ -137,9 +137,6 @@
                                                 </div>
                                             </form>
                                         </div>
-
-
-
 
                                     </div>
 
@@ -151,12 +148,12 @@
                                             <tr>
 
                                                 <th>ID</th>
-                                                <th>ord</th>
-                                                <th>Name</th>
+                                                <th>Ord.</th>
+                                                <th>Nome</th>
                                                 <th>Email</th>
-                                                <th>Categories</th>
-                                                <th>Image</th>
-                                                <th>Enable</th>
+                                                <th>Categorie</th>
+                                                <th>Img.</th>
+                                                <th>Status</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -204,9 +201,8 @@
                                                                         <a onclick="del_pack('<?php echo $row['id']; ?>')" class="px-2 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
                                                                     </li>
 																	*/ ?>
-
+</ul>
                                                         </td>
-                                                        </ul>
                                                     </tr>
                                             <?php }
                                             }
@@ -222,7 +218,7 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Edit Partners</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">Modifica partner</h5>
                                                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
@@ -235,8 +231,8 @@
 
                                                     <!-- body -->
                                                     <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary" id="update">Update</button>
+                                                        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                                                        <button type="submit" class="btn btn-primary" id="update">Modifica</button>
                                                     </div>
 
                                                 </div>
@@ -255,7 +251,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
 
-                                                    <h5 class="modal-title mt-0" id="exampleModalScrollableTitle"><?php echo lang('app.modal_block_item') ?></h5>
+                                                    <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Disattiva partner</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                                     </button>
                                                 </div>
@@ -265,7 +261,7 @@
 
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal"><?php echo lang('app.btn_cancel') ?></button>
+                                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Chiudi</button>
                                                     <input type="submit" name="delete" class="btn btn-danger" value="<?php echo lang('app.btn_save') ?>">
                                                 </div>
                                             </div>
@@ -281,18 +277,18 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
 
-                                                    <h5 class="modal-title mt-0" id="exampleModalScrollableTitle"><?php echo lang('app.modal_duplicate_item') ?></h5>
+                                                    <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Duplica Partner</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                                     </button>
                                                 </div>
 
 
                                                 <div class="modal-body" id="">
-                                                    <?php echo lang('app.alert_duplicate_item') ?><br />
-                                                    <div class="alert alert-warning"><label><input type='checkbox' name='insert_item' checked>I accept to associate the copied item to brochures as original</label></div>
+                                                    Sei sicuro di duplicare questo partner?<br />
+                                                    <div class="alert alert-warning"><label><input type='checkbox' name='insert_item' checked> Accetto di duplicare questo partner come da originale</label></div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal"><?php echo lang('app.btn_cancel') ?></button>
+                                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Chiudi</button>
                                                     <input type="submit" name="delete" class="btn btn-danger" value="<?php echo lang('app.btn_save') ?>">
                                                 </div>
                                             </div>
@@ -309,21 +305,22 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
 
-                                                    <h5 class="modal-title mt-0" id="exampleModalScrollableTitle"><?php echo lang('app.modal_associate_broch_item') ?></h5>
+                                                    <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Associa il partner alla brochure</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                                     </button>
                                                 </div>
 
 
-                                                <div class="modal-body" id="">
-                                                    <div class="alert alert-info"><?php echo lang('app.help_associate_item') ?></div>
+                                                <div class="modal-body mb-3" id="">
+													<div class="alert alert-info">Seleziona una o più brochure per associarla/e al partner</div>
+												</div>
                                                     <table class="table table-bordered" id="">
                                                         <thead>
                                                             <th></th>
-                                                            <th>Title</th>
-                                                            <th>Category</th>
-                                                            <th>Created_at</th>
-                                                            <th>updated_at</th>
+                                                            <th>Titolo</th>
+                                                            <th>Categoria</th>
+                                                            <th>Creato il</th>
+                                                            <th>Ultima modifica</th>
                                                             <th>Status</th>
                                                         </thead>
                                                         <tbody id="div_list_brochures">
@@ -332,7 +329,7 @@
                                                     </table>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal"><?php echo lang('app.btn_cancel') ?></button>
+                                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Chiudi</button>
                                                     <input type="submit" name="delete" class="btn btn-danger" value="<?php echo lang('app.btn_save') ?>">
                                                 </div>
                                             </div>
@@ -341,6 +338,13 @@
                                   
                                 </div>
                             </div>
+			<div class="col-12">
+				<h5>Info</h5>
+				<p><i class="uil uil-pen font-size-18 text-primary"></i> Strumento di modifica<br>
+					<i class="uil uil-apps font-size-18 text-warning"></i> Associazione<br>
+					<i class="uil uil-file-copy-alt font-size-18 text-info"></i> Permette di duplicare la righa<br>
+					<i class="uil uil-file-block-alt font-size-18 text-danger"></i> Attivare o disattivare la righa</p>
+			</div>
                         </div>
 
                         <!-- Optional JavaScript -->

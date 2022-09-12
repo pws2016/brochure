@@ -49,17 +49,20 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="page-title-box d-flex align-items-center justify-content-between">
-                                        <h4 class="mb-0">Category</h4>
+                                        <h4 class="mb-0">Elenco Categorie</h4>
 
                                         <div class="page-title-right">
                                             <ol class="breadcrumb m-0">
                                                 <li class="breadcrumb-item"></li>
-                                                <li class="breadcrumb-item active">Category</li>
+                                                <li class="breadcrumb-item active">Categorie</li>
                                             </ol>
                                         </div>
 
                                     </div>
                                 </div>
+								<div class="col-12">
+									<p>Clicca su <b>+ Agg. Nuova</b> per creare una nuova categoria.</p>
+								</div>
                             </div>
                             <!-- end page title -->
 
@@ -72,7 +75,7 @@
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                            <i class="mdi mdi-plus me-2"></i> Add New </button>
+                                                            <i class="mdi mdi-plus me-2"></i> Agg. Nuova </button>
                                                     </div>
                                                     <form action="<?= base_url('user/category/insert') ?>" method="post" id="form" enctype="multipart/form-data">
                                                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -80,7 +83,7 @@
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
 
-                                                                        <h5 class="modal-title" id="exampleModalLabel"> Add Partners</h5>
+                                                                        <h5 class="modal-title" id="exampleModalLabel"> Aggiungi categoria</h5>
                                                                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
@@ -89,15 +92,15 @@
                                                                         <!-- Add partners Form -->
 
                                                                         <div class="form-group">
-                                                                            <label for="">Title</label><span class="text-primary">*</span>
+                                                                            <label for="">Nome</label><span class="text-primary">*</span>
                                                                             <input type="text" id="title" name="title" class="form-control" required>
                                                                         </div>
                                                                         
 
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                        <button type="submit" class="btn btn-primary" id="add">Add Category</button>
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                                                                        <button type="submit" class="btn btn-primary" id="add">Salva</button>
                                                                         
                                                                     </div>
                                                                 </div>
@@ -119,8 +122,7 @@
                                                     <tr>
                                                        
                                                         <th>ID</th>
-                                                        <th>Title</th>
-                                                     
+                                                        <th>Nome</th>
 														<th></th>
                                                     </tr>
 												</thead>
@@ -149,8 +151,8 @@
                                                                             <a onclick="del_pack('<?php echo $row['id']; ?>')" class="px-2 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
                                                                         </li>
 
-                                                                </td>
-                                                                </ul>
+                                                                </ul></td>
+													
                                                             </tr>
                                                     <?php }
                                                     }
@@ -166,7 +168,7 @@
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Edit Partners</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Modifica Categoria</h5>
                                                                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -179,8 +181,8 @@
 
                                                             <!-- body -->
                                                             <div class="modal-footer">
-                                                                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary" id="update">Update</button>
+                                                                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                                                                <button type="submit" class="btn btn-primary" id="update">Modifica</button>
                                                             </div>
 
                                                         </div>
@@ -195,6 +197,11 @@
                                         </div>
                                     </div>
                                 </div>
+				<div class="col-12">
+				<h5>Info</h5>
+				<p><i class="uil uil-pen font-size-18 text-primary"></i> Strumento di modifica<br>
+					<i class="uil uil-trash-alt font-size-18 text-danger"></i> Strumento di cancellazione</p>
+			</div>
 
                                 <!-- Optional JavaScript -->
                                 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

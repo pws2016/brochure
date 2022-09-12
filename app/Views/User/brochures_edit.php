@@ -34,23 +34,11 @@
 		input[type=file]:focus,
 		input[type=url]:focus,
 		select:focus,
-		textarea:focus {
-			outline: #FF7700 auto 5px;
-		}
-
-		select.form-control:focus {
-			outline: #FF7700 auto 5px;
-			border: 1px solid #FF7700;
-		}
-
-		.error {
-			color: #6a74f4 !important;
-		}
-
-		.parsley-errors-list>li {
-			color: #6a74f4 !important;
-			font-weight: bold;
-		}
+		textarea:focus {outline: #FF7700 auto 5px;}
+		select.form-control:focus {outline: #FF7700 auto 5px;border: 1px solid #FF7700;}
+		.error {color: #6a74f4 !important;}
+		.parsley-errors-list>li {color: #6a74f4 !important;font-weight: bold;}
+		h6.titleblock {background: #f5f6f8;color: #000 !important;font-weight: 100;font-size: 15px;}
 	</style>
 </head>
 
@@ -67,15 +55,10 @@
 					<div class="row">
 						<div class="col-12">
 							<div class="page-title-box d-flex align-items-center justify-content-between">
-								<h4 class="mb-0"><?php echo lang('app.title_page_create_requests_certification') ?></h4>
-
-
-
+								<h4 class="mb-0">Stai per modificare: <?php echo $inf_brochure['title'] ?></h4>
 							</div>
 						</div>
 					</div>
-					<!-- end page title -->
-
 					<div class="row justify-content-center">
 						<div class="col-lg-12">
 
@@ -87,7 +70,7 @@
 
 											<div id="vertical-example" class="vertical-wizard">
 												<!-- Seller Details -->
-												<h3>General informations</h3>
+												<h3>Configurazione</h3>
 												<section>
 													<div class="alert alert-danger" role="alert" id="error_alert_0" style="display:none"><?php echo lang('app.error_required') ?></div>
 
@@ -95,14 +78,14 @@
 														<div class="row">
 															<div class="col-lg-12">
 																<div class="mb-3">
-																	<label for="verticalnav-firstname-input">Title<span class="text-primary">*</span>
+																	<label for="verticalnav-firstname-input">Modifica titolo progetto<span class="text-primary">*</span>
 
 																	</label>
 																	<input type="text" class="form-control" id="title" name="title" value="<?php echo $inf_brochure['title'] ?>" required>
 																</div>
 															</div>
 															<div class="form-group">
-																<label for="">Category</label><span class="text-primary">*</span>
+																<label for="">Categoria</label><span class="text-primary">*</span>
 
 																<select id="id_category" name="id_category" class=" form-control" required style="width:100%">
 																	<option value=""><?php echo lang('app.field_select') ?></option>
@@ -113,6 +96,7 @@
 																	<?php }
 																	} ?>
 																</select>
+																<small class="text-muted">Puoi scegliere una categoria per brochure, se non la trovi, controlla di averla inserito nella sezione Categorie</small>
 
 
 															</div>
@@ -125,12 +109,16 @@
 																			<option value="<?php echo $v['id'] ?>" <?php if ($v['id'] == $inf_brochure['template_id']) echo 'selected' ?>><?php echo $v['title'] ?></option>
 																		<?php } ?>
 																	</select>
+																	<small class="text-muted">E' l'output della tua brochure.  Sarà possibile vedere un anteprima alla fine dell'inserimento</small>
 																</div>
+															</div>
+															<div class="col-lg-12">
+																<h6 class="mb-3 titleblock">Metti in ordine le pagine della tua Brochure</h6>
 															</div>
 															<div class="row" id="template_pages">
 																<?php for ($i = 1; $i <= 7; $i++) { ?>
 																	<div class="mb-3 col-12">
-																		<label for="verticalnav-firstname-input"> Template Page <?php echo $i ?></label>
+																		<label for="verticalnav-firstname-input"> Ordine delle pagine <?php echo $i ?></label>
 																		<select class="form-control" id="id_page" name="id_page[]">
 																			<option value=""><?php echo lang('app.field_select') ?></option>
 																			<?php foreach ($list_pages as $k => $v) { ?>
@@ -152,7 +140,7 @@
 														<div class="row">
 															<div class="col-lg-12">
 																<div class="mb-3">
-																	<label for="verticalnav-firstname-input">Title couverture<span class="text-primary">*</span>
+																	<label for="verticalnav-firstname-input">Titolo di copertina<span class="text-primary">*</span>
 
 																	</label>
 																	<input type="text" class="form-control" id="title_couverture" name="title_couverture" value="<?php echo $inf_brochure['title_couverture'] ?>" required>
@@ -161,65 +149,66 @@
 
 															<div class="col-lg-12">
 																<div class="mb-3">
-																	<label for="verticalnav-firstname-input">SubTitle couverture
-
-																	</label>
+																	<label for="verticalnav-firstname-input">Sotto titolo</label>
 																	<input type="text" class="form-control" id="subtitle_couverture" name="subtitle_couverture" value="<?php echo $inf_brochure['subtitle_couverture'] ?>">
 
 																</div>
 															</div>
 														</div>
-
+														<div class="col-lg-12">
+															<h6 class="mb-3 titleblock">Aggiungere un logo alla brochure</h6>
+														</div>
 														<div class="form-check form-check-inline">
 															<input class="form-check-input" name="selectlogo" type="radio" id="logo1" value="no">
-															<label class="form-check-label" for="logo1">without logo</label>
+															<label class="form-check-label" for="logo1">Senza logo</label>
 														</div>
 														<div class="form-check form-check-inline">
 															<input class="form-check-input" name="selectlogo" type="radio" id="logo2" value="default" checked>
-															<label class="form-check-label" for="logo2">Default logo</label>
+															<label class="form-check-label" for="logo2">Logo di default</label>
 														</div>
 														<div class="form-check form-check-inline">
 															<input class="form-check-input" name="selectlogo" type="radio" id="logo4" value="current">
-															<label class="form-check-label" for="logo4">Current logo</label>
+															<label class="form-check-label" for="logo4">Logo attuale</label>
 														</div>
 														<div class="form-check form-check-inline mb-3">
 															<input class="form-check-input" name="selectlogo" type="radio" id="logo3" value="new">
-															<label class="form-check-label" for="logo3">New logo</label>
+															<label class="form-check-label" for="logo3">Nuovo logo</label>
 														</div>
 
 														<div class="row">
 															<div class="col-lg-12">
 																<div class="mb-3">
-																	<label for="verticalnav-firstname-input mb-3">Uplaod New Logo<span class="text-primary">*</span>
-
+																	<label for="verticalnav-firstname-input mb-3">Carica nuovo logo<span class="text-primary">*</span>
 																	</label>
 																	<input type="file" class="form-control" id="logo" name="logo">
 																</div>
 															</div>
 														</div>
+														<div class="col-lg-12">
+															<h6 class="mb-3 titleblock">Immagine di copertina</h6>
+														</div>
 														<div class="mb-3">
-
 															<div class="form-check form-check-inline ">
 																<input class="form-check-input" name="selectbg" type="radio" id="bg1" value="no">
-																<label class="form-check-label" for="bg1">without background</label>
+																<label class="form-check-label" for="bg1">Senza immagine</label>
 															</div>
 															<div class="form-check form-check-inline">
 																<input class="form-check-input" name="selectbg" type="radio" id="bg2" value="default" checked>
-																<label class="form-check-label" for="bg2">Default background</label>
+																<label class="form-check-label" for="bg2">Immagine di default</label>
 															</div>
 															<div class="form-check form-check-inline">
 																<input class="form-check-input" name="selectbg" type="radio" id="bg3" value="current">
-																<label class="form-check-label" for="bg3">Current background</label>
+																<label class="form-check-label" for="bg3">Immagine attuale</label>
 															</div>
 															<div class="form-check form-check-inline">
 																<input class="form-check-input" name="selectbg" type="radio" id="bg4" value="new">
-																<label class="form-check-label" for="bg4">New background</label>
+																<label class="form-check-label" for="bg4">Nuova immagine</label>
 															</div>
 
-															<div class="row">
+															<div class="row mt-3">
 																<div class="col-lg-12">
 																	<div class="mb-3">
-																		<label for="verticalnav-firstname-input">Uplaod New background<span class="text-primary">*</span>
+																		<label for="verticalnav-firstname-input">Carica nuova immagine<span class="text-primary">*</span>
 
 																		</label>
 																		<input type="file" class="form-control" id="background" name="background">
@@ -231,17 +220,17 @@
 												</section>
 
 												<!-- intro page -->
-												<h3>Introduction Page</h3>
+												<h3>Introduzione</h3>
 												<section>
 													<form method="post" id="form-step-2" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
 														<div class="row">
 															<div class="mb-3">
-																<label for="verticalnav-firstname-input"> Intro Title </label>
+																<label for="verticalnav-firstname-input"> Titole introduzione </label>
 																<input type="text" class="form-control" id="title_intro" name="title_intro" value="<?php echo $inf_brochure['title_intro'] ?? '' ?>">
 															</div>
 														</div>
 														<div class="mb-3 row">
-															<label for="description_intro" class="col-md-2 col-form-label">description</label>
+															<label for="description_intro" class="col-md-2 col-form-label">Testo</label>
 															<div class="mb-3 row">
 
 																<textarea id="intro" name="description_intro"><?php echo $inf_brochure['description_intro'] ?? '' ?></textarea>
@@ -257,23 +246,25 @@
 													<form method="post" id="form-step-3" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
 														<div class="row">
 															<div class="mb-3">
-																<label for="verticalnav-firstname-input"> Products Title </label>
+																<label for="verticalnav-firstname-input"> Titolo </label>
 																<input type="text" class="form-control" id="title_product" name="title_product" value="<?php echo $inf_brochure['title_product'] ?? '' ?>">
 															</div>
 														</div>
 														<div class="mb-3 row">
 
-															<label for="description_product" class="col-md-2 col-form-label">description</label>
+															<label for="description_product" class="col-md-2 col-form-label">Testo</label>
 															<div class="mb-3 row">
 
 																<textarea id="product" name="description_product"><?php echo $inf_brochure['description_product'] ?? '' ?></textarea>
 															</div>
 														</div>
+														<div class="col-lg-12">
+															<h6 class="mb-3 titleblock">Elenco di tutte le attività.</h6>
+															<p>Controlla la sessione <b>Area di attività</b> per togliere o aggiungere un attività nella lista.</p>
+														</div>
 														<div id=check_list_products>
 															<?php
-
-
-															foreach ($prod as $row) {
+																foreach ($prod as $row) {
 															?>
 
 																<input type="checkbox" name="select_product[]" value="<?= $row['id']; ?>" <?php if (in_array($row['id'], $items_product ?? array())) echo 'checked' ?> /> <?= $row['name']; ?> <br />
@@ -292,16 +283,20 @@
 													<form method="post" id="form-step-4" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
 														<div class="row">
 															<div class="mb-3">
-																<label for="title_operation"> Operation Title </label>
+																<label for="title_operation"> Titolo </label>
 																<input type="text" class="form-control" id="title_operation" name="title_operation" value="<?php echo $inf_brochure['title_operation'] ?? '' ?>">
 															</div>
 														</div>
 														<div class="mb-3 row">
-															<label for="description_operation" class="col-md-2 col-form-label">description</label>
+															<label for="description_operation" class="col-md-2 col-form-label">Testo</label>
 															<div class="mb-3 row">
 
 																<textarea id="opertion" name="description_operation"><?php echo $inf_brochure['description_operation'] ?></textarea>
 															</div>
+														</div>
+														<div class="col-lg-12">
+															<h6 class="mb-3 titleblock">Elenco di tutte le operazioni.</h6>
+															<p>Controlla la sessione <b>Operazioni</b> per togliere o aggiungere un operazione nella lista.</p>
 														</div>
 														<div id=div_list_operations>
 
@@ -324,15 +319,19 @@
 													<form method="post" id="form-step-5" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
 														<div class="row">
 															<div class="mb-3">
-																<label for="verticalnav-firstname-input"> Premi Title </label>
+																<label for="verticalnav-firstname-input"> Titolo premi </label>
 																<input type="text" class="form-control" id="title_premi" name="title_premi" value="<?php echo $inf_brochure['title_premi'] ?? '' ?>">
 															</div>
 														</div>
 														<div class="mb-3 row">
-															<label for="description_premi" class="col-md-2 col-form-label">description</label>
+															<label for="description_premi" class="col-md-2 col-form-label">Testo</label>
 															<div class="mb-3 row">
 
 																<textarea id="premi" name="description_premi"><?php echo $inf_brochure['description_premi'] ?? '' ?></textarea>
+															</div>
+															<div class="col-lg-12">
+																<h6 class="mb-3 titleblock">Elenco di tutti Premi.</h6>
+																<p>Controlla la sessione <b>Premi</b> per togliere o aggiungere un premio nella lista.</p>
 															</div>
 															<div id=check_list_premi>
 
@@ -357,16 +356,20 @@
 													<form method="post" id="form-step-6" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
 														<div class="row">
 															<div class="mb-3">
-																<label for="title_partners"> Partners Title </label>
+																<label for="title_partners"> Partners </label>
 																<input type="text" class="form-control" id="title_partners" name="title_partners" value="<?php echo $inf_brochure['title_partners'] ?? '' ?>">
 															</div>
 														</div>
 														<div class="mb-3 row">
-															<label for="description_partners" class="col-md-2 col-form-label">description</label>
+															<label for="description_partners" class="col-md-2 col-form-label">Testo</label>
 															<div class="mb-3 row">
 
 																<textarea id="partners" name="description_partners"><?php echo $inf_brochure['description_partners'] ?? '' ?></textarea>
 															</div>
+														</div>
+														<div class="col-lg-12">
+															<h6 class="mb-3 titleblock">Elenco di tutti Partner.</h6>
+															<p>Controlla la sessione <b>Partner</b> per togliere o aggiungere un partner nella lista.</p>
 														</div>
 														<div id=check_list_partners>
 															<?php
@@ -388,16 +391,20 @@
 													<form method="post" id="form-step-7" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
 														<div class="row">
 															<div class="mb-3">
-																<label for="title_contacts"> Contacts Title </label>
+																<label for="title_contacts"> Titolo </label>
 																<input type="text" class="form-control" id="title_contacts" name="title_contacts" value="<?php echo $inf_brochure['title_contacts'] ?? '' ?>">
 															</div>
 														</div>
 														<div class="mb-3 row">
-															<label for="description_contacts" class="col-md-2 col-form-label">description</label>
+															<label for="description_contacts" class="col-md-2 col-form-label">Testo</label>
 															<div class="mb-3 row">
 
 																<textarea id="contacts" name="description_contacts"><?php echo $inf_brochure['description_contacts'] ?? '' ?></textarea>
 															</div>
+														</div>
+														<div class="col-lg-12">
+															<h6 class="mb-3 titleblock">Elenco di tutti Contatti.</h6>
+															<p>Controlla la sessione <b>Contatti</b> per togliere o aggiungere un contatto nella lista.</p>
 														</div>
 														<div id=check_list_contacts>
 															<?php
@@ -416,12 +423,12 @@
 												</section>
 
 
-												<h3>prevus Page</h3>
+												<h3>Anteprima</h3>
 												<section>
 													<form method="post" id="form-step-8" action="<?php echo base_url($prefix_route . 'requests/pay_request') ?>" enctype="multipart/form-data">
 
 														<div class="row">
-															<input onclick="save_template()" type="button" class="btn btn-info" name="preview" value="save & preview">
+															<input onclick="save_template()" type="button" class="btn btn-info" name="preview" value="Salva e Anteprima">
 														</div>
 													</form>
 												</section>
