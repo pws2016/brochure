@@ -47,7 +47,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0">Elenco Contatti</h4>
+                                <h4 class="mb-0">Elenco Contatti / Sedi</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
@@ -96,7 +96,7 @@
                                                                 <!-- Add package Form -->
 
                                                                 <div class="form-group">
-                                                                    <label for="">Nome</label><span class="text-primary">*</span>
+                                                                    <label for="">Città</label><span class="text-primary">*</span>
                                                                     <input type="text" id="name" name="name" class="form-control" required>
                                                                 </div>
                                                                 <div class="form-group">
@@ -151,7 +151,7 @@
                                     <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                         <thead>
                                             <tr>
-                                                <th>Nome</th>
+                                                <th>Città</th>
                                                 <th>Email</th>
                                                 <th>Telefono</th>
                                                 <th>Fax</th>

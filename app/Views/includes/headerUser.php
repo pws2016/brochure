@@ -192,11 +192,10 @@
 					
 				<hr>
 				<li class="menu-title">Profilo</li>
-				<?php /* if($user_data['role']!='guest'){?>
+				 
 				<li>
-					<a href="<?php echo base_url($prefix_route.'profile');//$profile_url?>"><i class="uil uil-user-circle"></i> <span class="align-middle">Mio profilo</span></a>
+					<a href="<?php echo base_url('user/profile');//$profile_url?>"><i class="uil uil-user-circle"></i> <span class="align-middle">Mio profilo</span></a>
 				</li>
-				<?php }*/?>
 				
 				<li>
 					<a href="<?php echo base_url('logout')?>">

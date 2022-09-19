@@ -12,6 +12,7 @@ use App\Models\SettingModel;
 use App\Models\UserModel;
 use App\Models\UserProfileModel;
 use App\Models\UsersLogModel;
+use App\Models\UsersMobileModel;
 use App\Models\TemplatesModel;
 use App\Models\PackageModel;
 use App\Models\UserPackModel;
@@ -91,7 +92,7 @@ abstract class BaseController extends Controller
 		$this->CategoryModel=new CategoryModel();
 		$this->OperationsModel =  new OperationsModel();
 		$this->SubOperationsModel =  new SubOperationsModel();
-
+		$this->UsersMobileModel=new UsersMobileModel();
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();

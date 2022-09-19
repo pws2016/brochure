@@ -434,7 +434,7 @@ public function smsAuth()
 			}
 		}
 		$data['redirect_url'] = $uri;
-		return view('forgot_password', $data);
+		return view('forgot_password.php', $data);
 	}
 
 	public function resetPassword($email, $token)

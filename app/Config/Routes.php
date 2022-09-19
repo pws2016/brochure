@@ -68,6 +68,7 @@ $routes->add('admin/user/delete',       'User::delete');
 # ######user routes ########################
 $routes->add('user/dashboarduser',      'UserPanel::Dash');
 $routes->add('user/packageuser',        'Packageuser::package_list');
+$routes->add('user/profile',      'UserPanel::Profile');
 /////
 $routes->add('user/partners',           'Partners::partners');
 $routes->add('user/partners/insert',    'Partners::insert');
