@@ -1,27 +1,37 @@
 <!doctype html>
 <html lang="it">
-    <head>
-        <meta charset="utf-8" />
-        <title>Benvenuto su Certificazioni e Basic Plan Online di Creazioneimpresa</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="" name="description" />
-        <meta content="Creazioneimpresa" name="author" />
-        <link rel="shortcut icon" href="https://creazioneimpresa.net/wp-content/uploads/2020/06/favicon-black.png">
-        <link href="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
-        <link href="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-        <link href="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-		<!-- script src="https://www.google.com/recaptcha/api.js?render="></script -->
 
+    <head>
+        
+        <meta charset="utf-8" />
+        <title><?php echo lang('app.title_page_forgot_password')?> | <?php echo $settings['meta_title']?></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" CONTENT="noindex, nofollow">
+		<meta name="googlebot" content="noindex, nofollow">
+        <meta content="Creazioneimpresa" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="https://creazioneimpresa.net/wp-content/uploads/2020/06/favicon-black.png">
+
+        <!-- Bootstrap Css -->
+        <link href="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+<script src="https://www.google.com/recaptcha/api.js?render=<?php echo CAPTCHA_PUBLIC?>"></script>
     </head>
+
     <body class="authentication-bg">
+
+     
         <div class="account-pages my-5 pt-sm-5">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-center">
                             <a href="<?php echo base_url()?>/login" class="mb-5 d-block auth-logo">
-                                <!-- <img src="https://app.creazioneimpresa.it/Minible_v2.0.0/Admin/dist/assets/images/logo-black-150x150-mail.png" alt="" height="200" class="logo logo-dark">
-                                <img src="https://app.creazioneimpresa.it/Minible_v2.0.0/Admin/dist/assets/images/logo-black-150x150-mail.png" alt="" height="200" class="logo logo-light"> -->
+                                <img src="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/images/orizzontale-black.png" alt="" height="22" class="logo logo-dark">
+                                <img src="<?php echo base_url()?>/Minible_v2.0.0/Admin/dist/assets/images/creazioneimpresa_logo-bianco.png" alt="" height="22" class="logo logo-light">
                             </a>
                         </div>
                     </div>
@@ -30,36 +40,36 @@
                     <div class="col-md-8 col-lg-6 col-xl-5">
                         <div class="card">
                            
-                            <div class="card-body p-4">
-								<div class="row">
-									<div class="col-lg-12">
+                            <div class="card-body p-4"> 
                                 <div class="text-center mt-2">
-                                    <h5 class="text-primary"><?php echo lang('app.title_page_login')?></h5>
-                                   
+                                    <h5 class="text-primary"><?php echo lang('app.title_page_forgot_password')?></h5>
+                                   	
                                 </div>
                                 <div class="p-2 mt-4">
 								 <?php //echo $validation->listErrors()
-									 if(isset($validation)){?>
-									 <div class="alert alert-danger" role="alert">
-										 <?php echo $validation->listErrors()?>
-										</div>
-									 <?php }?>
-									 <?php //echo $validation->listErrors()
-									 if(isset($error)){?>
-									 <div class="alert alert-danger" role="alert">
-										 <?php echo $error?>
-										</div>
-									 <?php }?>
-									  <?php //echo $validation->listErrors()
-									 if(isset($_REQUEST['success'])){?>
-									 <div class="alert alert-success" role="alert">
-										 <?php echo $_REQUEST['success']?>
-										</div>
-									 <?php }?>
+			 if(isset($validation)){?>
+			 <div class="alert alert-danger" role="alert">
+				 <?php echo $validation->listErrors()?>
+				</div>
+			 <?php }?>
+			 <?php //echo $validation->listErrors()
+			 if(isset($error)){?>
+			 <div class="alert alert-danger" role="alert">
+				 <?php echo $error?>
+				</div>
+			 <?php }?>
+			  <?php if(isset($success)){?>
+			 <div class="alert alert-success" role="alert">
+				 <?php echo $success?>
+				</div>
+			 <?php }?>
                                    <?php $attributes = ['class' => '', 'id' => 'register-form','method'=>'post' ,  'accept-charset'=>"UTF-8"];
-									echo form_open(base_url('login'), $attributes);?>
+									echo form_open(base_url('forgotPassword'), $attributes);?>
         
                                         <div class="mb-3">
+										<div class="float-end">
+                                               <?php echo lang('app.remember_it')?> <a href="<?php echo base_url('login')?>" class=""><?php echo lang('app.btn_login')?></a>
+                                            </div>
                                             <label class="form-label" for="username">Email</label>
 											<?php $input = [
 												'type'  => 'email',
@@ -74,48 +84,34 @@
                                            
                                         </div>
                 
-                                        <div class="mb-3">
-                                            <div class="float-end">
-                                                <a href="<?php echo base_url('forgotPassword')?>" class="text-muted"><?php echo lang('app.forget_password')?></a>
-                                            </div>
-                                            <label class="form-label" for="userpassword"><?php echo lang('app.field_password')?></label>
-                                           <?php $input = [
-												'type'  => 'password',
-												'name'  => 'login_password',
-												'id'    => 'login_password',
-												'class' => 'form-control',
-												'placeholder' =>"Password"
-										];
-										echo form_input($input);?>
-                                        </div>
-                
+                                       
                                       
                                         <div class="mt-3 text-end">
-										 <?php /*<a class="btn btn-info w-sm waves-effect waves-light" href="<?php echo base_url('loginAsGuest')?>"><?php echo lang('app.btn_login_guest')?></a>*/?>
-											
-											
-                                            <button class="btn btn-primary w-sm waves-effect waves-light" type="submit">
-                                                <?php echo lang('app.btn_login')?>  </button>
+										<button class="g-recaptcha btn btn-primary w-sm waves-effect waves-light" 
+        data-sitekey="<?php echo CAPTCHA_PUBLIC?>"
+        data-callback='onSubmit'  name="submit_reset"
+        data-action='submit'><?php echo  lang('app.btn_recover')?></button>
+                                            
                                         </div>
             
-                                        <!-- <?php /*
+                                        
 
-                          
-*/?> -->
+                                      
+
                                         <div class="mt-4 text-center">
-                                            <p class="mb-3"><?php echo lang('app.looking_to')?> <a href="<?php echo base_url('register')?>" class="fw-medium text-primary"> <?php echo lang('app.create_account')?> </a> </p>
+                                            <p class="mb-0"><?php echo lang('app.looking_to')?> <a href="<?php echo base_url('register')?>" class="fw-medium text-primary"> <?php echo lang('app.create_account')?> </a> </p>
                                         </div>
                                   <?php echo form_close();?>
                                 </div>
-									</div></div>
+            
                             </div>
-							<!-- end card-body -->
-                        </div> 
-<!-- end card -->
+                        </div>
+
+                        <div class="mt-5 text-center">
+                            <?php echo view('includes/copyright');?>
+                        </div>
+
                     </div>
-					<div class="mt-5 text-center">
-						<?php echo view('includes/copyright');?>
-					</div>
                 </div>
                 <!-- end row -->
             </div>

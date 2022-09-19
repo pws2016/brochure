@@ -140,47 +140,47 @@
 			
 				<li>
 					<a href="<?php echo base_url('user/brochures/new')?>">
-						<i class="uil-analysis me-2"></i><span>New Brochure</span>
+						<i class="uil-analysis me-2"></i><span>+ Agg. Brochure</span>
 					</a>
 				</li>
 
 				<li>
 					<a href="<?php echo base_url('user/brochures')?>">
-						<i class="uil-analysis me-2"></i><span>My Brochure</span>
+						<i class="uil-analysis me-2"></i><span>Elenco Brochure</span>
 					</a>
 				</li>
 				
 			
-				<li class="menu-title">Offerte</li>
+				<li class="menu-title">Configurazione</li>
+				<li>
+					<a href="<?php echo base_url('user/companyInfo')?>">
+						<i class="uil-bars me-2"></i><span>Profilo Società</span>
+					</a>
+				</li>
 				<li>
 					<a href="<?php echo base_url('user/partners')?>">
-						<i class=" uil-bars me-2"></i><span>partners</span>
+						<i class=" uil-bars me-2"></i><span>Elenco Partner</span>
 						<!-- uil-bookmark-full -->
 					</a>
 				</li>
 				<li>
 					<a href="<?php echo base_url('user/contacts')?>">
-						<i class="uil-bars me-2"></i><span>Contacts</span>
+						<i class="uil-bars me-2"></i><span>Elenco Contatti</span>
 					</a>
 				</li>
 				<li>
 					<a href="<?php echo base_url('user/products')?>">
-						<i class="uil-bars me-2"></i><span>Products</span>
+						<i class="uil-bars me-2"></i><span>Elenco Prodotti</span>
 					</a>
 				</li>
 				<li>
 					<a href="<?php echo base_url('user/premi')?>">
-						<i class="uil-bars me-2"></i><span>Premi</span>
-					</a>
-				</li>
-				<li>
-					<a href="<?php echo base_url('user/companyInfo')?>">
-						<i class="uil-bars me-2"></i><span>Company info</span>
+						<i class="uil-bars me-2"></i><span>Elenco Premi</span>
 					</a>
 				</li>
 				<li>
 					<a href="<?php echo base_url('user/category')?>">
-						<i class="uil-bars me-2"></i><span>Category</span>
+						<i class="uil-bars me-2"></i><span>Elenco Categorie</span>
 					</a>
 				</li>
 				<li>
@@ -192,11 +192,10 @@
 					
 				<hr>
 				<li class="menu-title">Profilo</li>
-				<?php /* if($user_data['role']!='guest'){?>
+				 
 				<li>
-					<a href="<?php echo base_url($prefix_route.'profile');//$profile_url?>"><i class="uil uil-user-circle"></i> <span class="align-middle">Mio profilo</span></a>
+					<a href="<?php echo base_url('user/profile');//$profile_url?>"><i class="uil uil-user-circle"></i> <span class="align-middle">Mio profilo</span></a>
 				</li>
-				<?php }*/?>
 				
 				<li>
 					<a href="<?php echo base_url('logout')?>">
