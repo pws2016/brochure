@@ -40,6 +40,7 @@ class Authentification extends BaseController
 		$common_data = $this->common_data();
 		$settings = $common_data['settings'];
 		$data = $common_data;
+		$data['list_mobile'] = $this->UsersMobileModel->where('user_id', $data['user_data']['id'])->find();
 
 		if ($common_data['is_logged'] == true) {
 			if ($common_data['user_data']['role'] == 'A') return redirect()->to(base_url('admin/dashboard'));
@@ -70,20 +71,7 @@ class Authentification extends BaseController
 				} else {
 					$this->session->set(array('verifier_sms' => $users[0]));
 					// creation code + save dans table smsauth
-					$sms_code = random_string("numeric", 6);
-					$this->session->set(array('sms_code'=>$sms_code));
-					$iat = time(); // current timestamp value
-					$exp = $iat + 600;
-
-
-					$insert = $this->UsersAuthSmsModel->insert(array(
-
-						'code' => $sms_code,
-						'user_id' => $users[0]['id'],
-						'expired_at' => date('Y-m-d H:i', $exp)
-
-					));
-
+					
 
 
 					$redirect_url = 'smsAuth';
@@ -102,53 +90,94 @@ class Authentification extends BaseController
 		}
 	}
 
+	function hide_mobile_no($number)
+	{
+		return substr($number, 0, 2) . '******' . substr($number, -2);
+	}
+	
 
-public function smsAuth()
+
+	public function smsAuth()
 	{
 		$common_data = $this->common_data();
 		$data = $common_data;
 
-		if (!is_null($this->request->getVar('code'))) {
+		$s = $this->session->get('verifier_sms');
 
-			$s=$this->session->get('verifier_sms');
-			$res = $this->UsersAuthSmsModel
-			->where('user_id', $s['id'])
-			->where('code',$this->request->getVar('code'))
-			->find();
-			
-			if (empty($res)) {
+		switch ($this->request->getVar('action')) {
+			case "select_mobile":
+				$def = $this->request->getVar('select_mobile');
 
-				return view('smsAuth',array('error'=>"invalid code"));
-			}
-				
-			else {
-
-				
-				$iat = time();
-				
-				if ($iat > strtotime($res[0]['expired_at'])) {
-
-					return view('smsAuth',array('error'=>"expired code")); // code expiré
+				if ($def == 'default') {
+					$phone=$s['mobile'];
+				} else {
+					
+					$inf_mob=$this->UsersMobileModel->where('user_id', $s['id'])->where('id', $def)->first();
+					$phone=$inf_mob['mobile'];
 				}
-				else{
-				$this->session->set(array('user_data' => $s));
-				switch ($s['role']) {
-					case 'A':
-						$redirect_url = 'admin/dashboard';
-						break;
+					//echo $phone;
+					$sms_code = random_string("numeric", 6);
+					$this->session->set(array('sms_code' => $sms_code));
+					$iat = time(); // current timestamp value
+					$exp = $iat + 600;
 
-					default:
-						$redirect_url = 'user/dashboarduser';
+
+					$insert = $this->UsersAuthSmsModel->insert(array(
+
+						'code' => $sms_code,
+						'user_id' => $s['id'],
+						'expired_at' => date('Y-m-d H:i', $exp)
+
+					));
+					//call sms api
+					
+					$data['sms_code']=$sms_code; // to delete
+				break;
+			case "get_code":
+				if (!is_null($this->request->getVar('code'))) {
+
+
+					$res = $this->UsersAuthSmsModel
+						->where('user_id', $s['id'])
+						->where('code', $this->request->getVar('code'))
+						->find();
+
+					if (empty($res)) {
+
+						return view('smsAuth', array('error' => "invalid code"));
+					} else {
+
+
+						$iat = time();
+
+						if ($iat > strtotime($res[0]['expired_at'])) {
+
+							return view('smsAuth', array('error' => "expired code")); // code expiré
+						} else {
+							$this->session->set(array('user_data' => $s));
+							switch ($s['role']) {
+								case 'A':
+									$redirect_url = 'admin/dashboard';
+									break;
+
+								default:
+									$redirect_url = 'user/dashboarduser';
+							}
+						}
+					}
+					//    $this->addUserLog($data[0]['id'],'login');
+					return redirect()->to(base_url($redirect_url));
 				}
-				//    $this->addUserLog($data[0]['id'],'login');
-			return redirect()->to(base_url($redirect_url));
+				break;
 		}
 
-		}}
-		else{
-			return view('smsAuth');
-		}
-		
+		// recupiere list mobile +mobile default
+
+		$data['list_mobile'] = $this->UsersMobileModel->where('user_id', $s['id'])->find();
+		$data['default'] = $s['mobile'];
+
+		//var_dump($data['list_mobile']);
+		return view('smsAuth', $data);
 	}
 	// 	$common_data=$this->common_data();
 	// 	$data=$common_data;

@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="utf-8" />
-        <title><?php echo lang('app.title_page_profile')?> | <?php echo $settings['meta_title']?></title>
+        <title></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="robots" CONTENT="noindex, nofollow">
 		<meta name="googlebot" content="noindex, nofollow">
@@ -21,7 +21,7 @@
 
     <body data-sidebar="dark">
         <div id="layout-wrapper">
-            <?php echo view('includes/header.php')?>
+            <?php echo view('includes/headeruser.php')?>
     
             <div class="main-content">
 
@@ -81,15 +81,33 @@
                                                             <label for="horizontal-email-input" class="col-sm-3 col-form-label">Email <code>*</code></label>
                                                             <div class="col-sm-9">
                                                                <?php $input = [
-																			'type'  => 'email',
+																			'type'  => 'text',
 																			'name'  => 'signup_email',
 																			'id'    => 'signup_email',
 																			'class' => 'form-control',
 																			'value'=>$inf_user['email'],
 																			//'required'=>true,
 																			"disabled"=>true,
-																			'parsley-type'=>'email',
+																			
 																			'placeholder' =>"Email"
+																	];
+
+																	echo form_input($input);?>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-4">
+                                                            <label for="horizontal-email-input" class="col-sm-3 col-form-label">mobile <code>*</code></label>
+                                                            <div class="col-sm-9">
+                                                               <?php $input = [
+																			'type'  => 'text',
+																			'name'  => 'mobile',
+																			'id'    => 'mobile',
+																			'class' => 'form-control',
+																			'value'=>$inf_user['mobile'],
+																			'required'=>true,
+																			
+																			'parsley-type'=>'number',
+																			'placeholder' =>"Mobile"
 																	];
 
 																	echo form_input($input);?>

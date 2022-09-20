@@ -196,6 +196,9 @@
 				<li>
 					<a href="<?php echo base_url('user/profile');//$profile_url?>"><i class="uil uil-user-circle"></i> <span class="align-middle">Mio profilo</span></a>
 				</li>
+				<li>
+					<a href="<?php echo base_url('user/list_mobile');//$profile_url?>"><i class="uil uil-user-circle"></i> <span class="align-middle">List_mobile</span></a>
+				</li>
 				
 				<li>
 					<a href="<?php echo base_url('logout')?>">
