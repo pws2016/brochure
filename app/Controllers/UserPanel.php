@@ -45,9 +45,9 @@ class UserPanel extends BaseController
 					$data['error']=$error_msg;
 			}
 			else{
-					//$dt['email']=$signup_email;
-					if($signup_password!=""){$dt['password']=md5($signup_password);
-					$this->UserModel->edit($common_data['user_data']['id'],$dt);}
+					$dt['mobile']=$this->request->getVar('mobile');
+					if($signup_password!=""){$dt['password']=md5($signup_password);}
+					$this->UserModel->update($common_data['user_data']['id'],$dt);
 					$dtp=array("user_id"=>$common_data['user_data']['id'],
 					"ragione_sociale"=>$this->request->getVar('ragione_sociale'),
 					"fattura_piva"=>$this->request->getVar('fattura_piva'),
@@ -88,6 +88,9 @@ class UserPanel extends BaseController
 		
 		return view('user/profile',$data);
 	}
+
+
+	
 }
 
 

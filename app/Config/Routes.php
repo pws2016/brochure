@@ -69,6 +69,9 @@ $routes->add('admin/user/delete',       'User::delete');
 $routes->add('user/dashboarduser',      'UserPanel::Dash');
 $routes->add('user/packageuser',        'Packageuser::package_list');
 $routes->add('user/profile',      'UserPanel::Profile');
+$routes->add('user/list_mobile',      'List_mobile::List_mobile');
+$routes->add('user/list_mobile/insert',      'List_mobile::insert');
+$routes->add('user/list_mobile/delete',    'List_mobile::delete');
 /////
 $routes->add('user/partners',           'Partners::partners');
 $routes->add('user/partners/insert',    'Partners::insert');
