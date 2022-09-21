@@ -13,7 +13,8 @@
     <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-    <style>
+   <link rel="stylesheet" href="<?php echo base_url()?>/intl-tel-input-master/build/css/intlTelInput.css">
+   <style>
         input[type=text]:focus,
         input[type=email]:focus,
         input[type=password]:focus,
@@ -92,7 +93,7 @@
 
                                                                         <div class="form-group">
                                                                             <label for="">Nuovo phone</label><span class="text-primary">*</span>
-                                                                            <input type="mobile" id="mobile" name="mobile" class="form-control" required>
+                                                                            <input type="mobile" id="mobile" name="" class="form-control" required>
                                                                         </div>
 
                                                                         <div class="modal-footer">
@@ -198,7 +199,39 @@
                                             <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/parsleyjs/parsley.min.js"></script>
                                             <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/parsleyjs/i18n/it.js"></script>
                                             <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/js/pages/form-validation.init.js"></script>
-                                            <script>
+                                            <script src="<?php echo base_url()?>/intl-tel-input-master/build/js/intlTelInput.js"></script>
+  <script>
+    var input = document.querySelector("#mobile");
+    window.intlTelInput(input, {
+      // allowDropdown: false,
+      // autoHideDialCode: false,
+      // autoPlaceholder: "off",
+      // dropdownContainer: document.body,
+      // excludeCountries: ["us"],
+      // formatOnDisplay: false,
+      // geoIpLookup: function(callback) {
+      //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+      //     var countryCode = (resp && resp.country) ? resp.country : "";
+      //     callback(countryCode);
+      //   });
+      // },
+       hiddenInput: "mobile",
+      // initialCountry: "auto",
+       localizedCountries: { 'it': 'Italia' },
+      // nationalMode: false,
+       //onlyCountries: ['it'],
+      // placeholderNumberType: "MOBILE",
+       preferredCountries: ['it'],
+       separateDialCode: true,
+      utilsScript: "<?php echo base_url()?>/intl-tel-input-master/build/js/utils.js",
+    });
+	/*input.addEventListener("countrychange", function() { alert("");
+  // do something with iti.getSelectedCountryData()
+  console.log(iti.getSelectedCountryData());
+ // addressDropdown.value = iti.getSelectedCountryData().country ;
+});*/
+  </script>	  
+										   <script>
                                                 function del_pack(id) {
                                                     if (confirm("are you sure !")) {
                                                         $.ajax({
