@@ -105,6 +105,26 @@
                                                                     <label for="">Email</label><span class="text-primary">*</span>
                                                                     <input type="email" id="email" name="email" class="form-control" required>
                                                                 </div>
+																 <div class="form-group">
+                                                                    <label for="">Telefono</label>
+                                                                    <input type="text" id="phone" name="phone" class="form-control" >
+                                                                </div>
+																 <div class="form-group">
+                                                                    <label for="">descrizione</label>
+                                                                    <textarea id="description" name="description" class="form-control" ></textarea>
+                                                                </div>
+																 <div class="form-group">
+                                                                    <label for="">Sede</label>
+                                                                    <input type="text" id="sede" name="sede" class="form-control" >
+                                                                </div>
+																 <div class="form-group">
+                                                                    <label for="">LinkedIn URL</label>
+                                                                    <input type="text" id="linkedin" name="linkedin" class="form-control" >
+                                                                </div>
+																 <div class="form-group">
+                                                                    <label for="">Tipologia</label>
+                                                                    <input type="text" id="tipologia" name="tipologia" class="form-control" >
+                                                                </div>
                                                                 <div class="form-group">
                                                                     <label for="">Categoria/e di appartenenza</label><span class="text-primary">*</span>
                                                                     <select id="ids_category" name="ids_category[]" class="select2 form-control select2-multiple" multiple="multiple" data-placeholder="Choose ..." required style="width:100%">
@@ -147,14 +167,20 @@
                                         <thead>
                                             <tr>
 
-                                                <th>ID</th>
+                                               <th></th>
                                                 <th>Ord.</th>
                                                 <th>Nome</th>
                                                 <th>Email</th>
+												 <th>descrizione</th>
+												  <th>Telefono</th>
+												   <th>Sede</th>
+												    <th>Tipologia</th>
+													
                                                 <th>Categorie</th>
+												 <th>LinkedIn</th>
                                                 <th>Img.</th>
                                                 <th>Status</th>
-                                                <th></th>
+                                               
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -163,18 +189,7 @@
                                                 foreach ($part as $row) {
                                             ?><tr id="tr_<?php echo $row['id']; ?>">
 
-                                                        <td> <?php echo $row['user_id']; ?></td>
-                                                        <td> <?php echo $row['ord']; ?></td>
-                                                        <td> <?php echo $row['name']; ?></td>
-                                                        <td><?php echo $row['email']; ?></td>
-                                                        <td><?php echo $row['categories']; ?></td>
-
-                                                        <td>
-
-                                                            <img src="<?php echo base_url('uploads/' . $row['image']) ?>" height="50" width="50px" />
-                                                        </td>
-                                                        <td><?php if ($row['enable'] == 1) { ?><span class="bg-success badge me-2"><?php echo lang('app.yes') ?></span> <?php } else { ?><span class="bg-danger badge me-2"><?php echo lang('app.no') ?></span> <?php } ?></td>
-                                                        <td>
+                                                       <td>
                                                             <ul class="list-inline mb-0">
 
                                                                 <li class="list-inline-item">
@@ -203,6 +218,23 @@
 																	*/ ?>
 </ul>
                                                         </td>
+                                                        <td> <?php echo $row['ord']; ?></td>
+                                                        <td> <?php echo $row['name']; ?></td>
+                                                        <td><?php echo $row['email']; ?></td>
+														 <td> <?php echo $row['description']; ?></td>
+                                                        <td> <?php echo $row['phone']; ?></td>
+                                                        <td> <?php echo $row['sede']; ?></td>
+                                                        <td><?php echo $row['tipologia']; ?></td>
+                                                       
+
+                                                        <td><?php echo $row['categories']; ?></td>
+ <td><?php echo $row['linkedin']; ?></td>
+                                                        <td>
+
+                                                            <img src="<?php echo base_url('uploads/' . $row['image']) ?>" height="50" width="50px" />
+                                                        </td>
+                                                        <td><?php if ($row['enable'] == 1) { ?><span class="bg-success badge me-2"><?php echo lang('app.yes') ?></span> <?php } else { ?><span class="bg-danger badge me-2"><?php echo lang('app.no') ?></span> <?php } ?></td>
+                                                       
                                                     </tr>
                                             <?php }
                                             }

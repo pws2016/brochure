@@ -42,7 +42,7 @@ class Partners extends BaseController
                 case 'duplicate':
                     $id = $this->request->getVar('id');
                     $inf_part = $this->PartnersModel->find($id);
-                    $newid = $this->PartnersModel->insert(array("user_id" => $data['user_data']['id'], "name" => $inf_part['name'] . " copy", "email" => $inf_part['email'], "image" => $inf_part['image'], "enable" => $inf_part['enable'], "ids_category" => $inf_part['ids_category'],"ord" => $inf_part['ord'],));
+                    $newid = $this->PartnersModel->insert(array("user_id" => $data['user_data']['id'], "name" => $inf_part['name'] . " copy", "email" => $inf_part['email'], "image" => $inf_part['image'], "enable" => $inf_part['enable'], "ids_category" => $inf_part['ids_category'],"ord" => $inf_part['ord'],"description" => $inf_part['description'],"phone" => $inf_part['phone'],"sede" => $inf_part['sede'],"tipologia" => $inf_part['tipologia'],"linkedin" => $inf_part['linkedin']));
                     if ($this->request->getVar('insert_item') !== null) {
                         $ll = $this->BrochuresModel->where('user_id', $data['user_data']['id'])->where("id_category IN (" . $inf_part['ids_category'] . ")")->find();
                         if (!empty($ll)) {
@@ -122,6 +122,12 @@ class Partners extends BaseController
 
                     'name' => $this->request->getVar("name"),
                     'email' => $this->request->getVar("email"),
+					 'description' => $this->request->getVar("description"),
+                    'sede' => $this->request->getVar("sede"),
+					 'phone' => $this->request->getVar("phone"),
+                    'tipologia' => $this->request->getVar("tipologia"),
+					 'linkedin' => $this->request->getVar("linkedin"),
+                   
                     'image' => $name,
                     'user_id' => $data['user_data']['id'],
                     'enable' => 1,
@@ -159,7 +165,11 @@ class Partners extends BaseController
             'email' => $this->request->getVar("email"),
             'user_id' => $data['user_data']['id'],
              'ord' => $this->request->getVar("ord"),
-
+ 'description' => $this->request->getVar("description"),
+                    'sede' => $this->request->getVar("sede"),
+					 'phone' => $this->request->getVar("phone"),
+                    'tipologia' => $this->request->getVar("tipologia"),
+					 'linkedin' => $this->request->getVar("linkedin")
 
 
 
@@ -189,7 +199,11 @@ class Partners extends BaseController
                 'image' => $name,
                 'user_id' => $data['user_data']['id'],
                 'ord' => $this->request->getVar("ord"),
-
+ 'description' => $this->request->getVar("description"),
+                    'sede' => $this->request->getVar("sede"),
+					 'phone' => $this->request->getVar("phone"),
+                    'tipologia' => $this->request->getVar("tipologia"),
+					 'linkedin' => $this->request->getVar("linkedin")
 
 
             ];
@@ -218,6 +232,26 @@ class Partners extends BaseController
             <label for="">Email</label><span class="text-primary">*</span>
             <input type="email" id="email" name="email" value="<?= $par['email'] ?>" class="form-control" required>
         </div>
+		 <div class="form-group">
+                                                                    <label for="">Telefono</label>
+                                                                    <input type="text" id="phone" name="phone" class="form-control" value="<?= $par['phone'] ?>" >
+                                                                </div>
+																 <div class="form-group">
+                                                                    <label for="">descrizione</label>
+                                                                    <textarea id="description" name="description" class="form-control" ><?= $par['description'] ?></textarea>
+                                                                </div>
+																 <div class="form-group">
+                                                                    <label for="">Sede</label>
+                                                                    <input type="text" id="sede" name="sede" class="form-control" value="<?= $par['sede'] ?>" >
+                                                                </div>
+																 <div class="form-group">
+                                                                    <label for="">LinkedIn URL</label>
+                                                                    <input type="text" id="linkedin" name="linkedin" class="form-control" value="<?= $par['linkedin'] ?>" >
+                                                                </div>
+																 <div class="form-group">
+                                                                    <label for="">Tipologia</label>
+                                                                    <input type="text" id="tipologia" name="tipologia" class="form-control" value="<?= $par['tipologia'] ?>" >
+                                                                </div>
         <div class="form-group">
             <label for="">Category</label><span class="text-primary">*</span>
             <select id="ids_category" name="ids_category[]" class="select2 form-control select2-multiple" multiple="multiple" data-placeholder="Choose ..." required style="width:100%">
