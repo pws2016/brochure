@@ -237,9 +237,10 @@ class Brochures extends BaseController
 			$temp_page = $this->BrochureTemplatePagesModel->find($res_page_template[$i]);
 			$page[$i] = $temp_page['html'];
 			switch ($temp_page['type']) {
-
 				case 'couverture':
 					if ($inf_brochure['logo'] != "") $logo = "<img src='" . base_url('uploads/' . $inf_brochure['logo']) . "'>";
+					if ($inf_brochure['background'] != "") $background=base_url('uploads/' .$inf_brochure['background']);
+					else $background="";
 					$page[$i] = str_replace(
 						array("{page_title}", "{page_description}", "{logo}", "{background}"),
 						array($inf_brochure['title_couverture'], $inf_brochure['subtitle_couverture'], $logo, $background),
@@ -248,9 +249,21 @@ class Brochures extends BaseController
 
 					break;
 
+				case 'introduction':
+					if ($inf_brochure['logo'] != "") $logo = "<img src='" . base_url('uploads/' . $inf_brochure['logo']) . "'>";
+					if ($inf_brochure['background'] != "") $background=base_url('uploads/' .$inf_brochure['background']);
+					if ($inf_brochure['image_intro'] != "") $page_img=base_url('uploads/' .$inf_brochure['image_intro']);
+					$page[$i] = str_replace(
+						array("{page_title}", "{page_description}", "{logo}", "{background}","{page_img}"),
+						array($inf_brochure['title_intro'], $inf_brochure['description_intro'], $logo, $background,$page_img),
+						$page[$i]
+					);
+
+					break;
+
 
 				case 'operation':
-					
+					if ($inf_brochure['image_operation'] != "") $page_img=base_url('uploads/' .$inf_brochure['image_operation']);
 					preg_match_all('/{item}/', $page[$i], $output_array);
 					$x_items = count($output_array[0]);
 					$bitems = $this->BitemModel->where('id_brochure', $id)->where('type_item', 'operations')->find();
@@ -286,8 +299,8 @@ class Brochures extends BaseController
 						$page[$i] = substr_replace($page[$i], $item_html, $pos, 6);
 					}
 					$page[$i] = str_replace(
-					    array("{page_title}", "{page_description}"),
-						array($inf_brochure['title_operation'], $inf_brochure['description_operation']),
+					    array("{page_title}", "{page_description}","{page_img}"),
+						array($inf_brochure['title_operation'], $inf_brochure['description_operation'],$page_img),
 						$page[$i]
 					);
 
@@ -313,7 +326,7 @@ class Brochures extends BaseController
 							$item_html = $temp_page['item_html'];
 							if (!empty($inf_item)) {
 								$item_img = "";
-								if ($inf_item['image'] != "") $item_img = "<img src='" . base_url('uploads/' . $inf_item['image']) . "'>";
+								if ($inf_item['image'] != "") $item_img =base_url('uploads/' . $inf_item['image']);// "<img src='" . base_url('uploads/' . $inf_item['image']) . "'>";
 								$item_html = str_replace(
 									array("{item_title}", "{item_description}", "{item_img}"),
 									array($inf_item['name'], $inf_item['description'], $item_img),
@@ -348,7 +361,7 @@ class Brochures extends BaseController
 							$item_html = $temp_page['item_html'];
 							if (!empty($inf_item)) {
 								$item_img = "";
-								if ($inf_item['image'] != "") $item_img = "<img src='" . base_url('uploads/' . $inf_item['image']) . "'>";
+								if ($inf_item['image'] != "") $item_img =  base_url('uploads/' . $inf_item['image']);//"<img src='" . base_url('uploads/' . $inf_item['image']) . "'>";
 								$item_html = str_replace(
 									array("{item_title}", "{item_description}", "{item_img}"),
 									array($inf_item['name'], $inf_item['description'], $item_img),
@@ -384,7 +397,7 @@ class Brochures extends BaseController
 							$item_html = $temp_page['item_html'];
 							if (!empty($inf_item)) {
 								$item_img = "";
-								if ($inf_item['image'] != "") $item_img = "<img src='" . base_url('uploads/' . $inf_item['image']) . "'>";
+								if ($inf_item['image'] != "") $item_img =base_url('uploads/' . $inf_item['image']);// "<img src='" . base_url('uploads/' . $inf_item['image']) . "'>";
 								$item_html = str_replace(
 									array("{item_title}", "{item_email}", "{item_img}","{item_description}", "{item_sede}", "{item_phone}", "{item_linkedin}", "{item_tipologia}"),
 									array($inf_item['name'], $inf_item['email'], $item_img,$inf_item['description'], $inf_item['sede'],$inf_item['phone'], $inf_item['linkedin'],$inf_item['tipologia']),
@@ -419,7 +432,7 @@ class Brochures extends BaseController
 							$item_html = $temp_page['item_html'];
 							if (!empty($inf_item)) {
 								$item_img = "";
-								if ($inf_item['image'] != "") $item_img = "<img src='" . base_url('uploads/' . $inf_item['image']) . "'>";
+								if ($inf_item['image'] != "") $item_img =base_url('uploads/' . $inf_item['image']);// "<img src='" . base_url('uploads/' . $inf_item['image']) . "'>";
 								$item_html = str_replace(
 									array("{item_title}", "{item_email}", "{item_phone}", "{item_fax}", "{item_adres}", "{item_img}"),
 									array($inf_item['name'], $inf_item['email'], $inf_item['phone'], $inf_item['fax'], $inf_item['address'], $item_img),
@@ -433,8 +446,8 @@ class Brochures extends BaseController
 						$page[$i] = substr_replace($page[$i], $item_html, $pos, 6);
 					}
 					$page[$i] = str_replace(
-						array("{page_title}", "{page_description}"),
-						array($inf_brochure['title_contacts'], $inf_brochure['description_contacts']),
+						array("{page_title}", "{page_description}","{company_website}","{company_phone}","{company_email}","{company_twitter}","{company_facebook}","{company_linkedin}","{company_instagram}"),
+						array($inf_brochure['title_contacts'], $inf_brochure['description_contacts'], $inf_brochure['website'], $inf_brochure['phone'], $inf_brochure['email'], $inf_brochure['twitter'], $inf_brochure['facebook'], $inf_brochure['linkedin'], $inf_brochure['instagram']),
 						$page[$i]
 					);
 					break;

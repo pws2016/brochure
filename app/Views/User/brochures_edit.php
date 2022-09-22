@@ -163,11 +163,11 @@
 															<label class="form-check-label" for="logo1">Senza logo</label>
 														</div>
 														<div class="form-check form-check-inline">
-															<input class="form-check-input" name="selectlogo" type="radio" id="logo2" value="default" checked>
+															<input class="form-check-input" name="selectlogo" type="radio" id="logo2" value="default" >
 															<label class="form-check-label" for="logo2">Logo di default</label>
 														</div>
 														<div class="form-check form-check-inline">
-															<input class="form-check-input" name="selectlogo" type="radio" id="logo4" value="current">
+															<input class="form-check-input" name="selectlogo" type="radio" id="logo4" value="current" checked>
 															<label class="form-check-label" for="logo4">Logo attuale</label>
 														</div>
 														<div class="form-check form-check-inline mb-3">
@@ -193,11 +193,11 @@
 																<label class="form-check-label" for="bg1">Senza immagine</label>
 															</div>
 															<div class="form-check form-check-inline">
-																<input class="form-check-input" name="selectbg" type="radio" id="bg2" value="default" checked>
+																<input class="form-check-input" name="selectbg" type="radio" id="bg2" value="default" >
 																<label class="form-check-label" for="bg2">Immagine di default</label>
 															</div>
 															<div class="form-check form-check-inline">
-																<input class="form-check-input" name="selectbg" type="radio" id="bg3" value="current">
+																<input class="form-check-input" name="selectbg" type="radio" id="bg3" value="current" checked>
 																<label class="form-check-label" for="bg3">Immagine attuale</label>
 															</div>
 															<div class="form-check form-check-inline">
@@ -236,7 +236,36 @@
 																<textarea id="intro" name="description_intro"><?php echo $inf_brochure['description_intro'] ?? '' ?></textarea>
 															</div>
 														</div>
+													<div class="col-lg-12">
+															<h6 class="mb-3 titleblock">Immagine</h6>
+														</div>
+														<div class="form-check form-check-inline ">
+																<input class="form-check-input" name="select_img_intro" type="radio" id="bg1" value="no">
+																<label class="form-check-label" for="bg1">Senza immagine</label>
+															</div>
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" name="select_img_intro" type="radio" id="bg2" value="default" >
+																<label class="form-check-label" for="bg2">Immagine di default</label>
+															</div>
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" name="select_img_intro" type="radio" id="bg3" value="current" checked>
+																<label class="form-check-label" for="bg3">Immagine attuale</label>
+															</div>
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" name="select_img_intro" type="radio" id="bg4" value="new">
+																<label class="form-check-label" for="bg4">Nuova immagine</label>
+															</div>
 
+															<div class="row">
+																<div class="col-lg-12">
+																	<div class="mb-3">
+																		<label for="verticalnav-firstname-input">Carica nuova immagine<span class="text-primary">*</span>
+
+																		</label>
+																		<input type="file" class="form-control" id="image_intro" name="image_intro">
+																	</div>
+																</div>
+															</div>
 													</form>
 												</section>
 												<!-- product page -->
@@ -295,10 +324,41 @@
 															</div>
 														</div>
 														<div class="col-lg-12">
+															<h6 class="mb-3 titleblock">Immagine</h6>
+														</div>
+														<div class="form-check form-check-inline ">
+																<input class="form-check-input" name="select_img_operation" type="radio" id="bg1" value="no">
+																<label class="form-check-label" for="bg1">Senza immagine</label>
+															</div>
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" name="select_img_operation" type="radio" id="bg2" value="default" >
+																<label class="form-check-label" for="bg2">Immagine di default</label>
+															</div>
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" name="select_img_operation" type="radio" id="bg3" value="current" checked>
+																<label class="form-check-label" for="bg3">Immagine attuale</label>
+															</div>
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" name="select_img_operation" type="radio" id="bg4" value="new">
+																<label class="form-check-label" for="bg4">Nuova immagine</label>
+															</div>
+
+															<div class="row">
+																<div class="col-lg-12">
+																	<div class="mb-3">
+																		<label for="verticalnav-firstname-input">Carica nuova immagine<span class="text-primary">*</span>
+
+																		</label>
+																		<input type="file" class="form-control" id="image_operation" name="image_operation">
+																	</div>
+																</div>
+															</div>
+														<div class="mb-3 row">
+														<div class="col-lg-12">
 															<h6 class="mb-3 titleblock">Elenco di tutte le operazioni.</h6>
 															<p>Controlla la sessione <b>Operazioni</b> per togliere o aggiungere un operazione nella lista.</p>
 														</div>
-														<div id=div_list_operations>
+														<div id="div_list_operations">
 
 															<?php
 															foreach ($ope as $row) {
@@ -402,6 +462,62 @@
 																<textarea id="contacts" name="description_contacts"><?php echo $inf_brochure['description_contacts'] ?? '' ?></textarea>
 															</div>
 														</div>
+														<div class="mb-3 row">
+                                            <label for="title_operation" class="col-md-2 col-form-label">Telefono</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" name="phone" id="phone" value="<?php echo $inf_brochure['phone'] ?? '' ?>">
+												
+
+                                            </div>
+                                        </div>
+										 <div class="mb-3 row">
+                                            <label for="title_operation" class="col-md-2 col-form-label">Email</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" name="email" id="email" value="<?php echo $inf_brochure['email'] ?? '' ?>">
+												
+
+                                            </div>
+                                        </div>
+										 <div class="mb-3 row">
+                                            <label for="title_operation" class="col-md-2 col-form-label">Siteweb</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" name="siteweb" id="siteweb" value="<?php echo $inf_brochure['siteweb'] ?? '' ?>">
+												
+
+                                            </div>
+                                        </div>
+										 <div class="mb-3 row">
+                                            <label for="title_operation" class="col-md-2 col-form-label">Facebook</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" name="facebook" id="facebook" value="<?php echo $inf_brochure['facebook'] ?? '' ?>">
+												
+
+                                            </div>
+                                        </div>
+										 <div class="mb-3 row">
+                                            <label for="title_operation" class="col-md-2 col-form-label">Twitter</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" name="twitter" id="twitter" value="<?php echo $inf_brochure['twitter'] ?? '' ?>">
+												
+
+                                            </div>
+                                        </div>
+										 <div class="mb-3 row">
+                                            <label for="title_operation" class="col-md-2 col-form-label">LinkedIn</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" name="linkedin" id="linkedin" value="<?php echo $inf_brochure['linkedin'] ?? '' ?>">
+												
+
+                                            </div>
+                                        </div>
+										 <div class="mb-3 row">
+                                            <label for="title_operation" class="col-md-2 col-form-label">Instagram</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" name="instagram" id="instagram" value="<?php echo $inf_brochure['instagram'] ?? '' ?>">
+												
+
+                                            </div>
+                                        </div>
 														<div class="col-lg-12">
 															<h6 class="mb-3 titleblock">Elenco di tutti Contatti.</h6>
 															<p>Controlla la sessione <b>Contatti</b> per togliere o aggiungere un contatto nella lista.</p>
@@ -827,6 +943,20 @@
 				for (var i = 0; i < files.length; i++) {
 					var file = files[i];
 					formData.append('background', file, file.name);
+				}
+			}
+			if (currentIndex == 2) {
+				var files = document.getElementById("image_intro").files;
+				for (var i = 0; i < files.length; i++) {
+					var file = files[i];
+					formData.append('image_intro', file, file.name);
+				}
+			}
+			if (currentIndex == 4) {
+				var files = document.getElementById("image_operation").files;
+				for (var i = 0; i < files.length; i++) {
+					var file = files[i];
+					formData.append('image_operation', file, file.name);
 				}
 			}
 			$.ajax({

@@ -165,7 +165,7 @@ class Contacts extends BaseController
             'phone' => $this->request->getVar("phone"),
             'fax' => $this->request->getVar("fax"),
             'address' => $this->request->getVar("address"),
-
+'ids_category' => implode(",", $this->request->getVar("ids_category") ?? "")
         ];
         $validated = $this->validate([
             'image' => [
@@ -194,7 +194,7 @@ class Contacts extends BaseController
                 'address' => $this->request->getVar("address"),
                 'image' => $name,
                 'user_id' => $data['user_data']['id']
-
+'ids_category' => implode(",", $this->request->getVar("ids_category") ?? "")
 
 
 

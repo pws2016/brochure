@@ -107,6 +107,33 @@ class Ajax extends BaseController
 				$tab['title_intro'] = $this->request->getVar('title_intro');
 				$tab['description_intro'] = $this->request->getVar('description_intro');
 				$tab["step"] = $current_step;
+				if ($this->request->getVar('select_img_intro') == 'new') { // uplaod new logo 
+					$validated = $this->validate([
+						'image_intro' => [
+							'uploaded[image_intro]',
+							'mime_in[image_intro,image/jpg,image/jpeg,image/gif,image/png]',
+							'max_size[image_intro,4096]',
+						],
+					]);
+
+					if ($validated) {
+						$avatar_logo = $this->request->getFile('image_intro');
+						$logo_name = $avatar_logo->getRandomName();
+
+						$avatar_logo->move(ROOTPATH . 'public/uploads/', $logo_name);
+					} else {
+						$validation = $this->validator;
+						$error_msg = $validation->listErrors();
+						$logo_name = null;
+					}
+				} elseif ($this->request->getVar('select_img_intro') == 'default') { // recuperate logo from company data
+					$inf_company = $this->CompanyModel->where('user_id', $data['user_data']['id'])->first();
+					if (!empty($inf_company)) $logo_name = $inf_company['image_intro'];
+				} elseif ($this->request->getVar('select_img_intro') == 'current') { // remain old selected logo
+					$logo_name = null;
+				} else  $logo_name = ""; // without logo
+				//	$tab=array("step"=>$current_step);
+				if (!is_null($logo_name)) $tab['image_intro'] = $logo_name;
 				$this->BrochuresModel->update($this->session->get('current_brochure'), $tab);
 				break;
 
@@ -118,6 +145,7 @@ class Ajax extends BaseController
 
 				$tab["step"] = $current_step;
 				$this->BrochuresModel->update($this->session->get('current_brochure'), $tab);
+				$x=$this->BitemModel->where('id_brochure', $this->session->get('current_brochure'))->where('type_item', "products")->delete();
 				if (!empty($this->request->getVar('select_product'))) {
 					foreach ($this->request->getVar('select_product') as $select) {
 						$this->BitemModel->insert(array('id_brochure' => $this->session->get('current_brochure'), 'id_item' => $select, 'type_item' => "products"));
@@ -131,6 +159,33 @@ class Ajax extends BaseController
 				$tab['title_operation'] = $this->request->getVar('title_operation');
 				$tab['description_operation'] = $this->request->getVar('description_operation');
 				$tab["step"] = $current_step;
+				if ($this->request->getVar('select_img_operation') == 'new') { // uplaod new logo 
+					$validated = $this->validate([
+						'image_operation' => [
+							'uploaded[image_operation]',
+							'mime_in[image_operation,image/jpg,image/jpeg,image/gif,image/png]',
+							'max_size[image_operation,4096]',
+						],
+					]);
+
+					if ($validated) {
+						$avatar_logo = $this->request->getFile('image_operation');
+						$logo_name = $avatar_logo->getRandomName();
+
+						$avatar_logo->move(ROOTPATH . 'public/uploads/', $logo_name);
+					} else {
+						$validation = $this->validator;
+						$error_msg = $validation->listErrors();
+						$logo_name = null;
+					}
+				} elseif ($this->request->getVar('select_img_operation') == 'default') { // recuperate logo from company data
+					$inf_company = $this->CompanyModel->where('user_id', $data['user_data']['id'])->first();
+					if (!empty($inf_company)) $logo_name = $inf_company['image_operation'];
+				} elseif ($this->request->getVar('select_img_operation') == 'current') { // remain old selected logo
+					$logo_name = null;
+				} else  $logo_name = ""; // without logo
+				//	$tab=array("step"=>$current_step);
+				if (!is_null($logo_name)) $tab['image_operation'] = $logo_name;
 				$x = $this->BrochuresModel->update($this->session->get('current_brochure'), $tab);
 
 			$x=$this->BitemModel->where('id_brochure', $this->session->get('current_brochure'))->where('type_item', "operations")->delete();
@@ -174,7 +229,13 @@ class Ajax extends BaseController
 			case 7:
 				$tab['title_contacts'] = $this->request->getVar('title_contacts');
 				$tab['description_contacts'] = $this->request->getVar('description_contacts');
-
+				$tab['phone'] = $this->request->getVar('phone');
+				$tab['email'] = $this->request->getVar('email');
+				$tab['facebook'] = $this->request->getVar('facebook');
+				$tab['twitter'] = $this->request->getVar('twitter');
+				$tab['linkedin'] = $this->request->getVar('linkedin');
+				$tab['instagram'] = $this->request->getVar('instagram');
+				$tab['siteweb'] = $this->request->getVar('siteweb');
 				$tab["step"] = $current_step;
 				$this->BrochuresModel->update($this->session->get('current_brochure'), $tab);
 				$this->BitemModel->where('id_brochure', $this->session->get('current_brochure'))->where('type_item', "contacts")->delete();
