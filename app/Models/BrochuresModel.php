@@ -19,8 +19,11 @@ class BrochuresModel extends Model
 	'title_partners','description_partners',
 	'title_couverture','subtitle_couverture',
 	'title_operation','description_operation',
-	'title_product','description_product','id_category'
-	
+	'title_product','description_product','id_category',
+	'phone','email','siteweb',
+	'facebook','twitter',
+	'linkedin','instagram',
+	'image_intro','image_operation',
 	];
 	protected $useSoftDeletes = true;
 	protected $returnType = 'array';

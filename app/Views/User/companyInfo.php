@@ -81,6 +81,62 @@
                                                                              ?>
                                             </div>
                                         </div>
+										 <div class="mb-3 row">
+                                            <label for="title_operation" class="col-md-2 col-form-label">Telefono</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" name="phone" id="phone" value="<?php echo $company['phone'] ?? '' ?>">
+												
+
+                                            </div>
+                                        </div>
+										 <div class="mb-3 row">
+                                            <label for="title_operation" class="col-md-2 col-form-label">Email</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" name="email" id="email" value="<?php echo $company['email'] ?? '' ?>">
+												
+
+                                            </div>
+                                        </div>
+										 <div class="mb-3 row">
+                                            <label for="title_operation" class="col-md-2 col-form-label">Siteweb</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" name="siteweb" id="siteweb" value="<?php echo $company['siteweb'] ?? '' ?>">
+												
+
+                                            </div>
+                                        </div>
+										 <div class="mb-3 row">
+                                            <label for="title_operation" class="col-md-2 col-form-label">Facebook</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" name="facebook" id="facebook" value="<?php echo $company['facebook'] ?? '' ?>">
+												
+
+                                            </div>
+                                        </div>
+										 <div class="mb-3 row">
+                                            <label for="title_operation" class="col-md-2 col-form-label">Twitter</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" name="twitter" id="twitter" value="<?php echo $company['twitter'] ?? '' ?>">
+												
+
+                                            </div>
+                                        </div>
+										 <div class="mb-3 row">
+                                            <label for="title_operation" class="col-md-2 col-form-label">LinkedIn</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" name="linkedin" id="linkedin" value="<?php echo $company['linkedin'] ?? '' ?>">
+												
+
+                                            </div>
+                                        </div>
+										 <div class="mb-3 row">
+                                            <label for="title_operation" class="col-md-2 col-form-label">Instagram</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" name="instagram" id="instagram" value="<?php echo $company['instagram'] ?? '' ?>">
+												
+
+                                            </div>
+                                        </div>
 										<hr>
                                         <div class="mb-3 row">
                                             <label for="title_operation" class="col-md-2 col-form-label">Titolo Operazioni</label>
@@ -95,6 +151,19 @@
                                             <div class="col-md-10">
 
                                                 <textarea id="operation" name="description_operation" ><?php echo $company['description_operation'] ?? '' ?></textarea>
+                                            </div>
+                                        </div>
+										 <div class="mb-3 row">
+                                            <label for="image_operation" class="col-md-2 col-form-label">Scegli un immagine</label>
+                                            <div class="col-md-8">
+                                                <input class="form-control" type="file" name="image_operation" id="image_operation">
+												<small class="text-muted">Scegli un’immagine di sfondo che verrà poi utilizzato automaticamente su tutte le brochure.  Qual ora volesse, è possibile modificarlo direttamente sulla brochure.</small>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <?php
+                                                if ($company['image_operation'] != "") { ?> <img src="<?php echo base_url
+                                                    ('uploads/' . $company['image_operation']) ?>" height="50" width="50px"><?php }
+                                                                             ?>
                                             </div>
                                         </div>
 										<hr>
@@ -161,6 +230,7 @@
                                                 <textarea id="product" name="description_product"><?php echo $company['description_product'] ?? '' ?></textarea>
                                             </div>
                                         </div>
+										
 										<hr>
                                         <div class="mb-3 row">
                                             <label for="title_intro" class="col-md-2 col-form-label">Titolo introduzione</label>
@@ -177,7 +247,19 @@
                                                 <textarea id="intro" name="description_intro"><?php echo $company['description_intro'] ?? '' ?></textarea>
                                             </div>
                                         </div>
-
+<div class="mb-3 row">
+                                            <label for="image_intro" class="col-md-2 col-form-label">Scegli un immagine</label>
+                                            <div class="col-md-8">
+                                                <input class="form-control" type="file" name="image_intro" id="image_intro">
+												<small class="text-muted">Scegli un’immagine di sfondo che verrà poi utilizzato automaticamente su tutte le brochure.  Qual ora volesse, è possibile modificarlo direttamente sulla brochure.</small>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <?php
+                                                if ($company['image_intro'] != "") { ?> <img src="<?php echo base_url
+                                                    ('uploads/' . $company['image_intro']) ?>" height="50" width="50px"><?php }
+                                                                             ?>
+                                            </div>
+                                        </div>
 
 
                                         <button type="submit" class="btn btn-primary " id="update">Salva Modifica</button>

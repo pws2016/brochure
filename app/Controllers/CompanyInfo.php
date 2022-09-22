@@ -25,6 +25,7 @@ class CompanyInfo extends BaseController
 	{
         $data = $this->common_data();
         $exist=$this->CompanyModel->where('user_id',$data['user_data']['id'])->first();
+		
         $data_update = [
 
 
@@ -42,8 +43,13 @@ class CompanyInfo extends BaseController
             'description_contacts' => $this->request->getVar("description_contacts"),
             'description_partners' => $this->request->getVar("description_partners"),
             'description_intro' => $this->request->getVar("description_intro"),
-
-
+			'siteweb' => $this->request->getVar("siteweb"),
+			'phone' => $this->request->getVar("phone"),
+            'email' => $this->request->getVar("email"),
+            'facebook' => $this->request->getVar("facebook"),
+            'linkedin' => $this->request->getVar("linkedin"),
+            'twitter' => $this->request->getVar("twitter"),
+            'instagram' => $this->request->getVar("instagram"),
             'user_id' => $data['user_data']['id']
 
 
@@ -63,10 +69,13 @@ class CompanyInfo extends BaseController
             $log = $this->request->getFile('logo');
             $logo_name = $log->getName();
             $log->move(ROOTPATH . 'public/uploads');
-        }
+       
         $data_update['logo']=$logo_name;
         // validation bg image
-
+ }
+ $validation = $this->validator;
+ $validation->reset();
+  // $validation->reset();
        $validated = $this->validate([
                 'background' => [
                     'uploaded[background]',
@@ -84,7 +93,50 @@ class CompanyInfo extends BaseController
 
          $data_update['background']= $background_name;
             }
-            
+          $validation = $this->validator;
+ $validation->reset();
+			
+			$validated = $this->validate([
+                'image_intro' => [
+                    'uploaded[image_intro]',
+                    'mime_in[image_intro,image/jpg,image/jpeg,image/gif,image/png]',
+                    'max_size[image_intro,4096]',
+                ],
+            ]);
+     
+            $msg = 'Please select a valid image_intro';
+
+            if ($validated) {
+                $bg = $this->request->getFile('image_intro');
+                $background_name = $bg->getName();
+                $bg->move(ROOTPATH . 'public/uploads');
+
+         $data_update['image_intro']= $background_name;
+            }
+			 $validation = $this->validator;
+ $validation->reset();
+			$validated = $this->validate([
+                'image_operation' => [
+                    'uploaded[image_operation]',
+                    'mime_in[image_operation,image/jpg,image/jpeg,image/gif,image/png]',
+                    'max_size[image_operation,4096]',
+                ],
+            ]);
+     
+            $msg = 'Please select a valid background';
+
+            if ($validated) {
+                $bg = $this->request->getFile('image_operation');
+                $background_name = $bg->getName();
+                $bg->move(ROOTPATH . 'public/uploads');
+
+         $data_update['image_operation']= $background_name;
+            }
+				$error_msg = $validation->listErrors();
+		
+				 $validation = $this->validator;
+ $validation->reset();
+				
         if(empty($exist)){ // insert
             $this->CompanyModel->insert($data_update);
         }

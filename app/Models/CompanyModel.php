@@ -16,7 +16,10 @@ class CompanyModel extends Model
 	'title_premi','description_premi',
 	'title_product','description_product',
 
-
+	'phone','email','siteweb',
+	'facebook','twitter',
+	'image_intro','image_operation',
+	'linkedin','instagram',
 ];
 	// protected $useSoftDeletes = true;
 	// protected $returnType = 'array';

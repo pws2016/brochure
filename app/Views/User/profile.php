@@ -22,7 +22,7 @@
 
     <body data-sidebar="dark">
         <div id="layout-wrapper">
-            <?php echo view('includes/headeruser.php')?>
+            <?php echo view('includes/headerUser.php')?>
     
             <div class="main-content">
 
