@@ -7,7 +7,7 @@ class OperationsModel extends Model
 	
     protected $table = 'operations';
 	protected $primaryKey = 'id';
-    protected $allowedFields = ['user_id', 'name','description','enable','ids_category'];
+    protected $allowedFields = ['user_id', 'name','description','enable','ids_category','ord'];
 	// protected $useSoftDeletes = true;
 	// protected $returnType = 'array';
 	// protected $useTimestamps = true;

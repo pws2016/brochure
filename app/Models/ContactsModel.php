@@ -7,7 +7,7 @@ class ContactsModel extends Model
 	
     protected $table = 'contacts';
 	protected $primaryKey = 'id';
-    protected $allowedFields = ['user_id', 'name','email','image', 'address','phone','fax','enable','ids_category'];
+    protected $allowedFields = ['user_id', 'name','email','image', 'address','phone','fax','enable','ids_category','ord'];
 	// protected $useSoftDeletes = true;
 	// protected $returnType = 'array';
 	// protected $useTimestamps = true;

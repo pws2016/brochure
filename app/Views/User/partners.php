@@ -60,9 +60,9 @@
 
                             </div>
                         </div>
-						<div class="col-12">
-							<p>Clicca su <b>+ Agg. Nuovo</b> per creare un nuovo partner.</p>
-						</div>
+                        <div class="col-12">
+                            <p>Clicca su <b>+ Agg. Nuovo</b> per creare un nuovo partner.</p>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
@@ -96,70 +96,112 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <!-- Add partners Form -->
-
                                                                 <div class="form-group">
-                                                                    <label for="">Nome</label><span class="text-primary">*</span>
-                                                                    <input type="text" id="name" name="name" class="form-control" required>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="">Email</label><span class="text-primary">*</span>
-                                                                    <input type="email" id="email" name="email" class="form-control" required>
-                                                                </div>
-																 <div class="form-group">
-                                                                    <label for="">Telefono</label>
-                                                                    <input type="text" id="phone" name="phone" class="form-control" >
-                                                                </div>
-																 <div class="form-group">
-                                                                    <label for="">descrizione</label>
-                                                                    <textarea id="description" name="description" class="form-control" ></textarea>
-                                                                </div>
-																 <div class="form-group">
-                                                                    <label for="">Sede</label>
-                                                                    <input type="text" id="sede" name="sede" class="form-control" >
-                                                                </div>
-																 <div class="form-group">
-                                                                    <label for="">LinkedIn URL</label>
-                                                                    <input type="text" id="linkedin" name="linkedin" class="form-control" >
-                                                                </div>
-																 <div class="form-group">
-                                                                    <label for="">Tipologia</label>
-                                                                    <input type="text" id="tipologia" name="tipologia" class="form-control" >
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="">Categoria/e di appartenenza</label><span class="text-primary">*</span>
-                                                                    <select id="ids_category" name="ids_category[]" class="select2 form-control select2-multiple" multiple="multiple" data-placeholder="Choose ..." required style="width:100%">
-                                                                        <?php if (!empty($list_category)) {
-                                                                            foreach ($list_category as $k => $v) { ?>
-                                                                                <option value="<?php echo $v['id'] ?>" <?php if ($v['user_id'] == null) echo 'selected' ?>><?php echo $v['title'] ?></option>
+                                                                    <label for="">Title: </label>
+                                                                    <select class="form-select" name="title">
+                                                                        <option selected>Title: </option>
+                                                                        <?php if (!empty($title)) {
+                                                                            foreach ($title as $k => $v) { ?>
+                                                                                <option value="<?php echo $v ?>"><?php echo $v ?></option>
                                                                         <?php }
                                                                         } ?>
                                                                     </select>
                                                                 </div>
-                                                                <div class="mb-3">
-                                                                    <label for="image" class="form-label">Scegli un immagine</label><span class="text-primary">*</span>
-                                                                    <input class="form-control" type="file" name="image" id="image" required>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="">Nome</label><span class="text-primary">*</span>
+                                                                            <input type="text" id="name" name="name" class="form-control" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for=""> Last Nome</label><span class="text-primary">*</span>
+                                                                            <input type="text" id="lastname" name="lastname" class="form-control" required>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="">Email</label><span class="text-primary">*</span>
+                                                                        <input type="email" id="email" name="email" class="form-control" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="">Telefono</label>
+                                                                        <input type="text" id="phone" name="phone" class="form-control">
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="mb-3">
+                                                                                <label for="ord" class="form-label">Fax</label><span class="text-primary">*</span>
+                                                                                <input class="form-control" type="fax" name="fax" id="fax" required>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="mb-3">
+                                                                                <label for="ord" class="form-label">Mobile</label><span class="text-primary">*</span>
+                                                                                <input class="form-control" type="mobile" name="mobile" id="mobile" required>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="">descrizione</label>
+                                                                        <textarea id="description" name="description" class="form-control"></textarea>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="">Sede</label>
+                                                                        <input type="text" id="sede" name="sede" class="form-control">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="">LinkedIn URL</label>
+                                                                        <input type="text" id="linkedin" name="linkedin" class="form-control">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="">Tipologia</label>
+                                                                        <select class="form-select" name="tipologia">
+                                                                            <option selected>Open this select </option>
+                                                                            <?php if (!empty($typoPartner)) {
+                                                                                foreach ($typoPartner as $k => $v) { ?>
+                                                                                    <option value="<?php echo $v ?>"><?php echo $v ?></option>
+                                                                            <?php }
+                                                                            } ?>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="">Categoria/e di appartenenza</label><span class="text-primary">*</span>
+                                                                        <select id="ids_category" name="ids_category[]" class="select2 form-control select2-multiple" multiple="multiple" data-placeholder="Choose ..." required style="width:100%">
+                                                                            <?php if (!empty($list_category)) {
+                                                                                foreach ($list_category as $k => $v) { ?>
+                                                                                    <option value="<?php echo $v['id'] ?>" <?php if ($v['user_id'] == null) echo 'selected' ?>><?php echo $v['title'] ?></option>
+                                                                            <?php }
+                                                                            } ?>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="image" class="form-label">Scegli un immagine</label><span class="text-primary">*</span>
+                                                                        <input class="form-control" type="file" name="image" id="image" required>
+
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="ord" class="form-label">Ordinamento</label><span class="text-primary">*</span>
+                                                                        <input class="form-control" type="number" name="ord" id="ord" required>
+
+                                                                    </div>
+                                                                 
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                                                                    <button type="submit" class="btn btn-primary" id="add">Salva</button>
 
                                                                 </div>
-                                                                <div class="mb-3">
-                                                                    <label for="ord" class="form-label">Ordinamento</label><span class="text-primary">*</span>
-                                                                    <input class="form-control" type="number" name="ord" id="ord" required>
-
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-                                                                <button type="submit" class="btn btn-primary" id="add">Salva</button>
-
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
                                             </form>
                                         </div>
 
                                     </div>
-
 
                                     <!-- end row -->
 
@@ -167,20 +209,24 @@
                                         <thead>
                                             <tr>
 
-                                               <th></th>
+                                                <th></th>
                                                 <th>Ord.</th>
-                                                <th>Nome</th>
+                                                <th>Title</th>
+                                                <th>Nome </th>
+                                                <th>Last Nome</th>
                                                 <th>Email</th>
-												 <th>descrizione</th>
-												  <th>Telefono</th>
-												   <th>Sede</th>
-												    <th>Tipologia</th>
-													
+                                                <th>descrizione</th>
+                                                <th>Telefono</th>
+                                                <th>Fax</th>
+                                                <th>Mobile</th>
+                                                <th>Sede</th>
+                                                <th>Tipologia</th>
+
                                                 <th>Categorie</th>
-												 <th>LinkedIn</th>
+                                                <th>LinkedIn</th>
                                                 <th>Img.</th>
                                                 <th>Status</th>
-                                               
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -189,7 +235,7 @@
                                                 foreach ($part as $row) {
                                             ?><tr id="tr_<?php echo $row['id']; ?>">
 
-                                                       <td>
+                                                        <td>
                                                             <ul class="list-inline mb-0">
 
                                                                 <li class="list-inline-item">
@@ -216,25 +262,31 @@
                                                                         <a onclick="del_pack('<?php echo $row['id']; ?>')" class="px-2 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
                                                                     </li>
 																	*/ ?>
-</ul>
+                                                            </ul>
                                                         </td>
                                                         <td> <?php echo $row['ord']; ?></td>
-                                                        <td> <?php echo $row['name']; ?></td>
+                                                        <td> <?php echo $row['title']; ?></td>
+                                                        <td> <?php echo $row['name']; ?> </td>
+                                                        <td><?php echo $row['lastname']; ?></td>
                                                         <td><?php echo $row['email']; ?></td>
-														 <td> <?php echo $row['description']; ?></td>
+                                                        <td> 
+                                                    
+                                                        <?php echo  $maske = substr( $row['description'], 0, 50) . ".." ; ?></td>
                                                         <td> <?php echo $row['phone']; ?></td>
+                                                        <td> <?php echo $row['fax']; ?></td>
+                                                        <td> <?php echo $row['mobile']; ?></td>
                                                         <td> <?php echo $row['sede']; ?></td>
                                                         <td><?php echo $row['tipologia']; ?></td>
-                                                       
+
 
                                                         <td><?php echo $row['categories']; ?></td>
- <td><?php echo $row['linkedin']; ?></td>
+                                                        <td><?php echo $row['linkedin']; ?></td>
                                                         <td>
 
                                                             <img src="<?php echo base_url('uploads/' . $row['image']) ?>" height="50" width="50px" />
                                                         </td>
                                                         <td><?php if ($row['enable'] == 1) { ?><span class="bg-success badge me-2"><?php echo lang('app.yes') ?></span> <?php } else { ?><span class="bg-danger badge me-2"><?php echo lang('app.no') ?></span> <?php } ?></td>
-                                                       
+
                                                     </tr>
                                             <?php }
                                             }
@@ -344,81 +396,107 @@
 
 
                                                 <div class="modal-body mb-3" id="">
-													<div class="alert alert-info">Seleziona una o più brochure per associarla/e al partner</div>
-												</div>
-                                                    <table class="table table-bordered" id="">
-                                                        <thead>
-                                                            <th></th>
-                                                            <th>Titolo</th>
-                                                            <th>Categoria</th>
-                                                            <th>Creato il</th>
-                                                            <th>Ultima modifica</th>
-                                                            <th>Status</th>
-                                                        </thead>
-                                                        <tbody id="div_list_brochures">
+                                                    <div class="alert alert-info">Seleziona una o più brochure per associarla/e al partner</div>
+                                                </div>
+                                                <table class="table table-bordered" id="">
+                                                    <thead>
+                                                        <th></th>
+                                                        <th>Titolo</th>
+                                                        <th>Categoria</th>
+                                                        <th>Creato il</th>
+                                                        <th>Ultima modifica</th>
+                                                        <th>Status</th>
+                                                    </thead>
+                                                    <tbody id="div_list_brochures">
 
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Chiudi</button>
-                                                    <input type="submit" name="delete" class="btn btn-danger" value="<?php echo lang('app.btn_save') ?>">
-                                                </div>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Chiudi</button>
+                                                <input type="submit" name="delete" class="btn btn-danger" value="<?php echo lang('app.btn_save') ?>">
                                             </div>
                                         </div>
                                     </div>
-                                  
                                 </div>
+
                             </div>
-			<div class="col-12">
-				<h5>Info</h5>
-				<p><i class="uil uil-pen font-size-18 text-primary"></i> Strumento di modifica<br>
-					<i class="uil uil-apps font-size-18 text-warning"></i> Associazione<br>
-					<i class="uil uil-file-copy-alt font-size-18 text-info"></i> Permette di duplicare la righa<br>
-					<i class="uil uil-file-block-alt font-size-18 text-danger"></i> Attivare o disattivare la righa</p>
-			</div>
                         </div>
+                        <div class="col-12">
+                            <h5>Info</h5>
+                            <p><i class="uil uil-pen font-size-18 text-primary"></i> Strumento di modifica<br>
+                                <i class="uil uil-apps font-size-18 text-warning"></i> Associazione<br>
+                                <i class="uil uil-file-copy-alt font-size-18 text-info"></i> Permette di duplicare la righa<br>
+                                <i class="uil uil-file-block-alt font-size-18 text-danger"></i> Attivare o disattivare la righa
+                            </p>
+                        </div>
+                    </div>
 
-                        <!-- Optional JavaScript -->
-                        <!-- JAVASCRIPT -->
-                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/jquery/jquery.min.js"></script>
+                    <!-- Optional JavaScript -->
+                    <!-- JAVASCRIPT -->
+                    <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/jquery/jquery.min.js"></script>
 
 
-                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/metismenu/metisMenu.min.js"></script>
-                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/simplebar/simplebar.min.js"></script>
-                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/node-waves/waves.min.js"></script>
-                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
-                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
-                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/select2/js/select2.min.js"></script>
-                        <!-- Toastr -->
-                        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-                        <!-- Font Awesome -->
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/js/all.min.js"></script>
-                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+                    <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+                    <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/metismenu/metisMenu.min.js"></script>
+                    <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/simplebar/simplebar.min.js"></script>
+                    <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/node-waves/waves.min.js"></script>
+                    <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
+                    <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
+                    <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/select2/js/select2.min.js"></script>
+                    <!-- Toastr -->
+                    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+                    <!-- Font Awesome -->
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/js/all.min.js"></script>
+                    <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+                    <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
 
-                        <!-- Responsive examples -->
-                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-                        <script>
-                            $("#datatable").DataTable({
-                                language: {
-                                    url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Italian.json'
+                    <!-- Responsive examples -->
+                    <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+                    <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+                    <script>
+                        $("#datatable").DataTable({
+                            language: {
+                                url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Italian.json'
+                            },
+                            searching: true
+
+                        });
+                        $(".select2").select2();
+                    </script>
+                    <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/parsleyjs/parsley.min.js"></script>
+
+
+                    <script>
+                        function get_data(id) {
+                            $.ajax({
+                                url: "<?php echo base_url("user/partners/get_data"); ?>",
+                                type: "POST",
+                                cache: false,
+                                data: {
+
+                                    id: id
+
+
                                 },
-                                searching: true
+                                success: function(dataResult) {
+                                    $("#edit_partners").html(dataResult);
+                                    $(".select2").select2();
+
+                                }
 
                             });
-                            $(".select2").select2();
-                        </script>
-                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/parsleyjs/parsley.min.js"></script>
+                        }
 
 
-                        <script>
-                            function get_data(id) {
+
+
+
+                        function del_pack(id) {
+                            if (confirm("are you sure !")) {
                                 $.ajax({
-                                    url: "<?php echo base_url("user/partners/get_data"); ?>",
-                                    type: "POST",
+                                    url: "<?php echo base_url("user/partners/delete"); ?>",
+                                    type: "GET",
                                     cache: false,
                                     data: {
 
@@ -426,101 +504,76 @@
 
 
                                     },
-                                    success: function(dataResult) {
-                                        $("#edit_partners").html(dataResult);
-                                        $(".select2").select2();
+                                    success: function(datadelete) {
+
+                                        $("#tr_" + id).remove();
 
                                     }
 
                                 });
                             }
+                        }
 
+                        $(function() {
+                            $('#form').parsley().on('field:validated', function() {
+                                    var ok = $('.parsley-error').length === 0;
+                                    $('.bs-callout-info').toggleClass('hidden', !ok);
+                                    $('.bs-callout-warning').toggleClass('hidden', ok);
+                                })
+                                .on('form:submit', function() {
+                                    return true; // Don't submit form for this demo
+                                });
+                        });
 
+                        function block_item(id, enable) {
+                            $("#div_msg_desactivate").hide(0);
+                            $("#div_msg_activate").hide(0);
+                            $("#block_id").val(id);
+                            if (enable == 1) $("#block_action").val('desactivate');
+                            else $("#block_action").val('activate');
+                            $.ajax({
+                                url: "<?php echo base_url("user/partners/get_block_data"); ?>",
+                                type: "POST",
+                                cache: false,
+                                data: {
 
+                                    id: id,
+                                    enable: enable
 
-
-                            function del_pack(id) {
-                                if (confirm("are you sure !")) {
-                                    $.ajax({
-                                        url: "<?php echo base_url("user/partners/delete"); ?>",
-                                        type: "GET",
-                                        cache: false,
-                                        data: {
-
-                                            id: id
-
-
-                                        },
-                                        success: function(datadelete) {
-
-                                            $("#tr_" + id).remove();
-
-                                        }
-
-                                    });
+                                },
+                                success: function(dataResult) {
+                                    $("#div_block_item").html(dataResult);
                                 }
-                            }
 
-                            $(function() {
-                                $('#form').parsley().on('field:validated', function() {
-                                        var ok = $('.parsley-error').length === 0;
-                                        $('.bs-callout-info').toggleClass('hidden', !ok);
-                                        $('.bs-callout-warning').toggleClass('hidden', ok);
-                                    })
-                                    .on('form:submit', function() {
-                                        return true; // Don't submit form for this demo
-                                    });
                             });
 
-                            function block_item(id, enable) {
-                                $("#div_msg_desactivate").hide(0);
-                                $("#div_msg_activate").hide(0);
-                                $("#block_id").val(id);
-                                if (enable == 1) $("#block_action").val('desactivate');
-                                else $("#block_action").val('activate');
-                                $.ajax({
-                                    url: "<?php echo base_url("user/partners/get_block_data"); ?>",
-                                    type: "POST",
-                                    cache: false,
-                                    data: {
+                        }
 
-                                        id: id,
-                                        enable: enable
+                        function duplicate_item(id) {
+                            $("#duplicate_id").val(id);
+                        }
 
-                                    },
-                                    success: function(dataResult) {
-                                        $("#div_block_item").html(dataResult);
-                                    }
+                        function associate_item(id) {
+                            $("#associate_id").val(id);
+                            $.ajax({
+                                url: "<?php echo base_url("ajax/get_list_broch"); ?>",
+                                type: "POST",
+                                cache: false,
+                                data: {
 
-                                });
+                                    id: id,
+                                    type_item: 'premi'
 
-                            }
+                                },
+                                success: function(dataResult) {
+                                    $("#div_list_brochures").html(dataResult);
+                                }
 
-                            function duplicate_item(id) {
-                                $("#duplicate_id").val(id);
-                            }
+                            });
 
-                            function associate_item(id) {
-                                $("#associate_id").val(id);
-                                $.ajax({
-                                    url: "<?php echo base_url("ajax/get_list_broch"); ?>",
-                                    type: "POST",
-                                    cache: false,
-                                    data: {
-
-                                        id: id,
-                                        type_item: 'premi'
-
-                                    },
-                                    success: function(dataResult) {
-                                        $("#div_list_brochures").html(dataResult);
-                                    }
-
-                                });
-
-                            }
-                        </script>
-                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/js/app.js"></script>
+                        }
+                    </script>
+                    <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/js/app.js"></script>
 </body>
 
 </html>

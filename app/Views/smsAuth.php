@@ -68,9 +68,6 @@
 
                                                         $maskedPhone = substr( $row['mobile'], 0, 3) . "****" . substr( $row['mobile'], 7, 4);
                                                         
-                                                    
-                                                        
-                                                        
                                                         ?> <br /></option>
                                                 <?php }
                                                 } ?>

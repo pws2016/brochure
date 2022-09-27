@@ -156,7 +156,7 @@ class Products extends BaseController
 
             'name' => $this->request->getVar("name"),
             'description' => $this->request->getVar("description"),
-           
+            'ids_category' => implode(",", $this->request->getVar("ids_category") ?? ""),
 
 
         ];
@@ -183,9 +183,9 @@ class Products extends BaseController
                 'name' => $this->request->getVar("name"),
                 'description' => $this->request->getVar("description"),
                 'image' => $name,
-                'user_id' => $data['user_data']['id']
+                'user_id' => $data['user_data']['id'],
 
-
+                'ids_category' => implode(",", $this->request->getVar("ids_category") ?? ""),
 
 
             ];
@@ -244,7 +244,7 @@ class Products extends BaseController
         </div>
         <div class="form-group">
             <label for="description">Description</label><span class="text-primary">*</span>
-            <textarea id="description" name="description" class="md-textarea form-control" rows="3" required><?= $prod['description'] ?></textarea>  
+            <textarea id="description" name="description" class="md-textarea form-control" rows="3"><?= $prod['description'] ?></textarea>  
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Choose image</label>

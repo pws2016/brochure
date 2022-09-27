@@ -17,6 +17,14 @@
     <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    
+      
+    <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/@chenfengyuan/datepicker/datepicker.min.css">
+    <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/spectrum-colorpicker2/spectrum.min.css" rel="stylesheet" type="text/css">
+  
     <style>
         h3.post__title.expand:before {
             width: 100px;
@@ -113,7 +121,8 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="">Indirizzo</label>
-                                                                    <input type="text" id="address" name="address" class="form-control" required>
+                                                                
+                                                                    <textarea id="address" name="address" class="md-textarea form-control" rows="3" required></textarea>
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label for="image" class="form-label">Scegli un immagine</label><span class="text-primary">*</span>
@@ -130,7 +139,17 @@
                                                                         } ?>
                                                                     </select>
                                                                 </div>
+                                                               
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Order date</label>
+                                                                        <div class="input-group" id="datepicker1">
+                                                                            <input type="text" class="form-control"  name="ord" placeholder="dd/mm/yyyy" data-date-format="dd/mm/yyyy" data-date-container='#datepicker1' data-provide="datepicker">
 
+                                                                            <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                                                        </div><!-- input-group -->
+                                                                    </div>
+
+                                                              
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiusi</button>
@@ -159,6 +178,7 @@
                                                 <th>Img.</th>
                                                 <th>Categorie</th>
                                                 <th>Status</th>
+                                                <th>Ord.</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -176,14 +196,14 @@
                                                         <td><?php echo $row['phone']; ?></td>
                                                         <td><?php echo $row['fax']; ?></td>
                                                         <td><?php echo $row['address']; ?></td>
-
-
+                                                      
                                                         <td>
 
                                                             <img src="<?php echo base_url('uploads/contact_pic/' . $row['image']) ?>" height="50" width="50px" />
                                                         </td>
                                                         <td><?php echo $row['categories']; ?></td>
                                                         <td><?php if ($row['enable'] == 1) { ?><span class="bg-success badge me-2"><?php echo lang('app.yes') ?></span> <?php } else { ?><span class="bg-danger badge me-2"><?php echo lang('app.no') ?></span> <?php } ?></td>
+                                                        <td><?php echo $row['ord']; ?></td>
                                                         <td>
                                                             <ul class="list-inline mb-0">
 
@@ -207,11 +227,7 @@
                                                                         <a class="px-2 text-success" data-bs-target="#block-modal-dialog" data-bs-toggle="modal" onclick="block_item('<?php echo $row['id'] ?>','<?php echo $row['enable'] ?>')" href=""><i class="uil uil-file-check-alt font-size-18"></i></a>
                                                                     </li>
                                                                 <?php } ?>
-                                                                <?php /*
-                                                                    <li class="list-inline-item">
-                                                                        <a onclick="del_pack('<?php echo $row['id']; ?>')" class="px-2 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
-                                                                    </li>
-																	*/ ?>
+                                                             
 															</ul>
                                                         </td>
 
@@ -378,7 +394,11 @@ Seleziona una o più brochure per associarla/e al contatto</div>
                         <!-- Responsive examples -->
                         <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
                         <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-                        <script>
+                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/@chenfengyuan/datepicker/datepicker.min.js"></script>
+                       <script>
                             $("#datatable").DataTable({
                                 language: {
                                     url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Italian.json'
@@ -391,7 +411,12 @@ Seleziona una o più brochure per associarla/e al contatto</div>
                         <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/parsleyjs/parsley.min.js"></script>
 
 
-
+                        <script>
+                            $(function() {
+                                $('#datepicker').datepicker();
+                                $('#datepicker').datepicker('show');
+                            });
+                        </script>
 
 
                         <script>

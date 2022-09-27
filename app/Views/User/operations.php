@@ -16,7 +16,11 @@
     <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/@chenfengyuan/datepicker/datepicker.min.css">
+    <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/spectrum-colorpicker2/spectrum.min.css" rel="stylesheet" type="text/css">
     <style>
         h3.post__title.expand:before {
             width: 100px;
@@ -60,9 +64,9 @@
 
                             </div>
                         </div>
-						<div class="col-12">
-							<p>Clicca su <b>+ Agg. Nuovo</b> per creare una nuova operazione.</p>
-						</div>
+                        <div class="col-12">
+                            <p>Clicca su <b>+ Agg. Nuovo</b> per creare una nuova operazione.</p>
+                        </div>
                     </div>
                     <!-- end page title -->
 
@@ -112,15 +116,27 @@
                                                                     </select>
                                                                 </div>
 
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-                                                                <button type="submit" class="btn btn-primary" id="add">Salva</button>
+                                                                <div class="form-group">
 
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Order date</label>
+                                                                        <div class="input-group" id="datepicker1">
+                                                                            <input type="text" class="form-control"  name="ord" placeholder="dd M, yyyy" data-date-format="dd/mm/yyyy" data-date-container='#datepicker1' data-provide="datepicker">
+
+                                                                            <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                                                        </div><!-- input-group -->
+                                                                    </div>
+
+
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                                                                    <button type="submit" class="btn btn-primary" id="add">Salva</button>
+
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
                                             </form>
                                         </div>
 
@@ -141,6 +157,7 @@
                                                 <th>description</th>
                                                 <th>enable</th>
                                                 <th>categories</th>
+                                                <th>Ord.</th>
 
 
                                                 <th></th>
@@ -154,9 +171,10 @@
 
                                                         <td> <?php echo $row['id']; ?></td>
                                                         <td> <?php echo $row['name']; ?></td>
-                                                        <td> <?php echo $row['description']; ?></td>
+                                                        <td> <?php echo  $maske = substr( $row['description'], 0, 50) . "..." ; ?></td>
                                                         <td> <?php echo $row['enable']; ?></td>
                                                         <td> <?php echo $row['categories']; ?></td>
+                                                        <td> <?php echo $row['ord']; ?></td>
                                                         <td>
                                                             <ul class="list-inline mb-0">
                                                                 <li class="list-inline-item">
@@ -165,14 +183,14 @@
                                                                 <li class="list-inline-item">
                                                                     <a class="px-2 text-warning" data-bs-target="#associateBroch-modal-dialog" data-bs-toggle="modal" onclick="associate_item('<?php echo $row['id'] ?>')" href=""><i class="uil uil-apps font-size-18"></i></a>
                                                                 </li>
-                                                               
+
                                                                 <li class="list-inline-item">
                                                                     <a href="<?= base_url('user/subOperations/' . $row['id']) ?>"><i class="uil-bars me-2"></i></a>
                                                                 </li>
                                                                 <li class="list-inline-item">
                                                                     <a class="px-2 text-info" data-bs-target="#duplicate-modal-dialog" data-bs-toggle="modal" onclick="duplicate_item('<?php echo $row['id'] ?>')" href=""><i class="uil uil-file-copy-alt font-size-18"></i></a>
                                                                 </li>
-                                                               
+
                                                                 <?php if ($row['enable'] == 1) { ?>
                                                                     <li class="list-inline-item">
                                                                         <a class="px-2 text-danger" data-bs-target="#block-modal-dialog" data-bs-toggle="modal" onclick="block_item('<?php echo $row['id'] ?>','<?php echo $row['enable'] ?>')" href=""><i class="uil uil-file-block-alt font-size-18"></i></a>
@@ -182,7 +200,7 @@
                                                                         <a class="px-2 text-success" data-bs-target="#block-modal-dialog" data-bs-toggle="modal" onclick="block_item('<?php echo $row['id'] ?>','<?php echo $row['enable'] ?>')" href=""><i class="uil uil-file-check-alt font-size-18"></i></a>
                                                                     </li>
                                                                 <?php } ?>
-                                                              
+
                                                             </ul>
                                                         </td>
 
@@ -313,13 +331,14 @@
                                 </div>
                             </div>
                         </div>
-			<div class="col-12">
-				<h5>Info</h5>
-				<p><i class="uil uil-pen font-size-18 text-primary"></i> Strumento di modifica<br>
-					<i class="uil uil-apps font-size-18 text-warning"></i> Associazione<br>
-					<i class="uil uil-file-copy-alt font-size-18 text-info"></i> Permette di duplicare la righa<br>
-					<i class="uil uil-file-block-alt font-size-18 text-danger"></i> Attivare o disattivare la righa</p>
-			</div>
+                        <div class="col-12">
+                            <h5>Info</h5>
+                            <p><i class="uil uil-pen font-size-18 text-primary"></i> Strumento di modifica<br>
+                                <i class="uil uil-apps font-size-18 text-warning"></i> Associazione<br>
+                                <i class="uil uil-file-copy-alt font-size-18 text-info"></i> Permette di duplicare la righa<br>
+                                <i class="uil uil-file-block-alt font-size-18 text-danger"></i> Attivare o disattivare la righa
+                            </p>
+                        </div>
 
                         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
                         <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/jquery/jquery.min.js"></script>
@@ -341,11 +360,19 @@
                         <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/select2/js/select2.min.js"></script>
                         <!-- Toastr -->
                         <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-            
+
 
                         <!-- Responsive examples -->
                         <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
                         <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/aassets/libs/select2/js/select2.min.js"></script>
+                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/spectrum-colorpicker2/spectrum.min.js"></script>
+                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/@chenfengyuan/datepicker/datepicker.min.js"></script>
+
+
                         <script>
                             $("#datatable").DataTable({
                                 language: {
@@ -357,11 +384,16 @@
                             $(".select2").select2();
                         </script>
 
-                     
+
 
                         <!-- parsleyjs -->
                         <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/parsleyjs/parsley.min.js"></script>
-
+                        <script>
+                            $(function() {
+                                $('#datepicker').datepicker();
+                                $('#datepicker').datepicker('show');
+                            });
+                        </script>
                         <script>
                             function get_data(id) {
                                 $.ajax({
@@ -377,6 +409,8 @@
                                     success: function(dataResult) {
                                         $("#edit_op").html(dataResult);
                                         $(".select2").select2();
+                                        $('#editdatepicker').datepicker();
+                                        $('#editdatepicker').datepicker('show');
                                     }
 
                                 });
@@ -404,6 +438,7 @@
                                     });
                                 }
                             }
+
                             function block_item(id, enable) {
                                 $("#div_msg_desactivate").hide(0);
                                 $("#div_msg_activate").hide(0);
@@ -427,6 +462,7 @@
                                 });
 
                             }
+
                             function duplicate_item(id) {
                                 $("#duplicate_id").val(id);
                             }
