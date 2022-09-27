@@ -42,7 +42,7 @@ class Partners extends BaseController
                 case 'duplicate':
                     $id = $this->request->getVar('id');
                     $inf_part = $this->PartnersModel->find($id);
-                    $newid = $this->PartnersModel->insert(array("user_id" => $data['user_data']['id'], "name" => $inf_part['name'] . " copy", "email" => $inf_part['email'], "image" => $inf_part['image'], "enable" => $inf_part['enable'], "ids_category" => $inf_part['ids_category'],"ord" => $inf_part['ord'],"description" => $inf_part['description'],"phone" => $inf_part['phone'],"sede" => $inf_part['sede'],"tipologia" => $inf_part['tipologia'],"linkedin" => $inf_part['linkedin']));
+                    $newid = $this->PartnersModel->insert(array("user_id" => $data['user_data']['id'], "name" => $inf_part['name'] . " copy", "email" => $inf_part['email'], "lastname" => $inf_part['lastname'], "title" => $inf_part['title'], "fax" => $inf_part['fax'], "mobile" => $inf_part['mobile'], "image" => $inf_part['image'], "enable" => $inf_part['enable'], "ids_category" => $inf_part['ids_category'], "ord" => $inf_part['ord'], "description" => $inf_part['description'], "phone" => $inf_part['phone'], "sede" => $inf_part['sede'], "tipologia" => $inf_part['tipologia'], "linkedin" => $inf_part['linkedin']));
                     if ($this->request->getVar('insert_item') !== null) {
                         $ll = $this->BrochuresModel->where('user_id', $data['user_data']['id'])->where("id_category IN (" . $inf_part['ids_category'] . ")")->find();
                         if (!empty($ll)) {
@@ -87,7 +87,7 @@ class Partners extends BaseController
             $res[] = $vv;
         }
         $data['part'] = $res;
-      
+
         $data['list_category'] = $this->CategoryModel->where('user_id IS NULL')->orWhere('user_id', $data['user_data']['id'])->find();
 
         echo view('user/partners', $data);
@@ -108,7 +108,7 @@ class Partners extends BaseController
             ],
         ]);
 
-        $msg = 'Please select a valid file';
+        //  $msg = 'Please select a valid file';
 
         if ($validated) {
             $avatar = $this->request->getFile('image');
@@ -116,18 +116,22 @@ class Partners extends BaseController
             $avatar->move(ROOTPATH . 'public/uploads');
 
 
+
             if ($this->request->getVar("name") !== null) {
                 $add_data = [
-
-
+                    
+                    'fax' => $this->request->getVar("fax"),
+                    'mobile' => $this->request->getVar("mobile"),
+                    'title' => $this->request->getVar("title"),
                     'name' => $this->request->getVar("name"),
+                    'lastname' => $this->request->getVar("lastname"),
                     'email' => $this->request->getVar("email"),
-					 'description' => $this->request->getVar("description"),
+                    'description' => $this->request->getVar("description"),
                     'sede' => $this->request->getVar("sede"),
-					 'phone' => $this->request->getVar("phone"),
+                    'phone' => $this->request->getVar("phone"),
                     'tipologia' => $this->request->getVar("tipologia"),
-					 'linkedin' => $this->request->getVar("linkedin"),
-                   
+                    'linkedin' => $this->request->getVar("linkedin"),
+
                     'image' => $name,
                     'user_id' => $data['user_data']['id'],
                     'enable' => 1,
@@ -159,17 +163,20 @@ class Partners extends BaseController
 
         $data_update = [
 
-
-
+            'fax' => $this->request->getVar("fax"),
+            'mobile' => $this->request->getVar("mobile"),
+            'title' => $this->request->getVar("title"),
             'name' => $this->request->getVar("name"),
+            'lastname' => $this->request->getVar("lastname"),
             'email' => $this->request->getVar("email"),
             'user_id' => $data['user_data']['id'],
-             'ord' => $this->request->getVar("ord"),
- 'description' => $this->request->getVar("description"),
-                    'sede' => $this->request->getVar("sede"),
-					 'phone' => $this->request->getVar("phone"),
-                    'tipologia' => $this->request->getVar("tipologia"),
-					 'linkedin' => $this->request->getVar("linkedin")
+            'ord' => $this->request->getVar("ord"),
+            'description' => $this->request->getVar("description"),
+            'sede' => $this->request->getVar("sede"),
+            'phone' => $this->request->getVar("phone"),
+            'tipologia' => $this->request->getVar("tipologia"),
+            'linkedin' => $this->request->getVar("linkedin"),
+            'ids_category' => implode(",", $this->request->getVar("ids_category") ?? ""),
 
 
 
@@ -192,18 +199,21 @@ class Partners extends BaseController
 
 
             $data_update = [
-
-
+                'fax' => $this->request->getVar("fax"),
+                'mobile' => $this->request->getVar("mobile"),
+                'title' => $this->request->getVar("title"),
                 'name' => $this->request->getVar("name"),
+                'lastname' => $this->request->getVar("lastname"),
                 'email' => $this->request->getVar("email"),
                 'image' => $name,
                 'user_id' => $data['user_data']['id'],
                 'ord' => $this->request->getVar("ord"),
- 'description' => $this->request->getVar("description"),
-                    'sede' => $this->request->getVar("sede"),
-					 'phone' => $this->request->getVar("phone"),
-                    'tipologia' => $this->request->getVar("tipologia"),
-					 'linkedin' => $this->request->getVar("linkedin")
+                'description' => $this->request->getVar("description"),
+                'sede' => $this->request->getVar("sede"),
+                'phone' => $this->request->getVar("phone"),
+                'tipologia' => $this->request->getVar("tipologia"),
+                'linkedin' => $this->request->getVar("linkedin"),
+                'ids_category' => implode(",", $this->request->getVar("ids_category") ?? ""),
 
 
             ];
@@ -218,6 +228,7 @@ class Partners extends BaseController
     public function get_data()
     {
         $data = $this->common_data();
+       
         $id = $this->request->getVar("id");
         $par = $this->PartnersModel->find($id);
         $list_category = $this->CategoryModel->where('user_id IS NULL')->orWhere('user_id', $data['user_data']['id'])->find();
@@ -225,33 +236,71 @@ class Partners extends BaseController
 ?>
         <input type="hidden" id="edit_partners" name="id" class="form-control" value="<?= $par['id'] ?>">
         <div class="form-group">
+
+
+            <label class="radio-inline">
+                <input type="radio" name="title" value="Mr." checked>Mr.
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="title" value="Mrs.">Mrs.
+            </label>
+        </div>
+        <div class="form-group">
             <label for="">Name</label><span class="text-primary">*</span>
             <input type="text" id="name" name="name" value="<?= $par['name'] ?>" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for=""> Last Name</label><span class="text-primary">*</span>
+            <input type="text" id="lastname" name="lastname" value="<?= $par['lastname'] ?>" class="form-control" required>
         </div>
         <div class="form-group">
             <label for="">Email</label><span class="text-primary">*</span>
             <input type="email" id="email" name="email" value="<?= $par['email'] ?>" class="form-control" required>
         </div>
-		 <div class="form-group">
-                                                                    <label for="">Telefono</label>
-                                                                    <input type="text" id="phone" name="phone" class="form-control" value="<?= $par['phone'] ?>" >
-                                                                </div>
-																 <div class="form-group">
-                                                                    <label for="">descrizione</label>
-                                                                    <textarea id="description" name="description" class="form-control" ><?= $par['description'] ?></textarea>
-                                                                </div>
-																 <div class="form-group">
-                                                                    <label for="">Sede</label>
-                                                                    <input type="text" id="sede" name="sede" class="form-control" value="<?= $par['sede'] ?>" >
-                                                                </div>
-																 <div class="form-group">
-                                                                    <label for="">LinkedIn URL</label>
-                                                                    <input type="text" id="linkedin" name="linkedin" class="form-control" value="<?= $par['linkedin'] ?>" >
-                                                                </div>
-																 <div class="form-group">
-                                                                    <label for="">Tipologia</label>
-                                                                    <input type="text" id="tipologia" name="tipologia" class="form-control" value="<?= $par['tipologia'] ?>" >
-                                                                </div>
+        <div class="form-group">
+            <label for="">Telefono</label>
+            <input type="text" id="phone" name="phone" class="form-control" value="<?= $par['phone'] ?>">
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="ord" class="form-label">Fax</label><span class="text-primary">*</span>
+                    <input class="form-control" type="fax" name="fax" id="fax" value="<?= $par['fax'] ?>" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="ord" class="form-label">Mobile</label><span class="text-primary">*</span>
+                    <input class="form-control" type="mobile" name="mobile" id="mobile" value="<?= $par['mobile'] ?>" required>
+                </div>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="">descrizione</label>
+            <textarea id="description" name="description" class="form-control"><?= $par['description'] ?></textarea>
+        </div>
+        <div class="form-group">
+            <label for="">Sede</label>
+            <input type="text" id="sede" name="sede" class="form-control" value="<?= $par['sede'] ?>">
+        </div>
+        <div class="form-group">
+            <label for="">LinkedIn URL</label>
+            <input type="text" id="linkedin" name="linkedin" class="form-control" value="<?= $par['linkedin'] ?>">
+        </div>
+        <div class="form-group">
+            <label for="">Tipologia</label>
+            <select class="form-select" name="tipologia">
+             
+                <?php if (!empty( $data['typoPartner'])) {
+                    foreach ($data['typoPartner'] as $k => $v) { ?>
+                <option value="<?php echo $v ?>" <?php if ($v==$par['tipologia']) echo "selected"?>><?php echo $v ?></option>
+
+                       
+                <?php }
+                } ?>
+            </select>
+        </div>
         <div class="form-group">
             <label for="">Category</label><span class="text-primary">*</span>
             <select id="ids_category" name="ids_category[]" class="select2 form-control select2-multiple" multiple="multiple" data-placeholder="Choose ..." required style="width:100%">

@@ -115,7 +115,7 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="description">Descrizione</label><span class="text-primary">*</span>
-                                                                    <textarea id="description" name="description" class="md-textarea form-control" rows="3" required></textarea>
+                                                                    <textarea id="description" name="description" class="md-textarea form-control" rows="3" ></textarea>
 
 
                                                                 </div>
@@ -167,7 +167,8 @@
 
                                                         <td> <?php echo $row['name']; ?></td>
 
-                                                        <td><?php echo $row['description']; ?></td>
+                                                        <td><?php echo  $maskedPhone = substr( $row['description'], 0, 50) . ".." ;?>
+                                                    </td>
                                                         <td><?php echo $row['categories']; ?></td>
                                                         <td>
 

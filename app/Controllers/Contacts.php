@@ -26,7 +26,7 @@ class Contacts extends BaseController
                     $this->BitemModel->where('type_item', 'contacts')->where('id_item', $id)->where("id_brochure IN(select id from brochures where user_id='" . $data['user_data']['id'] . "')")->delete();
                     $msg = " contact desactivate";
                     break;
-                 
+
                 case 'activate':
                     $id = $this->request->getVar('id');
                     $this->ContactsModel->update($id, array("enable" => 1));
@@ -40,12 +40,12 @@ class Contacts extends BaseController
                     }
                     $msg = " conatct activate";
                     break;
-                   
+
 
                 case 'duplicate':
                     $id = $this->request->getVar('id');
                     $inf_cont = $this->ContactsModel->find($id);
-                    $newid = $this->ContactsModel->insert(array("user_id" => $data['user_data']['id'], "name" => $inf_cont['name'] . " copy", "phone" => $inf_cont['phone'],"fax" => $inf_cont['fax'],"address" => $inf_cont['address'],  "email" => $inf_cont['email'],"image" => $inf_cont['image'], "enable" => $inf_cont['enable'], "ids_category" => $inf_cont['ids_category']));
+                    $newid = $this->ContactsModel->insert(array("user_id" => $data['user_data']['id'], "name" => $inf_cont['name'] . " copy", "phone" => $inf_cont['phone'], "fax" => $inf_cont['fax'], "address" => $inf_cont['address'],  "email" => $inf_cont['email'], "image" => $inf_cont['image'], "enable" => $inf_cont['enable'], "ids_category" => $inf_cont['ids_category'], "ord" => $inf_cont['ord']));
                     if ($this->request->getVar('insert_item') !== null) {
                         $ll = $this->BrochuresModel->where('user_id', $data['user_data']['id'])->where("id_category IN (" . $inf_cont['ids_category'] . ")")->find();
                         if (!empty($ll)) {
@@ -57,20 +57,20 @@ class Contacts extends BaseController
                     }
                     $msg = "duplicate done";
                     break;
-                    case 'associate':
-                        $id = $this->request->getVar('id');
-                        if($id!=""){
-                            $this->BitemModel->where('type_item','premi')->where('id_item',$id)->where("id_brochure IN (select id from brochures where user_id='".$data['user_data']['id']."')")->delete();
-                           if(!empty( $this->request->getVar('list_assoc'))){
-                               foreach($this->request->getVar('list_assoc') as $kk=>$vv){
-                                    $this->BitemModel->insert(array("id_brochure" => $vv, 'id_item' => $id, 'type_item' => 'contacts'));
-                               }
-                           }
+                case 'associate':
+                    $id = $this->request->getVar('id');
+                    if ($id != "") {
+                        $this->BitemModel->where('type_item', 'premi')->where('id_item', $id)->where("id_brochure IN (select id from brochures where user_id='" . $data['user_data']['id'] . "')")->delete();
+                        if (!empty($this->request->getVar('list_assoc'))) {
+                            foreach ($this->request->getVar('list_assoc') as $kk => $vv) {
+                                $this->BitemModel->insert(array("id_brochure" => $vv, 'id_item' => $id, 'type_item' => 'contacts'));
+                            }
                         }
-                   break;
-               }
-               
-            
+                    }
+                    break;
+            }
+
+
 
             return redirect()->back()->with('msg', $msg);
         }
@@ -119,6 +119,9 @@ class Contacts extends BaseController
             $name = $avatar->getName();
             $avatar->move(ROOTPATH . 'public/uploads/contact_pic/');
 
+            $in_date = explode("/",$this->request->getVar("ord"));
+
+            $date = $in_date[2].'-'.$in_date[1].'-'.$in_date[0];
 
             if ($this->request->getVar("name") !== null) {
                 $add_data = [
@@ -132,8 +135,8 @@ class Contacts extends BaseController
                     'image' => $name,
                     'user_id' => $data['user_data']['id'],
                     'enable' => 1,
-                    'ids_category' => implode(",", $this->request->getVar("ids_category") ?? "")
-
+                    'ids_category' => implode(",", $this->request->getVar("ids_category") ?? ""),
+                    'ord' => $date,
 
 
                 ];
@@ -154,7 +157,9 @@ class Contacts extends BaseController
 
 
 
+        $in_date = explode("/",$this->request->getVar("ord"));
 
+        $date = $in_date[2].'-'.$in_date[1].'-'.$in_date[0];
 
         $data_update = [
 
@@ -165,7 +170,8 @@ class Contacts extends BaseController
             'phone' => $this->request->getVar("phone"),
             'fax' => $this->request->getVar("fax"),
             'address' => $this->request->getVar("address"),
-'ids_category' => implode(",", $this->request->getVar("ids_category") ?? "")
+            'ord' => $date,
+            'ids_category' => implode(",", $this->request->getVar("ids_category") ?? "")
         ];
         $validated = $this->validate([
             'image' => [
@@ -192,9 +198,10 @@ class Contacts extends BaseController
                 'phone' => $this->request->getVar("phone"),
                 'fax' => $this->request->getVar("fax"),
                 'address' => $this->request->getVar("address"),
+                'ord' => $date,
                 'image' => $name,
-                'user_id' => $data['user_data']['id']
-'ids_category' => implode(",", $this->request->getVar("ids_category") ?? "")
+                'user_id' => $data['user_data']['id'],
+                'ids_category' => implode(",", $this->request->getVar("ids_category") ?? "")
 
 
 
@@ -252,11 +259,21 @@ class Contacts extends BaseController
                 } ?>
             </select>
         </div>
+        <div class="mb-3">
+
+<label class="form-label">Order date</label>
+<div class="input-group" id="datepicker1">
+    <input type="text" class="form-control" name="ord" placeholder="dd/mm/yyyy" data-date-format="dd/mm/yyyy" data-date-container='#datepicker1' data-provide="datepicker" value="<?php if($cont['ord']!="") echo date('d/m/Y',strtotime($cont['ord'])) ?>"  >
+
+    <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+</div>
 
 
 
+</div>
 
-<?php
+
+        <?php
     }
     public function get_block_data()
     {

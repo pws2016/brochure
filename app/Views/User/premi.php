@@ -17,7 +17,12 @@
     <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <style>
+    
+    <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/@chenfengyuan/datepicker/datepicker.min.css">
+    <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/spectrum-colorpicker2/spectrum.min.css" rel="stylesheet" type="text/css"><style>
         h3.post__title.expand:before {
             width: 100px;
         }
@@ -125,6 +130,19 @@
                                                                     <input class="form-control" type="file" name="image" id="image" required>
 
                                                                 </div>
+                                                                <div class="form-group">
+
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Order date</label>
+                                                                        <div class="input-group" id="datepicker1">
+                                                                            <input type="text" class="form-control"  name="ord" placeholder="dd/mm/yyyy" data-date-format="dd/mm/yyyy" data-date-container='#datepicker1' data-provide="datepicker">
+
+                                                                            <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                                                        </div><!-- input-group -->
+                                                                    </div>
+
+
+                                                                </div>
                                                                 <div class="alert alert-warning"><label><input type='checkbox' name='insert_item' checked>Accetto di associare l'oggetto </label></div>
                                                             </div>
                                                             <div class="modal-footer">
@@ -152,6 +170,7 @@
 
                                                 <th>Nome</th>
                                                 <th>Descrizione</th>
+                                                <th>Date</th>
                                                 <th>Categorie</th>
                                                 <th>Img.</th>
                                                 <th>Status</th>
@@ -168,7 +187,9 @@
 
                                                         <td> <?php echo $row['name']; ?></td>
 
-                                                        <td><?php echo $row['description']; ?></td>
+                                                        <td><?php echo  $maske = substr( $row['description'], 0, 50) . "..." ; ?></td>
+                                                    
+                                                        <td><?php echo $row['ord']; ?></td>
                                                         <td><?php echo $row['categories']; ?></td>
                                                         <td>
 
@@ -369,7 +390,17 @@
                         <!-- Responsive examples -->
                         <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
                         <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-                        <script>
+                       
+                          <!-- Responsive examples -->
+                          <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/aassets/libs/select2/js/select2.min.js"></script>
+                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/spectrum-colorpicker2/spectrum.min.js"></script>
+                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+                        <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/@chenfengyuan/datepicker/datepicker.min.js"></script>
+<script>
                             $("#datatable").DataTable({
                                 language: {
                                     url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Italian.json'
@@ -381,7 +412,12 @@
                         </script>
                         <script src="<?php echo base_url() ?>/Minible_v2.0.0/Admin/dist/assets/libs/parsleyjs/parsley.min.js"></script>
 
-
+                        <script>
+                            $(function() {
+                                $('#datepicker').datepicker();
+                                $('#datepicker').datepicker('show');
+                            });
+                        </script>
                         <script>
                             function get_data(id) {
                                 $.ajax({

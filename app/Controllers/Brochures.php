@@ -118,11 +118,11 @@ class Brochures extends BaseController
 		$data['inf_brochure'] = $inf_brochure;
 		$data['startIndex'] = $inf_brochure['step'];
 		$data['company'] = $this->CompanyModel->where('user_id', $data['user_data']['id'])->first();
-		$data['premi'] = $this->PremiModel->where('user_id', $data['user_data']['id'])->where('FIND_IN_SET(1,ids_category)>0')->where('enable', '1')->find();
+		$data['premi'] = $this->PremiModel->where('user_id', $data['user_data']['id'])->where('FIND_IN_SET(1,ids_category)>0')->where('enable', '1')->orderBy('ord', 'DESC')->find();
 		$data['par'] = $this->PartnersModel->where('user_id', $data['user_data']['id'])->where('FIND_IN_SET(1,ids_category)>0')->where('enable', '1')->orderBy('ord', 'ASC')->find();
-		$data['cont'] = $this->ContactsModel->where('user_id', $data['user_data']['id'])->where('FIND_IN_SET(1,ids_category)>0')->where('enable', '1')->find();
+		$data['cont'] = $this->ContactsModel->where('user_id', $data['user_data']['id'])->where('FIND_IN_SET(1,ids_category)>0')->where('enable', '1')->orderBy('ord', 'DESC')->find();
 		$data['prod'] = $this->ProductsModel->where('user_id', $data['user_data']['id'])->where('FIND_IN_SET(1,ids_category)>0')->where('enable', '1')->find();
-		$data['ope'] = $this->OperationsModel->where('user_id', $data['user_data']['id'])->where('FIND_IN_SET(1,ids_category)>0')->where('enable', '1')->find();
+		$data['ope'] = $this->OperationsModel->where('user_id', $data['user_data']['id'])->where('FIND_IN_SET(1,ids_category)>0')->where('enable', '1')->orderBy('ord', 'DESC')->find();
 
 		//insert
 

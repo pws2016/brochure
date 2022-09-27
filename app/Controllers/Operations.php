@@ -22,9 +22,9 @@ class Operations extends BaseController
                     $id = $this->request->getVar('id');
                     $this->OperationsModel->update($id, array("enable" => 0));
                     $this->BitemModel->where('type_item', 'operations')->where('id_item', $id)->where("id_brochure IN(select id from brochures where user_id='" . $data['user_data']['id'] . "')")->delete();
-                    $msg=" operations desactivate";
+                    $msg = " operations desactivate";
                     break;
-              
+
                 case 'activate':
                     $id = $this->request->getVar('id');
                     $this->OperationsModel->update($id, array("enable" => 1));
@@ -36,28 +36,30 @@ class Operations extends BaseController
                             if (empty($exist)) $this->BitemModel->insert(array("id_brochure" => $v['id'], 'id_item' => $id, 'type_item' => 'operations'));
                         }
                     }
-                    $msg=" operations activate";
+                    $msg = " operations activate";
                     break;
-                   
+
 
                 case 'duplicate':
                     $id = $this->request->getVar('id');
                     $inf_operations = $this->OperationsModel->find($id);
                     $newid = $this->OperationsModel->insert(array(
-                    "user_id" => 
-                    $data['user_data']['id'], 
-                    "name" => $inf_operations['name'] . " copy", 
-                    "description" => $inf_operations['description'], 
-                      "enable" => $inf_operations['enable'], 
-                    "ids_category" => $inf_operations['ids_category']));
-                    $sub_op= $this->SubOperationsModel->where('id_op',$id)->find();
+                        "user_id" =>
+                        $data['user_data']['id'],
+                        "name" => $inf_operations['name'] . " copy",
+                        "description" => $inf_operations['description'],
+                        "enable" => $inf_operations['enable'],
+                        "ord" => $inf_operations['ord'],
+                        "ids_category" => $inf_operations['ids_category']
+                    ));
+                    $sub_op = $this->SubOperationsModel->where('id_op', $id)->find();
 
-                     if (!empty($sub_op)) {
-                            foreach ($sub_op as $k => $v) {
+                    if (!empty($sub_op)) {
+                        foreach ($sub_op as $k => $v) {
 
-                                $this->SubOperationsModel->insert(array("id_op"  => $newid, 'description' => $v['description'],'enable' => $v['enable'] ));
-                            }
+                            $this->SubOperationsModel->insert(array("id_op"  => $newid, 'description' => $v['description'], 'enable' => $v['enable'], 'ord' => $v['ord']));
                         }
+                    }
                     if ($this->request->getVar('insert_item') !== null) {
                         $ll = $this->BrochuresModel->where('user_id', $data['user_data']['id'])->where("id_category IN (" . $inf_operations['ids_category'] . ")")->find();
                         if (!empty($ll)) {
@@ -66,49 +68,47 @@ class Operations extends BaseController
                                 $this->BitemModel->insert(array("id_brochure" => $v['id'], 'id_item' => $newid, 'type_item' => 'operations'));
                             }
                         }
-                    
                     }
 
-                    $msg="duplicate done";
+                    $msg = "duplicate done";
 
-                break;
+                    break;
                 case 'associate':
                     $id = $this->request->getVar('id');
-                    if($id!=""){
-                        $this->BitemModel->where('type_item','operations')->where('id_item',$id)->where("id_brochure IN (select id from brochures where user_id='".$data['user_data']['id']."')")->delete();
-                       if(!empty( $this->request->getVar('list_assoc'))){
-                           foreach($this->request->getVar('list_assoc') as $kk=>$vv){
+                    if ($id != "") {
+                        $this->BitemModel->where('type_item', 'operations')->where('id_item', $id)->where("id_brochure IN (select id from brochures where user_id='" . $data['user_data']['id'] . "')")->delete();
+                        if (!empty($this->request->getVar('list_assoc'))) {
+                            foreach ($this->request->getVar('list_assoc') as $kk => $vv) {
                                 $this->BitemModel->insert(array("id_brochure" => $vv, 'id_item' => $id, 'type_item' => 'operations'));
-                           }
-                       }
+                            }
+                        }
                     }
-               break;
-			
+                    break;
             }
-            
-            return redirect()->back()->with('msg',$msg);
 
-        $ll = $this->OperationsModel->where('user_id', $data['user_data']['id'])->find();
-        $res = array();
-        foreach ($ll as $kk => $vv) {
-            $str_cat = "";
-            $tt = explode(",", $vv['ids_category']);
-            if (!empty($tt)) {
-                foreach ($tt as $k => $v) {
-                    $inf_cat = $this->CategoryModel->find($v);
-                    $str_cat .= $inf_cat['title'] . ",";
+            return redirect()->back()->with('msg', $msg);
+
+            $ll = $this->OperationsModel->where('user_id', $data['user_data']['id'])->find();
+            $res = array();
+            foreach ($ll as $kk => $vv) {
+                $str_cat = "";
+                $tt = explode(",", $vv['ids_category']);
+                if (!empty($tt)) {
+                    foreach ($tt as $k => $v) {
+                        $inf_cat = $this->CategoryModel->find($v);
+                        $str_cat .= $inf_cat['title'] . ",";
+                    }
+                    $str_cat = substr($str_cat, 0, -1);
                 }
-                $str_cat = substr($str_cat, 0, -1);
+                $vv['categories'] = $str_cat;
+                $res[] = $vv;
             }
-            $vv['categories'] = $str_cat;
-            $res[] = $vv;
-}
 
-        $data['operation'] = $res;
-        $data['list_category'] = $this->CategoryModel->where('user_id IS NULL')->orWhere('user_id', $data['user_data']['id'])->find();
+            $data['operation'] = $res;
+            $data['list_category'] = $this->CategoryModel->where('user_id IS NULL')->orWhere('user_id', $data['user_data']['id'])->find();
 
-        echo view('user/operations', $data);
-    }
+            echo view('user/operations', $data);
+        }
         $ll = $this->OperationsModel->where('user_id', $data['user_data']['id'])->find();
         $res = array();
         foreach ($ll as $kk => $vv) {
@@ -138,13 +138,18 @@ class Operations extends BaseController
         $data['list_category'] = $this->CategoryModel->where('user_id IS NULL')->orWhere('user_id', $data['user_data']['id'])->find();
 
         if ($this->request->getVar("name") !== null) {
+
+            $in_date = explode("/",$this->request->getVar("ord"));
+
+            $date = $in_date[2].'-'.$in_date[1].'-'.$in_date[0];
+           // echo $date;
             $add_data = [
 
 
                 'name' => $this->request->getVar("name"),
                 'description' => $this->request->getVar("description"),
 
-
+                'ord' => $date,
                 'user_id' => $data['user_data']['id'],
                 'ids_category' => implode(",", $this->request->getVar("ids_category") ?? "")
 
@@ -164,14 +169,16 @@ class Operations extends BaseController
         $data = $this->common_data();
         $id = $this->request->getVar("id");
         $data['list_category'] = $this->CategoryModel->where('user_id IS NULL')->orWhere('user_id', $data['user_data']['id'])->find();
+        $in_date = explode("/",$this->request->getVar("ord"));
 
+        $date = $in_date[2].'-'.$in_date[1].'-'.$in_date[0];
         $data_update = [
             'name' => $this->request->getVar("name"),
             'description' => $this->request->getVar("description"),
             'user_id' => $data['user_data']['id'],
-            'ids_category' => implode(",", $this->request->getVar("ids_category") ?? "")
+            'ids_category' => implode(",", $this->request->getVar("ids_category") ?? ""),
 
-
+            'ord' => $date,
 
         ];
 
@@ -188,16 +195,16 @@ class Operations extends BaseController
 
         $id = $this->request->getVar("id");
         $op = $this->OperationsModel->find($id);
-        
-    $list_category = $this->CategoryModel->where('user_id IS NULL')->orWhere('user_id', $data['user_data']['id'])->find();
 
-      
+        $list_category = $this->CategoryModel->where('user_id IS NULL')->orWhere('user_id', $data['user_data']['id'])->find();
+
+
 ?>
-        <input type="hidden" id="edit_op" name="id"  class="form-control" value="<?= $op['id'] ?>" > 
+        <input type="hidden" id="edit_op" name="id" class="form-control" value="<?= $op['id'] ?>">
 
         <div class="form-group">
             <label for="">name</label><span class="text-primary">*</span>
-            <input type="text"  id="name" name="name" class="form-control"   value="<?= $op['name'] ?>"required>
+            <input type="text" id="name" name="name" class="form-control" value="<?= $op['name'] ?>" required>
         </div>
         <div class="form-group">
             <label for="description">Description</label><span class="text-primary">*</span>
@@ -215,8 +222,20 @@ class Operations extends BaseController
                 } ?>
             </select>
         </div>
-    
-<?php
+        <div class="mb-3">
+
+            <label class="form-label">Order date</label>
+            <div class="input-group" id="datepicker2">
+                <input type="text" class="form-control" name="ord" placeholder="dd/mm/yyyy" data-date-format="dd/mm/yyyy" data-date-container='#datepicker2' data-provide="editdatepicker" value="<?php if($op['ord']!="") echo date('d/m/Y',strtotime($op['ord'])) ?>" >
+
+                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+            </div>
+
+
+
+        </div>
+
+        <?php
     }
     public function get_block_data()
     {

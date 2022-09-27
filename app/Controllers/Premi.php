@@ -42,7 +42,7 @@ class Premi extends BaseController
                 case 'duplicate':
                     $id = $this->request->getVar('id');
                     $inf_premi = $this->PremiModel->find($id);
-                    $newid = $this->PremiModel->insert(array("user_id" => $data['user_data']['id'], "name" => $inf_premi['name'] . " copy", "description" => $inf_premi['description'], "image" => $inf_premi['image'], "enable" => $inf_premi['enable'], "ids_category" => $inf_premi['ids_category']));
+                    $newid = $this->PremiModel->insert(array("user_id" => $data['user_data']['id'], "name" => $inf_premi['name'] . " copy", "description" => $inf_premi['description'], "image" => $inf_premi['image'], "enable" => $inf_premi['enable'], "ids_category" => $inf_premi['ids_category'],"ord" => $inf_premi['ord']));
                     if ($this->request->getVar('insert_item') !== null) {
                         $ll = $this->BrochuresModel->where('user_id', $data['user_data']['id'])->where("id_category IN (" . $inf_premi['ids_category'] . ")")->find();
                         if (!empty($ll)) {
@@ -113,11 +113,13 @@ class Premi extends BaseController
             $name = $avatar->getName();
             $avatar->move(ROOTPATH . 'public/uploads');
 
+            $in_date = explode("/",$this->request->getVar("ord"));
 
+            $date = $in_date[2].'-'.$in_date[1].'-'.$in_date[0];
             if ($this->request->getVar("name") !== null) {
                 $add_data = [
 
-
+                    'ord' => $date,
                     'name' => $this->request->getVar("name"),
                     'description' => $this->request->getVar("description"),
                     'image' => $name,
@@ -153,8 +155,13 @@ class Premi extends BaseController
 
         $id = $this->request->getVar("id");
         $inf_premi = $this->PremiModel->find($id);
-        $data_update = [
 
+        
+        $in_date = explode("/",$this->request->getVar("ord"));
+
+        $date = $in_date[2].'-'.$in_date[1].'-'.$in_date[0];
+        $data_update = [
+            'ord' => $date,
             'name' => $this->request->getVar("name"),
             'description' => $this->request->getVar("description"),
             'ids_category' => implode(",", $this->request->getVar("ids_category") ?? "")
@@ -175,7 +182,7 @@ class Premi extends BaseController
             $avatar->move(ROOTPATH . 'public/uploads');
 
             $data_update = [
-
+                'ord' => $date,
                 'name' => $this->request->getVar("name"),
                 'description' => $this->request->getVar("description"),
                 'image' => $name,
@@ -238,9 +245,22 @@ class Premi extends BaseController
             <label for="description">Description</label><span class="text-primary">*</span>
             <textarea id="description" name="description" class="md-textarea form-control" rows="3" required><?= $prod['description'] ?></textarea>
         </div>
+
         <div class="mb-3">
             <label for="image" class="form-label">Choose image</label>
             <input class="form-control" type="file" name="image" id="image">
+        </div>
+ <div class="mb-3">
+
+            <label class="form-label">Order date</label>
+            <div class="input-group" id="datepicker1">
+                <input type="text" class="form-control" name="ord" placeholder="dd/mm/yyyy" data-date-format="dd/mm/yyyy" data-date-container='#datepicker1' data-provide="datepicker" value="<?php if($prod['ord']!="") echo date('d/m/Y',strtotime($prod['ord'])) ?>"  >
+
+                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+            </div>
+
+
+
         </div>
 
         <div class="alert alert-warning"><label><input type='checkbox' name='insert_item' checked>I accept to associate the item to brochures </label></div>

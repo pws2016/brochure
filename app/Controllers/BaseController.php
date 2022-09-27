@@ -96,6 +96,12 @@ abstract class BaseController extends Controller
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();
+		$this->typoPartner=array('Partner-Senior',
+		'Partner',
+		'Managing Partner',
+		'Associate',
+		'Senior Associate');
+		$this->title=array('Mrs.','Mr.');
     }
 	public function common_data(){
 		$common_data=array();
@@ -104,6 +110,9 @@ abstract class BaseController extends Controller
 		if(!empty($user_data)) $is_logged=true;
 		$common_data['is_logged']=$is_logged;
 		$common_data['user_data']=$user_data;
+		$common_data['typoPartner']=$this->typoPartner;
+		$common_data['title']=$this->title;
+
 		$settings=$this->SettingModel->getByMetaKey();
 		$common_data['settings']=$settings;
 		$user_loginas=$this->session->get('user_loginas');	

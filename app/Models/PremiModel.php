@@ -7,7 +7,7 @@ class PremiModel extends Model
 	
     protected $table = 'premi';
 	protected $primaryKey = 'id';
-    protected $allowedFields = ['user_id', 'name','description','image','enable','ids_category'];
+    protected $allowedFields = ['user_id', 'name','description','image','enable','ids_category','ord'];
 	// protected $useSoftDeletes = true;
 	// protected $returnType = 'array';
 	// protected $useTimestamps = true;

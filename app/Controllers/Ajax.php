@@ -324,7 +324,7 @@ class Ajax extends BaseController
 
 		break;
 		case "operations":
-			$operat = $this->OperationsModel->where('user_id', $data['user_data']['id'])->where('FIND_IN_SET(' . $id_categ . ',ids_category)>0')->where('enable', '1')->find();
+			$operat = $this->OperationsModel->where('user_id', $data['user_data']['id'])->where('FIND_IN_SET(' . $id_categ . ',ids_category)>0')->where('enable', '1')->orderBy('ord','DESC')->find();
 				foreach ($operat as $row) {
 			?>
 					<input type="checkbox" name="select_operations[]" value="<?= $row['id']; ?>" checked /> <?= $row['name']; ?> <br />
@@ -335,7 +335,7 @@ class Ajax extends BaseController
 
 
 		case "premi":
-				$premi = $this->PremiModel->where('user_id', $data['user_data']['id'])->where('FIND_IN_SET(' . $id_categ . ',ids_category)>0')->where('enable', '1')->find();
+				$premi = $this->PremiModel->where('user_id', $data['user_data']['id'])->where('FIND_IN_SET(' . $id_categ . ',ids_category)>0')->where('enable', '1')->orderBy('ord','DESC')->find();
 
 				foreach ($premi as $row) {
 				?>
@@ -355,7 +355,7 @@ class Ajax extends BaseController
 		case "contacts":
 				
 
-					$cont = $this->ContactsModel->where('user_id',$data['user_data']['id'])->where('FIND_IN_SET(' . $id_categ . ',ids_category)>0')->where('enable','1')->find();
+					$cont = $this->ContactsModel->where('user_id',$data['user_data']['id'])->where('FIND_IN_SET(' . $id_categ . ',ids_category)>0')->where('enable','1')->orderBy('ord','DESC')->find();
 				
 					foreach ($cont as $row) {
 					?>
