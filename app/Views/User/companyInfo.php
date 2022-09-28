@@ -129,10 +129,17 @@
 
                                             </div>
                                         </div>
-										 <div class="mb-3 row">
+										 <!-- <div class="mb-3 row">
                                             <label for="title_operation" class="col-md-2 col-form-label">Instagram</label>
                                             <div class="col-md-10">
                                                 <input class="form-control" type="text" name="instagram" id="instagram" value="<?php echo $company['instagram'] ?? '' ?>">
+												
+
+                                            </div> -->
+                                            <div class="mb-3 row">
+                                            <label for="title_operation" class="col-md-2 col-form-label">Youtube</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" name="youtube" id="youtube" value="<?php echo $company['youtube'] ?? '' ?>">
 												
 
                                             </div>

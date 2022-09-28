@@ -50,6 +50,8 @@ class CompanyInfo extends BaseController
             'linkedin' => $this->request->getVar("linkedin"),
             'twitter' => $this->request->getVar("twitter"),
             'instagram' => $this->request->getVar("instagram"),
+            'youtube' => $this->request->getVar("youtube"),
+
             'user_id' => $data['user_data']['id']
 
 
