@@ -49,12 +49,12 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0">Operations</h4>
+                                <h4 class="mb-0">Sub Operations</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"></li>
-                                        <li class="breadcrumb-item active">Operations</li>
+                                        <li class="breadcrumb-item active">Sub Operations</li>
                                     </ol>
                                 </div>
 
@@ -152,7 +152,9 @@
                                                                 <li class="list-inline-item">
                                                                     <a onclick="del_pack('<?php echo $row['id']; ?>')" class="px-2 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
                                                                 </li>
-                                                                
+                                                                <li class="list-inline-item">
+                                                                    <a href="<?= base_url('user/subOperationsData/' . $row['id']) ?>"><i class="uil-bars me-2"></i></a>
+                                                                </li>
                                                             </ul>
                                                         </td>
 

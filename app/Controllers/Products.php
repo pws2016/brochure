@@ -72,6 +72,9 @@ class Products extends BaseController
 
             return redirect()->back()->with('msg',$msg);
         }
+
+
+
         $ll = $this->ProductsModel->where('user_id', $data['user_data']['id'])->find();
         $res = array();
         foreach ($ll as $kk => $vv) {

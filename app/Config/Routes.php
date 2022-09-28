@@ -122,24 +122,24 @@ $routes->add('user/operations/get_block_data',    'Operations::get_block_data');
 $routes->add('user/subOperations/insert',           'SubOperations::insert');
 $routes->add('user/subOperations/update',           'SubOperations::update');
 $routes->add('user/subOperations/get_data',           'SubOperations::get_data');
-
-
 $routes->add('user/subOperations/(:any)',           'SubOperations::subOperations/$1');
+/////sub operation data
 
+$routes->add('user/subOperationsData/insert',           'SubOperationsData::insert');
+$routes->add('user/subOperationsData/update',           'SubOperationsData::update');
+$routes->add('user/subOperationsData/get_data',           'SubOperationsData::get_data');
+$routes->add('user/subOperationsData/delete',           'SubOperationsData::delete');
+
+$routes->add('user/subOperationsData/(:any)',           'SubOperationsData::subOperationsData/$1');
 
 ///// testing
 $routes->add('admin/test',      'Test::test');
-
-
-
 $routes->add('/ajax/(:any)', 'Ajax::index/$1');
 $routes->add('user/brochures/new',    'Brochures::new_broch');
 $routes->add('user/brochures/delete',    'Brochures::delete');
 $routes->add('user/brochures/duplication',    'Brochures::duplication');
 $routes->add('user/brochures/edit/(:any)',    'Brochures::edit_broch/$1');
-
 $routes->add('user/brochures/preview/(:any)',    'Brochures::preview_broch/$1');
-
 $routes->add('user/brochures',    'Brochures::index');
 
 

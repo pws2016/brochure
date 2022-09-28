@@ -399,8 +399,8 @@ class Brochures extends BaseController
 								$item_img = "";
 								if ($inf_item['image'] != "") $item_img =base_url('uploads/' . $inf_item['image']);// "<img src='" . base_url('uploads/' . $inf_item['image']) . "'>";
 								$item_html = str_replace(
-									array("{item_title}", "{item_email}", "{item_img}","{item_description}", "{item_sede}", "{item_phone}", "{item_linkedin}", "{item_tipologia}"),
-									array($inf_item['name'], $inf_item['email'], $item_img,$inf_item['description'], $inf_item['sede'],$inf_item['phone'], $inf_item['linkedin'],$inf_item['tipologia']),
+									array("{item_title}","{item_name}", "{item_lastname}","{item_email}", "{item_img}","{item_description}", "{item_sede}", "{item_phone}", "{item_linkedin}", "{item_tipologia}","{item_fax}","{item_mobile}",),
+									array($inf_item['title'],$inf_item['name'],$inf_item['lastname'], $inf_item['email'], $item_img,$inf_item['description'], $inf_item['sede'],$inf_item['phone'], $inf_item['linkedin'],$inf_item['tipologia'],$inf_item['fax'],$inf_item['mobile'],),
 									$item_html
 								);
 							} else $item_html = "";
@@ -446,8 +446,8 @@ class Brochures extends BaseController
 						$page[$i] = substr_replace($page[$i], $item_html, $pos, 6);
 					}
 					$page[$i] = str_replace(
-						array("{page_title}", "{page_description}","{company_website}","{company_phone}","{company_email}","{company_twitter}","{company_facebook}","{company_linkedin}","{company_instagram}"),
-						array($inf_brochure['title_contacts'], $inf_brochure['description_contacts'], $inf_brochure['website'], $inf_brochure['phone'], $inf_brochure['email'], $inf_brochure['twitter'], $inf_brochure['facebook'], $inf_brochure['linkedin'], $inf_brochure['instagram']),
+						array("{page_title}", "{page_description}","{company_website}","{company_phone}","{company_email}","{company_twitter}","{company_facebook}","{company_linkedin}","{company_instagram}","{company_youtube}"),
+						array($inf_brochure['title_contacts'], $inf_brochure['description_contacts'], $inf_brochure['website'], $inf_brochure['phone'], $inf_brochure['email'], $inf_brochure['twitter'], $inf_brochure['facebook'], $inf_brochure['linkedin'], $inf_brochure['instagram'],$inf_brochure['youtube']),
 						$page[$i]
 					);
 					break;

@@ -19,7 +19,7 @@ class CompanyModel extends Model
 	'phone','email','siteweb',
 	'facebook','twitter',
 	'image_intro','image_operation',
-	'linkedin','instagram',
+	'linkedin','instagram','youtube',
 ];
 	// protected $useSoftDeletes = true;
 	// protected $returnType = 'array';
