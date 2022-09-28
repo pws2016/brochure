@@ -145,8 +145,8 @@ class Brochures extends BaseController
 
 
 
-		$verify = $this->verifyUserPack($data['user_data']['id']);
-		if ($verify['status'] == false) return redirect()->to(base_url('user/brochures'))->with('error', $verify['msg']);
+	/*	$verify = $this->verifyUserPack($data['user_data']['id']);
+		if ($verify['status'] == false) return redirect()->to(base_url('user/brochures'))->with('error', $verify['msg']);*/
 		//if(null ===($this->session->get('current_brochure')) ){
 
 
