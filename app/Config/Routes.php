@@ -116,6 +116,8 @@ $routes->add('user/operations/update',    'Operations::update');
 $routes->add('user/operations/delete',    'Operations::delete');
 $routes->add('user/operations/get_data',    'Operations::get_data');
 $routes->add('user/operations/get_block_data',    'Operations::get_block_data');
+$routes->add('user/operations/createExcel',    'Operations::createExcel');
+
 
 //////
 
