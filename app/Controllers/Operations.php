@@ -3,10 +3,9 @@
 namespace App\Controllers;
 
 use Illuminate\Support\Facades\DB;
-
 use CodeIgniter\Files\File;
-
-
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Operations extends BaseController
 {
@@ -139,10 +138,10 @@ class Operations extends BaseController
 
         if ($this->request->getVar("name") !== null) {
 
-            $in_date = explode("/",$this->request->getVar("ord"));
+            $in_date = explode("/", $this->request->getVar("ord"));
 
-            $date = $in_date[2].'-'.$in_date[1].'-'.$in_date[0];
-           // echo $date;
+            $date = $in_date[2] . '-' . $in_date[1] . '-' . $in_date[0];
+            // echo $date;
             $add_data = [
 
 
@@ -169,9 +168,9 @@ class Operations extends BaseController
         $data = $this->common_data();
         $id = $this->request->getVar("id");
         $data['list_category'] = $this->CategoryModel->where('user_id IS NULL')->orWhere('user_id', $data['user_data']['id'])->find();
-        $in_date = explode("/",$this->request->getVar("ord"));
+        $in_date = explode("/", $this->request->getVar("ord"));
 
-        $date = $in_date[2].'-'.$in_date[1].'-'.$in_date[0];
+        $date = $in_date[2] . '-' . $in_date[1] . '-' . $in_date[0];
         $data_update = [
             'name' => $this->request->getVar("name"),
             'description' => $this->request->getVar("description"),
@@ -226,7 +225,7 @@ class Operations extends BaseController
 
             <label class="form-label">Order date</label>
             <div class="input-group" id="datepicker2">
-                <input type="text" class="form-control" name="ord" placeholder="dd/mm/yyyy" data-date-format="dd/mm/yyyy" data-date-container='#datepicker2' data-provide="editdatepicker" value="<?php if($op['ord']!="") echo date('d/m/Y',strtotime($op['ord'])) ?>" >
+                <input type="text" class="form-control" name="ord" placeholder="dd/mm/yyyy" data-date-format="dd/mm/yyyy" data-date-container='#datepicker2' data-provide="editdatepicker" value="<?php if ($op['ord'] != "") echo date('d/m/Y', strtotime($op['ord'])) ?>">
 
                 <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
             </div>
@@ -263,4 +262,80 @@ class Operations extends BaseController
         $id = $this->request->getVar("id");
         $this->OperationsModel->delete($id);
     }
+
+    public function createExcel()
+    {
+
+        $data = $this->common_data();
+        $fileName = 'operations.xlsx';
+        $operations = $this->OperationsModel->where('user_id', $data['user_data']['id'])->find();
+
+        $res = array();
+        foreach ($operations as $v) {
+            $str_cat = "";
+            $tt = explode(",", $v['ids_category']);
+            if (!empty($tt)) {
+                foreach ($tt as $k => $c) {
+                    $inf_cat = $this->CategoryModel->find($c);
+                    $str_cat .= $inf_cat['title'] . ",";
+                }
+                $str_cat = substr($str_cat, 0, -1);
+            }
+            $res[] = array('A' => $v['id'], 'B' => $v['name'], 'C' => '', 'D' => '', 'E' => '', 'F' => '', 'G' => $v['description'], 'H' => $str_cat);
+            $suboperations = $this->SubOperationsModel->where('id_op', $v['id'])->find();
+
+            if (!empty($suboperations)) {
+                foreach ($suboperations as $vv) {
+                    $res[] = array('A' => $v['id'], 'B' => $v['name'], 'C' => $vv['description'], 'D' => '', 'E' => '', 'F' => '', 'G' => $v['description'], 'H' => $str_cat);
+                    $suboperationsData = $this->SubOperationsDataModel->where('sub_op', $vv['id'])->find();
+                    if (!empty($suboperationsData)) {
+                        foreach ($suboperationsData as $vvv) {
+
+                            $inf_partner = $this->PartnersModel->find($vvv['id_partner']);
+
+                            $res[] = array('A' => $v['id'], 'B' => $v['name'], 'C' => $vv['description'], 'D' => $vvv['date'], 'E' => $vvv['sede'], 'F' => $inf_partner['name'], 'G' => $v['description'], 'H' => $str_cat);
+                        }
+                    }
+                }
+            }
+        }
+        //    var_dump($res);
+        //    exit;
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A1', 'Id');
+        $sheet->setCellValue('B1', 'operations');
+        $sheet->setCellValue('C1', 'Sub_operations');
+        $sheet->setCellValue('D1', 'data');
+        $sheet->setCellValue('E1', 'sede');
+        $sheet->setCellValue('F1', 'partner');
+        $sheet->setCellValue('G1', 'desc operations');
+
+        $sheet->setCellValue('H1', 'Categoria');
+
+        $rows = 2;
+
+        foreach ($res as $v) {
+            $sheet->setCellValue('A' . $rows, $v['A']);
+            $sheet->setCellValue('B' . $rows, $v['B']);
+            $sheet->setCellValue('C' . $rows, $v['C']);
+
+            $sheet->setCellValue('D' . $rows, $v['D']);
+            $sheet->setCellValue('E' . $rows, $v['E']);
+            $sheet->setCellValue('F' . $rows, $v['F']);
+
+
+            $sheet->setCellValue('G' . $rows, $v['G']);
+            $sheet->setCellValue('H' . $rows, $v['H']);
+
+            $rows++;
+        }
+        $writer = new Xlsx($spreadsheet);
+        $writer->save(ROOTPATH . 'public/uploads/' . $fileName);
+        echo view('xsl.php',array('file'=>$fileName));
+    //     header("Content-Type: application/vnd.ms-excel");
+    //    return (base_url() . "/uploads/" . $fileName);
+    }
+    
 }
