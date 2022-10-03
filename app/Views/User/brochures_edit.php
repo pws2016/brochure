@@ -780,7 +780,7 @@
 
 						save_step(currentIndex);
 						switch (newIndex) {
-						case 3: alert("x");
+					/*	case 3: alert("x");
 							var id_cat = $("#id_category").val();
 							$.ajax({
 								url: "<?php echo base_url() ?>/ajax/get_items_cat",
@@ -795,7 +795,7 @@
 								$("#check_list_products").html(data);
 
 							});
-							break;
+							break;*/
 						case 4:
 
 							var id_cat = $("#id_category").val();
@@ -846,7 +846,7 @@
 
 							});
 							break;
-						case 7:
+					/*	case 7:
 							var id_cat = $("#id_category").val();
 							$.ajax({
 								url: "<?php echo base_url() ?>/ajax/get_items_cat",
@@ -861,7 +861,7 @@
 								$("#check_list_contacts").html(data);
 
 							});
-							break;
+							break; */
 					}
 						return true;
 					}

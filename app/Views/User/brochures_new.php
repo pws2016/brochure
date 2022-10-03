@@ -828,7 +828,7 @@
 						save_step(currentIndex);
 
 						switch (newIndex) {
-							case 3:
+							/*case 3:
 
 								var id_cat = $("#id_category").val();
 								$.ajax({
@@ -844,7 +844,7 @@
 									$("#div_list_products").html(data);
 
 								});
-								break;
+								break; */
 							case 4:
 
 								var id_cat = $("#id_category").val();
@@ -894,7 +894,7 @@
 
 								});
 								break;
-							case 7:
+					/*		case 7:
 								var id_cat = $("#id_category").val();
 								$.ajax({
 									url: "<?php echo base_url() ?>/ajax/get_items_by_cat",
@@ -909,7 +909,7 @@
 									$("#div_list_contacts").html(data);
 
 								});
-								break;
+								break; */
 						}
 
 						return true;
