@@ -779,41 +779,8 @@
 						tinyMCE.triggerSave();
 
 						save_step(currentIndex);
-						return true;
-					}
-					if ($form.on('form:error')) {
-						$(".parsley-errors-list").prev().addClass("error");
-						return false;
-					}
-
-				} else return true;
-			},
-			onFinished: function(event, currentIndex) {
-				if (confirm("Are u sure !")) {
-					/*var formData = new FormData();
-
-					var ff = $('#form-step-' + currentIndex).serializeArray();
-
-					$.each(ff, function(k, v) {
-						formData.append(v.name, v.value);
-
-					});
-					$.ajax({
-								url: "<?php echo base_url() ?>/ajax/save_template",
-								type: 'POST',
-								processData: false,
-								contentType: false,
-								data: formData
-							}).done(function(data) {
-								console.log(data);
-
-
-							});
-						*/
-
-					save_step(currentIndex);
-					switch (newIndex) {
-						case 3:
+						switch (newIndex) {
+						case 3: alert("x");
 							var id_cat = $("#id_category").val();
 							$.ajax({
 								url: "<?php echo base_url() ?>/ajax/get_items_cat",
@@ -824,7 +791,7 @@
 									type_item: 'products'
 								}
 							}).done(function(data) {
-								//	alert(data);
+									alert("");
 								$("#check_list_products").html(data);
 
 							});
@@ -896,6 +863,40 @@
 							});
 							break;
 					}
+						return true;
+					}
+					if ($form.on('form:error')) {
+						$(".parsley-errors-list").prev().addClass("error");
+						return false;
+					}
+
+				} else return true;
+			},
+			onFinished: function(event, currentIndex) {
+				if (confirm("Are u sure !")) {
+					/*var formData = new FormData();
+
+					var ff = $('#form-step-' + currentIndex).serializeArray();
+
+					$.each(ff, function(k, v) {
+						formData.append(v.name, v.value);
+
+					});
+					$.ajax({
+								url: "<?php echo base_url() ?>/ajax/save_template",
+								type: 'POST',
+								processData: false,
+								contentType: false,
+								data: formData
+							}).done(function(data) {
+								console.log(data);
+
+
+							});
+						*/
+
+					save_step(currentIndex);
+					
 
 
 					document.location.href = "<?php echo base_url('user/brochures') ?>";
