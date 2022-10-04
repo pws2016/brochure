@@ -432,7 +432,7 @@ class Brochures extends BaseController
 							$item_html = $temp_page['item_html'];
 							if (!empty($inf_item)) {
 								$item_img = "";
-								if ($inf_item['image'] != "") $item_img =base_url('uploads/' . $inf_item['image']);// "<img src='" . base_url('uploads/' . $inf_item['image']) . "'>";
+								if ($inf_item['image'] != "") $item_img =base_url('uploads/contact_pic/' . $inf_item['image']);// "<img src='" . base_url('uploads/' . $inf_item['image']) . "'>";
 								$item_html = str_replace(
 									array("{item_title}", "{item_email}", "{item_phone}", "{item_fax}", "{item_adres}", "{item_img}"),
 									array($inf_item['name'], $inf_item['email'], $inf_item['phone'], $inf_item['fax'], $inf_item['address'], $item_img),
