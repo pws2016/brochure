@@ -23,7 +23,7 @@ class Ajax extends BaseController
 
 
 				$x = $this->BrochuresModel->update($this->session->get('current_brochure'), $tab);
-				var_dump($this->session->get('current_brochure'));
+				//var_dump($this->session->get('current_brochure'));
 				$exist = $this->BtemplateModel->where('id_brochure', $this->session->get('current_brochure'))->delete();
 				foreach ($this->request->getVar('id_page') as $k => $v) {
 					$this->BtemplateModel->insert(array(
