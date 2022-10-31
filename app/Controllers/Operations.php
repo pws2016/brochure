@@ -216,7 +216,7 @@ class Operations extends BaseController
             <select id="ids_category" name="ids_category[]" class="select2 form-control select2-multiple" multiple="multiple" data-placeholder="Choose ..." required style="width:100%">
                 <?php if (!empty($list_category)) {
                     foreach ($list_category as $k => $v) { ?>
-                        <option value="<?php echo $v['id'] ?>" <?php if ($v['user_id'] == null) echo 'selected' ?>><?php echo $v['title'] ?></option>
+                        <option value="<?php echo $v['id'] ?>"  <?php if (in_array($v['id'], explode(',', $op['ids_category']))) echo 'selected' ?>><?php echo $v['title'] ?></option>
                 <?php }
                 } ?>
             </select>

@@ -301,7 +301,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
 
-                                                    <h5 class="modal-title mt-0" id="exampleModalScrollableTitle"><?php echo lang('app.modal_duplicate_item') ?></h5>
+                                                    <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Stai per duplicare il premio</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                                     </button>
                                                 </div>

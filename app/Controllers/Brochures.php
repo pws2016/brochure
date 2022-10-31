@@ -145,8 +145,8 @@ class Brochures extends BaseController
 
 
 
-		$verify = $this->verifyUserPack($data['user_data']['id']);
-		if ($verify['status'] == false) return redirect()->to(base_url('user/brochures'))->with('error', $verify['msg']);
+	/*	$verify = $this->verifyUserPack($data['user_data']['id']);
+		if ($verify['status'] == false) return redirect()->to(base_url('user/brochures'))->with('error', $verify['msg']);*/
 		//if(null ===($this->session->get('current_brochure')) ){
 
 
@@ -263,10 +263,23 @@ class Brochures extends BaseController
 
 
 				case 'operation':
+					$bitems = $this->BitemModel->where('id_brochure', $id)->where('type_item', 'operations')->find();
+						$total_items=count($bitems ?? array());
+				preg_match_all('/{item}/', $temp_page['row_html'], $output_array);
+				 $x_items_by_row = count($output_array[0]);
+				 $nb_rows=ceil($total_items/$x_items_by_row);
+				 
+				 $html_rows="";
+				for ($l = 1; $l <= $nb_rows; $l++) {
+					$html_rows.=$temp_page['row_html'];
+				}
+				
+				$page[$i]=str_replace("{items_row}",$html_rows,$page[$i]);
+				
 					if ($inf_brochure['image_operation'] != "") $page_img=base_url('uploads/' .$inf_brochure['image_operation']);
 					preg_match_all('/{item}/', $page[$i], $output_array);
 					$x_items = count($output_array[0]);
-					$bitems = $this->BitemModel->where('id_brochure', $id)->where('type_item', 'operations')->find();
+				
 
 					foreach ($bitems as $kk => $vv) {
 						$ids_item[$kk + 1] = $vv['id_item'];
@@ -311,10 +324,21 @@ class Brochures extends BaseController
 					// );
 					break;
 				case 'premi':
-
+					$bitems = $this->BitemModel->where('id_brochure', $id)->where('type_item', 'premi')->find();
+					$total_items=count($bitems ?? array());
+				preg_match_all('/{item}/', $temp_page['row_html'], $output_array);
+				 $x_items_by_row = count($output_array[0]);
+				 $nb_rows=ceil($total_items/$x_items_by_row);
+				 
+				 $html_rows="";
+				for ($l = 1; $l <= $nb_rows; $l++) {
+					$html_rows.=$temp_page['row_html'];
+				}
+				
+				$page[$i]=str_replace("{items_row}",$html_rows,$page[$i]);
 					preg_match_all('/{item}/', $page[$i], $output_array);
 					$x_items = count($output_array[0]);
-					$bitems = $this->BitemModel->where('id_brochure', $id)->where('type_item', 'premi')->find();
+					
 					foreach ($bitems as $kk => $vv) {
 						$ids_item[$kk + 1] = $vv['id_item'];
 					}
@@ -346,10 +370,22 @@ class Brochures extends BaseController
 					);
 					break;
 				case 'product':
-
+//{items_row}
+				$bitems = $this->BitemModel->where('id_brochure', $id)->where('type_item', 'products')->find();
+				 $total_items=count($bitems ?? array());
+				preg_match_all('/{item}/', $temp_page['row_html'], $output_array);
+				 $x_items_by_row = count($output_array[0]);
+				 $nb_rows=ceil($total_items/$x_items_by_row);
+				 
+				 $html_rows="";
+				for ($l = 1; $l <= $nb_rows; $l++) {
+					$html_rows.=$temp_page['row_html'];
+				}
+				
+				$page[$i]=str_replace("{items_row}",$html_rows,$page[$i]);
 					preg_match_all('/{item}/', $page[$i], $output_array);
 					$x_items = count($output_array[0]);
-					$bitems = $this->BitemModel->where('id_brochure', $id)->where('type_item', 'products')->find();
+					//$bitems = $this->BitemModel->where('id_brochure', $id)->where('type_item', 'products')->find();
 					foreach ($bitems as $kk => $vv) {
 						$ids_item[$kk + 1] = $vv['id_item'];
 					}
@@ -374,6 +410,7 @@ class Brochures extends BaseController
 						$pos = strpos($page[$i], "{item}");
 						$page[$i] = substr_replace($page[$i], $item_html, $pos, 6);
 					}
+					
 					$page[$i] = str_replace(
 						array("{page_title}", "{page_description}"),
 						array($inf_brochure['title_product'], $inf_brochure['description_product']),
@@ -382,10 +419,22 @@ class Brochures extends BaseController
 					break;
 
 				case 'partners':
-
+					$bitems = $this->BitemModel->where('id_brochure', $id)->where('type_item', 'partners')->find();
+$total_items=count($bitems ?? array());
+				preg_match_all('/{item}/', $temp_page['row_html'], $output_array);
+				 $x_items_by_row = count($output_array[0]);
+				 $nb_rows=ceil($total_items/$x_items_by_row);
+				 
+				 $html_rows="";
+				for ($l = 1; $l <= $nb_rows; $l++) {
+					$html_rows.=$temp_page['row_html'];
+				}
+				
+				$page[$i]=str_replace("{items_row}",$html_rows,$page[$i]);
+				
 					preg_match_all('/{item}/', $page[$i], $output_array);
 					$x_items = count($output_array[0]);
-					$bitems = $this->BitemModel->where('id_brochure', $id)->where('type_item', 'partners')->find();
+				
 					foreach ($bitems as $kk => $vv) {
 						$ids_item[$kk + 1] = $vv['id_item'];
 					}
@@ -417,10 +466,21 @@ class Brochures extends BaseController
 					);
 					break;
 				case 'contact':
-
+				$bitems = $this->BitemModel->where('id_brochure', $id)->where('type_item', 'contacts')->find();
+$total_items=count($bitems ?? array());
+				preg_match_all('/{item}/', $temp_page['row_html'], $output_array);
+				 $x_items_by_row = count($output_array[0]);
+				 $nb_rows=ceil($total_items/$x_items_by_row);
+				 
+				 $html_rows="";
+				for ($l = 1; $l <= $nb_rows; $l++) {
+					$html_rows.=$temp_page['row_html'];
+				}
+				
+				$page[$i]=str_replace("{items_row}",$html_rows,$page[$i]);
 					preg_match_all('/{item}/', $page[$i], $output_array);
 					$x_items = count($output_array[0]);
-					$bitems = $this->BitemModel->where('id_brochure', $id)->where('type_item', 'contacts')->find();
+					
 					foreach ($bitems as $kk => $vv) {
 						$ids_item[$kk + 1] = $vv['id_item'];
 					}
@@ -432,7 +492,7 @@ class Brochures extends BaseController
 							$item_html = $temp_page['item_html'];
 							if (!empty($inf_item)) {
 								$item_img = "";
-								if ($inf_item['image'] != "") $item_img =base_url('uploads/' . $inf_item['image']);// "<img src='" . base_url('uploads/' . $inf_item['image']) . "'>";
+								if ($inf_item['image'] != "") $item_img =base_url('uploads/contact_pic/' . $inf_item['image']);// "<img src='" . base_url('uploads/' . $inf_item['image']) . "'>";
 								$item_html = str_replace(
 									array("{item_title}", "{item_email}", "{item_phone}", "{item_fax}", "{item_adres}", "{item_img}"),
 									array($inf_item['name'], $inf_item['email'], $inf_item['phone'], $inf_item['fax'], $inf_item['address'], $item_img),

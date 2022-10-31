@@ -7,7 +7,7 @@ class BrochureTemplatePagesModel extends Model
 	
     protected $table = 'brochure_template_pages';
 	protected $primaryKey = 'id';
-    protected $allowedFields = ['template_id', 'title','html','ord','type','item_html'];
+    protected $allowedFields = ['template_id', 'title','html','ord','type','item_html','row_html'];
 	protected $returnType = 'array';
 
 	

@@ -243,7 +243,7 @@ class Contacts extends BaseController
         </div>
         <div class="form-group">
             <label for="">Address</label>
-            <input type="text" id="address" name="address" value="<?= $cont['address'] ?>" class="form-control" required>
+             <textarea id="address" name="address"  class="form-control" required><?= $cont['address'] ?></textarea>
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Choose image</label>
@@ -254,7 +254,7 @@ class Contacts extends BaseController
             <select id="ids_category" name="ids_category[]" class="select2 form-control select2-multiple" multiple="multiple" data-placeholder="Choose ..." required style="width:100%">
                 <?php if (!empty($list_category)) {
                     foreach ($list_category as $k => $v) { ?>
-                        <option value="<?php echo $v['id'] ?>" <?php if ($v['user_id'] == null) echo 'selected' ?>><?php echo $v['title'] ?></option>
+                        <option value="<?php echo $v['id'] ?>" <?php if (in_array($v['id'], explode(',', $cont['ids_category']))) echo 'selected' ?>><?php echo $v['title'] ?></option>
                 <?php }
                 } ?>
             </select>
